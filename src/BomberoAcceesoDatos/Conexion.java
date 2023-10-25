@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author Emanuel Sosa
  */
 public class Conexion {
-      private static final String DATABASE_URL = "jdbc:mariadb://";
+    private static final String DATABASE_URL = "jdbc:mariadb://";
     private static final String DATABASE_HOST = "localhost";
     private static final String DATABASE_PUERTO = ":3306";
     private static final String DATABASE_DB = "/bomberos";

@@ -19,11 +19,9 @@ import javax.swing.JOptionPane;
 public class BomberoData {
 
     private Connection con = null;
-
     public BomberoData() {
         con = Conexion.getConexion();
     }
-
     public void actualizarDatos(Bombero bombero) {
         String sql = "UPDATE bombero SET dni = ?, nombre_ape = ?, celular = ?, fecha_nac = ? WHERE id_bombero = ?";
         PreparedStatement ps = null;
