@@ -96,5 +96,10 @@ public class Bombero {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return "Bombero{" + "id_bombero=" + id_bombero + ", dni=" + dni + ", nombre_ape=" + nombre_ape + ", grupSanguineo=" + grupSanguineo + ", fecha_nac=" + fecha_nac + ", celular=" + celular + ", codBrigada=" + codBrigada + ", estado=" + estado + '}';
+    }
     
 }

@@ -18,11 +18,11 @@ public class Cuartel {
     private String domicilio;
     private int coordenadax;
     private int coordenaday;
-    private int telefono;
+    private String telefono;
     private String correoElectronico;
     private ArrayList<Brigada> brigadas;
 
-    public Cuartel(int codCuartel, String nombre, String domicilio, int coordenadax, int coordenaday, int telefono, String correoElectronico) {
+    public Cuartel(int codCuartel, String nombre, String domicilio, int coordenadax, int coordenaday, String telefono, String correoElectronico) {
         this.codCuartel = codCuartel;
         this.nombre = nombre;
         this.domicilio = domicilio;
@@ -72,11 +72,11 @@ public class Cuartel {
         this.coordenaday = coordenaday;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -95,8 +95,16 @@ public class Cuartel {
     public void setBrigadas(ArrayList<Brigada> brigadas) {
         this.brigadas = brigadas;
     }
+
+    
     
     private void intervenir(){
         
     }
+
+    @Override
+    public String toString() {
+        return "Cuartel{" + "codCuartel=" + codCuartel + ", nombre=" + nombre + ", domicilio=" + domicilio + ", coordenadax=" + coordenadax + ", coordenaday=" + coordenaday + ", telefono=" + telefono + ", correoElectronico=" + correoElectronico + ", brigadas=" + brigadas + '}';
+    }
+    
 }

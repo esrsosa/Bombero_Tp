@@ -10,7 +10,6 @@ package BomberosEntidades;
  * @author Marcos
  */
 public enum Especialidad {
-    
     Incendios,
     Derrumbes,
     Rescate,

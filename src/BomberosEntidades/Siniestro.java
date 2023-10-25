@@ -5,6 +5,7 @@
  */
 package BomberosEntidades;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -15,22 +16,36 @@ public class Siniestro {
     
     private int codigo;
     private Especialidad tipoSiniestro;
-    private Date fechaSiniestro;
+    private LocalDate fechaSiniestro;
     private int coordenadaX;
     private int coordenadaY;
     private String detalles;
-    private Date fechaResolucion;
+    private LocalDate fechaResolucion;
     private int calificacion;
-    private Brigada brigada;
+    private int codigoBrigada;
 
-    public Siniestro(int codigo, Especialidad tipoSiniestro, Date fechaSiniestro, int coordenadaX, int coordenadaY, String detalles) {
+    public Siniestro(int codigo, Especialidad tipoSiniestro, LocalDate fechaSiniestro, int coordenadaX, int coordenadaY, String detalles, LocalDate fechaResolucion, int calificacion, int codigoBrigada) {
         this.codigo = codigo;
         this.tipoSiniestro = tipoSiniestro;
         this.fechaSiniestro = fechaSiniestro;
         this.coordenadaX = coordenadaX;
         this.coordenadaY = coordenadaY;
         this.detalles = detalles;
+        this.fechaResolucion = fechaResolucion;
+        this.calificacion = calificacion;
+        this.codigoBrigada = codigoBrigada;
     }
+
+    public int getCodigoBrigada() {
+        return codigoBrigada;
+    }
+
+    public void setCodigoBrigada(int codigoBrigada) {
+        this.codigoBrigada = codigoBrigada;
+    }
+
+ 
+
 
     public int getCodigo() {
         return codigo;
@@ -48,13 +63,15 @@ public class Siniestro {
         this.tipoSiniestro = tipoSiniestro;
     }
 
-    public Date getFechaSiniestro() {
+    public LocalDate getFechaSiniestro() {
         return fechaSiniestro;
     }
 
-    public void setFechaSiniestro(Date fechaSiniestro) {
+    public void setFechaSiniestro(LocalDate fechaSiniestro) {
         this.fechaSiniestro = fechaSiniestro;
     }
+
+ 
 
     public int getCoordenadaX() {
         return coordenadaX;
@@ -80,13 +97,15 @@ public class Siniestro {
         this.detalles = detalles;
     }
 
-    public Date getFechaResolucion() {
+    public LocalDate getFechaResolucion() {
         return fechaResolucion;
     }
 
-    public void setFechaResolucion(Date fechaResolucion) {
+    public void setFechaResolucion(LocalDate fechaResolucion) {
         this.fechaResolucion = fechaResolucion;
     }
+
+
 
     public int getCalificacion() {
         return calificacion;
@@ -96,13 +115,6 @@ public class Siniestro {
         this.calificacion = calificacion;
     }
 
-    public Brigada getBrigada() {
-        return brigada;
-    }
-
-    public void setBrigada(Brigada brigada) {
-        this.brigada = brigada;
-    }
-    
+  
     
 }

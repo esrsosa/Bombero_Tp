@@ -15,12 +15,59 @@ public class Brigada {
     
     private int codBrigada;
     private String nombreBrigada;
-    private final ArrayList<Bombero> bomberos= new ArrayList<>(4);
+//    private final ArrayList<Bombero> bomberos= new ArrayList<>(4);
     private Especialidad especialidad;
     private boolean libre;
-    
-    
-    public void designarBrigada(){
-        
+    private int nro_cuartel;
+
+    public Brigada(int codBrigada, String nombreBrigada, Especialidad especialidad, boolean libre, int nro_cuartel) {
+        this.codBrigada = codBrigada;
+        this.nombreBrigada = nombreBrigada;
+        this.especialidad = especialidad;
+        this.libre = libre;
+        this.nro_cuartel = nro_cuartel;
     }
+
+    public int getCodBrigada() {
+        return codBrigada;
+    }
+
+    public void setCodBrigada(int codBrigada) {
+        this.codBrigada = codBrigada;
+    }
+
+    public String getNombreBrigada() {
+        return nombreBrigada;
+    }
+
+    public void setNombreBrigada(String nombreBrigada) {
+        this.nombreBrigada = nombreBrigada;
+    }
+
+    public Especialidad getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(Especialidad especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    public boolean isLibre() {
+        return libre;
+    }
+
+    public void setLibre(boolean libre) {
+        this.libre = libre;
+    }
+
+    public int getNro_cuartel() {
+        return nro_cuartel;
+    }
+
+    public void setNro_cuartel(int nro_cuartel) {
+        this.nro_cuartel = nro_cuartel;
+    }
+    
+  
+    
 }

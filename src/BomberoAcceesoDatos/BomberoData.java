@@ -22,7 +22,7 @@ public class BomberoData {
     public BomberoData() {
         con = Conexion.getConexion();
     }
-    public void actualizarDatos(Bombero bombero) {
+    public void actualizarDatos(Bombero bombero) {//probado
         String sql = "UPDATE bombero SET dni = ?, nombre_ape = ?, celular = ?, fecha_nac = ? WHERE id_bombero = ?";
         PreparedStatement ps = null;
         try {
@@ -51,7 +51,7 @@ public class BomberoData {
         }
     }
 
-    public void agregarBombero(Bombero bombero) {
+    public void agregarBombero(Bombero bombero) { //probado
         String sql = "INSERT INTO bombero (id_bombero, dni, nombre_ape, grupSanguineo, fecha_nac, celular, codBrigada, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = null;
         try {
