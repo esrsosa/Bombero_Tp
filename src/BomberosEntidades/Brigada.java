@@ -5,10 +5,22 @@
  */
 package BomberosEntidades;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Emanuel Sosa
  */
 public class Brigada {
     
+    private int codBrigada;
+    private String nombreBrigada;
+    private final ArrayList<Bombero> bomberos= new ArrayList<>(4);
+    private Especialidad especialidad;
+    private boolean libre;
+    
+    
+    public void designarBrigada(){
+        
+    }
 }
