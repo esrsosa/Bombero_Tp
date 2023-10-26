@@ -36,6 +36,12 @@ public class Siniestro {
         this.codigoBrigada = codigoBrigada;
     }
 
+    public Siniestro(int codigo, LocalDate fechaResolucion, int calificacion) {
+        this.codigo = codigo;
+        this.fechaResolucion = fechaResolucion;
+        this.calificacion = calificacion;
+    }
+
     public int getCodigoBrigada() {
         return codigoBrigada;
     }

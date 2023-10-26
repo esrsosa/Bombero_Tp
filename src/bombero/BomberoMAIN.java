@@ -27,46 +27,8 @@ public class BomberoMAIN {
      */
     public static void main(String[] args) {
 
-//        Clase Bombero
-//        :
-//
-//actualizarDatos()
-//        : Este método permitirá actualizar los datos de un bombero.
-//                darBaja()
-//        : Este método permitirá dar de baja a un bombero por inactividad.Clase Cuartel
-//        :
-//
-//asignarBrigada()
-//        : Este método permitirá asignar una brigada a un siniestro.Clase Brigada
-//        :
-//
-//agregarBombero()
-//        : Este método permitirá agregar un bombero a la brigada.
-//                eliminarBombero()
-//        : Este método permitirá eliminar un bombero de la brigada.Clase Incidente
-//        :
-//
-//asignarBrigada()
-//        : Este método permitirá asignar una brigada al incidente
-//        .
-//marcarComoResuelto()
-//        : Este método permitirá marcar el incidente como resuelto, colocando la fecha de resolución y su calificación.Además
-//        , necesitarás implementar varios métodos para manejar los comportamientos requeridos
-//        , como:
-//
-//        listarBrigadasLibres()
-//        : Este método listará las brigadas que se encuentran libres.
-//                listarBrigadasAsignadas()
-//        : Este método listará las brigadas que están asignadas a un incidente o siniestro.
-//                medirDistancia()
-//        : Este método medirá la distancia entre dos pares de coordenadas y devolverá la cantidad de metros entre ellas
-//        .
-//mostrarCuartelesCercanos()
-//        : Este método mostrará los cuarteles de bomberos cerca de un punto de siniestro o incidente.
-//                mostrarIncidentesRecientes()
-//        : Este método mostrará todos los incidentes o siniestros que han ocurrido entre ayer y hoy.
-//                
-//                
+
+        
 //        BomberoData bombero = new BomberoData();
 //     bombero.darBajaPorInactividad(1);
 //        BomberoData bombero = new BomberoData();
