@@ -56,23 +56,5 @@ public class CuartelData {
         }
     }
     
-   public void asignarBrigada(Siniestro s, Brigada brigada) {
-        if (s != null && brigada != null) {
-            String sql = "UPDATE siniestro SET codBrigada = ? WHERE codigo = ?";
-            try (PreparedStatement ps = con.prepareStatement(sql)) {
-                ps.setInt(1, brigada.getCodBrigada()); 
-                ps.setInt(2, s.getCodigo()); 
-                int exito = ps.executeUpdate();
-                if (exito > 0) {
-                    System.out.println("Brigada asignada al incidente en este cuartel.");
-                } else {
-                    System.out.println("No se pudo asignar la brigada al incidente.");
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("Incidente o brigada no válidos.");
-        }
-    }
+
 }
