@@ -15,7 +15,6 @@ public class Brigada {
     
     private int codBrigada;
     private String nombreBrigada;
-//    private final ArrayList<Bombero> bomberos= new ArrayList<>(4);
     private Especialidad especialidad;
     private boolean libre;
     private int nro_cuartel;
@@ -32,6 +31,7 @@ public class Brigada {
         this.codBrigada = codBrigada;
         this.nombreBrigada = nombreBrigada;
         this.especialidad = especialidad;
+        
     }
 
     public Brigada(int codBrigada) {
@@ -76,6 +76,11 @@ public class Brigada {
 
     public void setNro_cuartel(int nro_cuartel) {
         this.nro_cuartel = nro_cuartel;
+    }
+
+    @Override
+    public String toString() {
+        return "Brigada{" + "codBrigada=" + codBrigada + ", nombreBrigada=" + nombreBrigada + ", especialidad=" + especialidad + ", libre=" + libre + ", nro_cuartel=" + nro_cuartel + '}';
     }
     
   

@@ -28,21 +28,44 @@ public class BrigadaData {
         con = Conexion.getConexion();
     }
 
-    public void agregarCuartel(Brigada brigada) {
-        String sql = "INSERT INTO brigada (codBrigada, nombre_br, especialidad, libre, nro_cuartel) VALUES (?, ?, ?, ?, ?)";
+    public void agregarBrigada(Brigada brigada) {
+        String sql = "INSERT INTO brigada (codBrigada, nombre_br, especialidad) VALUES (?, ?, ?)";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, brigada.getCodBrigada());
             ps.setString(2, brigada.getNombreBrigada());
             ps.setString(3, brigada.getEspecialidad().toString());
-            ps.setBoolean(4, brigada.isLibre());
-            ps.setInt(5, brigada.getNro_cuartel());
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 System.out.println("brigada agregado exitosamente.");
             } else {
                 System.out.println("Error al agregar el brigada.");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al acceder a la tabla brigada: " + ex.getMessage());
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+    }
+    
+    public void asignarBrigadaAcuartel(int codBrigada, int codCuartel) {
+        String sql = "UPDATE brigada SET nro_cuartel = ? WHERE codBrigada = ?";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, codCuartel);
+            ps.setInt(2, codBrigada);
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                System.out.println("brigada asignada.");
+            } else {
+                System.out.println("brigada no existe o no pudo ser asignada.");
             }
         } catch (SQLException ex) {
             System.out.println("Error al acceder a la tabla brigada: " + ex.getMessage());
@@ -63,9 +86,9 @@ public class BrigadaData {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int codBrigada = rs.getInt("codBrigada");
-                boolean estaAsignada = estaAsignada(codBrigada);
-                if (!estaAsignada) {
-                    Brigada brigada = new Brigada(codBrigada, rs.getString("nombre_br"), Especialidad.valueOf(rs.getString("tipo")));
+                boolean estaAsignada = !estaAsignada(codBrigada);
+                if (estaAsignada) {
+                    Brigada brigada = new Brigada(codBrigada, rs.getString("nombre_br"), Especialidad.valueOf(rs.getString("especialidad")));
                     brigadas.add(brigada);
                 }
             }

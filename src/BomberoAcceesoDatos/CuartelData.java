@@ -12,7 +12,10 @@ import BomberosEntidades.Siniestro;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -55,6 +58,17 @@ public class CuartelData {
             }
         }
     }
-    
+
+    public boolean codCuartelExiste(int codCuartel) {
+        String sql = "SELECT 1 FROM cuartel WHERE codCuartel = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, codCuartel);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (SQLException ex) {
+            System.out.println("Error al verificar la existencia del código de cuartel: " + ex.getMessage());
+            return false;
+        }
+    }
 
 }

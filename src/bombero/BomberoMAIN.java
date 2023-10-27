@@ -27,10 +27,27 @@ public class BomberoMAIN {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-BrigadaData b=new BrigadaData();
-        System.out.println(b.listarBrigadasLibres());
+        BrigadaData b = new BrigadaData();
+        CuartelData c = new CuartelData();
+   
+        if (c.codCuartelExiste(2)&& b.codBrigadaExiste(5)) {
+            b.asignarBrigadaAcuartel(5, 2);
+            System.out.println("exito");
+        } else {
+            System.out.println("error");
+        }
 
-
+//        Brigada b1 = new Brigada(5, "sa", Especialidad.Rescate);
+//        if (!b.codBrigadaExiste(b1.getCodBrigada())) {
+//            b.agregarBrigada(b1);
+//        }else{
+//            System.out.println("ya existe ese codigo");
+//        }
+//        
+//        List<Brigada> b2 = b.listarBrigadasLibres();
+//        for (Brigada siniestro : b2) {
+//            System.out.println(siniestro);
+//        }
 //        SiniestrosData s = new SiniestrosData();
 //        System.out.println(s.codigoSiniestroExiste(2));
 //----------------------------------------------------
