@@ -6,11 +6,16 @@
 package BomberoAcceesoDatos;
 
 import BomberosEntidades.Brigada;
+import BomberosEntidades.Especialidad;
 import BomberosEntidades.Siniestro;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import sun.util.resources.LocaleData;
 
 /**
@@ -52,7 +57,6 @@ public class SiniestrosData {
                     ps.close();
                 }
             } catch (SQLException ex) {
-                // Manejar excepciones de cierre de recursos (opcional)
             }
         }
     }
@@ -103,4 +107,55 @@ public class SiniestrosData {
         }
     }
 
+    public List<Siniestro> listarSiniestrosRecientes() {
+        List<Siniestro> siniestrosRecientes = new ArrayList<>();
+        LocalDate semana = LocalDate.now().minusDays(7);
+        LocalDate hoy = LocalDate.now();
+        String sql = "SELECT * FROM siniestro WHERE fecha_siniestro BETWEEN ? AND ?";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setDate(1, Date.valueOf(semana));
+            ps.setDate(2, Date.valueOf(hoy));
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int codigo = rs.getInt("codigo");
+                Especialidad tipoSiniestro = Especialidad.valueOf(rs.getString("tipo"));
+                LocalDate fechaSiniestro = rs.getDate("fecha_siniestro").toLocalDate();
+                int coordenadaX = rs.getInt("coord_x");
+                int coordenadaY = rs.getInt("coord_y");
+                String detalles = rs.getString("detalles");
+                int codigoBrigada = rs.getInt("codBrigada");
+                Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro, coordenadaX, coordenadaY, detalles, codigoBrigada);
+                siniestrosRecientes.add(siniestro);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al consultar siniestros recientes: " + ex.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException ex) {
+
+            }
+        }
+        return siniestrosRecientes;
+    }
+
+    public boolean codigoSiniestroExiste(int codigo) {
+        String sql = "SELECT 1 FROM siniestro WHERE codigo = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, codigo);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (SQLException ex) {
+            System.out.println("Error al verificar la existencia del código de siniestro: " + ex.getMessage());
+            return false;
+        }
+    }
 }

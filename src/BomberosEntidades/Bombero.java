@@ -33,6 +33,10 @@ public class Bombero {
         this.estado = estado;
     }
 
+    public Bombero(int id_bombero) {
+        this.id_bombero = id_bombero;
+    }
+
     public int getId_bombero() {
         return id_bombero;
     }

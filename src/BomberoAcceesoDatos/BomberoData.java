@@ -9,6 +9,7 @@ import BomberosEntidades.Bombero;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -19,9 +20,11 @@ import javax.swing.JOptionPane;
 public class BomberoData {
 
     private Connection con = null;
+
     public BomberoData() {
         con = Conexion.getConexion();
     }
+
     public void actualizarDatos(Bombero bombero) {//probado
         String sql = "UPDATE bombero SET dni = ?, nombre_ape = ?, celular = ?, fecha_nac = ? WHERE id_bombero = ?";
         PreparedStatement ps = null;
@@ -46,7 +49,6 @@ public class BomberoData {
                     ps.close();
                 }
             } catch (SQLException ex) {
-                // Manejar excepciones de cierre de recursos (opcional)
             }
         }
     }
@@ -78,7 +80,6 @@ public class BomberoData {
                     ps.close();
                 }
             } catch (SQLException ex) {
-                // Manejar excepciones de cierre de recursos (opcional)
             }
         }
     }
@@ -103,8 +104,38 @@ public class BomberoData {
                     ps.close();
                 }
             } catch (SQLException ex) {
-                // Manejar excepciones de cierre de recursos (opcional)
             }
+        }
+    }
+
+    public void eliminarBombero(Bombero bombero) {
+        String sql = "DELETE FROM bombero WHERE id_bombero = ?";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, bombero.getId_bombero());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Error al eliminar el bombero de la base de datos: " + ex.getMessage());
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+    }
+
+    public boolean idBomberoExiste(int id_bombero) {
+        String sql = "SELECT 1 FROM bombero WHERE id_bombero = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id_bombero);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (SQLException ex) {
+            System.out.println("Error al verificar la existencia del ID del bombero: " + ex.getMessage());
+            return false;
         }
     }
 }

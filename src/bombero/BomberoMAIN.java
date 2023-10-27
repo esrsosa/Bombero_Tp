@@ -15,6 +15,7 @@ import BomberosEntidades.Cuartel;
 import BomberosEntidades.Especialidad;
 import BomberosEntidades.Siniestro;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  *
@@ -26,9 +27,24 @@ public class BomberoMAIN {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+BrigadaData b=new BrigadaData();
+        System.out.println(b.listarBrigadasLibres());
 
 
-        
+//        SiniestrosData s = new SiniestrosData();
+//        System.out.println(s.codigoSiniestroExiste(2));
+//----------------------------------------------------
+//        BomberoData b1=new BomberoData();
+//        Bombero b=new Bombero(1);
+//        b1.eliminarBombero(b);
+//-------------------------------------------------------- 
+//        Siniestro s1 = new Siniestro(4, Especialidad.Incendios, LocalDate.now().minusDays(2), 33, 02, "xx", 2);
+//        SiniestrosData s = new SiniestrosData();
+//        s.agregarSiniestro(s1);
+//        List<Siniestro> siniestrosRecientes = s.listarSiniestrosRecientes();
+//        for (Siniestro siniestro : siniestrosRecientes) {
+//            System.out.println(siniestro); 
+//        }
 //        BomberoData bombero = new BomberoData();
 //     bombero.darBajaPorInactividad(1);
 //        BomberoData bombero = new BomberoData();

@@ -5,24 +5,30 @@
  */
 package BomberoAcceesoDatos;
 
+import BomberosEntidades.Bombero;
 import BomberosEntidades.Brigada;
 import BomberosEntidades.Cuartel;
+import BomberosEntidades.Especialidad;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Emanuel Sosa
  */
 public class BrigadaData {
-       private Connection con = null;
+
+    private Connection con = null;
 
     public BrigadaData() {
         con = Conexion.getConexion();
     }
 
-     public void agregarCuartel(Brigada brigada) {
+    public void agregarCuartel(Brigada brigada) {
         String sql = "INSERT INTO brigada (codBrigada, nombre_br, especialidad, libre, nro_cuartel) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement ps = null;
         try {
@@ -46,10 +52,51 @@ public class BrigadaData {
                     ps.close();
                 }
             } catch (SQLException ex) {
-                // Manejar excepciones de cierre de recursos (opcional)
             }
         }
     }
+
+    public List<Brigada> listarBrigadasLibres() {
+        List<Brigada> brigadas = new ArrayList<>();
+        String sql = "SELECT * FROM brigada";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int codBrigada = rs.getInt("codBrigada");
+                boolean estaAsignada = estaAsignada(codBrigada);
+                if (!estaAsignada) {
+                    Brigada brigada = new Brigada(codBrigada, rs.getString("nombre_br"), Especialidad.valueOf(rs.getString("tipo")));
+                    brigadas.add(brigada);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al listar brigadas: " + ex.getMessage());
+        }
+        return brigadas;
+    }
+
+    public boolean estaAsignada(int codBrigada) {
+        String sql = "SELECT * FROM siniestro WHERE codBrigada = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, codBrigada);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (SQLException ex) {
+            System.out.println("Error al verificar asignaciones: " + ex.getMessage());
+            return false;
+        }
+    }
+
+    public boolean codBrigadaExiste(int codBrigada) {
+        String sql = "SELECT 1 FROM brigada WHERE codBrigada = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, codBrigada);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (SQLException ex) {
+            System.out.println("Error al verificar la existencia del código de brigada: " + ex.getMessage());
+            return false;
+        }
+    }
+
 }
-
-

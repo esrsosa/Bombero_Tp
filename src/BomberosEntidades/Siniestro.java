@@ -24,22 +24,26 @@ public class Siniestro {
     private int calificacion;
     private int codigoBrigada;
 
-    public Siniestro(int codigo, Especialidad tipoSiniestro, LocalDate fechaSiniestro, int coordenadaX, int coordenadaY, String detalles, LocalDate fechaResolucion, int calificacion, int codigoBrigada) {
+    public Siniestro(int codigo, Especialidad tipoSiniestro, LocalDate fechaSiniestro, int coordenadaX, int coordenadaY, String detalles, int codigoBrigada) {
         this.codigo = codigo;
         this.tipoSiniestro = tipoSiniestro;
         this.fechaSiniestro = fechaSiniestro;
         this.coordenadaX = coordenadaX;
         this.coordenadaY = coordenadaY;
         this.detalles = detalles;
-        this.fechaResolucion = fechaResolucion;
-        this.calificacion = calificacion;
         this.codigoBrigada = codigoBrigada;
     }
+
+
 
     public Siniestro(int codigo, LocalDate fechaResolucion, int calificacion) {
         this.codigo = codigo;
         this.fechaResolucion = fechaResolucion;
         this.calificacion = calificacion;
+    }
+
+    public Siniestro(int codigo) {
+        this.codigo = codigo;
     }
 
     public int getCodigoBrigada() {
@@ -120,6 +124,21 @@ public class Siniestro {
     public void setCalificacion(int calificacion) {
         this.calificacion = calificacion;
     }
+
+    @Override
+   public String toString() {
+    return "Siniestro{" +
+        "codigo=" + codigo +
+        ", tipoSiniestro=" + tipoSiniestro +
+        ", fechaSiniestro=" + fechaSiniestro +
+        ", coordenadaX=" + coordenadaX +
+        ", coordenadaY=" + coordenadaY +
+        ", detalles='" + detalles +
+        ", fechaResolucion=" + fechaResolucion +
+        ", calificacion=" + calificacion +
+        ", codigoBrigada=" + codigoBrigada;
+}
+
 
   
     
