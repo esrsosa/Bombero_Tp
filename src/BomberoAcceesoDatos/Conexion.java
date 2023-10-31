@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
  * @author Emanuel Sosa
  */
 public class Conexion {
+
     private static final String DATABASE_URL = "jdbc:mariadb://";
     private static final String DATABASE_HOST = "localhost";
     private static final String DATABASE_PUERTO = ":3306";
@@ -22,10 +23,10 @@ public class Conexion {
     private static final String DATABASE_USUARIO = "root";
     private static final String DATABASE_PASSWORD = "";
     private static Conexion conexion = null;
-
+    private static Connection con=null;
     private Conexion() {
         try {
-          
+            //Cargar drivers
             Class.forName("org.mariadb.jdbc.Driver");
 
         } catch (ClassNotFoundException ex) {
@@ -34,9 +35,9 @@ public class Conexion {
     }
 
     public static Connection getConexion() {
-        Connection con = null;
+ //       Connection con = null;
 
-        if (conexion == null) {
+        if (con == null) {
             conexion = new Conexion();
 
             try {
