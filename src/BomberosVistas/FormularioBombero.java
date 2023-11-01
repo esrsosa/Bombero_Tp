@@ -62,7 +62,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         jCelular = new javax.swing.JTextField();
         jTDisponibles = new javax.swing.JTextField();
         Jnombre = new javax.swing.JTextField();
-        jButton7 = new javax.swing.JButton();
+        jNuevo = new javax.swing.JButton();
         jDCalendar = new com.toedter.calendar.JDateChooser();
 
         jCheckBoxMenuItem1.setSelected(true);
@@ -122,10 +122,10 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
 
         jBrigadaAsignada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButton7.setText("Nuevo");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        jNuevo.setText("Nuevo");
+        jNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                jNuevoActionPerformed(evt);
             }
         });
 
@@ -178,7 +178,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(141, 141, 141)
-                                .addComponent(jButton7))
+                                .addComponent(jNuevo))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
                                 .addComponent(jButton2)
@@ -252,14 +252,14 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7)
                     .addComponent(jTDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton7)
+                .addComponent(jNuevo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void jNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNuevoActionPerformed
         // TODO add your handling code here:
         try{
         String dni = jDni.getText();
@@ -270,8 +270,6 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         String sangre = jSangre.getSelectedItem()+" ";
         String celular = jCelular.getText();
         int codBrigada =(Integer) jBrigadaAsignada.getSelectedItem();
-        
-        
         Especialidad especialidad = (Especialidad) jBrigadaAsignada.getSelectedItem();
             if (dni.isEmpty()||nombre.isEmpty()||apellido.isEmpty()||sangre.isEmpty()||celular.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No debe haber campos vacios");
@@ -284,7 +282,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         }catch (NumberFormatException ex){
             JOptionPane.showMessageDialog(this, "Debe ingresar numeros validos");
         }
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_jNuevoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -296,7 +294,6 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JTextField jCelular;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private com.toedter.calendar.JDateChooser jDCalendar;
@@ -310,6 +307,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JButton jNuevo;
     private javax.swing.JComboBox<String> jSangre;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTDisponibles;
