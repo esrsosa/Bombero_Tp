@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Emanuel Sosa
  */
-public class Cuartel {
+public class Cuartel implements Comparable <Cuartel> {
 
     private int codCuartel;
     private String nombre;
@@ -22,6 +22,19 @@ public class Cuartel {
     private String correoElectronico;
     private ArrayList<Brigada> brigadas;
 
+    public Cuartel() {
+    }
+
+    public Cuartel(String nombre, String domicilio, int coordenadax, int coordenaday, String telefono, String correoElectronico) {
+        this.nombre = nombre;
+        this.domicilio = domicilio;
+        this.coordenadax = coordenadax;
+        this.coordenaday = coordenaday;
+        this.telefono = telefono;
+        this.correoElectronico = correoElectronico;
+    }
+
+    
     public Cuartel(int codCuartel, String nombre, String domicilio, int coordenadax, int coordenaday, String telefono, String correoElectronico) {
         this.codCuartel = codCuartel;
         this.nombre = nombre;
@@ -102,9 +115,19 @@ public class Cuartel {
         
     }
 
-    @Override
-    public String toString() {
-        return "Cuartel{" + "codCuartel=" + codCuartel + ", nombre=" + nombre + ", domicilio=" + domicilio + ", coordenadax=" + coordenadax + ", coordenaday=" + coordenaday + ", telefono=" + telefono + ", correoElectronico=" + correoElectronico + ", brigadas=" + brigadas + '}';
+@Override
+    public int compareTo(Cuartel t) {
+        if (codCuartel==t.codCuartel) {
+            return 0;
+        }else if (codCuartel>t.codCuartel) {
+            return 1;
+        }else{
+            return -1;
+        } 
+    
     }
+    
+
+    
     
 }
