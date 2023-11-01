@@ -5,6 +5,10 @@
  */
 package BomberosVistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Emanuel Sosa
@@ -14,8 +18,15 @@ public class Bomberos extends javax.swing.JFrame {
     /**
      * Creates new form Bomberos
      */
+    private Image fondo;
+
     public Bomberos() {
+        fondo = new ImageIcon("fondo.jpeg").getImage();
         initComponents();
+    }
+    public void paintComponent(Graphics g) {
+        g.drawImage(fondo, 0, 0, getWidth(), getHeight(), this);
+        super.paintComponents(g);
     }
 
     /**
