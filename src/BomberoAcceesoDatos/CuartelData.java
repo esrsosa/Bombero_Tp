@@ -16,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,25 +31,26 @@ public class CuartelData {
     }
 
     public void agregarCuartel(Cuartel cuartel) {
-        String sql = "INSERT INTO cuartel (codCuartel, nombre_cuartel, direccion, coord_x, coord_y, telefono, correo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO cuartel (nombre_cuartel, direccion, coord_x, coord_y, telefono, correo) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, cuartel.getCodCuartel());
-            ps.setString(2, cuartel.getNombre());
-            ps.setString(3, cuartel.getDomicilio());
-            ps.setInt(4, cuartel.getCoordenadax());
-            ps.setInt(5, cuartel.getCoordenaday());
-            ps.setString(6, cuartel.getTelefono());
-            ps.setString(7, cuartel.getCorreoElectronico());
+
+            ps.setString(1, cuartel.getNombre());
+            ps.setString(2, cuartel.getDomicilio());
+            ps.setInt(3, cuartel.getCoordenadax());
+            ps.setInt(4, cuartel.getCoordenaday());
+            ps.setString(5, cuartel.getTelefono());
+            ps.setString(6, cuartel.getCorreoElectronico());
             int exito = ps.executeUpdate();
             if (exito == 1) {
-                System.out.println("cuartel agregado exitosamente.");
+                JOptionPane.showMessageDialog(null, "cuartel agregado exitosamente.");
             } else {
-                System.out.println("Error al agregar el cuartel.");
+
+                JOptionPane.showMessageDialog(null, "Error al agregar el cuartel.");
             }
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla cuartel: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel:" + ex.getMessage());
         } finally {
             try {
                 if (ps != null) {

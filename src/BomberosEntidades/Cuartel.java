@@ -22,6 +22,19 @@ public class Cuartel {
     private String correoElectronico;
     private ArrayList<Brigada> brigadas;
 
+    public Cuartel() {
+    }
+
+    public Cuartel(String nombre, String domicilio, int coordenadax, int coordenaday, String telefono, String correoElectronico) {
+        this.nombre = nombre;
+        this.domicilio = domicilio;
+        this.coordenadax = coordenadax;
+        this.coordenaday = coordenaday;
+        this.telefono = telefono;
+        this.correoElectronico = correoElectronico;
+    }
+
+    
     public Cuartel(int codCuartel, String nombre, String domicilio, int coordenadax, int coordenaday, String telefono, String correoElectronico) {
         this.codCuartel = codCuartel;
         this.nombre = nombre;
