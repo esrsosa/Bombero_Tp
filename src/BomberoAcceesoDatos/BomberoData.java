@@ -54,26 +54,29 @@ public class BomberoData {
     }
 
     public void agregarBombero(Bombero bombero) { //probado
-        String sql = "INSERT INTO bombero (id_bombero, dni, nombre_ape, grupSanguineo, fecha_nac, celular, codBrigada, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO bombero ( dni, nombre_ape, grupSanguineo, fecha_nac, celular, codBrigada) VALUES ( ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, bombero.getId_bombero());
-            ps.setString(2, bombero.getDni());
-            ps.setString(3, bombero.getNombre_ape());
-            ps.setString(4, bombero.getGrupSanguineo());
-            ps.setDate(5, Date.valueOf(bombero.getFecha_nac()));
-            ps.setString(6, bombero.getCelular());
-            ps.setInt(7, bombero.getCodBrigada());
-            ps.setBoolean(8, bombero.isEstado());
+            
+            ps.setString(1, bombero.getDni());
+            ps.setString(2, bombero.getNombre_ape());
+            ps.setString(3, bombero.getGrupSanguineo());
+            ps.setDate(4, Date.valueOf(bombero.getFecha_nac()));
+            ps.setString(5, bombero.getCelular());
+            ps.setInt(6, bombero.getCodBrigada());
+            ps.setBoolean(7, bombero.isEstado());
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 System.out.println("Bombero agregado exitosamente.");
+                JOptionPane.showMessageDialog(null, "Bombero agregado exitosamente.");
             } else {
                 System.out.println("Error al agregar el bombero.");
+                JOptionPane.showMessageDialog(null, "Error al agregar el bombero.");
             }
         } catch (SQLException ex) {
             System.out.println("Error al acceder a la tabla Bombero: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Bombero: ");
         } finally {
             try {
                 if (ps != null) {
@@ -93,11 +96,14 @@ public class BomberoData {
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 System.out.println("Baja por inactividad realizada con éxito.");
+                JOptionPane.showMessageDialog(null, "Baja por inactividad realizada con éxito.");
             } else {
                 System.out.println("El bombero no existe o no pudo ser dado de baja.");
+                JOptionPane.showMessageDialog(null, "El bombero no existe o no pudo ser dado de baja.");
             }
         } catch (SQLException ex) {
             System.out.println("Error al acceder a la tabla Bombero: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Bombero: " + ex.getMessage());
         } finally {
             try {
                 if (ps != null) {

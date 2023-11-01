@@ -40,7 +40,7 @@ public class BomberoMAIN {
 //            System.out.println("error");
 //        }
 
-//        Brigada b1 = new Brigada(5, "sa", Especialidad.Rescate);
+       Brigada b1 = new Brigada(5, "sa", Especialidad.Rescate);
 //        if (!b.codBrigadaExiste(b1.getCodBrigada())) {
 //            b.agregarBrigada(b1);
 //        }else{

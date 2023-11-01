@@ -8,6 +8,7 @@ package BomberosVistas;
 import BomberoAcceesoDatos.CuartelData;
 import BomberosEntidades.Cuartel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,13 +18,14 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
 
     private CuartelData cuartelData = new CuartelData();
     private Cuartel cuartelActual = null;
+    DefaultTableModel modelo = new DefaultTableModel();
 
     /**
      * Creates new form Cuartel
      */
     public FormularioCuartel() {
         initComponents();
-        
+        ArmarTabla();
     }
 
     /**
@@ -48,11 +50,10 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
         jtTelefono = new javax.swing.JTextField();
         jtCorreo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
 
@@ -68,7 +69,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
 
         jLabel6.setText("correo:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -79,7 +80,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable);
 
         jButton1.setText("SELECCIONAR");
 
@@ -91,8 +92,11 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
         });
 
         jButton3.setText("Nuevo Cuartel");
-
-        jButton4.setText("Limpiar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Salir");
 
@@ -145,8 +149,6 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
                         .addComponent(jButton2)
                         .addGap(54, 54, 54)
                         .addComponent(jButton3)
-                        .addGap(51, 51, 51)
-                        .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton5)
                         .addGap(30, 30, 30))))
@@ -192,7 +194,6 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
-                    .addComponent(jButton4)
                     .addComponent(jButton5))
                 .addGap(32, 32, 32))
         );
@@ -227,12 +228,16 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        Limpiar();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -242,7 +247,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable;
     private javax.swing.JTextField jtCoordenadaX;
     private javax.swing.JTextField jtCoordenadaY;
     private javax.swing.JTextField jtCorreo;
@@ -251,6 +256,13 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtTelefono;
     // End of variables declaration//GEN-END:variables
 
+    public void ArmarTabla(){
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Domicilio");
+        modelo.addColumn("telefono");
+        modelo.addColumn("Correo");
+        jTable.setModel(modelo);
+}
     public void Limpiar() {
         jtNombre.setText("");
         jtDireccion.setText("");

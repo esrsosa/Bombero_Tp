@@ -95,7 +95,12 @@ public class Bomberos extends javax.swing.JFrame {
 
         jMenu1.setText("Bomberos");
 
-        jMenuItem3.setText("jMenuItem3");
+        jMenuItem3.setText("Formulario Bomberos");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
@@ -152,6 +157,16 @@ public class Bomberos extends javax.swing.JFrame {
         vistaCuartel.setVisible(true);
         Escritorio.moveToFront(vistaCuartel);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        Escritorio.removeAll();
+        Escritorio.repaint();
+        FormularioBombero vistaBombero = new FormularioBombero();
+        Escritorio.add(vistaBombero);
+        vistaBombero.setVisible(true);
+        Escritorio.moveToFront(vistaBombero);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
