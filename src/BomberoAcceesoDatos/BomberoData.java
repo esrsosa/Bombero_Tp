@@ -25,47 +25,50 @@ public class BomberoData {
         con = Conexion.getConexion();
     }
 
-    public void actualizarDatos(Bombero bombero) {//probado
-        String sql = "UPDATE bombero SET dni = ?, nombre_ape = ?, celular = ?, fecha_nac = ? WHERE id_bombero = ?";
-        PreparedStatement ps = null;
+public void actualizarDatos(Bombero bombero) {
+    String sql = "UPDATE bombero SET nombre = ?, apellido = ?, grupSanguineo = ?, fecha_nac = ?, celular = ?, codBrigada = ? WHERE dni = ?";
+    PreparedStatement ps = null;
+    try {
+        ps = con.prepareStatement(sql);
+        ps.setString(1, bombero.getNombre());
+        ps.setString(2, bombero.getApellido());
+        ps.setString(3, bombero.getGrupSanguineo());
+        ps.setDate(4, Date.valueOf(bombero.getFecha_nac()));
+        ps.setString(5, bombero.getCelular());
+        ps.setInt(6, bombero.getCodBrigada());
+        ps.setString(7, bombero.getDni()); 
+        int exito = ps.executeUpdate();
+        if (exito == 1) {
+            JOptionPane.showMessageDialog(null, "Modificado Exitosamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "El bombero no existe");
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Bombero: " + ex.getMessage());
+    } finally {
         try {
-            ps = con.prepareStatement(sql);
-            ps.setString(1, bombero.getDni());
-            ps.setString(2, bombero.getNombre_ape());
-            ps.setString(3, bombero.getCelular());
-            ps.setDate(4, Date.valueOf(bombero.getFecha_nac()));
-            ps.setInt(5, bombero.getId_bombero());
-            int exito = ps.executeUpdate();
-            if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Modificado Exitosamente.");
-            } else {
-                JOptionPane.showMessageDialog(null, "El bombero no existe");
+            if (ps != null) {
+                ps.close();
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Bombero " + ex.getMessage());
-        } finally {
-            try {
-                if (ps != null) {
-                    ps.close();
-                }
-            } catch (SQLException ex) {
-            }
         }
     }
+}
 
     public void agregarBombero(Bombero bombero) { //probado
-        String sql = "INSERT INTO bombero ( dni, nombre_ape, grupSanguineo, fecha_nac, celular, codBrigada) VALUES ( ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO bombero ( dni, nombre, apellido, grupSanguineo, fecha_nac, celular, codBrigada) VALUES ( ?, ?, ?, ?, ?, ?,?)";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
-            
+    
             ps.setString(1, bombero.getDni());
-            ps.setString(2, bombero.getNombre_ape());
-            ps.setString(3, bombero.getGrupSanguineo());
-            ps.setDate(4, Date.valueOf(bombero.getFecha_nac()));
-            ps.setString(5, bombero.getCelular());
-            ps.setInt(6, bombero.getCodBrigada());
-            ps.setBoolean(7, bombero.isEstado());
+            ps.setString(2, bombero.getNombre());
+            ps.setString(3, bombero.getApellido());
+            ps.setString(4, bombero.getGrupSanguineo());
+            ps.setDate(5, Date.valueOf(bombero.getFecha_nac()));
+            ps.setString(6, bombero.getCelular());
+            ps.setInt(7, bombero.getCodBrigada());
+            ps.setBoolean(8, bombero.isEstado());
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 System.out.println("Bombero agregado exitosamente.");

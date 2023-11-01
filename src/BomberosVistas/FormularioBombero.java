@@ -22,6 +22,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
     private BomberoData bomberodata = new BomberoData();
     private Bombero bomberoActual = null;
     DefaultTableModel modelo = new DefaultTableModel();
+
     /**
      * Creates new form FormularioBombero
      */
@@ -50,11 +51,11 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jDarDeBaja = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jBuscar = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jModificar = new javax.swing.JButton();
         jSangre = new javax.swing.JComboBox<>();
         jBrigadaAsignada = new javax.swing.JComboBox<>();
         JApellido = new javax.swing.JTextField();
@@ -108,17 +109,23 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Dar de baja");
+        jDarDeBaja.setText("Dar de baja");
 
         jButton2.setText("Limpiar");
 
-        jButton4.setText("Buscar");
+        jBuscar.setText("Buscar");
+        jBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBuscarActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Salir");
 
-        jButton6.setText("Modificar");
+        jModificar.setText("Modificar");
 
-        jSangre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jSangre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A+", "A-", "B+", "B-", "AB+", "AB-", "0+", "0-" }));
+        jSangre.setSelectedIndex(-1);
 
         jBrigadaAsignada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -170,7 +177,9 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jDarDeBaja)
+                                    .addComponent(jTDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(390, 390, 390)
                         .addComponent(jLabel1))
@@ -183,18 +192,16 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                                 .addGap(23, 23, 23)
                                 .addComponent(jButton2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton6)))
+                                .addComponent(jModificar)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addComponent(jButton1)
-                                .addGap(191, 191, 191)
+                                .addGap(332, 332, 332)
                                 .addComponent(jButton5))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(73, 73, 73)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jDCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton4))
+                                    .addComponent(jBuscar))
                                 .addGap(41, 41, 41)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(45, Short.MAX_VALUE))
@@ -208,8 +215,8 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton2)
-                        .addComponent(jButton6)
-                        .addComponent(jButton1))
+                        .addComponent(jModificar)
+                        .addComponent(jDarDeBaja))
                     .addComponent(jButton5))
                 .addContainerGap(16, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -219,7 +226,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4))
+                            .addComponent(jBuscar))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -261,42 +268,66 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
 
     private void jNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNuevoActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
         String dni = jDni.getText();
         String nombre = Jnombre.getText();
         String apellido = JApellido.getText();
         java.util.Date sfecha = jDCalendar.getDate();
-        LocalDate fechaNac = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        String sangre = jSangre.getSelectedItem()+" ";
-        String celular = jCelular.getText();
-        int codBrigada =(Integer) jBrigadaAsignada.getSelectedItem();
-        Especialidad especialidad = (Especialidad) jBrigadaAsignada.getSelectedItem();
-            if (dni.isEmpty()||nombre.isEmpty()||apellido.isEmpty()||sangre.isEmpty()||celular.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No debe haber campos vacios");
+
+        if (dni.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || sfecha == null) {
+            JOptionPane.showMessageDialog(this, "No debe haber campos vacíos");
+        } else {
+            LocalDate fechaNac = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            String sangre = jSangre.getSelectedItem().toString() + " ";
+            String celular = jCelular.getText();
+            int codBrigada = 2;//(Integer) jBrigadaAsignada.getSelectedItem();
+            if (celular.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "El campo Celular no debe estar vacío");
+            } else {
+                if (bomberoActual == null) {
+                    bomberoActual = new Bombero(dni, nombre, apellido, sangre, fechaNac, celular, codBrigada,true);
+                    bomberodata.agregarBombero(bomberoActual);
+                }
             }
-            if (bomberoActual==null) {
-                bomberoActual= new Bombero(dni, nombre, sangre, fechaNac, celular, codBrigada);
-                bomberodata.agregarBombero(bomberoActual);
-            }
-        
-        }catch (NumberFormatException ex){
-            JOptionPane.showMessageDialog(this, "Debe ingresar numeros validos");
         }
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Debe ingresar números válidos");
+    }
     }//GEN-LAST:event_jNuevoActionPerformed
+
+    private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
+//         try {
+//        Integer dni = Integer.parseInt(jDni.getText());
+//        bomberoActual = bomberodata.;
+//        if (bomberoActual != null) {
+//            JApellido.setText(bomberoActual.getApellido());
+//            Jnombre.setText(bomberoActual.getNombre());
+//            LocalDate lc = bomberoActual.getFecha_nac();
+//            java.util.Date date = java.util.Date.from(lc.atStartOfDay(ZoneId.systemDefault()).toInstant());
+//            jDCalendar.setDate(date);
+//            jSangre.setSelectedItem(bomberoActual.getGrupSanguineo()); 
+//            jCelular.setText(bomberoActual.getCelular()); 
+//            jBrigadaAsignada.setSelectedItem(bomberoActual.getCodBrigada());
+//        } else {
+//        }
+//    } catch (NumberFormatException ex) {
+//        JOptionPane.showMessageDialog(this, "Debe ingresar un número válido");
+//    }
+//        
+    }//GEN-LAST:event_jBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JApellido;
     private javax.swing.JTextField Jnombre;
     private javax.swing.JComboBox<String> jBrigadaAsignada;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBuscar;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JTextField jCelular;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private com.toedter.calendar.JDateChooser jDCalendar;
+    private javax.swing.JButton jDarDeBaja;
     private javax.swing.JTextField jDni;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -307,6 +338,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JButton jModificar;
     private javax.swing.JButton jNuevo;
     private javax.swing.JComboBox<String> jSangre;
     private javax.swing.JScrollPane jScrollPane1;
