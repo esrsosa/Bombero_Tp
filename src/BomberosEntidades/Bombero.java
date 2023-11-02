@@ -4,18 +4,20 @@
  * and open the template in the editor.
  */
 package BomberosEntidades;
+
 import java.util.Date;
 import java.time.LocalDate;
-
 
 /**
  *
  * @author Emanuel Sosa
  */
 public class Bombero {
+
     private int id_bombero;
     private String dni;
-    private String nombre_ape;
+    private String nombre;
+    private String apellido;
     private String grupSanguineo;
     private LocalDate fecha_nac;
     private String celular;
@@ -25,28 +27,15 @@ public class Bombero {
     public Bombero() {
     }
 
-    public Bombero(String dni, String nombre_ape, String grupSanguineo, LocalDate fecha_nac, String celular, int codBrigada) {
+    public Bombero(String dni, String nombre, String apellido, String grupSanguineo, LocalDate fecha_nac, String celular, int codBrigada,boolean estado) {
         this.dni = dni;
-        this.nombre_ape = nombre_ape;
+        this.nombre = nombre;
+        this.apellido = apellido;
         this.grupSanguineo = grupSanguineo;
         this.fecha_nac = fecha_nac;
         this.celular = celular;
         this.codBrigada = codBrigada;
-    }
-
-    public Bombero(int id_bombero, String dni, String nombre_ape, String grupSanguineo, LocalDate fecha_nac, String celular, int codBrigada, boolean estado) {
-        this.id_bombero = id_bombero;
-        this.dni = dni;
-        this.nombre_ape = nombre_ape;
-        this.grupSanguineo = grupSanguineo;
-        this.fecha_nac = fecha_nac;
-        this.celular = celular;
-        this.codBrigada = codBrigada;
-        this.estado = estado;
-    }
-
-    public Bombero(int id_bombero) {
-        this.id_bombero = id_bombero;
+        this.estado=estado;
     }
 
     public int getId_bombero() {
@@ -65,12 +54,20 @@ public class Bombero {
         this.dni = dni;
     }
 
-    public String getNombre_ape() {
-        return nombre_ape;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombre_ape(String nombre_ape) {
-        this.nombre_ape = nombre_ape;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getGrupSanguineo() {
@@ -115,7 +112,10 @@ public class Bombero {
 
     @Override
     public String toString() {
-        return "Bombero{" + "id_bombero=" + id_bombero + ", dni=" + dni + ", nombre_ape=" + nombre_ape + ", grupSanguineo=" + grupSanguineo + ", fecha_nac=" + fecha_nac + ", celular=" + celular + ", codBrigada=" + codBrigada + ", estado=" + estado + '}';
+        return "Bombero{" + "id_bombero=" + id_bombero + ", dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", grupSanguineo=" + grupSanguineo + ", fecha_nac=" + fecha_nac + ", celular=" + celular + ", codBrigada=" + codBrigada + '}';
     }
+
     
+
+
 }
