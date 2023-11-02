@@ -13,6 +13,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,20 +32,21 @@ public class SiniestrosData {
     }
 
     public void agregarSiniestro(Siniestro siniestro) {
-        String sql = "INSERT INTO siniestro (codigo, tipo, fecha_siniestro, coord_x, coord_y, detalles, codBrigada) VALUES  (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO siniestro (tipo, fecha_siniestro, coord_x, coord_y, detalles, codBrigada) VALUES  (?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = null;
 
         try {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, siniestro.getCodigo()); // Asegúrate de que este atributo sea del tipo correcto en tu base de datos
-            ps.setString(2, siniestro.getTipoSiniestro().toString());
-            ps.setDate(3, Date.valueOf(siniestro.getFechaSiniestro()));
-            ps.setInt(4, siniestro.getCoordenadaX());
-            ps.setInt(5, siniestro.getCoordenadaY());
-            ps.setString(6, siniestro.getDetalles());
-            ps.setInt(7, siniestro.getCodigoBrigada());
-            int exito = ps.executeUpdate();
-            if (exito == 1) {
+            ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+          //  ps.setInt(1, siniestro.getCodigo()); // Asegúrate de que este atributo sea del tipo correcto en tu base de datos
+            ps.setString(1, siniestro.getTipoSiniestro().toString());
+            ps.setDate(2, Date.valueOf(siniestro.getFechaSiniestro()));
+            ps.setInt(3, siniestro.getCoordenadaX());
+            ps.setInt(4, siniestro.getCoordenadaY());
+            ps.setString(5, siniestro.getDetalles());
+            ps.setInt(6, siniestro.getCodigoBrigada());
+             ResultSet exito = ps.getGeneratedKeys();
+            if (exito.next()) {
+                siniestro.setCodigo(1);
                 System.out.println("Siniestro agregado exitosamente.");
             } else {
                 System.out.println("Error al agregar el siniestro.");

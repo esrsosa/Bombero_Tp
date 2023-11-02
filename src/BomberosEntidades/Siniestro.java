@@ -5,6 +5,7 @@
  */
 package BomberosEntidades;
 
+import bombero.TipoSiniestro;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -44,6 +45,10 @@ public class Siniestro {
 
     public Siniestro(int codigo) {
         this.codigo = codigo;
+    }
+
+    public Siniestro() {
+       
     }
 
     public int getCodigoBrigada() {
@@ -138,6 +143,8 @@ public class Siniestro {
         ", calificacion=" + calificacion +
         ", codigoBrigada=" + codigoBrigada;
 }
+
+  
 
 
   
