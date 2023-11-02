@@ -37,17 +37,21 @@ public class SiniestrosData {
 
         try {
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-          //  ps.setInt(1, siniestro.getCodigo()); // Asegúrate de que este atributo sea del tipo correcto en tu base de datos
             ps.setString(1, siniestro.getTipoSiniestro().toString());
             ps.setDate(2, Date.valueOf(siniestro.getFechaSiniestro()));
             ps.setInt(3, siniestro.getCoordenadaX());
             ps.setInt(4, siniestro.getCoordenadaY());
             ps.setString(5, siniestro.getDetalles());
             ps.setInt(6, siniestro.getCodigoBrigada());
-             ResultSet exito = ps.getGeneratedKeys();
-            if (exito.next()) {
-                siniestro.setCodigo(1);
-                System.out.println("Siniestro agregado exitosamente.");
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                ResultSet generatedKeys = ps.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    siniestro.setCodigo(generatedKeys.getInt(1)); 
+                    System.out.println("Siniestro agregado exitosamente con ID: " + siniestro.getCodigo());
+                } else {
+                    System.out.println("Error al obtener el ID del siniestro.");
+                }
             } else {
                 System.out.println("Error al agregar el siniestro.");
             }
