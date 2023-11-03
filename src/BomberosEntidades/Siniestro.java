@@ -17,13 +17,13 @@ public class Siniestro {
     
     private int codigo;
     private Especialidad tipoSiniestro;
-    private LocalDate fechaSiniestro;
+    private LocalDate fechaSiniestro; // localdatetime
     private int coordenadaX;
     private int coordenadaY;
     private String detalles;
     private LocalDate fechaResolucion;
     private int calificacion;
-    private int codigoBrigada;
+    private int codigoBrigada;// tipo brigada
 
     public Siniestro(Especialidad tipoSiniestro, LocalDate fechaSiniestro, int coordenadaX, int coordenadaY, String detalles, int codigoBrigada) {
         this.tipoSiniestro = tipoSiniestro;

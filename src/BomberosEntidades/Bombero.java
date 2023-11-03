@@ -21,7 +21,7 @@ public class Bombero {
     private String grupSanguineo;
     private LocalDate fecha_nac;
     private String celular;
-    private int codBrigada;
+    private int codBrigada; // tiene que ser tipo brigrada
     private boolean estado;
 
     public Bombero() {

@@ -20,7 +20,7 @@ public class Cuartel implements Comparable <Cuartel> {
     private int coordenaday;
     private String telefono;
     private String correoElectronico;
-    private ArrayList<Brigada> brigadas;
+    private ArrayList<Brigada> brigadas; // despues devatir
 
     public Cuartel() {
     }
