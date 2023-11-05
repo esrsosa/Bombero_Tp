@@ -27,6 +27,7 @@ public class BomberoMAIN {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+<<<<<<< HEAD
         
  SiniestrosData sd = new SiniestrosData();
         Siniestro siniestro = new Siniestro(1);
@@ -36,19 +37,17 @@ siniestro.setCoordenadaX(10); // Ejemplo de coordenadas X
 siniestro.setCoordenadaY(20); // Ejemplo de coordenadas Y
 siniestro.setDetalles("Detalles del siniestro"); // Ejemplo de detalles
 siniestro.setCodigoBrigada(1); // Ejemplo de código de brigada
+=======
+        Siniestro s1 = new Siniestro(Especialidad.Incendios, LocalDate.now().minusDays(2), 33, 02, "xx", 1);
+        SiniestrosData s = new SiniestrosData();
+        s.agregarSiniestro(s1);
+        List<Siniestro> siniestrosRecientes = s.listarSiniestrosRecientes();
+        for (Siniestro siniestro : siniestrosRecientes) {
+            System.out.println(siniestro);
+        }
+>>>>>>> 1509e1e8bdd00463bfa898e672f5a2e459ac22b7
 
-// Llama al método para agregar el siniestro a la base de datos
-sd.agregarSiniestro(siniestro);
-
-        
-        
-        
-        
-        
-        
-        
 //------------------------------------------------------------------------------
-
 //        BrigadaData b = new BrigadaData();
 //        CuartelData c = new CuartelData();
 //  
@@ -58,8 +57,7 @@ sd.agregarSiniestro(siniestro);
 //        } else {
 //            System.out.println("error");
 //        }
-
-       //Brigada b1 = new Brigada(5, "sa", Especialidad.Rescate);
+        //Brigada b1 = new Brigada(5, "sa", Especialidad.Rescate);
 //        if (!b.codBrigadaExiste(b1.getCodBrigada())) {
 //            b.agregarBrigada(b1);
 //        }else{
@@ -105,5 +103,4 @@ sd.agregarSiniestro(siniestro);
 //       // s1.agregarSiniestro(siniestro);
     }
 
- 
 }

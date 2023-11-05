@@ -16,8 +16,8 @@ public class Brigada {
     private int codBrigada;
     private String nombreBrigada;
     private Especialidad especialidad;
-    private boolean libre;
-    private int nro_cuartel;
+  //  private boolean libre; libre no deveria estar
+    private int nro_cuartel; // cambiar a cuartel
 
     public Brigada(int codBrigada, String nombreBrigada, Especialidad especialidad, boolean libre, int nro_cuartel) {
         this.codBrigada = codBrigada;
