@@ -45,7 +45,7 @@ public class CuartelData {
                 cuartel.setCorreoElectronico(rs.getString("correo"));
                 
             }else {
-                JOptionPane.showMessageDialog(null, "No existe el alumno");
+                JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel");
                 ps.close();
             }
         }catch(SQLException ex){
@@ -84,6 +84,29 @@ public class CuartelData {
         }
     }
 
+    public List<Cuartel> listaCuarteles (){
+        ArrayList<Cuartel> cuarteles = new ArrayList<>();
+        String sql = "SELECT  nombre_cuartel, direccion, telefono, correo FROM cuartel WHERE 1";
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                
+                Cuartel cuartel = new Cuartel();
+                cuartel.setNombre(rs.getString("nombre_cuartel"));
+                cuartel.setDomicilio(rs.getString("Direccion"));
+                cuartel.setTelefono(rs.getString("telefono"));
+                cuartel.setCorreoElectronico(rs.getString("correo"));
+                cuarteles.add(cuartel);
+            }
+            ps.close();
+            
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel "+ ex.getMessage());
+        }
+        return cuarteles;
+        
+    }
     public boolean codCuartelExiste(int codCuartel) {
         String sql = "SELECT 1 FROM cuartel WHERE codCuartel = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {

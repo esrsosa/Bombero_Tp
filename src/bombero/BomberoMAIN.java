@@ -30,7 +30,7 @@ public class BomberoMAIN {
         
  SiniestrosData sd = new SiniestrosData();
         Siniestro siniestro = new Siniestro(1);
-siniestro.setTipoSiniestro(TipoSiniestro.INCENDIO); // Ejemplo de configuración de datos
+//siniestro.setTipoSiniestro(TipoSiniestro.INCENDIO); // Ejemplo de configuración de datos
 siniestro.setFechaSiniestro(LocalDate.now()); // Ejemplo de configuración de fecha
 siniestro.setCoordenadaX(10); // Ejemplo de coordenadas X
 siniestro.setCoordenadaY(20); // Ejemplo de coordenadas Y

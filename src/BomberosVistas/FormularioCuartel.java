@@ -7,6 +7,8 @@ package BomberosVistas;
 
 import BomberoAcceesoDatos.CuartelData;
 import BomberosEntidades.Cuartel;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,6 +21,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
     private CuartelData cuartelData = new CuartelData();
     private Cuartel cuartelActual = null;
     DefaultTableModel modelo = new DefaultTableModel();
+    List<Cuartel> listaCuarteles = new ArrayList<>();
 
     /**
      * Creates new form Cuartel
@@ -26,6 +29,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
     public FormularioCuartel() {
         initComponents();
         ArmarTabla();
+        llenarTabla();
     }
 
     /**
@@ -83,6 +87,11 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable);
 
         jButton1.setText("SELECCIONAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Guardar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +108,11 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
         });
 
         jButton5.setText("Salir");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel7.setText("FORMULARIO DE CUARTEL");
@@ -113,10 +127,12 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel6)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addGap(37, 37, 37))
+                            .addComponent(jLabel4))
                         .addGap(84, 84, 84)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -200,7 +216,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-//Probado por arian  :)
+//Probado por arian  ;)
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         try {
@@ -222,6 +238,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
                 cuartelData.agregarCuartel(cuartelActual);
                 
             }
+            llenarTabla();
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar numeros validos ");
         }
@@ -232,6 +249,16 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         Limpiar();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -256,6 +283,13 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtTelefono;
     // End of variables declaration//GEN-END:variables
 
+    public void llenarTabla(){
+        modelo.setRowCount(0);
+        listaCuarteles = cuartelData.listaCuarteles();
+        for (Cuartel aux : listaCuarteles){
+            modelo.addRow(new Object []{aux.getNombre(), aux.getDomicilio(), aux.getTelefono(), aux.getCorreoElectronico()});
+        }
+    }
     public void ArmarTabla(){
         modelo.addColumn("Nombre");
         modelo.addColumn("Domicilio");
