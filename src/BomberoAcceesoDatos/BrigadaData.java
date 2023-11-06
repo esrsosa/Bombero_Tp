@@ -88,8 +88,8 @@ public class BrigadaData {
                 int codBrigada = rs.getInt("codBrigada");
                 boolean estaAsignada = !estaAsignada(codBrigada);
                 if (estaAsignada) {
-                    Brigada brigada = new Brigada(codBrigada, rs.getString("nombre_br"), Especialidad.valueOf(rs.getString("especialidad")));
-                    brigadas.add(brigada);
+////                    Brigada brigada = new Brigada(codBrigadars.getString("nombre_br"), Especialidad.valueOf(rs.getString("especialidad")));
+//                    brigadas.add(brigada);
                 }
             }
         } catch (SQLException ex) {
