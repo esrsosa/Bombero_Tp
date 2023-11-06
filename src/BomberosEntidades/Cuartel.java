@@ -115,6 +115,11 @@ public class Cuartel implements Comparable <Cuartel> {
         
     }
 
+    @Override
+    public String toString() {
+        return "Cuartel{" + "codCuartel=" + codCuartel + ", nombre=" + nombre + ", domicilio=" + domicilio + ", coordenadax=" + coordenadax + ", coordenaday=" + coordenaday + ", telefono=" + telefono + ", correoElectronico=" + correoElectronico + ", brigadas=" + brigadas + '}';
+    }
+
 @Override
     public int compareTo(Cuartel t) {
         if (codCuartel==t.codCuartel) {

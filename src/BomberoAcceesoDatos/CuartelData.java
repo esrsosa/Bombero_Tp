@@ -31,7 +31,7 @@ public class CuartelData {
     }
 
     public Cuartel buscarCuartel(int i){
-        String sql = "SELECT  nombre_cuartel, direccion, telefono, correo FROM cuartel WHERE codCuartel= ?";
+        String sql = "SELECT  codCuartel, nombre_cuartel, direccion, coord_x, coord_y, telefono, correo FROM cuartel WHERE codCuartel= ?";
         Cuartel cuartel = null;
         try{
             PreparedStatement ps = con.prepareStatement(sql);
@@ -39,11 +39,14 @@ public class CuartelData {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 cuartel = new Cuartel();
+                cuartel.setCodCuartel(rs.getInt("codCuartel"));
                 cuartel.setNombre(rs.getString("nombre_cuartel"));
                 cuartel.setDomicilio(rs.getString("direccion"));
+                cuartel.setCoordenadax(rs.getInt("coord_x"));
+                cuartel.setCoordenaday(rs.getInt("coord_y"));
                 cuartel.setTelefono(rs.getString("telefono"));
                 cuartel.setCorreoElectronico(rs.getString("correo"));
-                
+                JOptionPane.showMessageDialog(null, "cuartel encontrado");
             }else {
                 JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel");
                 ps.close();
@@ -53,6 +56,7 @@ public class CuartelData {
         }
         return cuartel;
     }
+    
     public void agregarCuartel(Cuartel cuartel) {
         String sql = "INSERT INTO cuartel (nombre_cuartel, direccion, coord_x, coord_y, telefono, correo) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = null;
@@ -86,13 +90,14 @@ public class CuartelData {
 
     public List<Cuartel> listaCuarteles (){
         ArrayList<Cuartel> cuarteles = new ArrayList<>();
-        String sql = "SELECT  nombre_cuartel, direccion, telefono, correo FROM cuartel WHERE 1";
+        String sql = "SELECT  codCuartel, nombre_cuartel, direccion, telefono, correo FROM cuartel WHERE 1";
         try{
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 
                 Cuartel cuartel = new Cuartel();
+                cuartel.setCodCuartel(rs.getInt("codCuartel"));
                 cuartel.setNombre(rs.getString("nombre_cuartel"));
                 cuartel.setDomicilio(rs.getString("Direccion"));
                 cuartel.setTelefono(rs.getString("telefono"));
@@ -116,6 +121,21 @@ public class CuartelData {
         } catch (SQLException ex) {
             System.out.println("Error al verificar la existencia del código de cuartel: " + ex.getMessage());
             return false;
+        }
+    }
+    
+    public void eliminarCuartel(int id){
+        String sql = "DELETE FROM `cuartel` WHERE codCuartel = ?";
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            int exito = ps.executeUpdate();
+            if (exito==1) {
+                JOptionPane.showMessageDialog(null, "Cuartel eliminado exitosamente");
+            }
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error a conectar con la tabla cuartel ");
         }
     }
 
