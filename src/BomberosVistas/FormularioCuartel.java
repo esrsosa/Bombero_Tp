@@ -76,7 +76,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable);
 
-        jbBuscar.setText("Buscar");
+        jbBuscar.setText("Seleccionar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
@@ -90,7 +90,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setText("Nuevo Cuartel");
+        jButton3.setText("Limpiar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -199,11 +199,11 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
                 .addComponent(jLabel7)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jButton2)
-                .addGap(54, 54, 54)
+                .addGap(78, 78, 78)
                 .addComponent(jButton3)
-                .addGap(49, 49, 49)
+                .addGap(57, 57, 57)
+                .addComponent(jButton2)
+                .addGap(73, 73, 73)
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton5)
@@ -214,11 +214,12 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(167, 167, 167)
-                        .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(18, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(157, 157, 157))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,9 +238,9 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
                         .addGap(32, 32, 32))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jbBuscar)
-                        .addGap(94, 94, 94))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -256,14 +257,14 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacíos");
                 return;
             }
-            
+
             int coordenadax = Integer.parseInt(jtCoordenadaX.getText());
             int coordenaday = Integer.parseInt(jtCoordenadaY.getText());
-            
-            if(cuartelActual==null){
+
+            if (cuartelActual == null) {
                 cuartelActual = new Cuartel(nombre, direccion, coordenadax, coordenaday, telefono, correo);
                 cuartelData.agregarCuartel(cuartelActual);
-                
+
             }
             llenarTabla();
         } catch (NumberFormatException ex) {
@@ -285,41 +286,38 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
+        Limpiar();
         cuartelActual = new Cuartel();
-        int id2 =jTable.getSelectedRow();
+        int id2 = jTable.getSelectedRow();
         Object valorCodigo = jTable.getValueAt(id2, 0);
         int numero = Integer.parseInt(valorCodigo.toString());
         System.out.println(valorCodigo);
         System.out.println(numero);
-  
         cuartelActual = cuartelData.buscarCuartel(numero);
-        if(cuartelActual!=null){
-            System.out.println("eso");
-            System.out.println(cuartelActual.toString());
-        jtNombre.setText(cuartelActual.getNombre());
-        jtDireccion.setText(cuartelActual.getDomicilio());
-        jtCoordenadaX.setText(cuartelActual.getCoordenadax()+"");
-        jtCoordenadaY.setText(cuartelActual.getCoordenaday()+"");
-        jtTelefono.setText(cuartelActual.getTelefono());
-        jtCorreo.setText(cuartelActual.getCorreoElectronico());
-        Limpiar();
+        if (cuartelActual != null) {
+
+            jtNombre.setText(cuartelActual.getNombre());
+            jtDireccion.setText(cuartelActual.getDomicilio());
+            jtCoordenadaX.setText(cuartelActual.getCoordenadax() + "");
+            jtCoordenadaY.setText(cuartelActual.getCoordenaday() + "");
+            jtTelefono.setText(cuartelActual.getTelefono());
+            jtCorreo.setText(cuartelActual.getCorreoElectronico());
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        try{
-        int id2 =jTable.getSelectedRow();
-        Object valorCodigo = jTable.getValueAt(id2, 0);
-        int numero = Integer.parseInt(valorCodigo.toString());
-           int confirmar = JOptionPane.showConfirmDialog(this, "Estas seguro que desea eliminar el cuartel?");
-           if (confirmar==0){
-               cuartelData.eliminarCuartel(numero);
-           }
-        }catch(NumberFormatException ex){
+        try {
+            int id2 = jTable.getSelectedRow();
+            Object valorCodigo = jTable.getValueAt(id2, 0);
+            int numero = Integer.parseInt(valorCodigo.toString());
+            int confirmar = JOptionPane.showConfirmDialog(this, "Estas seguro que desea eliminar el cuartel?");
+            if (confirmar == 0) {
+                cuartelData.eliminarCuartel(numero);
+            }
+        } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar un id válido");
         }
-        
         llenarTabla();
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -348,21 +346,23 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtTelefono;
     // End of variables declaration//GEN-END:variables
 
-    public void llenarTabla(){
+    public void llenarTabla() {
         modelo.setRowCount(0);
         listaCuarteles = cuartelData.listaCuarteles();
-        for (Cuartel aux : listaCuarteles){
-            modelo.addRow(new Object []{aux.getCodCuartel(), aux.getNombre(), aux.getDomicilio(), aux.getTelefono(), aux.getCorreoElectronico()});
+        for (Cuartel aux : listaCuarteles) {
+            modelo.addRow(new Object[]{aux.getCodCuartel(), aux.getNombre(), aux.getDomicilio(), aux.getTelefono(), aux.getCorreoElectronico()});
         }
     }
-    public void ArmarTabla(){
+
+    public void ArmarTabla() {
         modelo.addColumn("Codigo");
         modelo.addColumn("Nombre");
         modelo.addColumn("Domicilio");
         modelo.addColumn("telefono");
         modelo.addColumn("Correo");
         jTable.setModel(modelo);
-}
+    }
+
     public void Limpiar() {
         jtNombre.setText("");
         jtDireccion.setText("");

@@ -92,7 +92,7 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlimpiar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jModificar" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -126,7 +126,7 @@
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jModificar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jDarDeBaja" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -290,10 +290,13 @@
         <Property name="text" type="java.lang.String" value="Dar de baja"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="jlimpiar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Limpiar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jlimpiarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBuscar">
       <Properties>
@@ -351,6 +354,9 @@
     <Component class="javax.swing.JTextField" name="JApellido">
     </Component>
     <Component class="javax.swing.JTextField" name="jDni">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jDniKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jCelular">
     </Component>

@@ -27,23 +27,23 @@ public class BomberoData {
     public BomberoData() {
         con = Conexion.getConexion();
     }
-public Bombero buscarBombero(int codigoBombero) {
-    String sql = "SELECT dni, nombre_ape, celular, fecha_nac, grupSanguineo, codBrigada FROM bombero WHERE codigoBombero = ?";
+public Bombero buscarBombero(int dni) {
+    String sql = "SELECT dni, nombre, apellido, celular, fecha_nac, grupSanguineo, codBrigada FROM bombero WHERE dni = ?";
     Bombero bombero = null;
     try {
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, codigoBombero);
+        ps.setInt(1, dni);
         ResultSet rs = ps.executeQuery();
         
         if (rs.next()) {
             bombero = new Bombero();
             bombero.setDni(rs.getString("dni"));
-            bombero.setNombre(rs.getString("nombre_ape"));
+            bombero.setNombre(rs.getString("nombre"));
+            bombero.setApellido(rs.getString("apellido"));
             bombero.setCelular(rs.getString("celular"));
             bombero.setFecha_nac(rs.getDate("fecha_nac").toLocalDate());
             bombero.setGrupSanguineo(rs.getString("grupSanguineo"));
             bombero.setCodBrigada(rs.getInt("codBrigada"));
-            
             JOptionPane.showMessageDialog(null, "Bombero encontrado");
         } else {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero");

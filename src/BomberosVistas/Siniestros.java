@@ -190,6 +190,7 @@ public class Siniestros extends javax.swing.JInternalFrame {
     private void jGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGuardarActionPerformed
         // TODO add your handling code here:
       //  Siniestro si = (Siniestro) jCtipo.getSelectedItem();
+      
     }//GEN-LAST:event_jGuardarActionPerformed
 
     private void jCtipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCtipoActionPerformed

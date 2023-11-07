@@ -31,7 +31,8 @@ public class SiniestrosData {
         con = Conexion.getConexion();
     }
 
-    public void agregarSiniestro(Siniestro siniestro) {
+    public void agregarSiniestro(  Siniestro siniestro) {
+     
         String sql = "INSERT INTO siniestro (tipo, fecha_siniestro, coord_x, coord_y, detalles, codBrigada) VALUES  (?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = null;
 

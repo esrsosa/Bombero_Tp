@@ -14,6 +14,7 @@ import BomberosEntidades.Brigada;
 import BomberosEntidades.Cuartel;
 import BomberosEntidades.Especialidad;
 import BomberosEntidades.Siniestro;
+import static bombero.TipoSiniestro.INCENDIO;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -27,26 +28,13 @@ public class BomberoMAIN {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
-        
- SiniestrosData sd = new SiniestrosData();
-        Siniestro siniestro = new Siniestro(1);
-//siniestro.setTipoSiniestro(TipoSiniestro.INCENDIO); // Ejemplo de configuración de datos
-siniestro.setFechaSiniestro(LocalDate.now()); // Ejemplo de configuración de fecha
-siniestro.setCoordenadaX(10); // Ejemplo de coordenadas X
-siniestro.setCoordenadaY(20); // Ejemplo de coordenadas Y
-siniestro.setDetalles("Detalles del siniestro"); // Ejemplo de detalles
-siniestro.setCodigoBrigada(1); // Ejemplo de código de brigada
-
-        Siniestro s1 = new Siniestro(Especialidad.Incendios, LocalDate.now().minusDays(2), 33, 02, "xx", 1);
+        Siniestro s1 = new Siniestro(Especialidad.Incendios, LocalDate.now().minusDays(2), 33, 02, "xx", 5);
         SiniestrosData s = new SiniestrosData();
         s.agregarSiniestro(s1);
         List<Siniestro> siniestrosRecientes = s.listarSiniestrosRecientes();
-//        for (Siniestro siniestro : siniestrosRecientes) {
-            System.out.println(siniestro);
+        for (Siniestro siniestro : siniestrosRecientes) {
+            System.out.println(siniestro); 
         }
-
-
 //------------------------------------------------------------------------------
 //        BrigadaData b = new BrigadaData();
 //        CuartelData c = new CuartelData();
@@ -57,7 +45,7 @@ siniestro.setCodigoBrigada(1); // Ejemplo de código de brigada
 //        } else {
 //            System.out.println("error");
 //        }
-        //Brigada b1 = new Brigada(5, "sa", Especialidad.Rescate);
+    //Brigada b1 = new Brigada(5, "sa", Especialidad.Rescate);
 //        if (!b.codBrigadaExiste(b1.getCodBrigada())) {
 //            b.agregarBrigada(b1);
 //        }else{
@@ -101,6 +89,5 @@ siniestro.setCodigoBrigada(1); // Ejemplo de código de brigada
 //     //   SiniestrosData s1 = new SiniestrosData();
 //      //  Siniestro siniestro = new Siniestro(1, Especialidad.Incendios, (LocalDate.of(2002, 07, 18)), 233, 444, "perro salchicha", (LocalDate.of(2002, 07, 18)), 7, 1);
 //       // s1.agregarSiniestro(siniestro);
-    }
-
-
+}
+}
