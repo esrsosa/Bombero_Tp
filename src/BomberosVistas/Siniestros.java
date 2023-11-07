@@ -5,6 +5,7 @@
  */
 package BomberosVistas;
 
+import BomberosEntidades.Especialidad;
 import BomberosEntidades.Siniestro;
 
 /**
@@ -18,6 +19,7 @@ public class Siniestros extends javax.swing.JInternalFrame {
      */
     public Siniestros() {
         initComponents();
+       llenarTipo();
     }
 
     /**
@@ -60,7 +62,11 @@ public class Siniestros extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Tipo: ");
 
-        jCtipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCtipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCtipoActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Fecha de Siniestro: ");
 
@@ -183,10 +189,19 @@ public class Siniestros extends javax.swing.JInternalFrame {
 
     private void jGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGuardarActionPerformed
         // TODO add your handling code here:
-        Siniestro si = (Siniestro) jCtipo.getSelectedItem();
+      //  Siniestro si = (Siniestro) jCtipo.getSelectedItem();
     }//GEN-LAST:event_jGuardarActionPerformed
 
+    private void jCtipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCtipoActionPerformed
+        // TODO add your handling code here:
+      // llenarTipo();
+    }//GEN-LAST:event_jCtipoActionPerformed
 
+public void llenarTipo(){
+    for (Especialidad tipo :Especialidad.values()) {
+        jCtipo.addItem(tipo.getTipoEspecialidades());
+}
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JTextField jCoordx;

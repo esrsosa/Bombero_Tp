@@ -10,10 +10,24 @@ package BomberosEntidades;
  * @author Marcos
  */
 public enum Especialidad {
-    Incendios,
-    Derrumbes,
-    Rescate,
-    Accidentes,
-    Inundaciones,
-    OperativosPrevencion
+    Incendios("Incedio"),
+    Derrumbes("Derrumbe"),
+    Rescate("Rescate"),
+    Accidentes("Accidentes"),
+    Inundaciones("Inundaciones"),
+    OperativosPrevencion("OperativosPrevencion");
+    
+    private String tipoEspecialidades;         
+
+    public String getTipoEspecialidades() {
+        return tipoEspecialidades;
+    }
+
+    public void setTipoEspecialidades(String tipoEspecialidades) {
+        this.tipoEspecialidades = tipoEspecialidades;
+    }
+
+    private Especialidad(String tipoEspecialidades) {
+        this.tipoEspecialidades = tipoEspecialidades;
+    }
 }
