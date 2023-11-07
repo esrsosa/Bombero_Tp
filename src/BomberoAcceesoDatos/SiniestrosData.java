@@ -133,7 +133,7 @@ public class SiniestrosData {
                 int coordenadaY = rs.getInt("coord_y");
                 String detalles = rs.getString("detalles");
                 int codigoBrigada = rs.getInt("codBrigada");
-                Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro, coordenadaX, coordenadaY, detalles, codigoBrigada);
+                Siniestro siniestro = new Siniestro(tipoSiniestro, fechaSiniestro, coordenadaX, coordenadaY, detalles, codigoBrigada);
                 siniestrosRecientes.add(siniestro);
             }
         } catch (SQLException ex) {

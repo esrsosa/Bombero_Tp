@@ -23,7 +23,7 @@ public class Brigada {
         this.codBrigada = codBrigada;
         this.nombreBrigada = nombreBrigada;
         this.especialidad = especialidad;
-        this.libre = libre;
+     //   this.libre = libre;
         this.nro_cuartel = nro_cuartel;
     }
 
