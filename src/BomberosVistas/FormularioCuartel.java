@@ -24,7 +24,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
     List<Cuartel> listaCuarteles = new ArrayList<>();
 
     /**
-     * Creates new form Cuartel
+     * Creates new form Cwwwuartel
      */
     public FormularioCuartel() {
         initComponents();
@@ -248,7 +248,6 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         try {
-            
             String nombre = jtNombre.getText();
             String direccion = jtDireccion.getText();
             String correo = jtCorreo.getText();
@@ -292,7 +291,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
         int numero = Integer.parseInt(valorCodigo.toString());
         System.out.println(valorCodigo);
         System.out.println(numero);
-        
+  
         cuartelActual = cuartelData.buscarCuartel(numero);
         if(cuartelActual!=null){
             System.out.println("eso");
