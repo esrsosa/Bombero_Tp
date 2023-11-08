@@ -88,8 +88,11 @@ public class BrigadaData {
                 int codBrigada = rs.getInt("codBrigada");
                 boolean estaAsignada = !estaAsignada(codBrigada);
                 if (estaAsignada) {
-////                    Brigada brigada = new Brigada(codBrigadars.getString("nombre_br"), Especialidad.valueOf(rs.getString("especialidad")));
-//                    brigadas.add(brigada);
+                    Brigada brigada = new Brigada();
+                    brigada.setEspecialidad(Especialidad.valueOf(rs.getString("especialidad")));
+                    brigada.setNombreBrigada(rs.getString("nombre_br"));
+                    brigada.setCodBrigada(rs.getInt("codBrigada"));
+                    brigadas.add(brigada);
                 }
             }
         } catch (SQLException ex) {
@@ -110,16 +113,16 @@ public class BrigadaData {
         }
     }
 
-    public boolean codBrigadaExiste(int codBrigada) {
-        String sql = "SELECT 1 FROM brigada WHERE codBrigada = ?";
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setInt(1, codBrigada);
-            ResultSet rs = ps.executeQuery();
-            return rs.next();
-        } catch (SQLException ex) {
-            System.out.println("Error al verificar la existencia del código de brigada: " + ex.getMessage());
-            return false;
-        }
-    }
+//    public boolean codBrigadaExiste(int codBrigada) {
+//        String sql = "SELECT 1 FROM brigada WHERE codBrigada = ?";
+//        try (PreparedStatement ps = con.prepareStatement(sql)) {
+//            ps.setInt(1, codBrigada);
+//            ResultSet rs = ps.executeQuery();
+//            return rs.next();
+//        } catch (SQLException ex) {
+//            System.out.println("Error al verificar la existencia del código de brigada: " + ex.getMessage());
+//            return false;
+//        }
+//    }
 
 }

@@ -44,7 +44,7 @@ public Bombero buscarBombero(int dni) {
             bombero.setFecha_nac(rs.getDate("fecha_nac").toLocalDate());
             bombero.setGrupSanguineo(rs.getString("grupSanguineo"));
             bombero.setCodBrigada(rs.getInt("codBrigada"));
-            JOptionPane.showMessageDialog(null, "Bombero encontrado");
+      
         } else {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero");
         }

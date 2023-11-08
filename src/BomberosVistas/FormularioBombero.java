@@ -6,13 +6,16 @@
 package BomberosVistas;
 
 import BomberoAcceesoDatos.BomberoData;
+import BomberoAcceesoDatos.BrigadaData;
 import BomberosEntidades.Bombero;
+import BomberosEntidades.Brigada;
 import BomberosEntidades.Cuartel;
 import BomberosEntidades.Especialidad;
 import com.toedter.calendar.JCalendar;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -25,8 +28,10 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
 
     private BomberoData bomberodata = new BomberoData();
     private Bombero bomberoActual = null;
+    private BrigadaData bData = new BrigadaData();
     DefaultTableModel modelo = new DefaultTableModel();
     List<Bombero> listarBomberos;
+    List<Brigada> brigadas = bData.listarBrigadasLibres();
 
     /**
      * Creates new form FormularioBombero
@@ -35,6 +40,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         initComponents();
         ArmarTabla();
         llenarTabla();
+        llenarTipo();
     }
 
     /**
@@ -318,14 +324,13 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
             int dni = Integer.parseInt(jDni.getText());
             bomberoActual = bomberodata.buscarBombero(dni);
             if (bomberoActual != null) {
-                System.out.println("Bombero encontrado:");
                 jDni.setText(bomberoActual.getDni());
                 Jnombre.setText(bomberoActual.getNombre());
                 JApellido.setText(bomberoActual.getApellido());
                 jCelular.setText(bomberoActual.getCelular());
                 jSangre.setSelectedItem(bomberoActual.getGrupSanguineo());
-                java.util.Date sfecha = jDCalendar.getDate();
-                LocalDate fechaNac = bomberoActual.getFecha_nac();
+                jBrigadaAsignada.setSelectedItem(bomberoActual.getCodBrigada());
+                jDCalendar.setDate(Date.from(bomberoActual.getFecha_nac().atStartOfDay(ZoneId.systemDefault()).toInstant()));
                 limpiarTabla();
                 modelo.setRowCount(0);
                 modelo.addRow(new Object[]{bomberoActual.getDni(), bomberoActual.getApellido(), bomberoActual.getNombre(), bomberoActual.getCodBrigada()});
@@ -340,19 +345,20 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
     private void jDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDniKeyReleased
         if (jDni.getText().isEmpty()) {
             llenarTabla();
+            limpiar();
         }
+
     }//GEN-LAST:event_jDniKeyReleased
 
     private void jlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlimpiarActionPerformed
         // TODO add your handling code here:
         limpiar();
     }//GEN-LAST:event_jlimpiarActionPerformed
-    public void ArmarTabla() {
-        modelo.addColumn("Dni");
-        modelo.addColumn("Apellido");
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Brigada");
-        jMostrar.setModel(modelo);
+    public void llenarTipo() {
+        for (Brigada tipo : brigadas) {
+            jBrigadaAsignada.addItem(tipo.getNombreBrigada());
+            System.out.println(tipo.getNombreBrigada());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -408,5 +414,12 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         jBrigadaAsignada.setSelectedIndex(-1);
 
     }
-;
+
+    private void ArmarTabla() {
+        modelo.addColumn("Dni");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Brigada");
+        jMostrar.setModel(modelo);
+    }
 }

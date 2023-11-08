@@ -25,6 +25,17 @@ public class Brigada {
         this.nro_cuartel = nro_cuartel;
     }
 
+    public Brigada() {
+    }
+
+    public Brigada(String nombreBrigada, Especialidad especialidad, int nro_cuartel) {
+        this.nombreBrigada = nombreBrigada;
+        this.especialidad = especialidad;
+        this.nro_cuartel = nro_cuartel;
+    }
+
+
+
     public int getCodBrigada() {
         return codBrigada;
     }
