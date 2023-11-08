@@ -104,12 +104,12 @@ public class BomberoMAIN {
 //     //   Bombero b1=new Bombero(1,"44360403","Ema Sosa","0+",(LocalDate.of(2002, 07, 18)),"2665",1, true);
 //        bombero.agregarBombero(b1);
 //        System.out.println(b1);
-//        CuartelData c = new CuartelData();
-//        Cuartel cuartel=new Cuartel(1,"la campora", "casa rosada", 345,223, "25555", "aaaaaaaaaaaa");
-//        c.agregarCuartel(cuartel);
+        CuartelData c = new CuartelData();
+        Cuartel cuartel=new Cuartel(1,"la campora", "casa rosada", 345,223, "25555", "aaaaaaaaaaaa");
+        c.agregarCuartel(cuartel);
 //             BrigadaData b1=new BrigadaData();
-//             Brigada brigada=new Brigada(2, "alfa", Especialidad., true, 1);
-//             b1.agregarCuartel(brigada);
+//             Brigada brigada=new Brigada(2, "alfa", Especialidad.Derrumbes, 1);
+//             b1.agregarBrigada(brigada);
 //        SiniestrosData s1 = new SiniestrosData();
 //        Siniestro siniestro = new Siniestro( Especialidad.Incendios, (LocalDate.of(2002, 07, 18)), 233, 444, "perro salchicha", 7);
 //        s1.agregarSiniestro(siniestro);
