@@ -45,12 +45,12 @@ public Bombero buscarBombero(int dni) {
             bombero.setGrupSanguineo(rs.getString("grupSanguineo"));
             bombero.setCodBrigada(rs.getInt("codBrigada"));
       
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero");
+        
         }
         
         ps.close();
     } catch (SQLException ex) {
+         JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero");
         return bombero;
     }
     

@@ -304,13 +304,15 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 LocalDate fechaNac = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 String sangre = jSangre.getSelectedItem().toString() + " ";
                 String celular = jCelular.getText();
-                int codBrigada =2; // Integer.parseInt(jBrigadaAsignada.getSelectedItem().toString());
+                // validar brigada y sangre
+                int codBrigada = 2; // Integer.parseInt(jBrigadaAsignada.getSelectedItem().toString());
                 if (celular.isEmpty()) {
                     JOptionPane.showMessageDialog(this, "El campo Celular no debe estar vacío");
                 } else {
                     if (bomberoActual == null) {
                         bomberoActual = new Bombero(dni, nombre, apellido, sangre, fechaNac, celular, codBrigada, true);
                         bomberodata.agregarBombero(bomberoActual);
+
                     }
                 }
             }
@@ -337,7 +339,9 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 modelo.setRowCount(0);
                 modelo.addRow(new Object[]{bomberoActual.getDni(), bomberoActual.getApellido(), bomberoActual.getNombre(), bomberoActual.getCodBrigada()});
             } else {
-                System.out.println("Bombero no encontrado.");
+
+                JOptionPane.showMessageDialog(this, "Bombero no encontrado.");
+
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar números válidos");
@@ -351,13 +355,11 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jDniKeyReleased
 
-    
-    
-    
-    
+
     private void jlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlimpiarActionPerformed
         // TODO add your handling code here:
         limpiar();
+            llenarTabla();
     }//GEN-LAST:event_jlimpiarActionPerformed
 
     private void jDniKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDniKeyPressed
@@ -383,7 +385,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
 //            JOptionPane.showMessageDialog(this, "Debe ingresar números válidos");
 //        }
 //        
-        
+
     }//GEN-LAST:event_jDniKeyPressed
     public void llenarTipo() {
         for (Brigada tipo : brigadas) {
