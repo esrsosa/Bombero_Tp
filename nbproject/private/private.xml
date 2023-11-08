@@ -3,16 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Emanuel%20Sosa/OneDrive/Documentos/NetBeansProjects/Bombero/Bombero_Tp/src/BomberosVistas/HistorialDeSiniestro.java</file>
-            <file>file:/C:/Users/Emanuel%20Sosa/OneDrive/Documentos/NetBeansProjects/Bombero/Bombero_Tp/src/BomberosEntidades/Siniestro.java</file>
-            <file>file:/C:/Users/Emanuel%20Sosa/OneDrive/Documentos/NetBeansProjects/Bombero/Bombero_Tp/src/BomberosVistas/FormularioBombero.java</file>
-            <file>file:/C:/Users/Emanuel%20Sosa/OneDrive/Documentos/NetBeansProjects/Bombero/Bombero_Tp/src/bombero/TipoSiniestro.java</file>
-            <file>file:/C:/Users/Emanuel%20Sosa/OneDrive/Documentos/NetBeansProjects/Bombero/Bombero_Tp/src/BomberosVistas/FormularioCuartel.java</file>
-            <file>file:/C:/Users/Emanuel%20Sosa/OneDrive/Documentos/NetBeansProjects/Bombero/Bombero_Tp/src/BomberosVistas/Siniestros.java</file>
-            <file>file:/C:/Users/Emanuel%20Sosa/OneDrive/Documentos/NetBeansProjects/Bombero/Bombero_Tp/src/BomberosVistas/ResolucionDeSiniestro.java</file>
-            <file>file:/C:/Users/Emanuel%20Sosa/OneDrive/Documentos/NetBeansProjects/Bombero/Bombero_Tp/src/bombero/BomberoMAIN.java</file>
-            <file>file:/C:/Users/Emanuel%20Sosa/OneDrive/Documentos/NetBeansProjects/Bombero/Bombero_Tp/src/BomberoAcceesoDatos/SiniestrosData.java</file>
-            <file>file:/C:/Users/Emanuel%20Sosa/OneDrive/Documentos/NetBeansProjects/Bombero/Bombero_Tp/src/BomberoAcceesoDatos/BomberoData.java</file>
+            <file>file:/C:/Users/pollo/Documents/laboratorio%201/Bombero_Tp/src/BomberoAcceesoDatos/CuartelData.java</file>
+            <file>file:/C:/Users/pollo/Documents/laboratorio%201/Bombero_Tp/src/bombero/BomberoMAIN.java</file>
+            <file>file:/C:/Users/pollo/Documents/laboratorio%201/Bombero_Tp/src/BomberosEntidades/Especialidad.java</file>
+            <file>file:/C:/Users/pollo/Documents/laboratorio%201/Bombero_Tp/src/BomberosEntidades/Brigada.java</file>
+            <file>file:/C:/Users/pollo/Documents/laboratorio%201/Bombero_Tp/src/BomberosVistas/Siniestros.java</file>
+            <file>file:/C:/Users/pollo/Documents/laboratorio%201/Bombero_Tp/src/BomberoAcceesoDatos/Conexion.java</file>
+            <file>file:/C:/Users/pollo/Documents/laboratorio%201/Bombero_Tp/src/BomberosVistas/FormularioBombero.java</file>
+            <file>file:/C:/Users/pollo/Documents/laboratorio%201/Bombero_Tp/src/BomberosEntidades/Siniestro.java</file>
         </group>
     </open-files>
 </project-private>

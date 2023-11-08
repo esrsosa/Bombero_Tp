@@ -5,6 +5,7 @@
  */
 package BomberosVistas;
 
+import BomberoAcceesoDatos.SiniestrosData;
 import BomberosEntidades.Especialidad;
 import BomberosEntidades.Siniestro;
 
@@ -14,6 +15,8 @@ import BomberosEntidades.Siniestro;
  */
 public class Siniestros extends javax.swing.JInternalFrame {
 
+      private SiniestrosData siniesrodata = new SiniestrosData();
+    private Siniestro SinniestroActual = null;
     /**
      * Creates new form Siniestros
      */

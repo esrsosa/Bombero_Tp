@@ -1,9 +1,9 @@
-/*
+                                                   /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bombero;
+package bombero;                                              
 
 import BomberoAcceesoDatos.BomberoData;
 import BomberoAcceesoDatos.BrigadaData;
@@ -14,7 +14,6 @@ import BomberosEntidades.Brigada;
 import BomberosEntidades.Cuartel;
 import BomberosEntidades.Especialidad;
 import BomberosEntidades.Siniestro;
-import static bombero.TipoSiniestro.INCENDIO;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -28,13 +27,37 @@ public class BomberoMAIN {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Siniestro s1 = new Siniestro(Especialidad.Incendios, LocalDate.now().minusDays(2), 33, 02, "xx", 5);
-        SiniestrosData s = new SiniestrosData();
-        s.agregarSiniestro(s1);
-        List<Siniestro> siniestrosRecientes = s.listarSiniestrosRecientes();
-        for (Siniestro siniestro : siniestrosRecientes) {
-            System.out.println(siniestro); 
-        }
+
+        
+
+// SiniestrosData sd = new SiniestrosData();
+//        Siniestro siniestro = new Siniestro(1);
+////siniestro.setTipoSiniestro(TipoSiniestro.INCENDIO); // Ejemplo de configuración de datos
+//siniestro.setFechaSiniestro(LocalDate.now()); // Ejemplo de configuración de fecha
+//siniestro.setCoordenadaX(10); // Ejemplo de coordenadas X
+//siniestro.setCoordenadaY(20); // Ejemplo de coordenadas Y
+//siniestro.setDetalles("Detalles del siniestro"); // Ejemplo de detalles
+//siniestro.setCodigoBrigada(1); // Ejemplo de código de brigada
+//
+// SiniestrosData sd = new SiniestrosData();
+//        Siniestro siniestro = new Siniestro(1);
+////siniestro.setTipoSiniestro(TipoSiniestro.INCENDIO); // Ejemplo de configuración de datos
+//siniestro.setFechaSiniestro(LocalDate.now()); // Ejemplo de configuración de fecha
+//siniestro.setCoordenadaX(10); // Ejemplo de coordenadas X
+//siniestro.setCoordenadaY(20); // Ejemplo de coordenadas Y
+//siniestro.setDetalles("Detalles del siniestro"); // Ejemplo de detalles
+//siniestro.setCodigoBrigada(1); // Ejemplo de código de brigada
+//
+//
+//        Siniestro s1 = new Siniestro(Especialidad.Incendios, LocalDate.now().minusDays(2), 33, 02, "xx", 1);
+//        SiniestrosData s = new SiniestrosData();
+//        s.agregarSiniestro(s1);
+//        List<Siniestro> siniestrosRecientes = s.listarSiniestrosRecientes();
+////        for (Siniestro siniestro : siniestrosRecientes) {
+//            System.out.println(siniestro);
+//        }
+//
+
 //------------------------------------------------------------------------------
 //        BrigadaData b = new BrigadaData();
 //        CuartelData c = new CuartelData();
@@ -45,7 +68,7 @@ public class BomberoMAIN {
 //        } else {
 //            System.out.println("error");
 //        }
-    //Brigada b1 = new Brigada(5, "sa", Especialidad.Rescate);
+        //Brigada b1 = new Brigada(5, "sa", Especialidad.Rescate);
 //        if (!b.codBrigadaExiste(b1.getCodBrigada())) {
 //            b.agregarBrigada(b1);
 //        }else{
@@ -70,10 +93,10 @@ public class BomberoMAIN {
 //        for (Siniestro siniestro : siniestrosRecientes) {
 //            System.out.println(siniestro); 
 //        }
+       // BomberoData bombero = new BomberoData();
+    // bombero.darBajaPorInactividad(1);
 //        BomberoData bombero = new BomberoData();
-//     bombero.darBajaPorInactividad(1);
-//      //  BomberoData bombero = new BomberoData();
-//        Bombero b1 = new Bombero("1", "121212", "Ema raul", "0+", (LocalDate.of(2002, 07, 18)), "2665", 1, true);
+//        Bombero b1 = new Bombero("1", "121212", "Emaraul", "0+", (LocalDate.of(2002, 07, 18)), "2665", 1, true);
 //        bombero.actualizarDatos(b1);
 //      //  falta agregar brigada y cuertel
 //      ///  BomberoData bombero=new BomberoData();
@@ -83,11 +106,13 @@ public class BomberoMAIN {
 //        CuartelData c = new CuartelData();
 //        Cuartel cuartel=new Cuartel(1,"la campora", "casa rosada", 345,223, "25555", "aaaaaaaaaaaa");
 //        c.agregarCuartel(cuartel);
-//            // BrigadaData b1=new BrigadaData();
-//             Brigada brigada=new Brigada(2, "alfa", Especialidad.Rescate, true, 1);
-//           //  b1.agregarCuartel(brigada);
-//     //   SiniestrosData s1 = new SiniestrosData();
-//      //  Siniestro siniestro = new Siniestro(1, Especialidad.Incendios, (LocalDate.of(2002, 07, 18)), 233, 444, "perro salchicha", (LocalDate.of(2002, 07, 18)), 7, 1);
-//       // s1.agregarSiniestro(siniestro);
+//             BrigadaData b1=new BrigadaData();
+//             Brigada brigada=new Brigada(2, "alfa", Especialidad., true, 1);
+//             b1.agregarCuartel(brigada);
+        SiniestrosData s1 = new SiniestrosData();
+        Siniestro siniestro = new Siniestro( Especialidad.Incendios, (LocalDate.of(2002, 07, 18)), 233, 444, "perro salchicha", 7);
+        s1.agregarSiniestro(siniestro);
+   }
 }
-}
+
+
