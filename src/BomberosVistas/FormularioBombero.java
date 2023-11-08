@@ -146,6 +146,9 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         jSangre.setSelectedIndex(-1);
 
         jDni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jDniKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jDniKeyReleased(evt);
             }
@@ -314,6 +317,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar números válidos");
         }
+        llenarTabla();
     }//GEN-LAST:event_jNuevoActionPerformed
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
@@ -345,13 +349,42 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
             llenarTabla();
             limpiar();
         }
-
     }//GEN-LAST:event_jDniKeyReleased
 
+    
+    
+    
+    
     private void jlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jlimpiarActionPerformed
         // TODO add your handling code here:
         limpiar();
     }//GEN-LAST:event_jlimpiarActionPerformed
+
+    private void jDniKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDniKeyPressed
+//        // TODO add your handling code here:
+//            try {
+//            bomberoActual = new Bombero();
+//            int dni = Integer.parseInt(jDni.getText());
+//            bomberoActual = bomberodata.buscarBombero(dni);
+//            if (bomberoActual != null) {
+//                jDni.setText(bomberoActual.getDni());
+//                Jnombre.setText(bomberoActual.getNombre());
+//                JApellido.setText(bomberoActual.getApellido());
+//                jCelular.setText(bomberoActual.getCelular());
+//                jSangre.setSelectedItem(bomberoActual.getGrupSanguineo());
+//                jBrigadaAsignada.setSelectedItem(bomberoActual.getCodBrigada());
+//                jDCalendar.setDate(Date.from(bomberoActual.getFecha_nac().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+//                limpiarTabla();
+//                modelo.setRowCount(0);
+//                
+//                modelo.addRow(new Object[]{bomberoActual.getDni(), bomberoActual.getApellido(), bomberoActual.getNombre(), bomberoActual.getCodBrigada()});
+//            }
+//        } catch (NumberFormatException ex) {
+//            JOptionPane.showMessageDialog(this, "Debe ingresar números válidos");
+//        }
+//        
+        
+    }//GEN-LAST:event_jDniKeyPressed
     public void llenarTipo() {
         for (Brigada tipo : brigadas) {
             jBrigadaAsignada.addItem(tipo.getNombreBrigada());
@@ -406,6 +439,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
     private void limpiar() {
         jDni.setText(null);
         Jnombre.setText(null);
+        JApellido.setText(null);
         jSangre.setSelectedIndex(-1);
         jDCalendar.setDate(null);
         jCelular.setText(null);
