@@ -206,16 +206,14 @@ public class Siniestros extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGuardarActionPerformed
-        // TODO add your handling code here:
-      //  Siniestro si = (Siniestro) jCtipo.getSelectedItem();
 
-            Especialidad tipo = (Especialidad) jCtipo.getSelectedItem();
+           Especialidad tipo =Especialidad.valueOf(jCtipo.getSelectedItem().toString());
             java.util.Date sfecha = jFecha.getDate();
              LocalDate fechaSi = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             int corX = Integer.parseInt(jCoordx.getText()); 
             int corY = Integer.parseInt(jCoordy.getText()); 
             String Detalles = jDetalle.getText();
-            int brigada =(int) jBrigada.getSelectedItem(); 
+            int brigada =Integer.parseInt(jBrigada.getSelectedItem().toString()); 
             SinniestroActual = new Siniestro(tipo,fechaSi,corX,corY,Detalles,brigada);
            siniesrodata.agregarSiniestro(SinniestroActual);
     }//GEN-LAST:event_jGuardarActionPerformed
