@@ -145,8 +145,6 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         jSangre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A+", "A-", "B+", "B-", "AB+", "AB-", "0+", "0-" }));
         jSangre.setSelectedIndex(-1);
 
-        jBrigadaAsignada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jDni.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jDniKeyReleased(evt);
@@ -303,7 +301,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 LocalDate fechaNac = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 String sangre = jSangre.getSelectedItem().toString() + " ";
                 String celular = jCelular.getText();
-                int codBrigada = 2;//(Integer) jBrigadaAsignada.getSelectedItem();
+                int codBrigada =2; // Integer.parseInt(jBrigadaAsignada.getSelectedItem().toString());
                 if (celular.isEmpty()) {
                     JOptionPane.showMessageDialog(this, "El campo Celular no debe estar vacío");
                 } else {

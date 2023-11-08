@@ -49,13 +49,14 @@ public class BomberoMAIN {
 //siniestro.setCodigoBrigada(1); // Ejemplo de código de brigada
 //
 //
-//        Siniestro s1 = new Siniestro(Especialidad.Incendios, LocalDate.now().minusDays(2), 33, 02, "xx", 1);
-//        SiniestrosData s = new SiniestrosData();
-//        s.agregarSiniestro(s1);
-//        List<Siniestro> siniestrosRecientes = s.listarSiniestrosRecientes();
-////        for (Siniestro siniestro : siniestrosRecientes) {
-//            System.out.println(siniestro);
-//        }
+        Siniestro s1 = new Siniestro(Especialidad.Incendios, LocalDate.now().minusDays(2), 33, 02, "xx", 2);
+        SiniestrosData s = new SiniestrosData();
+        s.agregarSiniestro(s1);
+        List<Siniestro> siniestrosRecientes = s.listarSiniestrosRecientes();
+        for (Siniestro siniestro : siniestrosRecientes) {
+            System.out.println(siniestro);
+        }
+        
 //
 
 //------------------------------------------------------------------------------
@@ -109,10 +110,10 @@ public class BomberoMAIN {
 //             BrigadaData b1=new BrigadaData();
 //             Brigada brigada=new Brigada(2, "alfa", Especialidad., true, 1);
 //             b1.agregarCuartel(brigada);
-        SiniestrosData s1 = new SiniestrosData();
-        Siniestro siniestro = new Siniestro( Especialidad.Incendios, (LocalDate.of(2002, 07, 18)), 233, 444, "perro salchicha", 7);
-        s1.agregarSiniestro(siniestro);
-   }
+//        SiniestrosData s1 = new SiniestrosData();
+//        Siniestro siniestro = new Siniestro( Especialidad.Incendios, (LocalDate.of(2002, 07, 18)), 233, 444, "perro salchicha", 7);
+//        s1.agregarSiniestro(siniestro);
+//   }
 }
-
+}
 
