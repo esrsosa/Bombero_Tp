@@ -50,6 +50,7 @@ public class Bomberos extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu11 = new javax.swing.JMenu();
 
         jMenu3.setText("jMenu3");
@@ -133,6 +134,14 @@ public class Bomberos extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem5);
 
+        jMenuItem6.setText("Historial Siniestro");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem6);
+
         jMenuBar1.add(jMenu5);
 
         jMenu11.setText("Distancia");
@@ -182,13 +191,24 @@ public class Bomberos extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-         Escritorio.removeAll();
+        Escritorio.removeAll();
         Escritorio.repaint();
         Siniestros siniestro = new Siniestros();
         Escritorio.add(siniestro);
         siniestro.setVisible(true);
         Escritorio.moveToFront(siniestro);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        Escritorio.removeAll();
+        Escritorio.repaint();
+        HistorialDeSiniestro historial = new HistorialDeSiniestro();
+        Escritorio.add(historial);
+        historial.setVisible(true);
+        Escritorio.moveToFront(historial);
+
+
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,5 +267,6 @@ public class Bomberos extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     // End of variables declaration//GEN-END:variables
 }

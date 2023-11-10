@@ -146,6 +146,11 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         });
 
         jButton5.setText("Salir");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jModificar.setText("Modificar");
         jModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -153,8 +158,6 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 jModificarActionPerformed(evt);
             }
         });
-
-        jSangre.setSelectedIndex(-1);
 
         jDni.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -444,6 +447,10 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         llenarTabla();
         
     }//GEN-LAST:event_jDarDeBajaActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
     public void llenarTipo() {
         for (Brigada tipo : brigadas) {
             jBrigadaAsignada.addItem(tipo.getNombreBrigada());

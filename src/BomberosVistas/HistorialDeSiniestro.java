@@ -5,17 +5,30 @@
  */
 package BomberosVistas;
 
+import BomberoAcceesoDatos.SiniestrosData;
+import BomberosEntidades.Siniestro;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author pollo
  */
 public class HistorialDeSiniestro extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form HistorialDeSiniestro
-     */
+    private SiniestrosData siniestrodata = new SiniestrosData();
+    private Siniestro siniestroActual = null;
+    DefaultTableModel modelo = new DefaultTableModel();
+    List<Siniestro> listarSiniestros;
+
     public HistorialDeSiniestro() {
         initComponents();
+        ArmarTabla();
+        llenarTabla();
     }
 
     /**
@@ -29,18 +42,19 @@ public class HistorialDeSiniestro extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jHistorial = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jfecha1 = new com.toedter.calendar.JDateChooser();
+        jfecha2 = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jSalir = new javax.swing.JButton();
+        jBuscar = new javax.swing.JButton();
 
         jLabel1.setText("Historial del Siniestro");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jHistorial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null},
@@ -61,7 +75,7 @@ public class HistorialDeSiniestro extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jHistorial);
 
         jLabel2.setText("Filtrar entre fechas");
 
@@ -74,7 +88,19 @@ public class HistorialDeSiniestro extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("Salir");
+        jSalir.setText("Salir");
+        jSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSalirActionPerformed(evt);
+            }
+        });
+
+        jBuscar.setText("buscar");
+        jBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,40 +119,47 @@ public class HistorialDeSiniestro extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
+                        .addGap(51, 51, 51)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(98, 98, 98)
+                        .addGap(241, 241, 241)
                         .addComponent(jButton1)
                         .addGap(53, 53, 53)
-                        .addComponent(jButton2))
+                        .addComponent(jSalir))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jfecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jfecha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jBuscar)))
+                .addGap(0, 231, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jBuscar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jButton1)
+                            .addComponent(jSalir))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jfecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jfecha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -137,17 +170,182 @@ public class HistorialDeSiniestro extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
+
+//        siniestroActual = new Siniestro();
+//        java.util.Date sfecha = jfecha1.getDate();
+//        // Suponiendo que listarSiniestrosRecientes() devuelve una List<Siniestro>
+//        List<Siniestro> siniestrosRecientes = siniestrodata.listarSiniestrosRecientes();
+//
+//        if (siniestrosRecientes.isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "No se encontraron siniestros recientes.");
+//        } else {
+//            // Limpiar la tabla antes de agregar nuevas filas
+//            modelo.setRowCount(0);
+//
+//            // Suponiendo que quieres mostrar detalles del primer siniestro reciente
+//            Siniestro siniestroActual = siniestrosRecientes.get(0);
+//
+//            modelo.addRow(new Object[]{
+//                siniestroActual.getCodigo(),
+//                siniestroActual.getTipoSiniestro(),
+//                siniestroActual.getCoordenadaX(),
+//                siniestroActual.getCoordenadaY(),
+//                siniestroActual.getCodigoBrigada(),
+//                siniestroActual.getDetalles(),
+//                siniestroActual.getFechaSiniestro(),
+//                siniestroActual.getFechaResolucion()
+//            });
+//        }
+//---------------------------------------------------------------------------------------------------
+/// Obtener las fechas ingresadas del componente gráfico (supongamos que son JDateChooser)
+//        try {
+//            java.util.Date fechaInicio = jfecha1.getDate();
+//            java.util.Date fechaFin = jfecha2.getDate();
+//
+//           
+//            if (fechaInicio == null || fechaFin == null) {
+//                JOptionPane.showMessageDialog(this, "Debe ingresar ambas fechas.");
+//                return;
+//            }
+//
+//            LocalDate fechaInicioFiltro = fechaInicio.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//            LocalDate fechaFinFiltro = fechaFin.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//
+//            List<Siniestro> siniestrosRecientes = siniestrodata.listarSiniestrosRecientes();
+//
+//            List<Siniestro> siniestrosFiltrados = siniestrosRecientes.stream()
+//                    .filter(siniestro
+//                            -> siniestro.getFechaSiniestro().isAfter(fechaInicioFiltro)
+//                    && siniestro.getFechaSiniestro().isBefore(fechaFinFiltro))
+//                    .collect(Collectors.toList());
+//
+//            modelo.setRowCount(0);
+//
+//            if (siniestrosFiltrados.isEmpty()) {
+//              
+//                JOptionPane.showMessageDialog(this, "No se encontraron siniestros recientes entre las fechas ingresadas: "
+//                        + fechaInicioFiltro + " y " + fechaFinFiltro);
+//            } else {
+//                for (Siniestro siniestroActual : siniestrosFiltrados) {
+//                    modelo.addRow(new Object[]{
+//                        siniestroActual.getCodigo(),
+//                        siniestroActual.getTipoSiniestro(),
+//                        siniestroActual.getCoordenadaX(),
+//                        siniestroActual.getCoordenadaY(),
+//                        siniestroActual.getCodigoBrigada(),
+//                        siniestroActual.getDetalles(),
+//                        siniestroActual.getFechaSiniestro(),
+//                        siniestroActual.getFechaResolucion()
+//                    });
+//                }
+//            }
+//
+//        } catch (NumberFormatException ex) {
+//            JOptionPane.showMessageDialog(this, "Error en el formato de las fechas.");
+//        }
+//---------------------------------------------------------------------------------------------------
+        try {
+            java.util.Date fechaInicio = jfecha1.getDate();
+            java.util.Date fechaFin = jfecha2.getDate();
+
+            if (fechaInicio == null || fechaFin == null) {
+                JOptionPane.showMessageDialog(this, "Debe ingresar ambas fechas.");
+                return;
+            }
+
+            LocalDate fechaInicioFiltro = fechaInicio.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate fechaFinFiltro = fechaFin.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            List<Siniestro> siniestrosRecientes = siniestrodata.listarSiniestrosRecientes();
+
+          
+            List<Siniestro> siniestrosFiltrados = siniestrosRecientes.stream()
+                    .filter(siniestro
+                            -> siniestro.getFechaSiniestro().isAfter(fechaInicioFiltro)
+                    && siniestro.getFechaSiniestro().isBefore(fechaFinFiltro))
+                    .collect(Collectors.toList());
+
+            modelo.setRowCount(0);
+
+   
+        
+
+            if (siniestrosFiltrados.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No se encontraron siniestros recientes entre las fechas ingresadas.");
+            } else {
+              
+                for (Siniestro siniestroActual : siniestrosFiltrados) {
+                    modelo.addRow(new Object[]{
+                        siniestroActual.getCodigo(),
+                        siniestroActual.getTipoSiniestro(),
+                        siniestroActual.getCoordenadaX(),
+                        siniestroActual.getCoordenadaY(),
+                        siniestroActual.getCodigoBrigada(),
+                        siniestroActual.getDetalles(),
+                        siniestroActual.getFechaSiniestro(),
+                        siniestroActual.getFechaResolucion()
+                    });
+                }
+            }
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Error en el formato de las fechas.");
+        }
+
+    }//GEN-LAST:event_jBuscarActionPerformed
+
+    private void jSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBuscar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private javax.swing.JTable jHistorial;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton jSalir;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
+    private com.toedter.calendar.JDateChooser jfecha1;
+    private com.toedter.calendar.JDateChooser jfecha2;
     // End of variables declaration//GEN-END:variables
+
+    private void llenarTabla() {
+        modelo.setRowCount(0);
+        listarSiniestros = siniestrodata.listarSiniestrosRecientes();
+        for (Siniestro aux : listarSiniestros) {
+            modelo.addRow(new Object[]{aux.getCodigo(), aux.getTipoSiniestro(), aux.getCoordenadaX(), aux.getCoordenadaY(), aux.getCodigoBrigada(), aux.getDetalles(), aux.getFechaSiniestro(), aux.getFechaResolucion(), aux.getCalificacion()});
+        }
+    }
+
+    private void limpiarTabla() {
+        int filas = modelo.getRowCount();
+        for (int i = filas - 1; i >= 0; i--) {
+            modelo.removeRow(i);
+        }
+    }
+
+    private void ArmarTabla() {
+        modelo.addColumn("ID");
+        modelo.addColumn("Tipo");
+        modelo.addColumn("CorX");
+        modelo.addColumn("CorY");
+        modelo.addColumn("Brigada");
+        modelo.addColumn("Detalle");
+        modelo.addColumn("F.Inicio");
+        modelo.addColumn("F.Resolucion");
+        modelo.addColumn("puntuacion");
+        modelo.addColumn("Activos");
+        modelo.addColumn("Hora");
+
+        jHistorial.setModel(modelo);
+        // this.setLocationRelativeTo(null);
+        this.setResizable(false);
+
+    }
+
 }
