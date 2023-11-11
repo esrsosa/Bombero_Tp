@@ -29,7 +29,7 @@ public class BomberoData {
     }
 
     public Bombero buscarBombero(int dni) {
-        String sql = "SELECT dni, nombre, apellido, celular, fecha_nac, grupSanguineo, codBrigada FROM bombero WHERE dni = ?";
+        String sql = "SELECT dni, nombre, apellido, celular, fecha_nac, grupSanguineo, codBrigada FROM bombero WHERE dni = ? AND estado = 1";
         Bombero bombero = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -45,15 +45,12 @@ public class BomberoData {
                 bombero.setFecha_nac(rs.getDate("fecha_nac").toLocalDate());
                 bombero.setGrupSanguineo(rs.getString("grupSanguineo"));
                 bombero.setCodBrigada(rs.getInt("codBrigada"));
-
             }
-
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero");
             return bombero;
         }
-
         return bombero;
     }
 
