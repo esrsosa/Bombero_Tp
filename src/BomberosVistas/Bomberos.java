@@ -51,6 +51,7 @@ public class Bomberos extends javax.swing.JFrame {
         jMenu5 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu11 = new javax.swing.JMenu();
 
         jMenu3.setText("jMenu3");
@@ -142,6 +143,14 @@ public class Bomberos extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem6);
 
+        jMenuItem7.setText("Resolucion Siniestro");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem7);
+
         jMenuBar1.add(jMenu5);
 
         jMenu11.setText("Distancia");
@@ -210,6 +219,16 @@ public class Bomberos extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+          Escritorio.removeAll();
+        Escritorio.repaint();
+         ResolucionDeSiniestro Resolucion = new ResolucionDeSiniestro();
+        Escritorio.add(Resolucion);
+        Resolucion.setVisible(true);
+        Escritorio.moveToFront(Resolucion);
+        
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -268,5 +287,6 @@ public class Bomberos extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     // End of variables declaration//GEN-END:variables
 }

@@ -14,6 +14,7 @@ import BomberosEntidades.Brigada;
 import BomberosEntidades.Cuartel;
 import BomberosEntidades.Especialidad;
 import BomberosEntidades.Siniestro;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -28,7 +29,21 @@ public class BomberoMAIN {
      */
     public static void main(String[] args) {
 
-        
+         // Supongamos que tienes una instancia de ResolucionDeSiniestro
+        SiniestrosData resolucionDeSiniestro = new SiniestrosData();
+
+        // Crear un objeto Siniestro con datos de prueba
+        Siniestro siniestroPrueba = new Siniestro();
+        siniestroPrueba.setCodigo(1); // Supongamos que el código del siniestro es 1
+        siniestroPrueba.setFechaResolucion(LocalDate.now()); // Fecha actual
+        siniestroPrueba.setCalificacion(5); // Puntuación de prueba
+
+    
+            // Llamar a la función marcarComoResuelto
+             resolucionDeSiniestro.marcarComoResuelto(siniestroPrueba);
+
+     
+       
 
 // SiniestrosData sd = new SiniestrosData();
 //        Siniestro siniestro = new Siniestro(1);
@@ -87,13 +102,14 @@ public class BomberoMAIN {
 //        Bombero b=new Bombero(1);
 //        b1.eliminarBombero(b);
 //-------------------------------------------------------- 
-        Siniestro s1 = new Siniestro(Especialidad.Incendios, LocalDate.now().minusDays(2), 33, 02, "xx", 2);
-        SiniestrosData s = new SiniestrosData();
-        s.agregarSiniestro(s1);
-        List<Siniestro> siniestrosRecientes = s.listarSiniestrosRecientes();
-        for (Siniestro siniestro : siniestrosRecientes) {
-            System.out.println(siniestro); 
-        }
+//        Siniestro s1 = new Siniestro(Especialidad.Incendios, LocalDate.now().minusDays(2), 33, 02, "xx", 2);
+//        SiniestrosData s = new SiniestrosData();
+//        s.agregarSiniestro(s1);
+//        List<Siniestro> siniestrosRecientes = s.listarSiniestrosRecientes();
+//        for (Siniestro siniestro : siniestrosRecientes) {
+//            System.out.println(siniestro); 
+//        }
+//-------------------------------------------------------------------------------------------
        // BomberoData bombero = new BomberoData();
     // bombero.darBajaPorInactividad(1);
 //        BomberoData bombero = new BomberoData();
