@@ -103,6 +103,11 @@ public class Siniestros extends javax.swing.JInternalFrame {
         jLimpiar.setText("Limpiar");
 
         jSalir.setText("Salir");
+        jSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSalirActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Brigada: ");
 
@@ -222,6 +227,10 @@ public class Siniestros extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
       // llenarTipo();
     }//GEN-LAST:event_jCtipoActionPerformed
+
+    private void jSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalirActionPerformed
+       dispose();
+    }//GEN-LAST:event_jSalirActionPerformed
 
 public void llenarTipo(){
     for (Especialidad tipo :Especialidad.values()) {

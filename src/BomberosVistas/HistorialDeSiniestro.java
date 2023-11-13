@@ -285,7 +285,9 @@ public class HistorialDeSiniestro extends javax.swing.JInternalFrame {
                         siniestroActual.getCodigoBrigada(),
                         siniestroActual.getDetalles(),
                         siniestroActual.getFechaSiniestro(),
-                        siniestroActual.getFechaResolucion()
+                        siniestroActual.getFechaResolucion(),
+                        siniestroActual.getCalificacion()
+                            
                     });
                 }
             }
@@ -344,8 +346,8 @@ public class HistorialDeSiniestro extends javax.swing.JInternalFrame {
         modelo.addColumn("Hora");
 
         jHistorial.setModel(modelo);
-        // this.setLocationRelativeTo(null);
-        this.setResizable(false);
+       // this.setLocationRelativeTo(null);
+    this.setResizable(false);
 
     }
 

@@ -7,12 +7,15 @@ package BomberosVistas;
 
 import BomberoAcceesoDatos.SiniestrosData;
 import BomberosEntidades.Siniestro;
+import static java.lang.System.in;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
@@ -25,6 +28,7 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
     public ResolucionDeSiniestro() {
         initComponents();
         armarCabecera();
+        llenarTabla();
     }
 
     /**
@@ -41,11 +45,12 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
         jTable = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jPunto = new javax.swing.JComboBox<>();
         jFecha = new com.toedter.calendar.JDateChooser();
-        jButton1 = new javax.swing.JButton();
+        jGuardar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jTCodigo = new javax.swing.JTextField();
 
         jLabel1.setText("Resolucion del Simiestero");
 
@@ -67,16 +72,27 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Puntuacion: ");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "★", "★★", "★★★", "★★★★", "★★★★★" }));
+        jPunto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
 
-        jButton1.setText("Guardar");
+        jGuardar.setText("Guardar");
+        jGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jGuardarActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Salir");
-
-        jButton3.setText("Buscar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Codigo: ");
+
+        jTCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTCodigoActionPerformed(evt);
             }
         });
 
@@ -84,24 +100,6 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(jButton3)))
-                .addContainerGap(285, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,10 +107,32 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addGap(259, 259, 259))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jGuardar)
                         .addGap(58, 58, 58)
                         .addComponent(jButton2)
                         .addGap(234, 234, 234))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jPunto, 0, 46, Short.MAX_VALUE)
+                                    .addComponent(jTCodigo))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,105 +142,58 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jButton3))
-                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jPunto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(jGuardar)
                     .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-  siniestroActual = new Siniestro();
-  
-java.util.Date fecha = jFecha.getDate();
+    private void jTCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTCodigoActionPerformed
 
-if (fecha == null) {
-    JOptionPane.showMessageDialog(this, "Debe ingresar una fecha.");
-    return;
-}
+    private void jGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGuardarActionPerformed
+        Resolucion();
+    }//GEN-LAST:event_jGuardarActionPerformed
 
-LocalDate fechaResolucion = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-// Marcar siniestros como resueltos y obtener la lista resultante
-               listarSiniestros = siniestrodata.marcarComoResuelto(siniestroActual);
-
-modelo.setRowCount(0);
-
-// Iterar sobre la lista de siniestros resueltos y agregarlos al modelo de la tabla
-// Iterar sobre la lista de siniestros resueltos y agregarlos al modelo de la tabla
-for (Siniestro siniestro : listarSiniestros) {
-    modelo.addRow(new Object[]{
-        siniestro.getCodigo(),
-        siniestro.getFechaResolucion(),
-        siniestro.getTipoSiniestro(),
-        siniestro.getCodigoBrigada(),
-        siniestro.getDetalles()
-    });
-}
-
-
-
-
-    // ...
-
-                                           
-//        siniestroActual = new Siniestro();
-//
-//    modelo.setRowCount(0);
-//
-//    siniestrodata.marcarComoResuelto(siniestroActual);
-//
-//    if (listarSiniestros.isEmpty()) {
-//        JOptionPane.showMessageDialog(this, "No hay siniestros resueltos para mostrar.");
-//    } else {
-//        for (Siniestro siniestro : listarSiniestros) {
-//            modelo.addRow(new Object[]{
-//                siniestro.getCodigo(),
-//                siniestro.getFechaResolucion(),
-//                siniestro.getTipoSiniestro(),
-//                siniestro.getCodigoBrigada(),
-//                siniestro.getDetalles()
-//            });
-//        }
-//    }
-//    
-
-
-
-
-
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jFecha;
+    private javax.swing.JButton jGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JComboBox<String> jPunto;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTCodigo;
     private javax.swing.JTable jTable;
     // End of variables declaration//GEN-END:variables
 
     public void armarCabecera() {
         ArrayList<Object> filaCabecera = new ArrayList<>();
-        filaCabecera.add("id");
+        filaCabecera.add("Codigo");
         filaCabecera.add("Fecha");
         filaCabecera.add("Tipo");
         filaCabecera.add("Brigada");
@@ -231,5 +204,85 @@ for (Siniestro siniestro : listarSiniestros) {
         }
         jTable.setModel(modelo);
     }
+ private void llenarTabla() {
+        modelo.setRowCount(0);
+        listarSiniestros = siniestrodata.listarSiniestrosRecientes();
+        for (Siniestro aux : listarSiniestros) {
+            modelo.addRow(new Object[]{aux.getCodigo(), aux.getFechaSiniestro(),aux.getTipoSiniestro(),aux.getCodigoBrigada(),  aux.getDetalles() });
+        }
+    }
+ private void Resolucion(){
+//      siniestroActual = new Siniestro();
+//        Integer codigo = Integer.parseInt(jTCodigo.getText());
+//        java.util.Date fecha = jFecha.getDate();
+//        LocalDate fechaResolucion = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//        Integer puntuacion = Integer.parseInt(jPunto.getItemAt(siniestroActual.getCalificacion()));
+//        
+//        siniestroActual.setCodigo(codigo);
+//        siniestroActual.setFechaResolucion( fechaResolucion);
+//        siniestroActual.setCalificacion(puntuacion);
+//        
+//        if (fecha == null) {
+//            JOptionPane.showMessageDialog(this, "Debe ingresar una fecha.");
+//            return;
+//        }
+//
+//
+//
+//       siniestrodata.marcarComoResuelto(siniestroActual);
+//        modelo.setRowCount(0);
+//
+//        for (Siniestro siniestro : listarSiniestros) {
+//            modelo.addRow(new Object[]{
+//                siniestro.getCodigo(),
+//                siniestro.getFechaResolucion(),
+//                siniestro.getTipoSiniestro(),
+//                siniestro.getCodigoBrigada(),
+//                siniestro.getDetalles()
+//            });
+//        }
+siniestroActual = new Siniestro();
 
+try {
+    Integer codigo = Integer.parseInt(jTCodigo.getText());
+    java.util.Date fecha = jFecha.getDate();
+    
+    // Verifica si la fecha es nula antes de intentar convertirla
+    if (fecha == null) {
+        JOptionPane.showMessageDialog(this, "Debe ingresar una fecha.");
+        return;
+    }
+
+    LocalDate fechaResolucion = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    Integer puntuacion = Integer.parseInt(Objects.requireNonNull(jPunto.getSelectedItem()).toString());
+
+    // Configura los atributos del objeto Siniestro
+    siniestroActual.setCodigo(codigo);
+    siniestroActual.setFechaResolucion(fechaResolucion);
+    siniestroActual.setCalificacion(puntuacion);
+
+    // Llama al método marcarComoResuelto
+    siniestrodata.marcarComoResuelto(siniestroActual);
+
+    // Actualiza la tabla después de marcar como resuelto
+    modelo.setRowCount(0);
+
+    for (Siniestro siniestro : listarSiniestros) {
+        modelo.addRow(new Object[]{
+                siniestro.getCodigo(),
+                siniestro.getFechaResolucion(),
+                siniestro.getTipoSiniestro(),
+                siniestro.getCodigoBrigada(),
+                siniestro.getDetalles()
+        });
+    }
+} catch (NumberFormatException ex) {
+    // Maneja la excepción si no se puede convertir el texto a número
+    JOptionPane.showMessageDialog(this, "Ingrese un código y una puntuación válidos.");
+} catch (NullPointerException ex) {
+    // Maneja la excepción si hay referencias nulas
+    JOptionPane.showMessageDialog(this, "Asegúrese de ingresar todos los datos requeridos.");
+}
+
+ }
 }
