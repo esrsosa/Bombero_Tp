@@ -164,4 +164,37 @@ public class SiniestrosData {
             return false;
         }
     }
+    
+    public List<Siniestro> listarTodosLosSiniestrosOrdenadosPorFechaResolucion() {
+    List<Siniestro> todosLosSiniestros = new ArrayList<>();
+    String sql = "SELECT * FROM siniestro ORDER BY siniestro.fecha_resol DESC";
+    
+    try (PreparedStatement ps = con.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+        
+        while (rs.next()) {
+            Especialidad tipoSiniestro = Especialidad.valueOf(rs.getString("tipo"));
+            LocalDate fechaSiniestro = rs.getDate("fecha_siniestro").toLocalDate();
+            int coordenadaX = rs.getInt("coord_x");
+            int coordenadaY = rs.getInt("coord_y");
+            String detalles = rs.getString("detalles");
+            int codigoBrigada = rs.getInt("codBrigada");
+            LocalDate fechaResolucion = rs.getDate("fecha_resol").toLocalDate(); 
+            int calificacion = rs.getInt("puntuacion"); 
+            
+            Siniestro siniestro = new Siniestro(tipoSiniestro, fechaSiniestro, coordenadaX, coordenadaY, detalles, codigoBrigada);
+            siniestro.setFechaResolucion(fechaResolucion); 
+            siniestro.setCalificacion(calificacion); 
+            todosLosSiniestros.add(siniestro);
+        }
+        
+    } catch (SQLException ex) {
+       
+        System.out.println("Error al consultar todos los siniestros ordenados por fecha de resolución: " + ex.getMessage());
+    }
+
+    return todosLosSiniestros;
+}
+
+
 }

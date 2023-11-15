@@ -173,7 +173,7 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jGuardarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       dispose();
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
@@ -204,14 +204,16 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
         }
         jTable.setModel(modelo);
     }
- private void llenarTabla() {
+
+    private void llenarTabla() {
         modelo.setRowCount(0);
         listarSiniestros = siniestrodata.listarSiniestrosRecientes();
         for (Siniestro aux : listarSiniestros) {
-            modelo.addRow(new Object[]{aux.getCodigo(), aux.getFechaSiniestro(),aux.getTipoSiniestro(),aux.getCodigoBrigada(),  aux.getDetalles() });
+            modelo.addRow(new Object[]{aux.getCodigo(), aux.getFechaSiniestro(), aux.getTipoSiniestro(), aux.getCodigoBrigada(), aux.getDetalles()});
         }
     }
- private void Resolucion(){
+
+    private void Resolucion() {
 //      siniestroActual = new Siniestro();
 //        Integer codigo = Integer.parseInt(jTCodigo.getText());
 //        java.util.Date fecha = jFecha.getDate();
@@ -241,48 +243,44 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
 //                siniestro.getDetalles()
 //            });
 //        }
-siniestroActual = new Siniestro();
+        siniestroActual = new Siniestro();
 
-try {
-    Integer codigo = Integer.parseInt(jTCodigo.getText());
-    java.util.Date fecha = jFecha.getDate();
-    
-    // Verifica si la fecha es nula antes de intentar convertirla
-    if (fecha == null) {
-        JOptionPane.showMessageDialog(this, "Debe ingresar una fecha.");
-        return;
+        try {
+            Integer codigo = Integer.parseInt(jTCodigo.getText());
+            java.util.Date fecha = jFecha.getDate();
+
+            if (fecha == null) {
+                JOptionPane.showMessageDialog(this, "Debe ingresar una fecha.");
+                return;
+            }
+
+            LocalDate fechaResolucion = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Integer puntuacion = Integer.parseInt(Objects.requireNonNull(jPunto.getSelectedItem()).toString());
+
+            siniestroActual.setCodigo(codigo);
+            siniestroActual.setFechaResolucion(fechaResolucion);
+            siniestroActual.setCalificacion(puntuacion);
+
+            siniestrodata.marcarComoResuelto(siniestroActual);
+
+            modelo.setRowCount(0);
+
+            for (Siniestro siniestro : listarSiniestros) {
+                modelo.addRow(new Object[]{
+                    siniestro.getCodigo(),
+                    siniestro.getFechaResolucion(),
+                    siniestro.getTipoSiniestro(),
+                    siniestro.getCodigoBrigada(),
+                    siniestro.getDetalles()
+                });
+            }
+        } catch (NumberFormatException ex) {
+
+            JOptionPane.showMessageDialog(this, "Ingrese un código y una puntuación válidos.");
+        } catch (NullPointerException ex) {
+
+            JOptionPane.showMessageDialog(this, "Asegúrese de ingresar todos los datos requeridos.");
+        }
+
     }
-
-    LocalDate fechaResolucion = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-    Integer puntuacion = Integer.parseInt(Objects.requireNonNull(jPunto.getSelectedItem()).toString());
-
-    // Configura los atributos del objeto Siniestro
-    siniestroActual.setCodigo(codigo);
-    siniestroActual.setFechaResolucion(fechaResolucion);
-    siniestroActual.setCalificacion(puntuacion);
-
-    // Llama al método marcarComoResuelto
-    siniestrodata.marcarComoResuelto(siniestroActual);
-
-    // Actualiza la tabla después de marcar como resuelto
-    modelo.setRowCount(0);
-
-    for (Siniestro siniestro : listarSiniestros) {
-        modelo.addRow(new Object[]{
-                siniestro.getCodigo(),
-                siniestro.getFechaResolucion(),
-                siniestro.getTipoSiniestro(),
-                siniestro.getCodigoBrigada(),
-                siniestro.getDetalles()
-        });
-    }
-} catch (NumberFormatException ex) {
-    // Maneja la excepción si no se puede convertir el texto a número
-    JOptionPane.showMessageDialog(this, "Ingrese un código y una puntuación válidos.");
-} catch (NullPointerException ex) {
-    // Maneja la excepción si hay referencias nulas
-    JOptionPane.showMessageDialog(this, "Asegúrese de ingresar todos los datos requeridos.");
-}
-
- }
 }
