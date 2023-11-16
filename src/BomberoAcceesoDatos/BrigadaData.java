@@ -22,6 +22,7 @@ import java.util.List;
  */
 public class BrigadaData {
 
+    private CuartelData cd = new CuartelData();
     private Connection con = null;
 
     public BrigadaData() {
@@ -55,7 +56,7 @@ public class BrigadaData {
     }
     
     public void asignarBrigadaAcuartel(int codBrigada, int codCuartel) {
-        String sql = "UPDATE brigada SET nro_cuartel = ? WHERE codBrigada = ?";
+        String sql = "UPDATE brigada SET codCuartel = ? WHERE codBrigada = ? ";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -81,7 +82,7 @@ public class BrigadaData {
 
     public List<Brigada> listarBrigadasLibres() {
         List<Brigada> brigadas = new ArrayList<>();
-        String sql = "SELECT * FROM brigada";
+        String sql = "SELECT * FROM brigada WHERE libre = 1";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -100,7 +101,6 @@ public class BrigadaData {
         }
         return brigadas;
     }
-
     public boolean estaAsignada(int codBrigada) {
         String sql = "SELECT * FROM siniestro WHERE codBrigada = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -112,4 +112,32 @@ public class BrigadaData {
             return false;
         }
     }
+    public Brigada buscarBrigadaPorId(int i) {
+        Brigada brigada = null;
+        Cuartel cuartel = null;
+        String sql = "SELECT * FROM siniestro WHERE codBrigada = ?";
+        try  {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, i);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+            brigada = new Brigada();
+            cuartel = new Cuartel();
+            
+            brigada.setCodBrigada(rs.getInt("codBrigada"));
+            brigada.setEspecialidad(Especialidad.valueOf(rs.getString("especialidad")));
+            brigada.setNombreBrigada(rs.getString("nombre_br"));
+            int entero = rs.getInt("codCuartel");
+            cuartel = cd.buscarCuartel(entero);//busco cuartel con CuartelData
+            brigada.setNro_cuartel(cuartel);
+            
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al verificar asignaciones: " + ex.getMessage());
+           return brigada; 
+        }
+        return brigada;
+        
+    }
+    
 }

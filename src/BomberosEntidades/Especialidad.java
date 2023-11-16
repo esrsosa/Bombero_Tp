@@ -10,8 +10,8 @@ package BomberosEntidades;
  * @author Marcos
  */
 public enum Especialidad {
-    Incendios("Incedio"),
-    Derrumbes("Derrumbe"),
+    Incendios("Incedios"),
+    Derrumbes("Derrumbes"),
     Rescate("Rescate"),
     Accidentes("Accidentes"),
     Inundaciones("Inundaciones"),
@@ -21,6 +21,11 @@ public enum Especialidad {
 
     public String getTipoEspecialidades() {
         return tipoEspecialidades;
+    }
+
+    @Override
+    public String toString() {
+        return "Especialidad{" + "tipoEspecialidades=" + tipoEspecialidades + '}';
     }
 
     public void setTipoEspecialidades(String tipoEspecialidades) {

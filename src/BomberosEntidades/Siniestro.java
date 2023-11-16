@@ -34,6 +34,28 @@ public class Siniestro {
         this.codigoBrigada = codigoBrigada;
     }
 
+    public Siniestro(int codigo, Especialidad tipoSiniestro, LocalDate fechaSiniestro, int coordenadaX, int coordenadaY, String detalles, Brigada codigoBrigada) {
+        this.codigo = codigo;
+        this.tipoSiniestro = tipoSiniestro;
+        this.fechaSiniestro = fechaSiniestro;
+        this.coordenadaX = coordenadaX;
+        this.coordenadaY = coordenadaY;
+        this.detalles = detalles;
+        this.codigoBrigada = codigoBrigada;
+    }
+
+    public Siniestro(int codigo, Especialidad tipoSiniestro, LocalDate fechaSiniestro, int coordenadaX, int coordenadaY, String detalles, LocalDate fechaResolucion, int calificacion, Brigada codigoBrigada) {
+        this.codigo = codigo;
+        this.tipoSiniestro = tipoSiniestro;
+        this.fechaSiniestro = fechaSiniestro;
+        this.coordenadaX = coordenadaX;
+        this.coordenadaY = coordenadaY;
+        this.detalles = detalles;
+        this.fechaResolucion = fechaResolucion;
+        this.calificacion = calificacion;
+        this.codigoBrigada = codigoBrigada;
+    }
+
 
 
     public Siniestro(int codigo, LocalDate fechaResolucion, int calificacion) {

@@ -17,7 +17,7 @@ public class Brigada {
     private int codBrigada;
     private String nombreBrigada;
     private Especialidad especialidad;
-    private Cuartel nro_cuartel; 
+    private Cuartel nro_cuartel; //Relacion con cuartel
     List<Bombero> bomberos= new ArrayList(4);//Relacion con bombero
     public Brigada() {
     }

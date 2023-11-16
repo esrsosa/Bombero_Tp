@@ -25,14 +25,15 @@ import sun.util.resources.LocaleData;
  */
 public class SiniestrosData {
 
+    private BrigadaData bd = new BrigadaData();
     private Connection con = null;
 
     public SiniestrosData() {
         con = Conexion.getConexion();
     }
 
-    public void agregarSiniestro(  Siniestro siniestro) {
-     
+    public void agregarSiniestro(Siniestro siniestro) {
+
         String sql = "INSERT INTO siniestro (tipo, fecha_siniestro, coord_x, coord_y, detalles, codBrigada) VALUES  (?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = null;
 
@@ -48,7 +49,7 @@ public class SiniestrosData {
             if (exito == 1) {
                 ResultSet generatedKeys = ps.getGeneratedKeys();
                 if (generatedKeys.next()) {
-                    siniestro.setCodigo(generatedKeys.getInt(1)); 
+                    siniestro.setCodigo(generatedKeys.getInt(1));
                     System.out.println("Siniestro agregado exitosamente con ID: " + siniestro.getCodigo());
                 } else {
                     System.out.println("Error al obtener el ID del siniestro.");
@@ -114,9 +115,9 @@ public class SiniestrosData {
         }
     }
 
-    public List<Siniestro> listarSiniestrosRecientes() {
+    public List<Siniestro> listarSiniestrosRecientes() {//Devuelve los siniestros de la ultima semana
         List<Siniestro> siniestrosRecientes = new ArrayList<>();
-        LocalDate semana = LocalDate.now().minusDays(7);
+        LocalDate semana = LocalDate.now().minusDays(7);//16-7=9  9/11/23-16/11/23
         LocalDate hoy = LocalDate.now();
         String sql = "SELECT * FROM siniestro WHERE fecha_siniestro BETWEEN ? AND ?";
         PreparedStatement ps = null;
@@ -127,14 +128,26 @@ public class SiniestrosData {
             ps.setDate(2, Date.valueOf(hoy));
             rs = ps.executeQuery();
             while (rs.next()) {
-                Especialidad tipoSiniestro = Especialidad.valueOf(rs.getString("tipo"));
+                int codigo = rs.getInt("codigo");
+                String auxiliar = rs.getString("tipo");
+                Especialidad tipoSiniestro = Especialidad.valueOf(auxiliar);
                 LocalDate fechaSiniestro = rs.getDate("fecha_siniestro").toLocalDate();
                 int coordenadaX = rs.getInt("coord_x");
                 int coordenadaY = rs.getInt("coord_y");
                 String detalles = rs.getString("detalles");
-                Brigada codigoBrigada =(Brigada) rs.getObject("codBrigada");
-                Siniestro siniestro = new Siniestro(tipoSiniestro, fechaSiniestro, coordenadaX, coordenadaY, detalles, codigoBrigada);
-                siniestrosRecientes.add(siniestro);
+                int brigadaCod = rs.getInt("codBrigada");
+
+                Brigada codigoBrigada = bd.buscarBrigadaPorId(brigadaCod);
+
+                Integer fechaResolucion = rs.getInt("fecha_resol");// puede o no puede estar
+                Integer puntuacion = rs.getInt("puntuacion");//puede o no puede
+                if (fechaResolucion != null && puntuacion != null) {
+                    Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro, coordenadaX, coordenadaY, detalles, fechaSiniestro, puntuacion, codigoBrigada);
+                    siniestrosRecientes.add(siniestro);
+                } else {
+                    Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro, coordenadaX, coordenadaY, detalles, codigoBrigada);
+                    siniestrosRecientes.add(siniestro);
+                }
             }
         } catch (SQLException ex) {
             System.out.println("Error al consultar siniestros recientes: " + ex.getMessage());
@@ -164,38 +177,42 @@ public class SiniestrosData {
             return false;
         }
     }
-    
+
     public List<Siniestro> listarTodosLosSiniestrosOrdenadosPorFechaResolucion() {
-    List<Siniestro> todosLosSiniestros = new ArrayList<>();
-    String sql = "SELECT * FROM siniestro ORDER BY siniestro.fecha_resol DESC";
-    
-    try (PreparedStatement ps = con.prepareStatement(sql);
-         ResultSet rs = ps.executeQuery()) {
-        
-        while (rs.next()) {
-           // int codigo = rs.getInt("codigo");
-            Especialidad tipoSiniestro = Especialidad.valueOf(rs.getString("tipo"));
-            LocalDate fechaSiniestro = rs.getDate("fecha_siniestro").toLocalDate();
-            int coordenadaX = rs.getInt("coord_x");
-            int coordenadaY = rs.getInt("coord_y");
-            String detalles = rs.getString("detalles");
-            Brigada codigoBrigada = (Brigada) rs.getObject("codBrigada");
-            LocalDate fechaResolucion = rs.getDate("fecha_resol").toLocalDate(); 
-            int calificacion = rs.getInt("puntuacion"); 
-            
-            Siniestro siniestro = new Siniestro(tipoSiniestro, fechaSiniestro, coordenadaX, coordenadaY, detalles, codigoBrigada);
-            siniestro.setFechaResolucion(fechaResolucion); 
-            siniestro.setCalificacion(calificacion); 
-            todosLosSiniestros.add(siniestro);
+        List<Siniestro> todosLosSiniestros = new ArrayList<>();
+        String sql = "SELECT * FROM siniestro ORDER BY siniestro.fecha_resol DESC";
+
+        try (PreparedStatement ps = con.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                int codigo = rs.getInt("codigo");
+                String auxiliar = rs.getString("tipo");
+                Especialidad tipoSiniestro = Especialidad.valueOf(auxiliar);
+                LocalDate fechaSiniestro = rs.getDate("fecha_siniestro").toLocalDate();
+                int coordenadaX = rs.getInt("coord_x");
+                int coordenadaY = rs.getInt("coord_y");
+                String detalles = rs.getString("detalles");
+                int brigadaCod = rs.getInt("codBrigada");
+                System.out.println(brigadaCod);
+                Brigada codigoBrigada = bd.buscarBrigadaPorId(brigadaCod);
+                Integer fechaResolucion = rs.getInt("fecha_resol");// puede o no puede estar
+                Integer puntuacion = rs.getInt("puntuacion");//puede o no puede
+                if (fechaResolucion != null && puntuacion != null) {
+                    Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro, coordenadaX, coordenadaY, detalles, fechaSiniestro, puntuacion, codigoBrigada);
+                    todosLosSiniestros.add(siniestro);
+                } else {
+                    Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro, coordenadaX, coordenadaY, detalles, codigoBrigada);
+                    todosLosSiniestros.add(siniestro);
+                }
+            }
+
+        } catch (SQLException ex) {
+
+            System.out.println("Error al consultar todos los siniestros ordenados por fecha de resolución: " + ex.getMessage());
         }
-        
-    } catch (SQLException ex) {
-       
-        System.out.println("Error al consultar todos los siniestros ordenados por fecha de resolución: " + ex.getMessage());
+
+        return todosLosSiniestros;
     }
-
-    return todosLosSiniestros;
-}
-
 
 }

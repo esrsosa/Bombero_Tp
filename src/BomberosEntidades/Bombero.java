@@ -106,11 +106,11 @@ public class Bombero {
         this.celular = celular;
     }
 
-    public Brigada getCodBrigada() {
+    public Brigada getBrigada() {
         return brigada;
     }
 
-    public void setCodBrigada(Brigada codBrigada) {
+    public void setBrigada(Brigada codBrigada) {
         this.brigada = codBrigada;
     }
 
