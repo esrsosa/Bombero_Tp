@@ -5,13 +5,13 @@
  */
 package BomberosEntidades;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Emanuel Sosa
  */
-public class Cuartel implements Comparable <Cuartel> {
+public class Cuartel  {
 
     private int codCuartel;
     private String nombre;
@@ -20,7 +20,9 @@ public class Cuartel implements Comparable <Cuartel> {
     private int coordenaday;
     private String telefono;
     private String correoElectronico;
-    private ArrayList<Brigada> brigadas; // despues devatir
+    private boolean activo;
+    private List<Brigada> brigadas; // Relacion con Brigada
+    
 
     public Cuartel() {
     }
@@ -43,6 +45,14 @@ public class Cuartel implements Comparable <Cuartel> {
         this.coordenaday = coordenaday;
         this.telefono = telefono;
         this.correoElectronico = correoElectronico;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     public int getCodCuartel() {
@@ -101,11 +111,11 @@ public class Cuartel implements Comparable <Cuartel> {
         this.correoElectronico = correoElectronico;
     }
 
-    public ArrayList<Brigada> getBrigadas() {
+    public List<Brigada> getBrigadas() {
         return brigadas;
     }
 
-    public void setBrigadas(ArrayList<Brigada> brigadas) {
+    public void setBrigadas(List<Brigada> brigadas) {
         this.brigadas = brigadas;
     }
 
@@ -119,19 +129,6 @@ public class Cuartel implements Comparable <Cuartel> {
     public String toString() {
         return "Cuartel{" + "codCuartel=" + codCuartel + ", nombre=" + nombre + ", domicilio=" + domicilio + ", coordenadax=" + coordenadax + ", coordenaday=" + coordenaday + ", telefono=" + telefono + ", correoElectronico=" + correoElectronico + ", brigadas=" + brigadas + '}';
     }
-
-@Override
-    public int compareTo(Cuartel t) {
-        if (codCuartel==t.codCuartel) {
-            return 0;
-        }else if (codCuartel>t.codCuartel) {
-            return 1;
-        }else{
-            return -1;
-        } 
-    
-    }
-    
 
     
     

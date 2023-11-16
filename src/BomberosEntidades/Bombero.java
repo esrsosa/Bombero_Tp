@@ -21,13 +21,14 @@ public class Bombero {
     private String grupSanguineo;
     private LocalDate fecha_nac;
     private String celular;
-    private int codBrigada; // tiene que ser tipo brigrada
+    private Brigada codBrigada;//Relacion con brigada
     private boolean estado;
 
     public Bombero() {
     }
 
-    public Bombero(String dni, String nombre, String apellido, String grupSanguineo, LocalDate fecha_nac, String celular, int codBrigada,boolean estado) {
+    public Bombero(int id_bombero, String dni, String nombre, String apellido, String grupSanguineo, LocalDate fecha_nac, String celular, Brigada codBrigada, boolean estado) {
+        this.id_bombero = id_bombero;
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -35,6 +36,16 @@ public class Bombero {
         this.fecha_nac = fecha_nac;
         this.celular = celular;
         this.codBrigada = codBrigada;
+        this.estado = estado;
+    }
+
+    public Bombero(String dni, String nombre, String apellido, String grupSanguineo, LocalDate fecha_nac, String celular,boolean estado) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.grupSanguineo = grupSanguineo;
+        this.fecha_nac = fecha_nac;
+        this.celular = celular;
         this.estado=estado;
     }
 
@@ -94,11 +105,11 @@ public class Bombero {
         this.celular = celular;
     }
 
-    public int getCodBrigada() {
+    public Brigada getCodBrigada() {
         return codBrigada;
     }
 
-    public void setCodBrigada(int codBrigada) {
+    public void setCodBrigada(Brigada codBrigada) {
         this.codBrigada = codBrigada;
     }
 
