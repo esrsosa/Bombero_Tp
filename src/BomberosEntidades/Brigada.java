@@ -18,23 +18,22 @@ public class Brigada {
     private String nombreBrigada;
     private Especialidad especialidad;
     private Cuartel nro_cuartel; 
-    List<Bombero> bomberos;//Relacion con bombero
+    List<Bombero> bomberos= new ArrayList(4);//Relacion con bombero
     public Brigada() {
     }
 
-    public Brigada(int codBrigada, String nombreBrigada, Especialidad especialidad, Cuartel nro_cuartel, List<Bombero> bomberos) {
+    public Brigada(int codBrigada, String nombreBrigada, Especialidad especialidad, Cuartel nro_cuartel) {
         this.codBrigada = codBrigada;
         this.nombreBrigada = nombreBrigada;
         this.especialidad = especialidad;
         this.nro_cuartel = nro_cuartel;
-        this.bomberos = bomberos;
+        
     }
 
-    public Brigada(String nombreBrigada, Especialidad especialidad, Cuartel nro_cuartel, List<Bombero> bomberos) {
+    public Brigada(String nombreBrigada, Especialidad especialidad, Cuartel nro_cuartel) {
         this.nombreBrigada = nombreBrigada;
         this.especialidad = especialidad;
         this.nro_cuartel = nro_cuartel;
-        this.bomberos = bomberos;
     }
 
    

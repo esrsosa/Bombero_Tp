@@ -21,7 +21,7 @@ public class Bombero {
     private String grupSanguineo;
     private LocalDate fecha_nac;
     private String celular;
-    private Brigada codBrigada;//Relacion con brigada
+    private Brigada brigada;//Relacion con brigada
     private boolean estado;
 
     public Bombero() {
@@ -35,11 +35,11 @@ public class Bombero {
         this.grupSanguineo = grupSanguineo;
         this.fecha_nac = fecha_nac;
         this.celular = celular;
-        this.codBrigada = codBrigada;
+        this.brigada = codBrigada;
         this.estado = estado;
     }
 
-    public Bombero(String dni, String nombre, String apellido, String grupSanguineo, LocalDate fecha_nac, String celular,boolean estado) {
+    public Bombero(String dni, String nombre, String apellido, String grupSanguineo, LocalDate fecha_nac, String celular,boolean estado, Brigada brigada) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -47,6 +47,7 @@ public class Bombero {
         this.fecha_nac = fecha_nac;
         this.celular = celular;
         this.estado=estado;
+        this.brigada=brigada;
     }
 
     public int getId_bombero() {
@@ -106,11 +107,11 @@ public class Bombero {
     }
 
     public Brigada getCodBrigada() {
-        return codBrigada;
+        return brigada;
     }
 
     public void setCodBrigada(Brigada codBrigada) {
-        this.codBrigada = codBrigada;
+        this.brigada = codBrigada;
     }
 
     public boolean isEstado() {
@@ -123,7 +124,7 @@ public class Bombero {
 
     @Override
     public String toString() {
-        return "Bombero{" + "id_bombero=" + id_bombero + ", dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", grupSanguineo=" + grupSanguineo + ", fecha_nac=" + fecha_nac + ", celular=" + celular + ", codBrigada=" + codBrigada + '}';
+        return "Bombero{" + "id_bombero=" + id_bombero + ", dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", grupSanguineo=" + grupSanguineo + ", fecha_nac=" + fecha_nac + ", celular=" + celular + ", codBrigada=" + brigada + '}';
     }
 
     
