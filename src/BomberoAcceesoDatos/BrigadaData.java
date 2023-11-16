@@ -115,7 +115,7 @@ public class BrigadaData {
     public Brigada buscarBrigadaPorId(int i) {
         Brigada brigada = null;
         Cuartel cuartel = null;
-        String sql = "SELECT * FROM siniestro WHERE codBrigada = ?";
+        String sql = "SELECT * FROM brigada WHERE codBrigada = ?";
         try  {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, i);
