@@ -23,9 +23,9 @@ public class Siniestro {
     private String detalles;
     private LocalDate fechaResolucion;
     private int calificacion;
-    private int codigoBrigada;// tipo brigada
+    private Brigada codigoBrigada;//Relacion con Brigada
 
-    public Siniestro(Especialidad tipoSiniestro, LocalDate fechaSiniestro, int coordenadaX, int coordenadaY, String detalles, int codigoBrigada) {
+    public Siniestro(Especialidad tipoSiniestro, LocalDate fechaSiniestro, int coordenadaX, int coordenadaY, String detalles, Brigada codigoBrigada) {
         this.tipoSiniestro = tipoSiniestro;
         this.fechaSiniestro = fechaSiniestro;
         this.coordenadaX = coordenadaX;
@@ -50,11 +50,11 @@ public class Siniestro {
        
     }
 
-    public int getCodigoBrigada() {
+    public Brigada getCodigoBrigada() {
         return codigoBrigada;
     }
 
-    public void setCodigoBrigada(int codigoBrigada) {
+    public void setCodigoBrigada(Brigada codigoBrigada) {
         this.codigoBrigada = codigoBrigada;
     }
 

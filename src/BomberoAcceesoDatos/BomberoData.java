@@ -6,6 +6,7 @@
 package BomberoAcceesoDatos;
 
 import BomberosEntidades.Bombero;
+import BomberosEntidades.Brigada;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -44,7 +45,8 @@ public class BomberoData {
                 bombero.setCelular(rs.getString("celular"));
                 bombero.setFecha_nac(rs.getDate("fecha_nac").toLocalDate());
                 bombero.setGrupSanguineo(rs.getString("grupSanguineo"));
-                bombero.setCodBrigada(rs.getInt("codBrigada"));
+                Brigada codBrigada =(Brigada) rs.getObject("codBrigada"); //No estoy seguro si funciona
+                bombero.setCodBrigada(codBrigada);
             }
             ps.close();
         } catch (SQLException ex) {
@@ -64,7 +66,7 @@ public class BomberoData {
             ps.setString(3, bombero.getGrupSanguineo());
             ps.setDate(4, Date.valueOf(bombero.getFecha_nac()));
             ps.setString(5, bombero.getCelular());
-            ps.setInt(6, bombero.getCodBrigada());
+            ps.setObject(6, bombero.getCodBrigada());
             ps.setString(7, bombero.getDni());
             int exito = ps.executeUpdate();
             if (exito == 1) {
@@ -101,7 +103,7 @@ public class BomberoData {
                 bombero.setFecha_nac(fechaNac);
                 bombero.setCelular(rs.getString("celular"));
                 bombero.setEstado(rs.getBoolean("estado"));
-                int codBrigada = rs.getInt("codBrigada");
+                Brigada codBrigada =(Brigada) rs.getObject("codBrigada"); //No estoy seguro si funciona
                 bombero.setCodBrigada(codBrigada);
                 if (bombero.isEstado()) {
                     bomberos.add(bombero);
@@ -128,7 +130,7 @@ public class BomberoData {
             ps.setString(4, bombero.getGrupSanguineo());
             ps.setDate(5, Date.valueOf(bombero.getFecha_nac()));
             ps.setString(6, bombero.getCelular());
-            ps.setInt(7, bombero.getCodBrigada());
+            ps.setObject(7, bombero.getCodBrigada());
             ps.setBoolean(8, bombero.isEstado());
             int exito = ps.executeUpdate();
             if (exito == 1) {

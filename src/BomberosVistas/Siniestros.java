@@ -6,6 +6,7 @@
 package BomberosVistas;
 
 import BomberoAcceesoDatos.SiniestrosData;
+import BomberosEntidades.Brigada;
 import BomberosEntidades.Especialidad;
 import BomberosEntidades.Siniestro;
 import java.time.LocalDate;
@@ -218,7 +219,7 @@ public class Siniestros extends javax.swing.JInternalFrame {
             int corX = Integer.parseInt(jCoordx.getText()); 
             int corY = Integer.parseInt(jCoordy.getText()); 
             String Detalles = jDetalle.getText();
-            int brigada =Integer.parseInt(jBrigada.getSelectedItem().toString()); 
+            Brigada brigada =(Brigada) jBrigada.getSelectedItem();//Funciona?? 
             SinniestroActual = new Siniestro(tipo,fechaSi,corX,corY,Detalles,brigada);
            siniesrodata.agregarSiniestro(SinniestroActual);
     }//GEN-LAST:event_jGuardarActionPerformed

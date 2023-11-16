@@ -22,7 +22,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
     private Cuartel cuartelActual = null;
     DefaultTableModel modelo = new DefaultTableModel();
     List<Cuartel> listaCuarteles = new ArrayList<>();
-
+    private String Activo;
     /**
      * Creates new form Cwwwuartel
      */
@@ -62,6 +62,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
         jtCoordenadaY = new javax.swing.JTextField();
         jtTelefono = new javax.swing.JTextField();
         jtCorreo = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,7 +108,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel7.setText("FORMULARIO DE CUARTEL");
 
-        jButton4.setText("Eliminar");
+        jButton4.setText("Dar de baja");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -190,6 +191,13 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
+        jButton1.setText("Dar de Alta");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -198,16 +206,6 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
                 .addGap(319, 319, 319)
                 .addComponent(jLabel7)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addComponent(jButton3)
-                .addGap(57, 57, 57)
-                .addComponent(jButton2)
-                .addGap(73, 73, 73)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
-                .addGap(30, 30, 30))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -220,6 +218,18 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(157, 157, 157))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(78, 78, 78)
+                .addComponent(jButton3)
+                .addGap(57, 57, 57)
+                .addComponent(jButton2)
+                .addGap(73, 73, 73)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton5)
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,20 +237,24 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3)
-                            .addComponent(jButton5)
-                            .addComponent(jButton4))
-                        .addGap(32, 32, 32))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbBuscar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jbBuscar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2)
+                            .addComponent(jButton3)
+                            .addComponent(jButton5))
+                        .addGap(32, 32, 32))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton4)
+                        .addContainerGap())))
         );
 
         pack();
@@ -311,9 +325,9 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
             int id2 = jTable.getSelectedRow();
             Object valorCodigo = jTable.getValueAt(id2, 0);
             int numero = Integer.parseInt(valorCodigo.toString());
-            int confirmar = JOptionPane.showConfirmDialog(this, "Estas seguro que desea eliminar el cuartel?");
+            int confirmar = JOptionPane.showConfirmDialog(this, "Estas seguro que desea dar de baja al cuartel?");
             if (confirmar == 0) {
-                cuartelData.eliminarCuartel(numero);
+                cuartelData.darBajaCuartel(numero);
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar un id válido");
@@ -321,8 +335,25 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
         llenarTabla();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         try {
+            int id2 = jTable.getSelectedRow();
+            Object valorCodigo = jTable.getValueAt(id2, 0);
+            int numero = Integer.parseInt(valorCodigo.toString());
+            int confirmar = JOptionPane.showConfirmDialog(this, "Estas seguro que desea dar de alta al cuartel?");
+            if (confirmar == 0) {
+                cuartelData.darAltaCuartel(numero);
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un id válido");
+        }
+        llenarTabla();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -349,8 +380,14 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
     public void llenarTabla() {
         modelo.setRowCount(0);
         listaCuarteles = cuartelData.listaCuarteles();
+        
         for (Cuartel aux : listaCuarteles) {
-            modelo.addRow(new Object[]{aux.getCodCuartel(), aux.getNombre(), aux.getDomicilio(), aux.getTelefono(), aux.getCorreoElectronico()});
+            if(aux.isActivo()){
+                Activo = "Activo";
+            }else{
+                Activo = "Inactivo";
+            }
+            modelo.addRow(new Object[]{aux.getCodCuartel(), aux.getNombre(), aux.getDomicilio(), aux.getTelefono(), Activo});
         }
     }
 
@@ -359,7 +396,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
         modelo.addColumn("Nombre");
         modelo.addColumn("Domicilio");
         modelo.addColumn("telefono");
-        modelo.addColumn("Correo");
+        modelo.addColumn("Actividad");
         jTable.setModel(modelo);
     }
 

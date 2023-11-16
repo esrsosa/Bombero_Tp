@@ -6,6 +6,7 @@
 package BomberosEntidades;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -16,25 +17,26 @@ public class Brigada {
     private int codBrigada;
     private String nombreBrigada;
     private Especialidad especialidad;
-    private int nro_cuartel; // cambiar a cuartel
+    private Cuartel nro_cuartel; 
+    List<Bombero> bomberos= new ArrayList(4);//Relacion con bombero
+    public Brigada() {
+    }
 
-    public Brigada(int codBrigada, String nombreBrigada, Especialidad especialidad, int nro_cuartel) {
+    public Brigada(int codBrigada, String nombreBrigada, Especialidad especialidad, Cuartel nro_cuartel) {
         this.codBrigada = codBrigada;
         this.nombreBrigada = nombreBrigada;
         this.especialidad = especialidad;
         this.nro_cuartel = nro_cuartel;
+        
     }
 
-    public Brigada() {
-    }
-
-    public Brigada(String nombreBrigada, Especialidad especialidad, int nro_cuartel) {
+    public Brigada(String nombreBrigada, Especialidad especialidad, Cuartel nro_cuartel) {
         this.nombreBrigada = nombreBrigada;
         this.especialidad = especialidad;
         this.nro_cuartel = nro_cuartel;
     }
 
-
+   
 
     public int getCodBrigada() {
         return codBrigada;
@@ -60,11 +62,11 @@ public class Brigada {
         this.especialidad = especialidad;
     }
 
-    public int getNro_cuartel() {
+    public Cuartel getNro_cuartel() {
         return nro_cuartel;
     }
 
-    public void setNro_cuartel(int nro_cuartel) {
+    public void setNro_cuartel(Cuartel nro_cuartel) {
         this.nro_cuartel = nro_cuartel;
     }
 

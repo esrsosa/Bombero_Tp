@@ -90,7 +90,7 @@ public class CuartelData {
 
     public List<Cuartel> listaCuarteles (){
         ArrayList<Cuartel> cuarteles = new ArrayList<>();
-        String sql = "SELECT  codCuartel, nombre_cuartel, direccion, telefono, correo FROM cuartel WHERE 1";
+        String sql = "SELECT  codCuartel, nombre_cuartel, direccion, telefono, correo, activo FROM cuartel WHERE 1";
         try{
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -102,6 +102,7 @@ public class CuartelData {
                 cuartel.setDomicilio(rs.getString("Direccion"));
                 cuartel.setTelefono(rs.getString("telefono"));
                 cuartel.setCorreoElectronico(rs.getString("correo"));
+                cuartel.setActivo(rs.getBoolean("activo"));
                 cuarteles.add(cuartel);
             }
             ps.close();
@@ -124,15 +125,29 @@ public class CuartelData {
         }
     }
     
-    public void eliminarCuartel(int id){
-        String sql = "DELETE FROM `cuartel` WHERE codCuartel = ?";
+    public void darBajaCuartel(int id){
+        String sql = "UPDATE cuartel SET activo = false WHERE codCuartel = ?";
         try{
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             int exito = ps.executeUpdate();
             if (exito==1) {
-                JOptionPane.showMessageDialog(null, "Cuartel eliminado exitosamente");
+                JOptionPane.showMessageDialog(null, "Cuartel fue dado de baja");
+            }
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error a conectar con la tabla cuartel ");
+        }
+    }
+    public void darAltaCuartel(int id){
+        String sql = "UPDATE cuartel SET activo = true WHERE codCuartel = ?";
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            int exito = ps.executeUpdate();
+            if (exito==1) {
+                JOptionPane.showMessageDialog(null, "Cuartel fue dado de alta");
             }
         }catch (SQLException ex){
             JOptionPane.showMessageDialog(null, "Error a conectar con la tabla cuartel ");

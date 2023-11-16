@@ -43,7 +43,7 @@ public class SiniestrosData {
             ps.setInt(3, siniestro.getCoordenadaX());
             ps.setInt(4, siniestro.getCoordenadaY());
             ps.setString(5, siniestro.getDetalles());
-            ps.setInt(6, siniestro.getCodigoBrigada());
+            ps.setObject(6, siniestro.getCodigoBrigada());//No estoy seguro si funciona
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 ResultSet generatedKeys = ps.getGeneratedKeys();
@@ -132,7 +132,7 @@ public class SiniestrosData {
                 int coordenadaX = rs.getInt("coord_x");
                 int coordenadaY = rs.getInt("coord_y");
                 String detalles = rs.getString("detalles");
-                int codigoBrigada = rs.getInt("codBrigada");
+                Brigada codigoBrigada =(Brigada) rs.getObject("codBrigada");
                 Siniestro siniestro = new Siniestro(tipoSiniestro, fechaSiniestro, coordenadaX, coordenadaY, detalles, codigoBrigada);
                 siniestrosRecientes.add(siniestro);
             }
@@ -179,7 +179,7 @@ public class SiniestrosData {
             int coordenadaX = rs.getInt("coord_x");
             int coordenadaY = rs.getInt("coord_y");
             String detalles = rs.getString("detalles");
-            int codigoBrigada = rs.getInt("codBrigada");
+            Brigada codigoBrigada = (Brigada) rs.getObject("codBrigada");
             LocalDate fechaResolucion = rs.getDate("fecha_resol").toLocalDate(); 
             int calificacion = rs.getInt("puntuacion"); 
             
