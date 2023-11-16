@@ -173,6 +173,7 @@ public class SiniestrosData {
          ResultSet rs = ps.executeQuery()) {
         
         while (rs.next()) {
+           // int codigo = rs.getInt("codigo");
             Especialidad tipoSiniestro = Especialidad.valueOf(rs.getString("tipo"));
             LocalDate fechaSiniestro = rs.getDate("fecha_siniestro").toLocalDate();
             int coordenadaX = rs.getInt("coord_x");

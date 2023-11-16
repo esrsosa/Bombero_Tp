@@ -28,21 +28,46 @@ public class BomberoMAIN {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        
+        
+        
+         SiniestrosData siniestrosData = new SiniestrosData();
 
-         // Supongamos que tienes una instancia de ResolucionDeSiniestro
-        SiniestrosData resolucionDeSiniestro = new SiniestrosData();
+        // Llama al método para obtener todos los siniestros ordenados por fecha de resolución
+        List<Siniestro> siniestrosOrdenados = siniestrosData.listarTodosLosSiniestrosOrdenadosPorFechaResolucion();
 
-        // Crear un objeto Siniestro con datos de prueba
-        Siniestro siniestroPrueba = new Siniestro();
-        siniestroPrueba.setCodigo(1); // Supongamos que el código del siniestro es 1
-        siniestroPrueba.setFechaResolucion(LocalDate.now()); // Fecha actual
-        siniestroPrueba.setCalificacion(5); // Puntuación de prueba
+        // Imprime o utiliza la lista de siniestros según tus necesidades
+        for (Siniestro siniestro : siniestrosOrdenados) {
+            System.out.println("Código: " + siniestro.getCodigo());
+            System.out.println("Tipo: " + siniestro.getTipoSiniestro());
+            System.out.println("Fecha Siniestro: " + siniestro.getFechaSiniestro());
+            System.out.println("Coordenada X: " + siniestro.getCoordenadaX());
+            System.out.println("Coordenada Y: " + siniestro.getCoordenadaY());
+            System.out.println("Detalles: " + siniestro.getDetalles());
+            System.out.println("Código Brigada: " + siniestro.getCodigoBrigada());
+        //    System.out.println("Fecha Resolución: " + siniestro.getFechaResolucion());
+           // System.out.println("Calificación: " + siniestro.getCalificacion());
+            System.out.println("------------------------------------");
+        }
+        
+        
+        
 
-    
-            // Llamar a la función marcarComoResuelto
-             resolucionDeSiniestro.marcarComoResuelto(siniestroPrueba);
-
-     
+//         // Supongamos que tienes una instancia de ResolucionDeSiniestro
+//        SiniestrosData resolucionDeSiniestro = new SiniestrosData();
+//
+//        // Crear un objeto Siniestro con datos de prueba
+//        Siniestro siniestroPrueba = new Siniestro();
+//        siniestroPrueba.setCodigo(1); // Supongamos que el código del siniestro es 1
+//        siniestroPrueba.setFechaResolucion(LocalDate.now()); // Fecha actual
+//        siniestroPrueba.setCalificacion(5); // Puntuación de prueba
+//
+//    
+//            // Llamar a la función marcarComoResuelto
+//             resolucionDeSiniestro.marcarComoResuelto(siniestroPrueba);
+//
+//     
        
 
 // SiniestrosData sd = new SiniestrosData();

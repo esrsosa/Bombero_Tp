@@ -15,7 +15,7 @@ public enum Especialidad {
     Rescate("Rescate"),
     Accidentes("Accidentes"),
     Inundaciones("Inundaciones"),
-    OperativosPrevencion("OperativosPrevencion");
+    OperativosPrevencion("OperativosPrevencio");
     
     private String tipoEspecialidades;         
 

@@ -319,7 +319,7 @@ public class HistorialDeSiniestro extends javax.swing.JInternalFrame {
 
     private void llenarTabla() {
         modelo.setRowCount(0);
-        listarSiniestros = siniestrodata.listarTodosLosSiniestrosOrdenadosPorFechaResolucion();
+        listarSiniestros = siniestrodata.listarSiniestrosRecientes();
         for (Siniestro aux : listarSiniestros) {
             modelo.addRow(new Object[]{aux.getCodigo(), aux.getTipoSiniestro(), aux.getCoordenadaX(), aux.getCoordenadaY(), aux.getCodigoBrigada(), aux.getDetalles(), aux.getFechaSiniestro(), aux.getFechaResolucion(), aux.getCalificacion()});
         }
