@@ -25,7 +25,7 @@ public enum Especialidad {
 
     @Override
     public String toString() {
-        return "Especialidad{" + "tipoEspecialidades=" + tipoEspecialidades + '}';
+        return  tipoEspecialidades ;
     }
 
     public void setTipoEspecialidades(String tipoEspecialidades) {

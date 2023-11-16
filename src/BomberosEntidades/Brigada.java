@@ -72,7 +72,7 @@ public class Brigada {
 
     @Override
     public String toString() {
-        return "Brigada{" + "codBrigada=" + codBrigada + ", nombreBrigada=" + nombreBrigada + ", especialidad=" + especialidad + ", nro_cuartel=" + nro_cuartel + '}';
+        return  nombreBrigada +" "+ especialidad ;
     }
   
     
