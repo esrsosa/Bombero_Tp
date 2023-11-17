@@ -8,6 +8,7 @@ package BomberosVistas;
 import BomberoAcceesoDatos.BomberoData;
 import BomberoAcceesoDatos.BrigadaData;
 import BomberoAcceesoDatos.CuartelData;
+import BomberoAcceesoDatos.SiniestrosData;
 import BomberosEntidades.Bombero;
 import BomberosEntidades.Cuartel;
 import BomberosEntidades.Especialidad;
@@ -17,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import BomberosEntidades.Brigada;
+import BomberosEntidades.Siniestro;
 
 /**
  *
@@ -34,7 +36,9 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
     List<Bombero> listarBomberos = bomberodata.listaBomberos();
     private List<BomberosEntidades.Brigada> listaBrigadas = bData.listarBrigadasLibres();
     DefaultComboBoxModel comboModelo = new DefaultComboBoxModel(listaCuartel.toArray());
-
+    DefaultTableModel modelo2 = new DefaultTableModel();
+    private SiniestrosData sn = new SiniestrosData();
+    List<Siniestro> listarSiniestro =  sn.listarSiniestroSinResolver();
     List<BomberosEntidades.Brigada> brigadas = bData.listarBrigadasLibres();
 
     /**
@@ -42,8 +46,10 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
      */
     public FormularioBrigada() {
         initComponents();
+        armarTabla2();
         llenarTipo();
         ArmarTabla();
+        llenarSiniestro();
         llenarCuartel();
         llenarTabla();
     }
@@ -75,10 +81,12 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         liompiarfasasdasd = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jCtipo = new javax.swing.JComboBox<>();
         jcCuartel = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableSiniestro = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
 
         jLabel1.setText("Brigada");
 
@@ -117,8 +125,6 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton4.setText("Modificar");
-
         jButton5.setText("Salir");
 
         jCtipo.addActionListener(new java.awt.event.ActionListener() {
@@ -127,22 +133,29 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
             }
         });
 
+        jTableSiniestro.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTableSiniestro);
+
+        jLabel5.setText("Siniestros");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(liompiarfasasdasd)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -157,14 +170,28 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                                 .addGap(7, 7, 7)
                                 .addComponent(jcCuartel, 0, 145, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(24, 24, 24))
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18)
+                        .addComponent(liompiarfasasdasd)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton5)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(79, 79, 79))
             .addGroup(layout.createSequentialGroup()
-                .addGap(355, 355, 355)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(355, 355, 355)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(349, 349, 349)
+                        .addComponent(jLabel5)))
+                .addContainerGap(439, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,7 +199,14 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -185,15 +219,13 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jcCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(liompiarfasasdasd)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
-                .addContainerGap(192, Short.MAX_VALUE))
+                            .addComponent(jcCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton3)
+                            .addComponent(jButton5)
+                            .addComponent(liompiarfasasdasd))
+                        .addGap(83, 83, 83))))
         );
 
         pack();
@@ -234,15 +266,17 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<Especialidad> jCtipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTabla;
+    private javax.swing.JTable jTableSiniestro;
     private javax.swing.JComboBox<Cuartel> jcCuartel;
     private javax.swing.JTextField jtNombre;
     private javax.swing.JButton liompiarfasasdasd;
@@ -252,7 +286,18 @@ public void llenarTipo() {
             jCtipo.addItem(tipo);
         }
     }
-
+public void llenarSiniestro(){
+    for (Siniestro aux : listarSiniestro) {
+            modelo2.addRow(new Object[]{aux.getCodigo(), aux.getFechaSiniestro(), aux.getTipoSiniestro(), aux.getCodigoBrigada(), aux.getDetalles()});
+        }
+}
+public void armarTabla2(){
+    modelo2.addColumn("Codigo");
+    modelo2.addColumn("Fecha");
+    modelo2.addColumn("Tipo");
+    modelo2.addColumn("CodBrigada");
+    modelo2.addColumn("Detalles");
+}
     public void llenarCuartel() {
         jcCuartel.setModel(comboModelo);
     }

@@ -211,7 +211,7 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
 
     private void llenarTabla() {
         modelo.setRowCount(0);
-        listarSiniestros = siniestrodata.listarSiniestrosRecientes();
+        listarSiniestros = siniestrodata.listarSiniestroSinResolver();
         for (Siniestro aux : listarSiniestros) {
             modelo.addRow(new Object[]{aux.getCodigo(), aux.getFechaSiniestro(), aux.getTipoSiniestro(), aux.getCodigoBrigada(), aux.getDetalles()});
         }
