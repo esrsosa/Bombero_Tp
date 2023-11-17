@@ -89,7 +89,7 @@ public class CuartelData {
     }
 
     public List<Cuartel> listaCuarteles (){
-        ArrayList<Cuartel> cuarteles = new ArrayList<>();
+        List<Cuartel> cuarteles = new ArrayList<>();
         String sql = "SELECT  codCuartel, nombre_cuartel, direccion, telefono, correo, activo FROM cuartel WHERE 1";
         try{
             PreparedStatement ps = con.prepareStatement(sql);
