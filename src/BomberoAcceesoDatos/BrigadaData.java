@@ -101,6 +101,7 @@ public class BrigadaData {
         }
         return brigadas;
     }
+    
     public boolean estaAsignada(int codBrigada) {
         String sql = "SELECT * FROM siniestro WHERE codBrigada = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -112,6 +113,7 @@ public class BrigadaData {
             return false;
         }
     }
+    
     public Brigada buscarBrigadaPorId(int i) {
         Brigada brigada = null;
         Cuartel cuartel = null;
@@ -136,8 +138,7 @@ public class BrigadaData {
             System.out.println("Error al verificar asignaciones: " + ex.getMessage());
            return brigada; 
         }
-        return brigada;
-        
+        return brigada; 
     }
     
 }

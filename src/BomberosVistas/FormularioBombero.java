@@ -35,7 +35,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
     DefaultTableModel modelo = new DefaultTableModel();
     private List<Brigada> listaBrigadas = bData.listarBrigadasLibres();
     DefaultComboBoxModel comboModelo = new DefaultComboBoxModel(listaBrigadas.toArray());
-    List<Bombero> listarBomberos;
+    List<Bombero> listarBomberos= bomberodata.listaBomberos();
     List<Brigada> brigadas = bData.listarBrigadasLibres();
 
     public FormularioBombero() {
@@ -43,8 +43,8 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         ArmarTabla();
         armarSangre();
         llenarTabla();
-        llenarTipo();
-//        llenarComboBox();
+//        llenarTipo();
+        llenarComboBox();
         brigadas();
     }
 
@@ -322,10 +322,11 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                     || jSangre.getSelectedItem().toString().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No debe haber campos vacíos");
             } else {
+                Brigada asigBrigada = new Brigada();
                 String dni1 = String.valueOf(dni);
                 String sangre = jSangre.getSelectedItem().toString();
                 LocalDate fechaNac = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                Brigada asigBrigada =(Brigada) jBrigadaAsignada.getSelectedItem();         //Solo le agregue esto
+                asigBrigada =(Brigada)jBrigadaAsignada.getSelectedItem();         //Solo le agregue esto
                 if (bomberoActual == null) {
                     if (!brigadasLibre()) {
                         bomberoActual = new Bombero(dni1, nombre, apellido, sangre, fechaNac, celular, true,asigBrigada);
@@ -443,12 +444,14 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jBrigadaAsignadaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jBrigadaAsignadaItemStateChanged
         brigadas();
     }//GEN-LAST:event_jBrigadaAsignadaItemStateChanged
     public void brigadas() {
+        
         List<Bombero> bomberos = bomberodata.listaBomberos();
         List<Brigada> brigadasLibres = bData.listarBrigadasLibres();
         Map<Brigada, Integer> bomberosPorBrigada = new HashMap<>();//Cambie la llave a Brigada
@@ -467,12 +470,12 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         }
     }
 
-    public void llenarTipo() {
-        for (Brigada tipo : brigadas) {
-            jBrigadaAsignada.addItem(tipo.getNombreBrigada());
-        }
-        jTDisponibles.setEnabled(false);
-    }
+//    public void llenarTipo() {
+//        for (Brigada tipo : brigadas) {
+//            jBrigadaAsignada.addItem(tipo.getNombreBrigada());
+//        }
+//        jTDisponibles.setEnabled(false);
+//    }
 
     public int Ndebrigada() {
         for (Brigada tipo : brigadas) {
@@ -502,6 +505,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 }
             }
         }
+        
         return false;
     }
 
@@ -509,7 +513,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JApellido;
     private javax.swing.JTextField Jnombre;
-    private javax.swing.JComboBox<String> jBrigadaAsignada;
+    private javax.swing.JComboBox<Brigada> jBrigadaAsignada;
     private javax.swing.JButton jBuscar;
     private javax.swing.JButton jButton5;
     private javax.swing.JTextField jCelular;
@@ -540,12 +544,12 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
     }
     private void llenarTabla() {
         modelo.setRowCount(0);
-        listarBomberos = bomberodata.listaBomberos();
+        
         for (Bombero bomb : listarBomberos) {
             for (Brigada brig : brigadas) {
-                if (bomb.getBrigada().equals(brig)) {//Cambie el "==" a un equals
+                 //Cambie el "==" a un equals
                     modelo.addRow(new Object[]{bomb.getDni(), bomb.getApellido(), bomb.getNombre(), brig.getNombreBrigada()});
-                }
+                
             }
         }
     }

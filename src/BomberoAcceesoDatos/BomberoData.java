@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  * @author Emanuel Sosa
  */
 public class BomberoData {
-
+    BrigadaData bd = new BrigadaData();
     private Connection con = null;
 
     public BomberoData() {
@@ -103,7 +103,9 @@ public class BomberoData {
                 bombero.setFecha_nac(fechaNac);
                 bombero.setCelular(rs.getString("celular"));
                 bombero.setEstado(rs.getBoolean("estado"));
-                Brigada codBrigada =(Brigada) rs.getObject("codBrigada"); //No estoy seguro si funciona
+                int numBrigada = rs.getInt("codBrigada");
+                Brigada codBrigada = bd.buscarBrigadaPorId(numBrigada);
+//                Brigada codBrigada =(Brigada) rs.getObject("codBrigada"); //No estoy seguro si funciona
                 bombero.setBrigada(codBrigada);
                 if (bombero.isEstado()) {
                     bomberos.add(bombero);
@@ -119,7 +121,7 @@ public class BomberoData {
     }
 
     public void agregarBombero(Bombero bombero) { //probado
-        String sql = "INSERT INTO bombero ( dni, nombre, apellido, grupSanguineo, fecha_nac, celular, codBrigada, estado) VALUES ( ?, ?, ?, ?, ?, ?,?,?)";
+        String sql = "INSERT INTO bombero ( dni, nombre, apellido, celular, fecha_nac, grupSanguineo, codBrigada, estado) VALUES ( ?, ?, ?, ?, ?, ?,?,?)";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -130,7 +132,9 @@ public class BomberoData {
             ps.setString(4, bombero.getGrupSanguineo());
             ps.setDate(5, Date.valueOf(bombero.getFecha_nac()));
             ps.setString(6, bombero.getCelular());
-            ps.setObject(7, bombero.getBrigada());
+            int codigoBrigada = bombero.getBrigada().getCodBrigada();
+            ps.setInt(7, codigoBrigada);
+//            ps.setObject(7, bombero.getBrigada());
             ps.setBoolean(8, bombero.isEstado());
             int exito = ps.executeUpdate();
             if (exito == 1) {
