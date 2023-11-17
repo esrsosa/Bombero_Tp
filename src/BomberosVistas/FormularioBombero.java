@@ -322,6 +322,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                     || jSangre.getSelectedItem().toString().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No debe haber campos vacíos");
             } else {
+                
                 Brigada asigBrigada = new Brigada();
                 String dni1 = String.valueOf(dni);
                 String sangre = jSangre.getSelectedItem().toString();
@@ -542,6 +543,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
     public void llenarComboBox(){
         jBrigadaAsignada.setModel(comboModelo);
     }
+    
     private void llenarTabla() {
         modelo.setRowCount(0);
         
