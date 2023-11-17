@@ -220,5 +220,46 @@ public class SiniestrosData {
 
         return todosLosSiniestros;
     }
+public List<Siniestro> listarSiniestroSinResolver() {
+        List<Siniestro> todosLosSiniestros = new ArrayList<>();
+        String sql = "SELECT * FROM siniestro where puntuacion = 0";
 
+        try (PreparedStatement ps = con.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                int codigo = rs.getInt("codigo");
+                String auxiliar = rs.getString("tipo");
+                Especialidad tipoSiniestro = Especialidad.valueOf(auxiliar);
+                LocalDate fechaSiniestro = rs.getDate("fecha_siniestro").toLocalDate();
+                int coordenadaX = rs.getInt("coord_x");
+                int coordenadaY = rs.getInt("coord_y");
+                String detalles = rs.getString("detalles");
+                int brigadaCod = rs.getInt("codBrigada");
+                System.out.println(brigadaCod);
+                Brigada codigoBrigada = bd.buscarBrigadaPorId(brigadaCod);
+                LocalDate fechaResolucion = null;
+                if (rs.getDate("fecha_resol") != null) {
+                    fechaResolucion = rs.getDate("fecha_resol").toLocalDate();
+                }
+
+                // LocalDate fechaResolucion = rs.getDate("fecha_resol") != null ? rs.getDate("fecha_resol").toLocalDate() : null;
+                // LocalDate fechaResolucion = rs.getDate("fecha_resol").toLocalDate();// puede o no puede estar
+                Integer puntuacion = rs.getInt("puntuacion");//puede o no puede
+                if (fechaResolucion != null && puntuacion != null) {
+                    Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro, coordenadaX, coordenadaY, detalles, fechaSiniestro, puntuacion, codigoBrigada);
+                    todosLosSiniestros.add(siniestro);
+                } else {
+                    Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro, coordenadaX, coordenadaY, detalles, codigoBrigada);
+                    todosLosSiniestros.add(siniestro);
+                }
+            }
+
+        } catch (SQLException ex) {
+
+            System.out.println("Error al consultar todos los siniestros ordenados por fecha de resolución: " + ex.getMessage());
+        }
+
+        return todosLosSiniestros;
+    }
 }
