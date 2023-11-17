@@ -119,13 +119,13 @@ public class BomberoMAIN {
 //        }else{
 //            System.out.println("ya existe ese codigo");
 //        }
-//        
-        List<Brigada> b2 = b.listarBrigadasLibres();
-        for (Brigada siniestro : b2) {
-            System.out.println(siniestro);
-        }
-        SiniestrosData s = new SiniestrosData();
-        System.out.println(s.codigoSiniestroExiste(2));
+//  -------------------------------------------------------      
+//        List<Brigada> b2 = b.listarBrigadasLibres();
+//        for (Brigada siniestro : b2) {
+//            System.out.println(siniestro);
+//        }
+//        SiniestrosData s = new SiniestrosData();
+//        System.out.println(s.codigoSiniestroExiste(2));
 //----------------------------------------------------
 //        BomberoData b1=new BomberoData();
 //        Bombero b=new Bombero(1);

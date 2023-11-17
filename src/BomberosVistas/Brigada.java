@@ -8,6 +8,7 @@ package BomberosVistas;
 import BomberoAcceesoDatos.BomberoData;
 import BomberoAcceesoDatos.BrigadaData;
 import BomberosEntidades.Bombero;
+import BomberosEntidades.Especialidad;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
@@ -33,7 +34,7 @@ public class Brigada extends javax.swing.JInternalFrame {
      */
     public Brigada() {
         initComponents();
-//        llenarTipo();
+        llenarTipo();
         ArmarTabla();
         llenarCuartel();
         llenarTabla();
@@ -44,7 +45,7 @@ public class Brigada extends javax.swing.JInternalFrame {
         modelo.addColumn("Apellido");
         modelo.addColumn("Nombre");
         modelo.addColumn("Brigada");
-        jTable1.setModel(comboModelo);
+        jTable1.setModel(modelo);
     }
 
     //
@@ -194,13 +195,14 @@ public class Brigada extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
-//public void llenarTipo() {
-//        for (Especialidad tipo : Especialidad.values()) {
-//            jCtipo.addItem(tipo.getTipoEspecialidades());
-//        }
-//    }
+public void llenarTipo() {
+        for (Especialidad tipo : Especialidad.values()) {
+            jCtipo.addItem(tipo.getTipoEspecialidades());
+        }
+    }
 
     public void llenarCuartel() {
+          jCuartel.setModel(comboModelo);
     }
 
     private void llenarTabla() {
@@ -213,5 +215,7 @@ public class Brigada extends javax.swing.JInternalFrame {
                 }
             }
         }
+    }
+}
 
 
