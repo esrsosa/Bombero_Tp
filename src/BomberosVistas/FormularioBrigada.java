@@ -193,7 +193,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                     .addComponent(jButton3)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(192, Short.MAX_VALUE))
         );
 
         pack();
@@ -222,7 +222,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
 
     private void liompiarfasasdasdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_liompiarfasasdasdActionPerformed
         // TODO add your handling code here:
-limpiarCampos();
+        limpiarCampos();
 
     }//GEN-LAST:event_liompiarfasasdasdActionPerformed
     private void limpiarCampos() {
