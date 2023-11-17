@@ -7,10 +7,13 @@ package BomberosVistas;
 
 import BomberoAcceesoDatos.BomberoData;
 import BomberoAcceesoDatos.BrigadaData;
+import BomberoAcceesoDatos.CuartelData;
 import BomberosEntidades.Bombero;
+import BomberosEntidades.Cuartel;
 import BomberosEntidades.Especialidad;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -22,11 +25,14 @@ public class Brigada extends javax.swing.JInternalFrame {
 
     private BomberoData bomberodata = new BomberoData();
     private Bombero bomberoActual = null;
+    CuartelData cd = new CuartelData();
+    private List<Cuartel> listaCuartel = cd.listaCuarteles();
     private BrigadaData bData = new BrigadaData();
     DefaultTableModel modelo = new DefaultTableModel();
-    private List<BomberosEntidades.Brigada> listaBrigadas = bData.listarBrigadasLibres();
-    DefaultComboBoxModel comboModelo = new DefaultComboBoxModel(listaBrigadas.toArray());
     List<Bombero> listarBomberos = bomberodata.listaBomberos();
+    private List<BomberosEntidades.Brigada> listaBrigadas = bData.listarBrigadasLibres();
+    DefaultComboBoxModel comboModelo = new DefaultComboBoxModel(listaCuartel.toArray());
+
     List<BomberosEntidades.Brigada> brigadas = bData.listarBrigadasLibres();
 
     /**
@@ -62,7 +68,7 @@ public class Brigada extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jtNombre = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -71,7 +77,7 @@ public class Brigada extends javax.swing.JInternalFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jCtipo = new javax.swing.JComboBox<>();
-        jCuartel = new javax.swing.JComboBox<>();
+        jcCuartel = new javax.swing.JComboBox<>();
 
         jLabel1.setText("Brigada");
 
@@ -99,12 +105,15 @@ public class Brigada extends javax.swing.JInternalFrame {
         jButton2.setText("Limpiar");
 
         jButton3.setText("Nuevo");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Modificar");
 
         jButton5.setText("Salir");
-
-        jCuartel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,11 +139,11 @@ public class Brigada extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(1, 1, 1)
-                                .addComponent(jTextField1))
+                                .addComponent(jtNombre))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(7, 7, 7)
-                                .addComponent(jCuartel, 0, 145, Short.MAX_VALUE)))
+                                .addComponent(jcCuartel, 0, 145, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -155,7 +164,7 @@ public class Brigada extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -164,7 +173,7 @@ public class Brigada extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jcCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -178,6 +187,21 @@ public class Brigada extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        try {
+            Cuartel cuartel ;
+            Brigada brigada;
+            String nombre = jtNombre.getText();
+            Especialidad esp = (Especialidad) jCtipo.getSelectedItem();
+            cuartel = (Cuartel) jcCuartel.getSelectedItem();
+             brigada = new Brigada(nombre, esp, cuartel);
+
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "No debe haber campos vacios ");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -185,24 +209,24 @@ public class Brigada extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jCtipo;
-    private javax.swing.JComboBox<String> jCuartel;
+    private javax.swing.JComboBox<Especialidad> jCtipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox<Cuartel> jcCuartel;
+    private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
 public void llenarTipo() {
         for (Especialidad tipo : Especialidad.values()) {
-            jCtipo.addItem(tipo.getTipoEspecialidades());
+            jCtipo.addItem(tipo);
         }
     }
 
     public void llenarCuartel() {
-          jCuartel.setModel(comboModelo);
+        jcCuartel.setModel(comboModelo);
     }
 
     private void llenarTabla() {
@@ -217,5 +241,3 @@ public void llenarTipo() {
         }
     }
 }
-
-
