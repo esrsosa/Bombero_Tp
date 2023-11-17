@@ -98,7 +98,7 @@
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jBrigada" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBrigadaAsignada" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="93" max="32767" attributes="0"/>
@@ -136,7 +136,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jBrigada" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBrigadaAsignada" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="25" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -258,7 +258,7 @@
         <Property name="text" type="java.lang.String" value="Brigada: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jBrigada">
+    <Component class="javax.swing.JComboBox" name="jBrigadaAsignada">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">

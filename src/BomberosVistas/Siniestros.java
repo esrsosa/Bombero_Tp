@@ -5,12 +5,15 @@
  */
 package BomberosVistas;
 
+import BomberoAcceesoDatos.BrigadaData;
 import BomberoAcceesoDatos.SiniestrosData;
 import BomberosEntidades.Brigada;
 import BomberosEntidades.Especialidad;
 import BomberosEntidades.Siniestro;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -20,12 +23,17 @@ public class Siniestros extends javax.swing.JInternalFrame {
 
       private SiniestrosData siniesrodata = new SiniestrosData();
     private Siniestro SinniestroActual = null;
+    private BrigadaData bData = new BrigadaData();
+        private List<Brigada> listaBrigadas = bData.listarBrigadasLibres();
+      DefaultComboBoxModel comboModelo = new DefaultComboBoxModel(listaBrigadas.toArray());
     /**
      * Creates new form Siniestros
      */
     public Siniestros() {
         initComponents();
        llenarTipo();
+       llenarComboBox();
+               
     }
 
     /**
@@ -64,7 +72,7 @@ public class Siniestros extends javax.swing.JInternalFrame {
         jFecha = new com.toedter.calendar.JDateChooser();
         jHoras = new com.toedter.components.JSpinField();
         jLabel8 = new javax.swing.JLabel();
-        jBrigada = new javax.swing.JComboBox<>();
+        jBrigadaAsignada = new javax.swing.JComboBox<>();
 
         jLabel1.setText("Siniestros");
 
@@ -112,7 +120,7 @@ public class Siniestros extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Brigada: ");
 
-        jBrigada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
+        jBrigadaAsignada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -166,7 +174,7 @@ public class Siniestros extends javax.swing.JInternalFrame {
                         .addGap(44, 44, 44)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBrigada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jBrigadaAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(93, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -195,7 +203,7 @@ public class Siniestros extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jBrigada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBrigadaAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -219,7 +227,7 @@ public class Siniestros extends javax.swing.JInternalFrame {
             int corX = Integer.parseInt(jCoordx.getText()); 
             int corY = Integer.parseInt(jCoordy.getText()); 
             String Detalles = jDetalle.getText();
-            Brigada brigada =(Brigada) jBrigada.getSelectedItem();//Funciona?? 
+            Brigada brigada =(Brigada) jBrigadaAsignada.getSelectedItem();//Funciona?? 
             SinniestroActual = new Siniestro(tipo,fechaSi,corX,corY,Detalles,brigada);
            siniesrodata.agregarSiniestro(SinniestroActual);
     }//GEN-LAST:event_jGuardarActionPerformed
@@ -237,9 +245,10 @@ public void llenarTipo(){
     for (Especialidad tipo :Especialidad.values()) {
         jCtipo.addItem(tipo.getTipoEspecialidades());
 }
+    
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jBrigada;
+    private javax.swing.JComboBox<String> jBrigadaAsignada;
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JTextField jCoordx;
     private javax.swing.JTextField jCoordy;
@@ -268,4 +277,7 @@ public void llenarTipo(){
     private com.toedter.calendar.JYearChooser jYearChooser1;
     private com.toedter.calendar.JYearChooser jYearChooser2;
     // End of variables declaration//GEN-END:variables
+public void llenarComboBox(){
+        jBrigadaAsignada.setModel(comboModelo);
+    }
 }
