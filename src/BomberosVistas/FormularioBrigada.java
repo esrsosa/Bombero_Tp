@@ -16,15 +16,17 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import BomberosEntidades.Brigada;
 
 /**
  *
  * @author pollo
  */
-public class Brigada extends javax.swing.JInternalFrame {
+public class FormularioBrigada extends javax.swing.JInternalFrame {
 
     private BomberoData bomberodata = new BomberoData();
     private Bombero bomberoActual = null;
+    private FormularioBrigada brigada;
     CuartelData cd = new CuartelData();
     private List<Cuartel> listaCuartel = cd.listaCuarteles();
     private BrigadaData bData = new BrigadaData();
@@ -38,7 +40,7 @@ public class Brigada extends javax.swing.JInternalFrame {
     /**
      * Creates new form Brigada
      */
-    public Brigada() {
+    public FormularioBrigada() {
         initComponents();
         llenarTipo();
         ArmarTabla();
@@ -51,7 +53,7 @@ public class Brigada extends javax.swing.JInternalFrame {
         modelo.addColumn("Apellido");
         modelo.addColumn("Nombre");
         modelo.addColumn("Brigada");
-        jTable1.setModel(modelo);
+        jTabla.setModel(modelo);
     }
 
     //
@@ -70,7 +72,7 @@ public class Brigada extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jtNombre = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTabla = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -87,7 +89,7 @@ public class Brigada extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Cuartel: ");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -98,7 +100,7 @@ public class Brigada extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTabla);
 
         jButton1.setText("Selecionar");
 
@@ -190,13 +192,15 @@ public class Brigada extends javax.swing.JInternalFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         try {
+
             Cuartel cuartel ;
             Brigada brigada;
             String nombre = jtNombre.getText();
             Especialidad esp = (Especialidad) jCtipo.getSelectedItem();
             cuartel = (Cuartel) jcCuartel.getSelectedItem();
              brigada = new Brigada(nombre, esp, cuartel);
-
+             bData.agregarBrigada(brigada);
+             llenarTabla();
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "No debe haber campos vacios ");
         }
@@ -215,7 +219,7 @@ public class Brigada extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTabla;
     private javax.swing.JComboBox<Cuartel> jcCuartel;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables

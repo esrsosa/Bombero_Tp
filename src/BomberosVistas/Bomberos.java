@@ -261,7 +261,7 @@ public class Bomberos extends javax.swing.JFrame {
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
          Escritorio.removeAll();
         Escritorio.repaint();
-        Brigada bri = new Brigada();
+        FormularioBrigada bri = new FormularioBrigada();
         Escritorio.add(bri);
         bri.setVisible(true);
         Escritorio.moveToFront(bri);
