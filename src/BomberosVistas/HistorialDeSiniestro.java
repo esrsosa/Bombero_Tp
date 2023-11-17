@@ -7,7 +7,9 @@ package BomberosVistas;
 
 import BomberoAcceesoDatos.SiniestrosData;
 import BomberosEntidades.Siniestro;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +25,7 @@ public class HistorialDeSiniestro extends javax.swing.JInternalFrame {
     private SiniestrosData siniestrodata = new SiniestrosData();
     private Siniestro siniestroActual = null;
     DefaultTableModel modelo = new DefaultTableModel();
-    List<Siniestro> listarSiniestros;
+    List<Siniestro> listarSiniestros = siniestrodata.listarSiniestrosRecientes();
 
     public HistorialDeSiniestro() {
         initComponents();
@@ -247,35 +249,36 @@ public class HistorialDeSiniestro extends javax.swing.JInternalFrame {
 //        }
 //---------------------------------------------------------------------------------------------------
         try {
-            java.util.Date fechaInicio = jfecha1.getDate();
-            java.util.Date fechaFin = jfecha2.getDate();
 
+            java.util.Date fechaInicio = jfecha1.getDate();
+            Instant instant = fechaInicio.toInstant();
+
+            java.util.Date fechaFin = jfecha2.getDate();
+            Instant instant2 = fechaFin.toInstant();
+           
             if (fechaInicio == null || fechaFin == null) {
                 JOptionPane.showMessageDialog(this, "Debe ingresar ambas fechas.");
                 return;
             }
-
-            LocalDate fechaInicioFiltro = fechaInicio.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            LocalDate fechaFinFiltro = fechaFin.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDateTime FechaInicioFiltro = instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
+            LocalDateTime FechaFinFiltro = instant2.atZone(ZoneId.systemDefault()).toLocalDateTime();
+//            LocalDate fechaInicioFiltro = fechaInicio.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//            LocalDate fechaFinFiltro = fechaFin.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
             List<Siniestro> siniestrosRecientes = siniestrodata.listarSiniestrosRecientes();
 
-          
             List<Siniestro> siniestrosFiltrados = siniestrosRecientes.stream()
                     .filter(siniestro
-                            -> siniestro.getFechaSiniestro().isAfter(fechaInicioFiltro)
-                    && siniestro.getFechaSiniestro().isBefore(fechaFinFiltro))
+                            -> siniestro.getFechaSiniestro().isAfter(FechaInicioFiltro)
+                    && siniestro.getFechaSiniestro().isBefore(FechaFinFiltro))
                     .collect(Collectors.toList());
 
             modelo.setRowCount(0);
 
-   
-        
-
             if (siniestrosFiltrados.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No se encontraron siniestros recientes entre las fechas ingresadas.");
             } else {
-              
+
                 for (Siniestro siniestroActual : siniestrosFiltrados) {
                     modelo.addRow(new Object[]{
                         siniestroActual.getCodigo(),
@@ -287,7 +290,7 @@ public class HistorialDeSiniestro extends javax.swing.JInternalFrame {
                         siniestroActual.getFechaSiniestro(),
                         siniestroActual.getFechaResolucion(),
                         siniestroActual.getCalificacion()
-                            
+
                     });
                 }
             }
@@ -346,8 +349,8 @@ public class HistorialDeSiniestro extends javax.swing.JInternalFrame {
         modelo.addColumn("Hora");
 
         jHistorial.setModel(modelo);
-       // this.setLocationRelativeTo(null);
-    this.setResizable(false);
+        // this.setLocationRelativeTo(null);
+        this.setResizable(false);
 
     }
 

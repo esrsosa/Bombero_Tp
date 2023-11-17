@@ -5,14 +5,21 @@
  */
 package BomberosVistas;
 
+import BomberoAcceesoDatos.SiniestrosData;
+import BomberosEntidades.Siniestro;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
- private List<Siniestro>
 /**
  *
  * @author pollo
  */
 public class CalcularDistancia extends javax.swing.JInternalFrame {
+
+    private SiniestrosData sd = new SiniestrosData();
+    private List<Siniestro> listaSiniestros = sd.listarSiniestroSinResolver();
+    DefaultComboBoxModel comboModelo = new DefaultComboBoxModel(listaSiniestros.toArray());
 
     /**
      * Creates new form CalcularDistancia
@@ -38,7 +45,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
         jTable3 = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboSiniestro = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -84,7 +91,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Lista de Cuarteles");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboSiniestro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,7 +107,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
                         .addComponent(jLabel8))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(279, 279, 279)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jComboSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(251, 251, 251)
                         .addComponent(jLabel7)))
@@ -118,7 +125,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
                 .addGap(42, 42, 42)
                 .addComponent(jLabel7)
                 .addGap(32, 32, 32)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboSiniestro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
                 .addGap(21, 21, 21)
@@ -134,7 +141,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        calcularDistancia();
+//        calcularDistancia();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -146,7 +153,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboSiniestro;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
@@ -154,20 +161,22 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
-  private void calcularDistancia() {
-        try {
-            int X1 = Integer.parseInt(x1.getText().trim());
-            int Y1 = Integer.parseInt(y1.getText().trim());
-            int X2 = Integer.parseInt(x2.getText().trim());
-            int Y2 = Integer.parseInt(y2.getText().trim());
-
-            double distancia = Math.sqrt(Math.pow(X2 - X1, 2) + Math.pow(Y2 - Y1, 2));
-
-            jDMetros.setText("" + distancia);
-        } catch (NumberFormatException ex) {
-
-            JOptionPane.showMessageDialog(this, "Error: Ingresa números válidos en los campos." + ex.getMessage());
-        }
-    }
-
+//  private void calcularDistancia() {
+//        try {
+//            int X1 = Integer.parseInt(x1.getText().trim());
+//            int Y1 = Integer.parseInt(y1.getText().trim());
+//            int X2 = Integer.parseInt(x2.getText().trim());
+//            int Y2 = Integer.parseInt(y2.getText().trim());
+//
+//            double distancia = Math.sqrt(Math.pow(X2 - X1, 2) + Math.pow(Y2 - Y1, 2));
+//
+//            jDMetros.setText("" + distancia);
+//        } catch (NumberFormatException ex) {
+//
+//            JOptionPane.showMessageDialog(this, "Error: Ingresa números válidos en los campos." + ex.getMessage());
+//        }
+//    }
+public void llenarCombo(){
+    
+}
 }
