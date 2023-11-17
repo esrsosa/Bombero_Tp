@@ -7,6 +7,7 @@ package BomberosVistas;
 
 import BomberoAcceesoDatos.BrigadaData;
 import BomberoAcceesoDatos.CuartelData;
+import BomberosEntidades.Cuartel;
 import BomberosEntidades.Especialidad;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;

@@ -198,12 +198,12 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_y2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-  calcularDistancia();
-       
+        calcularDistancia();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       dispose();
+        dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -239,19 +239,18 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
   private void calcularDistancia() {
         try {
-          int X1 = Integer.parseInt(x1.getText().trim());
-    int Y1 = Integer.parseInt(y1.getText().trim());
-    int X2 = Integer.parseInt(x2.getText().trim());
-    int Y2 = Integer.parseInt(y2.getText().trim());
+            int X1 = Integer.parseInt(x1.getText().trim());
+            int Y1 = Integer.parseInt(y1.getText().trim());
+            int X2 = Integer.parseInt(x2.getText().trim());
+            int Y2 = Integer.parseInt(y2.getText().trim());
 
             double distancia = Math.sqrt(Math.pow(X2 - X1, 2) + Math.pow(Y2 - Y1, 2));
 
             jDMetros.setText("" + distancia);
         } catch (NumberFormatException ex) {
-            
-            JOptionPane.showMessageDialog(this, "Error: Ingresa números válidos en los campos."+ ex.getMessage());
+
+            JOptionPane.showMessageDialog(this, "Error: Ingresa números válidos en los campos." + ex.getMessage());
         }
     }
-
 
 }
