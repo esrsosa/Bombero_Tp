@@ -14,12 +14,13 @@ import java.util.Objects;
  * @author Emanuel Sosa
  */
 public class Brigada {
-    
+
     private int codBrigada;
     private String nombreBrigada;
     private Especialidad especialidad;
     private Cuartel nro_cuartel; //Relacion con cuartel
-    List<Bombero> bomberos= new ArrayList(4);//Relacion con bombero
+    List<Bombero> bomberos = new ArrayList(4);//Relacion con bombero
+
     public Brigada() {
     }
 
@@ -28,7 +29,7 @@ public class Brigada {
         this.nombreBrigada = nombreBrigada;
         this.especialidad = especialidad;
         this.nro_cuartel = nro_cuartel;
-        
+
     }
 
     public Brigada(String nombreBrigada, Especialidad especialidad, Cuartel nro_cuartel) {
@@ -79,8 +80,19 @@ public class Brigada {
 
     @Override
     public String toString() {
-        return  nombreBrigada;
+        return nombreBrigada;
     }
-  
-    
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Brigada brigada = (Brigada) obj;
+        return Objects.equals(codBrigada, brigada.codBrigada);
+    }
+
 }
