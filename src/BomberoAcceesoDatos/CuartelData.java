@@ -89,7 +89,7 @@ public class CuartelData {
 
     public List<Cuartel> listaCuarteles (){
         List<Cuartel> cuarteles = new ArrayList<>();
-        String sql = "SELECT  codCuartel, nombre_cuartel, direccion, telefono, correo, activo FROM cuartel WHERE 1";
+        String sql = "SELECT  codCuartel, nombre_cuartel, direccion, coord_x, coord_y, telefono, correo, activo FROM cuartel WHERE 1";
         try{
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -99,6 +99,8 @@ public class CuartelData {
                 cuartel.setCodCuartel(rs.getInt("codCuartel"));
                 cuartel.setNombre(rs.getString("nombre_cuartel"));
                 cuartel.setDomicilio(rs.getString("Direccion"));
+                cuartel.setCoordenadax(rs.getInt("coord_x"));
+                cuartel.setCoordenaday(rs.getInt("coord_y"));
                 cuartel.setTelefono(rs.getString("telefono"));
                 cuartel.setCorreoElectronico(rs.getString("correo"));
                 cuartel.setActivo(rs.getBoolean("activo"));
