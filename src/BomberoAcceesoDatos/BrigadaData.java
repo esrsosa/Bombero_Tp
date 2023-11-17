@@ -125,14 +125,12 @@ public class BrigadaData {
             if(rs.next()){
             brigada = new Brigada();
             cuartel = new Cuartel();
-            
             brigada.setCodBrigada(rs.getInt("codBrigada"));
             brigada.setEspecialidad(Especialidad.valueOf(rs.getString("especialidad")));
             brigada.setNombreBrigada(rs.getString("nombre_br"));
             int entero = rs.getInt("codCuartel");
             cuartel = cd.buscarCuartel(entero);//busco cuartel con CuartelData
             brigada.setNro_cuartel(cuartel);
-            
             }
         } catch (SQLException ex) {
             System.out.println("Error al verificar asignaciones: " + ex.getMessage());

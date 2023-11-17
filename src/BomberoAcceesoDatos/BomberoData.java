@@ -68,7 +68,8 @@ public class BomberoData {
             ps.setString(3, bombero.getGrupSanguineo());
             ps.setDate(4, Date.valueOf(bombero.getFecha_nac()));
             ps.setString(5, bombero.getCelular());
-            ps.setObject(6, bombero.getBrigada());
+            int codigoBrigada = bombero.getBrigada().getCodBrigada();
+            ps.setObject(6, codigoBrigada);
             ps.setString(7, bombero.getDni());
             int exito = ps.executeUpdate();
             if (exito == 1) {
@@ -87,7 +88,6 @@ public class BomberoData {
             }
         }
     }
-
     public List<Bombero> listaBomberos() {
         ArrayList<Bombero> bomberos = new ArrayList<>();
         String sql = "SELECT dni, nombre, apellido, grupSanguineo, fecha_nac, celular, codBrigada, estado FROM bombero";
@@ -135,7 +135,6 @@ public class BomberoData {
             ps.setString(6, bombero.getCelular());
             int codigoBrigada = bombero.getBrigada().getCodBrigada();
             ps.setInt(7, codigoBrigada);
-//            ps.setObject(7, bombero.getBrigada());
             ps.setBoolean(8, bombero.isEstado());
             int exito = ps.executeUpdate();
             if (exito == 1) {

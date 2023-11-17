@@ -46,7 +46,7 @@ public class CuartelData {
                 cuartel.setCoordenaday(rs.getInt("coord_y"));
                 cuartel.setTelefono(rs.getString("telefono"));
                 cuartel.setCorreoElectronico(rs.getString("correo"));
-                JOptionPane.showMessageDialog(null, "cuartel encontrado");
+//                JOptionPane.showMessageDialog(null, "cuartel encontrado");
             }else {
                 JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel");
                 ps.close();

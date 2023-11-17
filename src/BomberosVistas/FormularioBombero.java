@@ -35,7 +35,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
     DefaultTableModel modelo = new DefaultTableModel();
     private List<Brigada> listaBrigadas = bData.listarBrigadasLibres();
     DefaultComboBoxModel comboModelo = new DefaultComboBoxModel(listaBrigadas.toArray());
-    List<Bombero> listarBomberos= bomberodata.listaBomberos();
+    List<Bombero> listarBomberos = bomberodata.listaBomberos();
     List<Brigada> brigadas = bData.listarBrigadasLibres();
 
     public FormularioBombero() {
@@ -317,7 +317,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
             String apellido = JApellido.getText();
             java.util.Date sfecha = jDCalendar.getDate();
             String celular = jCelular.getText();
-            
+
             if (jDni.getText().isEmpty() || nombre.isEmpty() || apellido.isEmpty() || sfecha == null || celular.isEmpty()
                     || jSangre.getSelectedItem().toString().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No debe haber campos vacíos");
@@ -326,10 +326,10 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 String dni1 = String.valueOf(dni);
                 String sangre = jSangre.getSelectedItem().toString();
                 LocalDate fechaNac = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                asigBrigada =(Brigada)jBrigadaAsignada.getSelectedItem();         //Solo le agregue esto
+                asigBrigada.setCodBrigada(Ndebrigada());
                 if (bomberoActual == null) {
                     if (!brigadasLibre()) {
-                        bomberoActual = new Bombero(dni1, nombre, apellido, sangre, fechaNac, celular, true,asigBrigada);
+                        bomberoActual = new Bombero(dni1, nombre, apellido, celular, fechaNac, sangre, true, asigBrigada);
                         bomberodata.agregarBombero(bomberoActual);
                     } else {
                         JOptionPane.showMessageDialog(this, "Brigada completa, " + jBrigadaAsignada.getSelectedItem().toString());
@@ -406,7 +406,8 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
             String apellido = JApellido.getText();
             java.util.Date sfecha = jDCalendar.getDate();
             String celular = jCelular.getText();
-            Brigada asigBrigada =(Brigada) jBrigadaAsignada.getSelectedItem();//solo agregue esto
+            Brigada asigBrigada = new Brigada();
+            asigBrigada.setCodBrigada(Ndebrigada());
             if (jDni.getText().isEmpty() || nombre.isEmpty() || apellido.isEmpty() || sfecha == null || celular.isEmpty()
                     || jSangre.getSelectedItem().toString().isEmpty()) {//hay que verificar si entro una brigada en asigBrigada
                 JOptionPane.showMessageDialog(this, "No debe haber campos vacíos");
@@ -427,7 +428,6 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jModificarActionPerformed
 
     private void jDarDeBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDarDeBajaActionPerformed
-        // TODO add your handling code here:
         try {
             String dni = jDni.getText();
             if (dni.isEmpty()) {
@@ -451,12 +451,11 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         brigadas();
     }//GEN-LAST:event_jBrigadaAsignadaItemStateChanged
     public void brigadas() {
-        
         List<Bombero> bomberos = bomberodata.listaBomberos();
         List<Brigada> brigadasLibres = bData.listarBrigadasLibres();
-        Map<Brigada, Integer> bomberosPorBrigada = new HashMap<>();//Cambie la llave a Brigada
+        Map<Integer, Integer> bomberosPorBrigada = new HashMap<>();
         for (Bombero bombero : bomberos) {
-            Brigada codBrigada = bombero.getBrigada();//Cambie el "int" a "Brigada"
+            int codBrigada = bombero.getBrigada().getCodBrigada();
             bomberosPorBrigada.put(codBrigada, bomberosPorBrigada.getOrDefault(codBrigada, 0) + 1);
         }
         for (Brigada brigada : brigadasLibres) {
@@ -469,13 +468,12 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
             }
         }
     }
-
-//    public void llenarTipo() {
-//        for (Brigada tipo : brigadas) {
-//            jBrigadaAsignada.addItem(tipo.getNombreBrigada());
-//        }
-//        jTDisponibles.setEnabled(false);
-//    }
+    //    public void llenarTipo() {
+    //        for (Brigada tipo : brigadas) {
+    //            jBrigadaAsignada.addItem(tipo.getNombreBrigada());
+    //        }
+    //        jTDisponibles.setEnabled(false);
+    //    }
 
     public int Ndebrigada() {
         for (Brigada tipo : brigadas) {
@@ -505,30 +503,29 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 }
             }
         }
-        
+
         return false;
     }
 
-   public void llenarComboBox(){
+    public void llenarComboBox() {
         jBrigadaAsignada.setModel(comboModelo);
+
     }
+
     private void llenarTabla() {
         modelo.setRowCount(0);
-       
         for (Bombero bomb : listarBomberos) {
-            for (Brigada brig : brigadas) {
-                 //Cambie el "==" a un equals
-                    modelo.addRow(new Object[]{bomb.getDni(), bomb.getApellido(), bomb.getNombre(), brig.getNombreBrigada()});
-                
-            }
+            modelo.addRow(new Object[]{bomb.getDni(), bomb.getApellido(), bomb.getNombre(), bomb.getBrigada().getNombreBrigada()});
         }
     }
+
     private void limpiarTabla() {
         int filas = modelo.getRowCount();
         for (int i = filas - 1; i >= 0; i--) {
             modelo.removeRow(i);
         }
     }
+
     private void limpiar() {
         jBrigadaAsignada.setSelectedIndex(0);
         brigadas();
@@ -540,6 +537,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         jCelular.setText(null);
         jTDisponibles.setText("");
     }
+
     private void ArmarTabla() {
         modelo.addColumn("Dni");
         modelo.addColumn("Apellido");
@@ -576,5 +574,4 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
     private javax.swing.JButton jlimpiar;
     // End of variables declaration//GEN-END:variables
 
- 
 }
