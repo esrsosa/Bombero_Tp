@@ -326,7 +326,8 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 String dni1 = String.valueOf(dni);
                 String sangre = jSangre.getSelectedItem().toString();
                 LocalDate fechaNac = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                asigBrigada.setCodBrigada(Ndebrigada());
+                asigBrigada =(Brigada) jBrigadaAsignada.getSelectedItem();
+//                asigBrigada.setCodBrigada(Ndebrigada());
                 if (bomberoActual == null) {
                     if (!brigadasLibre()) {
                         bomberoActual = new Bombero(dni1, nombre, apellido, celular, fechaNac, sangre, true, asigBrigada);
@@ -498,7 +499,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 int codBrigada = brigada.getCodBrigada();
                 int bomberosAsignados = bomberosPorBrigada.getOrDefault(codBrigada, 0);
                 int bomberosDisponibles = Math.max(0, 5 - bomberosAsignados);
-                if (bomberosDisponibles == 0) {
+                if (bomberosDisponibles <= 0) {
                     return true;
                 }
             }

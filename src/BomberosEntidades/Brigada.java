@@ -36,7 +36,13 @@ public class Brigada {
         this.nro_cuartel = nro_cuartel;
     }
 
-   
+    public void setBomberos(List<Bombero> bomberos) {
+        this.bomberos = bomberos;
+    }
+
+    public List<Bombero> getBomberos() {
+        return bomberos;
+    }
 
     public int getCodBrigada() {
         return codBrigada;

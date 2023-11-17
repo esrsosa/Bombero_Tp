@@ -133,8 +133,9 @@ public class BomberoData {
             ps.setString(4, bombero.getGrupSanguineo());
             ps.setDate(5, Date.valueOf(bombero.getFecha_nac()));
             ps.setString(6, bombero.getCelular());
-            int codigoBrigada = bombero.getBrigada().getCodBrigada();
-            ps.setInt(7, codigoBrigada);
+            int codBrigada = bombero.getBrigada().getCodBrigada();
+            bd.buscarBrigadaPorId(bombero.getBrigada().getCodBrigada());
+            ps.setInt(7, codBrigada);
             ps.setBoolean(8, bombero.isEstado());
             int exito = ps.executeUpdate();
             if (exito == 1) {
