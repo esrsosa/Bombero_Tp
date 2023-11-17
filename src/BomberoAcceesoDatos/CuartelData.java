@@ -62,7 +62,6 @@ public class CuartelData {
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
-
             ps.setString(1, cuartel.getNombre());
             ps.setString(2, cuartel.getDomicilio());
             ps.setInt(3, cuartel.getCoordenadax());

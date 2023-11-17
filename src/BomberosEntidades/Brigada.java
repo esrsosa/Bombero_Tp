@@ -79,17 +79,8 @@ public class Brigada {
 
     @Override
     public String toString() {
-        return  nombreBrigada +" "+ especialidad ;
+        return  nombreBrigada;
     }
   
-       public boolean equals(Object obj) {
-        if (this == obj) {
-            return true; 
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        Brigada brigada = (Brigada) obj;
-        return codBrigada == brigada.codBrigada && Objects.equals(nombreBrigada, brigada.nombreBrigada);
-    }
+    
 }

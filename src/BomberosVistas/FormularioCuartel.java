@@ -309,7 +309,6 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
         System.out.println(numero);
         cuartelActual = cuartelData.buscarCuartel(numero);
         if (cuartelActual != null) {
-
             jtNombre.setText(cuartelActual.getNombre());
             jtDireccion.setText(cuartelActual.getDomicilio());
             jtCoordenadaX.setText(cuartelActual.getCoordenadax() + "");

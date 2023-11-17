@@ -28,13 +28,13 @@ public class BomberoMAIN {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        
-//                BrigadaData b = new BrigadaData();
-//                CuartelData c1=new CuartelData();
-//                Cuartel c= new Cuartel("Patos salvajes", "Plaza pringles", 23, 32, "2665032890", "s");
-//                Brigada br=new Brigada("Perros salchichas", Especialidad.Derrumbes,c );
-//                b.agregarBrigada(br);
-//        
+        
+                BrigadaData b = new BrigadaData();
+                CuartelData c1=new CuartelData();
+                Cuartel c= c1.buscarCuartel(8);
+                Brigada br=new Brigada("Golden retirever's", Especialidad.Incendios,c );
+                b.agregarBrigada(br);
+        
         
 //         SiniestrosData siniestrosData = new SiniestrosData();
 //
