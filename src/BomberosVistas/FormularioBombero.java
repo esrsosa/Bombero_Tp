@@ -43,7 +43,6 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         ArmarTabla();
         armarSangre();
         llenarTabla();
-//        llenarTipo();
         llenarComboBox();
         brigadas();
     }
