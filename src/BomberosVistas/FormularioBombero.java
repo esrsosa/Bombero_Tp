@@ -199,53 +199,6 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(18, 18, 18)
-                                .addComponent(jDCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jDni, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(106, 106, 106))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel3))
-                                    .addGap(28, 28, 28)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(JApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Jnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(97, 97, 97)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jSangre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel9)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jBrigadaAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jDarDeBaja)
-                                    .addComponent(jTDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(390, 390, 390)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(141, 141, 141)
@@ -257,29 +210,79 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                                 .addComponent(jModificar)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(332, 332, 332)
-                                .addComponent(jButton5))
+                                .addGap(523, 523, 523)
+                                .addComponent(jTSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(120, 120, 120)
                                 .addComponent(jBuscar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(71, 71, 71)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jDCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel2)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jDni, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(106, 106, 106))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel4)
+                                                .addComponent(jLabel3))
+                                            .addGap(28, 28, 28)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(JApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(Jnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(97, 97, 97)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(jLabel5)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jSangre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(jLabel8)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(jLabel9)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jBrigadaAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jDarDeBaja)
+                                                .addGap(36, 36, 36)
+                                                .addComponent(jButton5))))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(390, 390, 390)
+                                .addComponent(jLabel1)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
-                .addComponent(jTSelecionar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap(75, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jlimpiar)
                         .addComponent(jModificar)
-                        .addComponent(jDarDeBaja))
-                    .addComponent(jButton5))
+                        .addComponent(jDarDeBaja)
+                        .addComponent(jButton5))
+                    .addComponent(jTSelecionar))
                 .addContainerGap(16, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,7 +362,6 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar datos válidos" + ex.getMessage());
         }
-
     }//GEN-LAST:event_jNuevoActionPerformed
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
@@ -379,12 +381,10 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 modelo.setRowCount(0);
                 for (Brigada tipo : brigadas) {
                     if (bomberoActual.getBrigada().getCodBrigada() == tipo.getCodBrigada()) { //Basicamente comparaba el bomberoActual.getCodBrigada con el tipo.getCodBombero, lo cambie por un equals que compara objetos
-                        jBrigadaAsignada.setSelectedItem(tipo);
+                        jBrigadaAsignada.setSelectedItem(tipo.getNombreBrigada());
                         modelo.addRow(new Object[]{bomberoActual.getDni(), bomberoActual.getApellido(), bomberoActual.getNombre(), tipo.getNombreBrigada()});
                     }
-
                 }
-
             } else {
                 JOptionPane.showMessageDialog(this, "Bombero no encontrado." + "Dni: " + dni);
             }
@@ -436,9 +436,8 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 String sangre = jSangre.getSelectedItem().toString();
                 LocalDate fechaNac = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 if (!brigadasLibre()) {
-                    bomberoActual = new Bombero(dni, nombre, apellido, sangre, fechaNac, celular, true, asigBrigada);
+                    bomberoActual = new Bombero(dni, nombre, apellido, celular, fechaNac, sangre, true, asigBrigada);
                     bomberodata.actualizarDatos(bomberoActual);
-
                     limpiar();
                 } else {
                     JOptionPane.showMessageDialog(this, "Brigada completa, " + jBrigadaAsignada.getSelectedItem().toString());
@@ -482,7 +481,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
 
         try {
             int filaSeleccionada = jMostrar.getSelectedRow();
-            if (filaSeleccionada != -1) { 
+            if (filaSeleccionada != -1) {
                 Object valorCodigo = jMostrar.getValueAt(filaSeleccionada, 0);
                 if (valorCodigo != null) {
                     int numero = Integer.parseInt(valorCodigo.toString());
@@ -494,6 +493,12 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                         jCelular.setText(bomberoActual.getCelular());
                         jSangre.setSelectedItem(bomberoActual.getGrupSanguineo());
                         jBrigadaAsignada.setSelectedItem(bomberoActual.getBrigada());
+                        jDCalendar.setDate(Date.from(bomberoActual.getFecha_nac().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+                        for (Brigada tipo : brigadas) {
+                            if (bomberoActual.getBrigada().getCodBrigada() == tipo.getCodBrigada()) { //Basicamente comparaba el bomberoActual.getCodBrigada con el tipo.getCodBombero, lo cambie por un equals que compara objetos
+                                jBrigadaAsignada.setSelectedItem(tipo.getNombreBrigada());
+                            }
+                        }
                     } else {
                         JOptionPane.showMessageDialog(this, "Bombero no encontrado");
                     }
@@ -507,6 +512,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Error al procesar la selección: " + ex.getMessage());
         }
     }//GEN-LAST:event_jTSelecionarActionPerformed
+
     public void brigadas() {
         List<Bombero> bomberos = bomberodata.listaBomberos();
         List<Brigada> brigadasLibres = bData.listarBrigadasLibres();
@@ -522,7 +528,6 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 int bomberosAsignados = bomberosPorBrigada.getOrDefault(codBrigada, 0);
                 int bomberosDisponibles = Math.max(0, 5 - bomberosAsignados);
                 jTDisponibles.setText("   [ " + bomberosDisponibles + " ] ");
-
             }
         }
     }
