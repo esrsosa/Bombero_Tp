@@ -7,6 +7,7 @@ package BomberosEntidades;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -81,5 +82,14 @@ public class Brigada {
         return nombreBrigada;
     }
   
-    
+       public boolean equals(Object obj) {
+        if (this == obj) {
+            return true; 
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Brigada brigada = (Brigada) obj;
+        return codBrigada == brigada.codBrigada && Objects.equals(nombreBrigada, brigada.nombreBrigada);
+    }
 }

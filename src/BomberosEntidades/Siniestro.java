@@ -5,7 +5,6 @@
  */
 package BomberosEntidades;
 
-import bombero.TipoSiniestro;
 import java.time.LocalDate;
 import java.util.Date;
 

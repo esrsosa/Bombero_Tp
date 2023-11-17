@@ -30,13 +30,14 @@ public class BrigadaData {
     }
 
     public void agregarBrigada(Brigada brigada) {
-        String sql = "INSERT INTO brigada (codBrigada, nombre_br, especialidad) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO brigada (nombre_br, especialidad,codCuartel) VALUES (?, ?, ?)";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, brigada.getCodBrigada());
-            ps.setString(2, brigada.getNombreBrigada());
-            ps.setString(3, brigada.getEspecialidad().toString());
+            ps.setString(1, brigada.getNombreBrigada());
+            ps.setString(2, brigada.getEspecialidad().toString());
+            int nCuartel=brigada.getNro_cuartel().getCodCuartel();
+            ps.setInt(3, nCuartel);
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 System.out.println("brigada agregado exitosamente.");

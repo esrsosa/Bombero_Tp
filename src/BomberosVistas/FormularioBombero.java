@@ -45,7 +45,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         llenarTabla();
 //        llenarTipo();
         llenarComboBox();
-        brigadas();
+             brigadas();
     }
 
     @SuppressWarnings("unchecked")
@@ -188,7 +188,10 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(jDCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel2)
@@ -241,10 +244,8 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                                 .addGap(332, 332, 332)
                                 .addComponent(jButton5))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(73, 73, 73)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jDCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jBuscar))
+                                .addGap(120, 120, 120)
+                                .addComponent(jBuscar)
                                 .addGap(41, 41, 41)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(45, Short.MAX_VALUE))
@@ -326,7 +327,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 String dni1 = String.valueOf(dni);
                 String sangre = jSangre.getSelectedItem().toString();
                 LocalDate fechaNac = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                asigBrigada =(Brigada) jBrigadaAsignada.getSelectedItem();
+                asigBrigada = (Brigada) jBrigadaAsignada.getSelectedItem();
 //                asigBrigada.setCodBrigada(Ndebrigada());
                 if (bomberoActual == null) {
                     if (!brigadasLibre()) {
@@ -359,10 +360,11 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 limpiarTabla();
                 modelo.setRowCount(0);
                 for (Brigada tipo : brigadas) {
-                    if (bomberoActual.getBrigada().equals(tipo)) { //Basicamente comparaba el bomberoActual.getCodBrigada con el tipo.getCodBombero, lo cambie por un equals que compara objetos
-                        jBrigadaAsignada.setSelectedItem(tipo.getNombreBrigada());
+                    if (bomberoActual.getBrigada().getCodBrigada() == tipo.getCodBrigada()) { //Basicamente comparaba el bomberoActual.getCodBrigada con el tipo.getCodBombero, lo cambie por un equals que compara objetos
+                        jBrigadaAsignada.setSelectedItem(tipo);
                         modelo.addRow(new Object[]{bomberoActual.getDni(), bomberoActual.getApellido(), bomberoActual.getNombre(), tipo.getNombreBrigada()});
                     }
+
                 }
 
             } else {
@@ -466,15 +468,10 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 int bomberosAsignados = bomberosPorBrigada.getOrDefault(codBrigada, 0);
                 int bomberosDisponibles = Math.max(0, 5 - bomberosAsignados);
                 jTDisponibles.setText("   [ " + bomberosDisponibles + " ] ");
+
             }
         }
     }
-    //    public void llenarTipo() {
-    //        for (Brigada tipo : brigadas) {
-    //            jBrigadaAsignada.addItem(tipo.getNombreBrigada());
-    //        }
-    //        jTDisponibles.setEnabled(false);
-    //    }
 
     public int Ndebrigada() {
         for (Brigada tipo : brigadas) {
@@ -504,13 +501,12 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 }
             }
         }
-
         return false;
     }
 
     public void llenarComboBox() {
         jBrigadaAsignada.setModel(comboModelo);
-
+        jTDisponibles.setEnabled(false);
     }
 
     private void llenarTabla() {
@@ -528,7 +524,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
     }
 
     private void limpiar() {
-        jBrigadaAsignada.setSelectedIndex(0);
+        jBrigadaAsignada.setSelectedIndex(1);
         brigadas();
         jDni.setText(null);
         Jnombre.setText(null);
