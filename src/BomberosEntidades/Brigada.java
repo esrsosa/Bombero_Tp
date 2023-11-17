@@ -7,6 +7,7 @@ package BomberosEntidades;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -78,7 +79,7 @@ public class Brigada {
 
     @Override
     public String toString() {
-        return  nombreBrigada +" "+ especialidad ;
+        return  nombreBrigada;
     }
   
     

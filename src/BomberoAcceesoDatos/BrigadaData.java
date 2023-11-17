@@ -30,13 +30,15 @@ public class BrigadaData {
     }
 
     public void agregarBrigada(Brigada brigada) {
-        String sql = "INSERT INTO brigada (codBrigada, nombre_br, especialidad) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO brigada (nombre_br, especialidad,codCuartel,libre) VALUES (?, ?, ?,?)";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, brigada.getCodBrigada());
-            ps.setString(2, brigada.getNombreBrigada());
-            ps.setString(3, brigada.getEspecialidad().toString());
+            ps.setString(1, brigada.getNombreBrigada());
+            ps.setString(2, brigada.getEspecialidad().toString());
+            int nCuartel=brigada.getNro_cuartel().getCodCuartel();
+            ps.setInt(3, nCuartel);
+            ps.setBoolean(4, true);
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 System.out.println("brigada agregado exitosamente.");
@@ -86,15 +88,11 @@ public class BrigadaData {
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-//                int codBrigada = rs.getInt("codBrigada");
-//                boolean estaAsignada = !estaAsignada(codBrigada);
-//                if (estaAsignada) {
                     Brigada brigada = new Brigada();
                     brigada.setEspecialidad(Especialidad.valueOf(rs.getString("especialidad")));
                     brigada.setNombreBrigada(rs.getString("nombre_br"));
                     brigada.setCodBrigada(rs.getInt("codBrigada"));
                     brigadas.add(brigada);
-//                }
             }
         } catch (SQLException ex) {
             System.out.println("Error al listar brigadas: " + ex.getMessage());

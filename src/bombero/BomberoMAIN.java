@@ -29,28 +29,32 @@ public class BomberoMAIN {
      */
     public static void main(String[] args) {
         
+                BrigadaData b = new BrigadaData();
+                CuartelData c1=new CuartelData();
+                Cuartel c= c1.buscarCuartel(8);
+                Brigada br=new Brigada("Golden retirever's", Especialidad.Incendios,c );
+                b.agregarBrigada(br);
         
         
-        
-         SiniestrosData siniestrosData = new SiniestrosData();
-
-        // Llama al método para obtener todos los siniestros ordenados por fecha de resolución
-        List<Siniestro> siniestrosOrdenados = siniestrosData.listarTodosLosSiniestrosOrdenadosPorFechaResolucion();
-
-        // Imprime o utiliza la lista de siniestros según tus necesidades
-        for (Siniestro siniestro : siniestrosOrdenados) {
-            System.out.println("Código: " + siniestro.getCodigo());
-            System.out.println("Tipo: " + siniestro.getTipoSiniestro());
-            System.out.println("Fecha Siniestro: " + siniestro.getFechaSiniestro());
-            System.out.println("Coordenada X: " + siniestro.getCoordenadaX());
-            System.out.println("Coordenada Y: " + siniestro.getCoordenadaY());
-            System.out.println("Detalles: " + siniestro.getDetalles());
-            System.out.println("Código Brigada: " + siniestro.getCodigoBrigada());
-        //    System.out.println("Fecha Resolución: " + siniestro.getFechaResolucion());
-           // System.out.println("Calificación: " + siniestro.getCalificacion());
-            System.out.println("------------------------------------");
-        }
-        
+//         SiniestrosData siniestrosData = new SiniestrosData();
+//
+//        // Llama al método para obtener todos los siniestros ordenados por fecha de resolución
+//        List<Siniestro> siniestrosOrdenados = siniestrosData.listarTodosLosSiniestrosOrdenadosPorFechaResolucion();
+//
+//        // Imprime o utiliza la lista de siniestros según tus necesidades
+//        for (Siniestro siniestro : siniestrosOrdenados) {
+//            System.out.println("Código: " + siniestro.getCodigo());
+//            System.out.println("Tipo: " + siniestro.getTipoSiniestro());
+//            System.out.println("Fecha Siniestro: " + siniestro.getFechaSiniestro());
+//            System.out.println("Coordenada X: " + siniestro.getCoordenadaX());
+//            System.out.println("Coordenada Y: " + siniestro.getCoordenadaY());
+//            System.out.println("Detalles: " + siniestro.getDetalles());
+//            System.out.println("Código Brigada: " + siniestro.getCodigoBrigada());
+//        //    System.out.println("Fecha Resolución: " + siniestro.getFechaResolucion());
+//           // System.out.println("Calificación: " + siniestro.getCalificacion());
+//            System.out.println("------------------------------------");
+//        }
+//        
         
         
 
