@@ -25,6 +25,15 @@ public class Siniestro {
     private int calificacion;
     private Brigada codigoBrigada;//Relacion con Brigada
 
+    public Siniestro(Especialidad tipoSiniestro, LocalDate fechaSiniestro, int coordenadaX, int coordenadaY, String detalles) {
+        this.tipoSiniestro = tipoSiniestro;
+        this.fechaSiniestro = fechaSiniestro;
+        this.coordenadaX = coordenadaX;
+        this.coordenadaY = coordenadaY;
+        this.detalles = detalles;
+    }
+
+    
     public Siniestro(Especialidad tipoSiniestro, LocalDate fechaSiniestro, int coordenadaX, int coordenadaY, String detalles, Brigada codigoBrigada) {
         this.tipoSiniestro = tipoSiniestro;
         this.fechaSiniestro = fechaSiniestro;
