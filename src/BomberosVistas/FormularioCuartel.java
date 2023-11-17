@@ -23,7 +23,6 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
     DefaultTableModel modelo = new DefaultTableModel();
     List<Cuartel> listaCuarteles = new ArrayList<>();
     private String Activo;
-
     /**
      * Creates new form Cwwwuartel
      */
@@ -300,24 +299,22 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-
+        // TODO add your handling code here:
         Limpiar();
         cuartelActual = new Cuartel();
         int id2 = jTable.getSelectedRow();
-        if (id2 != -1) {
-            Object valorCodigo = jTable.getValueAt(id2, 0);
-                int numero = Integer.parseInt(valorCodigo.toString());
-                cuartelActual = cuartelData.buscarCuartel(numero);
-                if (cuartelActual != null) {
-                    jtNombre.setText(cuartelActual.getNombre());
-                    jtDireccion.setText(cuartelActual.getDomicilio());
-                    jtCoordenadaX.setText(cuartelActual.getCoordenadax() + "");
-                    jtCoordenadaY.setText(cuartelActual.getCoordenaday() + "");
-                    jtTelefono.setText(cuartelActual.getTelefono());
-                    jtCorreo.setText(cuartelActual.getCorreoElectronico());
-                } 
-        } else {
-            JOptionPane.showMessageDialog(this,"Ninguna fila seleccionada");
+        Object valorCodigo = jTable.getValueAt(id2, 0);
+        int numero = Integer.parseInt(valorCodigo.toString());
+        System.out.println(valorCodigo);
+        System.out.println(numero);
+        cuartelActual = cuartelData.buscarCuartel(numero);
+        if (cuartelActual != null) {
+            jtNombre.setText(cuartelActual.getNombre());
+            jtDireccion.setText(cuartelActual.getDomicilio());
+            jtCoordenadaX.setText(cuartelActual.getCoordenadax() + "");
+            jtCoordenadaY.setText(cuartelActual.getCoordenaday() + "");
+            jtTelefono.setText(cuartelActual.getTelefono());
+            jtCorreo.setText(cuartelActual.getCorreoElectronico());
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
@@ -339,7 +336,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        try {
+         try {
             int id2 = jTable.getSelectedRow();
             Object valorCodigo = jTable.getValueAt(id2, 0);
             int numero = Integer.parseInt(valorCodigo.toString());
@@ -382,11 +379,11 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
     public void llenarTabla() {
         modelo.setRowCount(0);
         listaCuarteles = cuartelData.listaCuarteles();
-
+        
         for (Cuartel aux : listaCuarteles) {
-            if (aux.isActivo()) {
+            if(aux.isActivo()){
                 Activo = "Activo";
-            } else {
+            }else{
                 Activo = "Inactivo";
             }
             modelo.addRow(new Object[]{aux.getCodCuartel(), aux.getNombre(), aux.getDomicilio(), aux.getTelefono(), Activo});

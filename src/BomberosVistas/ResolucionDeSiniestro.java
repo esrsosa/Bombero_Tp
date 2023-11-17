@@ -8,7 +8,11 @@ package BomberosVistas;
 import BomberoAcceesoDatos.SiniestrosData;
 import BomberosEntidades.Siniestro;
 import static java.lang.System.in;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
@@ -256,9 +260,12 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
 
             LocalDate fechaResolucion = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             Integer puntuacion = Integer.parseInt(Objects.requireNonNull(jPunto.getSelectedItem()).toString());
-
+            
+            LocalDateTime fechaResol = fechaResolucion.atTime(LocalTime.now());
+            
             siniestroActual.setCodigo(codigo);
-            siniestroActual.setFechaResolucion(fechaResolucion);
+            
+            siniestroActual.setFechaResolucion(fechaResol);
             siniestroActual.setCalificacion(puntuacion);
 
             siniestrodata.marcarComoResuelto(siniestroActual);

@@ -92,7 +92,7 @@ public class Brigada {
             return false;
         }
         Brigada brigada = (Brigada) obj;
-        return Objects.equals(getCodBrigada(), brigada.getCodBrigada());
+        return Objects.equals(codBrigada, brigada.codBrigada);
     }
 
 }

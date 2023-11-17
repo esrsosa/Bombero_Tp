@@ -14,7 +14,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import sun.util.resources.LocaleData;
@@ -36,11 +38,13 @@ public class SiniestrosData {
 
         String sql = "INSERT INTO siniestro (tipo, fecha_siniestro, coord_x, coord_y, detalles, codBrigada) VALUES  (?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = null;
-
+        LocalDateTime fechaResolucion = LocalDateTime.now();
+        Timestamp timestamp = Timestamp.valueOf(fechaResolucion);
         try {
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, siniestro.getTipoSiniestro().toString());
-            ps.setDate(2, Date.valueOf(siniestro.getFechaSiniestro()));
+
+            ps.setTimestamp(2, timestamp);
             ps.setInt(3, siniestro.getCoordenadaX());
             ps.setInt(4, siniestro.getCoordenadaY());
             ps.setString(5, siniestro.getDetalles());
@@ -92,9 +96,11 @@ public class SiniestrosData {
     public void marcarComoResuelto(Siniestro siniestro) {
         String sql = "UPDATE siniestro SET fecha_resol = ?, puntuacion = ? WHERE codigo = ?";
         PreparedStatement ps = null;
+        LocalDateTime fechaResolucion = LocalDateTime.now();
+        Timestamp timestamp = Timestamp.valueOf(fechaResolucion);
         try {
             ps = con.prepareStatement(sql);
-            ps.setDate(1, Date.valueOf(siniestro.getFechaResolucion()));
+            ps.setTimestamp(1, timestamp);
             ps.setInt(2, siniestro.getCalificacion());
             ps.setInt(3, siniestro.getCodigo());
             int exito = ps.executeUpdate();
@@ -131,21 +137,26 @@ public class SiniestrosData {
                 int codigo = rs.getInt("codigo");
                 String auxiliar = rs.getString("tipo");
                 Especialidad tipoSiniestro = Especialidad.valueOf(auxiliar);
-                LocalDate fechaSiniestro = rs.getDate("fecha_siniestro").toLocalDate();
+                Timestamp fechaSiniestro = rs.getTimestamp("fecha_siniestro");
+                LocalDateTime fechaSiniestro1 = fechaSiniestro.toLocalDateTime();
+//                LocalDate fechaSiniestro = rs.getDate("fecha_siniestro").toLocalDate();
                 int coordenadaX = rs.getInt("coord_x");
                 int coordenadaY = rs.getInt("coord_y");
                 String detalles = rs.getString("detalles");
                 int brigadaCod = rs.getInt("codBrigada");
 
                 Brigada codigoBrigada = bd.buscarBrigadaPorId(brigadaCod);
-                LocalDate fechaResolucion = rs.getDate("fecha_resol") != null ? rs.getDate("fecha_resol").toLocalDate() : null;
+//                LocalDate fechaResolucion = rs.getDate("fecha_resol") != null ? rs.getDate("fecha_resol").toLocalDate() : null;
+                Timestamp fechaResol = rs.getTimestamp("fecha_Resol");
+                
                 //Integer fechaResolucion = rs.getInt("fecha_resol");// puede o no puede estar
                 Integer puntuacion = rs.getInt("puntuacion");//puede o no puede
-                if (fechaResolucion != null && puntuacion != null) {
-                    Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro, coordenadaX, coordenadaY, detalles, fechaSiniestro, puntuacion, codigoBrigada);
+                if (fechaResol != null && puntuacion != null) {
+                    LocalDateTime fechaResolucion = fechaResol.toLocalDateTime();
+                    Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro1, coordenadaX, coordenadaY, detalles, fechaResolucion, puntuacion, codigoBrigada);
                     siniestrosRecientes.add(siniestro);
                 } else {
-                    Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro, coordenadaX, coordenadaY, detalles, codigoBrigada);
+                    Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro1, coordenadaX, coordenadaY, detalles, codigoBrigada);
                     siniestrosRecientes.add(siniestro);
                 }
             }
@@ -189,26 +200,29 @@ public class SiniestrosData {
                 int codigo = rs.getInt("codigo");
                 String auxiliar = rs.getString("tipo");
                 Especialidad tipoSiniestro = Especialidad.valueOf(auxiliar);
-                LocalDate fechaSiniestro = rs.getDate("fecha_siniestro").toLocalDate();
+                Timestamp fechaSiniestro = rs.getTimestamp("fecha_siniestro");
+                LocalDateTime fechaSiniestro1 = fechaSiniestro.toLocalDateTime();
                 int coordenadaX = rs.getInt("coord_x");
                 int coordenadaY = rs.getInt("coord_y");
                 String detalles = rs.getString("detalles");
                 int brigadaCod = rs.getInt("codBrigada");
                 System.out.println(brigadaCod);
                 Brigada codigoBrigada = bd.buscarBrigadaPorId(brigadaCod);
-                LocalDate fechaResolucion = null;
+                LocalDateTime fechaResolucion = null;
+//                 fechaResolucion = null;
                 if (rs.getDate("fecha_resol") != null) {
-                    fechaResolucion = rs.getDate("fecha_resol").toLocalDate();
+                    Timestamp fechaResol = rs.getTimestamp("fecha_Resol");
+                    fechaResolucion = fechaResol.toLocalDateTime();
                 }
 
                 // LocalDate fechaResolucion = rs.getDate("fecha_resol") != null ? rs.getDate("fecha_resol").toLocalDate() : null;
                 // LocalDate fechaResolucion = rs.getDate("fecha_resol").toLocalDate();// puede o no puede estar
                 Integer puntuacion = rs.getInt("puntuacion");//puede o no puede
                 if (fechaResolucion != null && puntuacion != null) {
-                    Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro, coordenadaX, coordenadaY, detalles, fechaSiniestro, puntuacion, codigoBrigada);
+                    Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro1, coordenadaX, coordenadaY, detalles, fechaResolucion, puntuacion, codigoBrigada);
                     todosLosSiniestros.add(siniestro);
                 } else {
-                    Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro, coordenadaX, coordenadaY, detalles, codigoBrigada);
+                    Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro1, coordenadaX, coordenadaY, detalles, codigoBrigada);
                     todosLosSiniestros.add(siniestro);
                 }
             }
@@ -220,7 +234,8 @@ public class SiniestrosData {
 
         return todosLosSiniestros;
     }
-public List<Siniestro> listarSiniestroSinResolver() {
+
+    public List<Siniestro> listarSiniestroSinResolver() {
         List<Siniestro> todosLosSiniestros = new ArrayList<>();
         String sql = "SELECT * FROM siniestro where puntuacion = 0";
 
@@ -231,26 +246,29 @@ public List<Siniestro> listarSiniestroSinResolver() {
                 int codigo = rs.getInt("codigo");
                 String auxiliar = rs.getString("tipo");
                 Especialidad tipoSiniestro = Especialidad.valueOf(auxiliar);
-                LocalDate fechaSiniestro = rs.getDate("fecha_siniestro").toLocalDate();
+                Timestamp fechaSiniestro = rs.getTimestamp("fecha_siniestro");
+                LocalDateTime fechaSiniestro1 = fechaSiniestro.toLocalDateTime();
                 int coordenadaX = rs.getInt("coord_x");
                 int coordenadaY = rs.getInt("coord_y");
                 String detalles = rs.getString("detalles");
                 int brigadaCod = rs.getInt("codBrigada");
                 System.out.println(brigadaCod);
                 Brigada codigoBrigada = bd.buscarBrigadaPorId(brigadaCod);
-                LocalDate fechaResolucion = null;
+                LocalDateTime fechaResolucion = null;
                 if (rs.getDate("fecha_resol") != null) {
-                    fechaResolucion = rs.getDate("fecha_resol").toLocalDate();
+                    Timestamp fechaResol = rs.getTimestamp("fecha_Resol");
+                    fechaResolucion = fechaResol.toLocalDateTime();
+
                 }
 
                 // LocalDate fechaResolucion = rs.getDate("fecha_resol") != null ? rs.getDate("fecha_resol").toLocalDate() : null;
                 // LocalDate fechaResolucion = rs.getDate("fecha_resol").toLocalDate();// puede o no puede estar
                 Integer puntuacion = rs.getInt("puntuacion");//puede o no puede
                 if (fechaResolucion != null && puntuacion != null) {
-                    Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro, coordenadaX, coordenadaY, detalles, fechaSiniestro, puntuacion, codigoBrigada);
+                    Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro1, coordenadaX, coordenadaY, detalles, fechaResolucion, puntuacion, codigoBrigada);
                     todosLosSiniestros.add(siniestro);
                 } else {
-                    Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro, coordenadaX, coordenadaY, detalles, codigoBrigada);
+                    Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro1, coordenadaX, coordenadaY, detalles, codigoBrigada);
                     todosLosSiniestros.add(siniestro);
                 }
             }
