@@ -509,7 +509,44 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         return false;
     }
 
-
+   public void llenarComboBox(){
+        jBrigadaAsignada.setModel(comboModelo);
+    }
+    private void llenarTabla() {
+        modelo.setRowCount(0);
+       
+        for (Bombero bomb : listarBomberos) {
+            for (Brigada brig : brigadas) {
+                 //Cambie el "==" a un equals
+                    modelo.addRow(new Object[]{bomb.getDni(), bomb.getApellido(), bomb.getNombre(), brig.getNombreBrigada()});
+                
+            }
+        }
+    }
+    private void limpiarTabla() {
+        int filas = modelo.getRowCount();
+        for (int i = filas - 1; i >= 0; i--) {
+            modelo.removeRow(i);
+        }
+    }
+    private void limpiar() {
+        jBrigadaAsignada.setSelectedIndex(0);
+        brigadas();
+        jDni.setText(null);
+        Jnombre.setText(null);
+        JApellido.setText(null);
+        jSangre.setSelectedIndex(-1);
+        jDCalendar.setDate(null);
+        jCelular.setText(null);
+        jTDisponibles.setText("");
+    }
+    private void ArmarTabla() {
+        modelo.addColumn("Dni");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Brigada");
+        jMostrar.setModel(modelo);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JApellido;
     private javax.swing.JTextField Jnombre;
@@ -539,45 +576,5 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
     private javax.swing.JButton jlimpiar;
     // End of variables declaration//GEN-END:variables
 
-    public void llenarComboBox(){
-        jBrigadaAsignada.setModel(comboModelo);
-    }
-    private void llenarTabla() {
-        modelo.setRowCount(0);
-        
-        for (Bombero bomb : listarBomberos) {
-            for (Brigada brig : brigadas) {
-                 //Cambie el "==" a un equals
-                    modelo.addRow(new Object[]{bomb.getDni(), bomb.getApellido(), bomb.getNombre(), brig.getNombreBrigada()});
-                
-            }
-        }
-    }
-
-    private void limpiarTabla() {
-        int filas = modelo.getRowCount();
-        for (int i = filas - 1; i >= 0; i--) {
-            modelo.removeRow(i);
-        }
-    }
-
-    private void limpiar() {
-        jBrigadaAsignada.setSelectedIndex(0);
-        brigadas();
-        jDni.setText(null);
-        Jnombre.setText(null);
-        JApellido.setText(null);
-        jSangre.setSelectedIndex(-1);
-        jDCalendar.setDate(null);
-        jCelular.setText(null);
-        jTDisponibles.setText("");
-    }
-
-    private void ArmarTabla() {
-        modelo.addColumn("Dni");
-        modelo.addColumn("Apellido");
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Brigada");
-        jMostrar.setModel(modelo);
-    }
+ 
 }
