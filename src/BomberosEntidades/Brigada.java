@@ -79,7 +79,7 @@ public class Brigada {
 
     @Override
     public String toString() {
-        return nombreBrigada;
+        return  nombreBrigada +" "+ especialidad ;
     }
   
        public boolean equals(Object obj) {

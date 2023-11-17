@@ -138,8 +138,8 @@ public class SiniestrosData {
                 int brigadaCod = rs.getInt("codBrigada");
 
                 Brigada codigoBrigada = bd.buscarBrigadaPorId(brigadaCod);
-
-                Integer fechaResolucion = rs.getInt("fecha_resol");// puede o no puede estar
+                LocalDate fechaResolucion = rs.getDate("fecha_resol") != null ? rs.getDate("fecha_resol").toLocalDate() : null;
+                //Integer fechaResolucion = rs.getInt("fecha_resol");// puede o no puede estar
                 Integer puntuacion = rs.getInt("puntuacion");//puede o no puede
                 if (fechaResolucion != null && puntuacion != null) {
                     Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro, coordenadaX, coordenadaY, detalles, fechaSiniestro, puntuacion, codigoBrigada);
@@ -196,7 +196,13 @@ public class SiniestrosData {
                 int brigadaCod = rs.getInt("codBrigada");
                 System.out.println(brigadaCod);
                 Brigada codigoBrigada = bd.buscarBrigadaPorId(brigadaCod);
-                LocalDate fechaResolucion = rs.getDate("fecha_resol").toLocalDate();// puede o no puede estar
+                LocalDate fechaResolucion = null;
+                if (rs.getDate("fecha_resol") != null) {
+                    fechaResolucion = rs.getDate("fecha_resol").toLocalDate();
+                }
+
+                // LocalDate fechaResolucion = rs.getDate("fecha_resol") != null ? rs.getDate("fecha_resol").toLocalDate() : null;
+                // LocalDate fechaResolucion = rs.getDate("fecha_resol").toLocalDate();// puede o no puede estar
                 Integer puntuacion = rs.getInt("puntuacion");//puede o no puede
                 if (fechaResolucion != null && puntuacion != null) {
                     Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro, coordenadaX, coordenadaY, detalles, fechaSiniestro, puntuacion, codigoBrigada);
