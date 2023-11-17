@@ -30,11 +30,11 @@ public class BomberoMAIN {
     public static void main(String[] args) {
         
                 BrigadaData b = new BrigadaData();
-                CuartelData c1=new CuartelData();
-                Cuartel c= c1.buscarCuartel(8);
-                Brigada br=new Brigada("Golden retirever's", Especialidad.Incendios,c );
-                b.agregarBrigada(br);
-        
+//                CuartelData c1=new CuartelData();
+//                Cuartel c= c1.buscarCuartel(8);
+//                Brigada br=new Brigada("Golden retirever's", Especialidad.Incendios,c );
+//                b.agregarBrigada(br);
+//        
         
 //         SiniestrosData siniestrosData = new SiniestrosData();
 //
@@ -120,12 +120,12 @@ public class BomberoMAIN {
 //            System.out.println("ya existe ese codigo");
 //        }
 //        
-//        List<Brigada> b2 = b.listarBrigadasLibres();
-//        for (Brigada siniestro : b2) {
-//            System.out.println(siniestro);
-//        }
-//        SiniestrosData s = new SiniestrosData();
-//        System.out.println(s.codigoSiniestroExiste(2));
+        List<Brigada> b2 = b.listarBrigadasLibres();
+        for (Brigada siniestro : b2) {
+            System.out.println(siniestro);
+        }
+        SiniestrosData s = new SiniestrosData();
+        System.out.println(s.codigoSiniestroExiste(2));
 //----------------------------------------------------
 //        BomberoData b1=new BomberoData();
 //        Bombero b=new Bombero(1);

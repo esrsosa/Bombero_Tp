@@ -7,10 +7,12 @@ package BomberosVistas;
 
 import BomberoAcceesoDatos.BrigadaData;
 import BomberoAcceesoDatos.CuartelData;
+import BomberosEntidades.Bombero;
 import BomberosEntidades.Cuartel;
 import BomberosEntidades.Especialidad;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 
 
 
@@ -19,9 +21,10 @@ import javax.swing.DefaultComboBoxModel;
  * @author pollo
  */
 public class Brigada extends javax.swing.JInternalFrame {
-   private CuartelData bData = new CuartelData(); 
-   private List<Cuartel> listaCuartel = bData.listaCuarteles();                 
-   DefaultComboBoxModel comboModelo = new DefaultComboBoxModel(listaCuartel.toArray());
+     DefaultTableModel modelo = new DefaultTableModel();
+   private BrigadaData bData = new BrigadaData(); 
+    List<BomberosEntidadesBrigada> listaBrigada = BrigadaData.listarBrigadasLibres();                 
+   DefaultComboBoxModel comboModelo = new DefaultComboBoxModel(BrigadaData.toArray());
    
     /**
      * Creates new form Brigada
@@ -30,6 +33,7 @@ public class Brigada extends javax.swing.JInternalFrame {
         initComponents();
         llenarTipo();
         llenarCuartel() ;
+        llenarTabla();
     }
 
     /**
@@ -187,6 +191,18 @@ public void llenarCuartel() {
     
    jCuartel.setModel(comboModelo);
     }
+
+private void llenarTabla() {
+        modelo.setRowCount(0);
+        listaBrigada = bData.listarBrigadasLibres();
+        for (BomberosEntidades.Brigada aux : listaBrigada) {
+            
+              
+                    modelo.addRow(new Object[]{aux.getNombreBrigada(), aux.getEspecialidad(), aux.getCodBrigada()});
+                }
+            }
+        
+    
 }
 
 

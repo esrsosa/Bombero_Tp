@@ -20,6 +20,12 @@ public class Brigada {
     private Especialidad especialidad;
     private Cuartel nro_cuartel; //Relacion con cuartel
     List<Bombero> bomberos= new ArrayList(4);//Relacion con bombero
+
+    public Brigada(int codBrigada, String nombreBrigada, Especialidad especialidad) {
+        this.codBrigada = codBrigada;
+        this.nombreBrigada = nombreBrigada;
+        this.especialidad = especialidad;
+    }
     public Brigada() {
     }
 
