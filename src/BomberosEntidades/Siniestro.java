@@ -6,6 +6,7 @@
 package BomberosEntidades;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -16,15 +17,15 @@ public class Siniestro {
     
     private int codigo;
     private Especialidad tipoSiniestro;
-    private LocalDate fechaSiniestro; // localdatetime
+    private LocalDateTime fechaSiniestro; // localdatetime
     private int coordenadaX;
     private int coordenadaY;
     private String detalles;
-    private LocalDate fechaResolucion;
+    private LocalDateTime fechaResolucion;
     private int calificacion;
     private Brigada codigoBrigada;//Relacion con Brigada
 
-    public Siniestro(Especialidad tipoSiniestro, LocalDate fechaSiniestro, int coordenadaX, int coordenadaY, String detalles) {
+    public Siniestro(Especialidad tipoSiniestro, LocalDateTime fechaSiniestro, int coordenadaX, int coordenadaY, String detalles) {
         this.tipoSiniestro = tipoSiniestro;
         this.fechaSiniestro = fechaSiniestro;
         this.coordenadaX = coordenadaX;
@@ -33,7 +34,7 @@ public class Siniestro {
     }
 
     
-    public Siniestro(Especialidad tipoSiniestro, LocalDate fechaSiniestro, int coordenadaX, int coordenadaY, String detalles, Brigada codigoBrigada) {
+    public Siniestro(Especialidad tipoSiniestro, LocalDateTime fechaSiniestro, int coordenadaX, int coordenadaY, String detalles, Brigada codigoBrigada) {
         this.tipoSiniestro = tipoSiniestro;
         this.fechaSiniestro = fechaSiniestro;
         this.coordenadaX = coordenadaX;
@@ -42,7 +43,7 @@ public class Siniestro {
         this.codigoBrigada = codigoBrigada;
     }
 
-    public Siniestro(int codigo, Especialidad tipoSiniestro, LocalDate fechaSiniestro, int coordenadaX, int coordenadaY, String detalles, Brigada codigoBrigada) {
+    public Siniestro(int codigo, Especialidad tipoSiniestro, LocalDateTime fechaSiniestro, int coordenadaX, int coordenadaY, String detalles, Brigada codigoBrigada) {
         this.codigo = codigo;
         this.tipoSiniestro = tipoSiniestro;
         this.fechaSiniestro = fechaSiniestro;
@@ -52,7 +53,7 @@ public class Siniestro {
         this.codigoBrigada = codigoBrigada;
     }
 
-    public Siniestro(int codigo, Especialidad tipoSiniestro, LocalDate fechaSiniestro, int coordenadaX, int coordenadaY, String detalles, LocalDate fechaResolucion, int calificacion, Brigada codigoBrigada) {
+    public Siniestro(int codigo, Especialidad tipoSiniestro, LocalDateTime fechaSiniestro, int coordenadaX, int coordenadaY, String detalles, LocalDateTime fechaResolucion, int calificacion, Brigada codigoBrigada) {
         this.codigo = codigo;
         this.tipoSiniestro = tipoSiniestro;
         this.fechaSiniestro = fechaSiniestro;
@@ -66,7 +67,7 @@ public class Siniestro {
 
 
 
-    public Siniestro(int codigo, LocalDate fechaResolucion, int calificacion) {
+    public Siniestro(int codigo, LocalDateTime fechaResolucion, int calificacion) {
         this.codigo = codigo;
         this.fechaResolucion = fechaResolucion;
         this.calificacion = calificacion;
@@ -107,11 +108,11 @@ public class Siniestro {
         this.tipoSiniestro = tipoSiniestro;
     }
 
-    public LocalDate getFechaSiniestro() {
+    public LocalDateTime getFechaSiniestro() {
         return fechaSiniestro;
     }
 
-    public void setFechaSiniestro(LocalDate fechaSiniestro) {
+    public void setFechaSiniestro(LocalDateTime fechaSiniestro) {
         this.fechaSiniestro = fechaSiniestro;
     }
 
@@ -141,11 +142,11 @@ public class Siniestro {
         this.detalles = detalles;
     }
 
-    public LocalDate getFechaResolucion() {
+    public LocalDateTime getFechaResolucion() {
         return fechaResolucion;
     }
 
-    public void setFechaResolucion(LocalDate fechaResolucion) {
+    public void setFechaResolucion(LocalDateTime fechaResolucion) {
         this.fechaResolucion = fechaResolucion;
     }
 
