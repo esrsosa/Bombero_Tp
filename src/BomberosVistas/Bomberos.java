@@ -53,6 +53,7 @@ public class Bomberos extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu11 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
@@ -154,6 +155,15 @@ public class Bomberos extends javax.swing.JFrame {
         jMenuBar1.add(jMenu5);
 
         jMenu11.setText("Distancia");
+
+        jMenuItem8.setText("Calcular distancia");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem8);
+
         jMenuBar1.add(jMenu11);
 
         setJMenuBar(jMenuBar1);
@@ -229,6 +239,15 @@ public class Bomberos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+          Escritorio.removeAll();
+        Escritorio.repaint();
+        CalcularDistancia calcular = new CalcularDistancia();
+          Escritorio.add(calcular);
+        calcular.setVisible(true);
+        Escritorio.moveToFront(calcular);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -288,5 +307,6 @@ public class Bomberos extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     // End of variables declaration//GEN-END:variables
 }
