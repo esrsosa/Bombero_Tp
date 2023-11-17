@@ -5,37 +5,49 @@
  */
 package BomberosVistas;
 
+import BomberoAcceesoDatos.BomberoData;
 import BomberoAcceesoDatos.BrigadaData;
-import BomberoAcceesoDatos.CuartelData;
 import BomberosEntidades.Bombero;
-import BomberosEntidades.Cuartel;
-import BomberosEntidades.Especialidad;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
-
-
+import javax.swing.table.TableModel;
 
 /**
  *
  * @author pollo
  */
 public class Brigada extends javax.swing.JInternalFrame {
-     DefaultTableModel modelo = new DefaultTableModel();
-   private BrigadaData bData = new BrigadaData(); 
-    List<BomberosEntidadesBrigada> listaBrigada = BrigadaData.listarBrigadasLibres();                 
-   DefaultComboBoxModel comboModelo = new DefaultComboBoxModel(BrigadaData.toArray());
-   
+
+    private BomberoData bomberodata = new BomberoData();
+    private Bombero bomberoActual = null;
+    private BrigadaData bData = new BrigadaData();
+    DefaultTableModel modelo = new DefaultTableModel();
+    private List<BomberosEntidades.Brigada> listaBrigadas = bData.listarBrigadasLibres();
+    DefaultComboBoxModel comboModelo = new DefaultComboBoxModel(listaBrigadas.toArray());
+    List<Bombero> listarBomberos = bomberodata.listaBomberos();
+    List<BomberosEntidades.Brigada> brigadas = bData.listarBrigadasLibres();
+
     /**
      * Creates new form Brigada
      */
     public Brigada() {
         initComponents();
-        llenarTipo();
-        llenarCuartel() ;
+//        llenarTipo();
+        ArmarTabla();
+        llenarCuartel();
         llenarTabla();
     }
 
+    private void ArmarTabla() {
+        modelo.addColumn("Dni");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Brigada");
+        jTable1.setModel(comboModelo);
+    }
+
+    //
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -182,27 +194,24 @@ public class Brigada extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
-public void llenarTipo() {
-        for (Especialidad tipo : Especialidad.values()) {
-            jCtipo.addItem(tipo.getTipoEspecialidades());
-        }
-    }
-public void llenarCuartel() {
-    
-   jCuartel.setModel(comboModelo);
+//public void llenarTipo() {
+//        for (Especialidad tipo : Especialidad.values()) {
+//            jCtipo.addItem(tipo.getTipoEspecialidades());
+//        }
+//    }
+
+    public void llenarCuartel() {
     }
 
-private void llenarTabla() {
+    private void llenarTabla() {
         modelo.setRowCount(0);
-        listaBrigada = bData.listarBrigadasLibres();
-        for (BomberosEntidades.Brigada aux : listaBrigada) {
-            
-              
-                    modelo.addRow(new Object[]{aux.getNombreBrigada(), aux.getEspecialidad(), aux.getCodBrigada()});
+        listarBomberos = bomberodata.listaBomberos();
+        for (Bombero aux : listarBomberos) {
+            for (BomberosEntidades.Brigada tipo : brigadas) {
+                if (aux.getBrigada().getCodBrigada() == tipo.getCodBrigada()) {
+                    modelo.addRow(new Object[]{aux.getDni(), aux.getApellido(), aux.getNombre(), tipo.getNombreBrigada()});
                 }
             }
-        
-    
-}
+        }
 
 
