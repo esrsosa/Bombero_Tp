@@ -103,13 +103,13 @@ public class BomberoMAIN {
 //        BrigadaData b = new BrigadaData();
 //        CuartelData c = new CuartelData();
 //  
-//        if (c.codCuartelExiste(2)&& b.codBrigadaExiste(5)) {
+//        if (c.codCuartelExiste(2)) {
 //            b.asignarBrigadaAcuartel(5, 2);
 //            System.out.println("exito");
 //        } else {
 //            System.out.println("error");
 //        }
-        //Brigada b1 = new Brigada(5, "sa", Especialidad.Rescate);
+//        Brigada b1 = new Brigada(5, "sa", Especialidad.Rescate);
 //        if (!b.codBrigadaExiste(b1.getCodBrigada())) {
 //            b.agregarBrigada(b1);
 //        }else{

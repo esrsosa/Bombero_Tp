@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class BomberoData {
 
+    BrigadaData bd = new BrigadaData();
     private Connection con = null;
 
     public BomberoData() {
@@ -36,7 +37,6 @@ public class BomberoData {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, dni);
             ResultSet rs = ps.executeQuery();
-
             if (rs.next()) {
                 bombero = new Bombero();
                 bombero.setDni(rs.getString("dni"));
@@ -45,8 +45,10 @@ public class BomberoData {
                 bombero.setCelular(rs.getString("celular"));
                 bombero.setFecha_nac(rs.getDate("fecha_nac").toLocalDate());
                 bombero.setGrupSanguineo(rs.getString("grupSanguineo"));
-                Brigada codBrigada =(Brigada) rs.getObject("codBrigada"); //No estoy seguro si funciona
-                bombero.setBrigada(codBrigada);
+                int codBrigada = rs.getInt("codBrigada");
+                Brigada brigada = new Brigada();
+                brigada.setCodBrigada(codBrigada);
+                bombero.setBrigada(brigada);
             }
             ps.close();
         } catch (SQLException ex) {
@@ -66,7 +68,8 @@ public class BomberoData {
             ps.setString(3, bombero.getGrupSanguineo());
             ps.setDate(4, Date.valueOf(bombero.getFecha_nac()));
             ps.setString(5, bombero.getCelular());
-            ps.setObject(6, bombero.getBrigada());
+            int codigoBrigada = bombero.getBrigada().getCodBrigada();
+            ps.setObject(6, codigoBrigada);
             ps.setString(7, bombero.getDni());
             int exito = ps.executeUpdate();
             if (exito == 1) {
@@ -85,7 +88,6 @@ public class BomberoData {
             }
         }
     }
-
     public List<Bombero> listaBomberos() {
         ArrayList<Bombero> bomberos = new ArrayList<>();
         String sql = "SELECT dni, nombre, apellido, grupSanguineo, fecha_nac, celular, codBrigada, estado FROM bombero";
@@ -103,7 +105,9 @@ public class BomberoData {
                 bombero.setFecha_nac(fechaNac);
                 bombero.setCelular(rs.getString("celular"));
                 bombero.setEstado(rs.getBoolean("estado"));
-                Brigada codBrigada =(Brigada) rs.getObject("codBrigada"); //No estoy seguro si funciona
+                int numBrigada = rs.getInt("codBrigada");
+                Brigada codBrigada = bd.buscarBrigadaPorId(numBrigada);
+//                Brigada codBrigada =(Brigada) rs.getObject("codBrigada"); //No estoy seguro si funciona
                 bombero.setBrigada(codBrigada);
                 if (bombero.isEstado()) {
                     bomberos.add(bombero);
@@ -118,19 +122,19 @@ public class BomberoData {
         return bomberos;
     }
 
-    public void agregarBombero(Bombero bombero) { //probado
-        String sql = "INSERT INTO bombero ( dni, nombre, apellido, grupSanguineo, fecha_nac, celular, codBrigada, estado) VALUES ( ?, ?, ?, ?, ?, ?,?,?)";
+    public void agregarBombero(Bombero bombero) { //probado por arian :)
+        String sql = "INSERT INTO bombero ( dni, nombre, apellido, celular, fecha_nac, grupSanguineo, codBrigada, estado) VALUES ( ?, ?, ?, ?, ?, ?,?,?)";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
-
             ps.setString(1, bombero.getDni());
             ps.setString(2, bombero.getNombre());
             ps.setString(3, bombero.getApellido());
             ps.setString(4, bombero.getGrupSanguineo());
             ps.setDate(5, Date.valueOf(bombero.getFecha_nac()));
             ps.setString(6, bombero.getCelular());
-            ps.setObject(7, bombero.getBrigada());
+            int codigoBrigada = bombero.getBrigada().getCodBrigada();
+            ps.setInt(7, codigoBrigada);
             ps.setBoolean(8, bombero.isEstado());
             int exito = ps.executeUpdate();
             if (exito == 1) {
@@ -207,6 +211,5 @@ public class BomberoData {
             return false;
         }
     }
-    
-    
+
 }
