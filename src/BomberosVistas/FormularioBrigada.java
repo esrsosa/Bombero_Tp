@@ -49,10 +49,9 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
     }
 
     private void ArmarTabla() {
-        modelo.addColumn("Dni");
-        modelo.addColumn("Apellido");
+        modelo.addColumn("Codigo");
         modelo.addColumn("Nombre");
-        modelo.addColumn("Brigada");
+        modelo.addColumn("Especialidad");
         jTabla.setModel(modelo);
     }
 
@@ -74,7 +73,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTabla = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        liompiarfasasdasd = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -104,7 +103,12 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
 
         jButton1.setText("Selecionar");
 
-        jButton2.setText("Limpiar");
+        liompiarfasasdasd.setText("Limpiar");
+        liompiarfasasdasd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                liompiarfasasdasdActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Nuevo");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +121,12 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
 
         jButton5.setText("Salir");
 
+        jCtipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCtipoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,7 +135,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(liompiarfasasdasd)
                         .addGap(18, 18, 18)
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
@@ -179,7 +189,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(liompiarfasasdasd)
                     .addComponent(jButton3)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
@@ -192,24 +202,37 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         try {
-
-            Cuartel cuartel ;
+            Cuartel cuartel;
             Brigada brigada;
             String nombre = jtNombre.getText();
             Especialidad esp = (Especialidad) jCtipo.getSelectedItem();
             cuartel = (Cuartel) jcCuartel.getSelectedItem();
-             brigada = new Brigada(nombre, esp, cuartel);
-             bData.agregarBrigada(brigada);
-             llenarTabla();
+            brigada = new Brigada(nombre, esp, cuartel);
+            bData.agregarBrigada(brigada);
+            llenarTabla();
+
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "No debe haber campos vacios ");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jCtipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCtipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCtipoActionPerformed
+
+    private void liompiarfasasdasdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_liompiarfasasdasdActionPerformed
+        // TODO add your handling code here:
+limpiarCampos();
+
+    }//GEN-LAST:event_liompiarfasasdasdActionPerformed
+    private void limpiarCampos() {
+        jtNombre.setText("");
+        jCtipo.setSelectedIndex(0);
+        jcCuartel.setSelectedIndex(0);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -222,6 +245,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTabla;
     private javax.swing.JComboBox<Cuartel> jcCuartel;
     private javax.swing.JTextField jtNombre;
+    private javax.swing.JButton liompiarfasasdasd;
     // End of variables declaration//GEN-END:variables
 public void llenarTipo() {
         for (Especialidad tipo : Especialidad.values()) {
@@ -235,13 +259,9 @@ public void llenarTipo() {
 
     private void llenarTabla() {
         modelo.setRowCount(0);
-        listarBomberos = bomberodata.listaBomberos();
-        for (Bombero aux : listarBomberos) {
-            for (BomberosEntidades.Brigada tipo : brigadas) {
-                if (aux.getBrigada().getCodBrigada() == tipo.getCodBrigada()) {
-                    modelo.addRow(new Object[]{aux.getDni(), aux.getApellido(), aux.getNombre(), tipo.getNombreBrigada()});
-                }
-            }
+        for (Brigada aux : brigadas) {
+            modelo.addRow(new Object[]{aux.getCodBrigada(), aux.getNombreBrigada(), aux.getEspecialidad()});
         }
+
     }
 }
