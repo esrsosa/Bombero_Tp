@@ -25,6 +25,7 @@ public class Siniestros extends javax.swing.JInternalFrame {
     private Siniestro SinniestroActual = null;
     private BrigadaData bData = new BrigadaData();
         private List<Brigada> listaBrigadas = bData.listarBrigadasLibres();
+        
       DefaultComboBoxModel comboModelo = new DefaultComboBoxModel(listaBrigadas.toArray());
     /**
      * Creates new form Siniestros
