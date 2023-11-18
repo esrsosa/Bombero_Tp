@@ -44,11 +44,11 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
         jbBuscar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jBGuardar = new javax.swing.JButton();
+        jbLimpiar = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        jbDarBaja = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -62,7 +62,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
         jtCoordenadaY = new javax.swing.JTextField();
         jtTelefono = new javax.swing.JTextField();
         jtCorreo = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jbDarAlta = new javax.swing.JButton();
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -84,34 +84,34 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("Guardar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jBGuardar.setText("Guardar");
+        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jBGuardarActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Limpiar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jbLimpiar.setText("Limpiar");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jbLimpiarActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Salir");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jbSalirActionPerformed(evt);
             }
         });
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel7.setText("FORMULARIO DE CUARTEL");
 
-        jButton4.setText("Dar de baja");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jbDarBaja.setText("Dar de baja");
+        jbDarBaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jbDarBajaActionPerformed(evt);
             }
         });
 
@@ -191,10 +191,10 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Dar de Alta");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbDarAlta.setText("Dar de Alta");
+        jbDarAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbDarAltaActionPerformed(evt);
             }
         });
 
@@ -220,15 +220,15 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
                         .addGap(157, 157, 157))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(78, 78, 78)
-                .addComponent(jButton3)
+                .addComponent(jbLimpiar)
                 .addGap(57, 57, 57)
-                .addComponent(jButton2)
+                .addComponent(jBGuardar)
                 .addGap(73, 73, 73)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jbDarAlta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbDarBaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
+                .addComponent(jbSalir)
                 .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
@@ -246,22 +246,23 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3)
-                            .addComponent(jButton5))
+                            .addComponent(jBGuardar)
+                            .addComponent(jbLimpiar)
+                            .addComponent(jbSalir))
                         .addGap(32, 32, 32))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jbDarAlta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4)
+                        .addComponent(jbDarBaja)
                         .addContainerGap())))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 //Probado por arian  ;)
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         // TODO add your handling code here:
+        
         try {
             String nombre = jtNombre.getText();
             String direccion = jtDireccion.getText();
@@ -276,7 +277,8 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
             int coordenaday = Integer.parseInt(jtCoordenadaY.getText());
 
             if (cuartelActual == null) {
-                cuartelActual = new Cuartel(nombre, direccion, coordenadax, coordenaday, telefono, correo);
+                int valor = 1;
+                cuartelActual = new Cuartel(nombre, direccion, coordenadax, coordenaday, telefono, correo, valor);
                 cuartelData.agregarCuartel(cuartelActual);
 
             }
@@ -285,18 +287,18 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Debe ingresar numeros validos ");
         }
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jBGuardarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
         // TODO add your handling code here:
         Limpiar();
         cuartelActual = null;
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jbLimpiarActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         // TODO add your handling code here:
         dispose();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
@@ -318,7 +320,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jbDarBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDarBajaActionPerformed
         // TODO add your handling code here:
         try {
             int id2 = jTable.getSelectedRow();
@@ -332,9 +334,9 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Debe ingresar un id válido");
         }
         llenarTabla();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jbDarBajaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbDarAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDarAltaActionPerformed
         // TODO add your handling code here:
          try {
             int id2 = jTable.getSelectedRow();
@@ -348,15 +350,11 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Debe ingresar un id válido");
         }
         llenarTabla();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbDarAltaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jBGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -368,6 +366,10 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable;
     private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbDarAlta;
+    private javax.swing.JButton jbDarBaja;
+    private javax.swing.JButton jbLimpiar;
+    private javax.swing.JButton jbSalir;
     private javax.swing.JTextField jtCoordenadaX;
     private javax.swing.JTextField jtCoordenadaY;
     private javax.swing.JTextField jtCorreo;
@@ -381,7 +383,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
         listaCuarteles = cuartelData.listaCuarteles();
         
         for (Cuartel aux : listaCuarteles) {
-            if(aux.isActivo()){
+            if(aux.getActivo()==1){
                 Activo = "Activo";
             }else{
                 Activo = "Inactivo";

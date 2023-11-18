@@ -58,7 +58,7 @@ public class CuartelData {
     }
     
     public void agregarCuartel(Cuartel cuartel) {
-        String sql = "INSERT INTO cuartel (nombre_cuartel, direccion, coord_x, coord_y, telefono, correo) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO cuartel (nombre_cuartel, direccion, coord_x, coord_y, telefono, correo, activo) VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -68,6 +68,7 @@ public class CuartelData {
             ps.setInt(4, cuartel.getCoordenaday());
             ps.setString(5, cuartel.getTelefono());
             ps.setString(6, cuartel.getCorreoElectronico());
+            ps.setInt(7, 1);
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "cuartel agregado exitosamente.");
@@ -103,7 +104,7 @@ public class CuartelData {
                 cuartel.setCoordenaday(rs.getInt("coord_y"));
                 cuartel.setTelefono(rs.getString("telefono"));
                 cuartel.setCorreoElectronico(rs.getString("correo"));
-                cuartel.setActivo(rs.getBoolean("activo"));
+                cuartel.setActivo(rs.getInt("activo"));
                 cuarteles.add(cuartel);
             }
             ps.close();

@@ -20,11 +20,21 @@ public class Cuartel  {
     private int coordenaday;
     private String telefono;
     private String correoElectronico;
-    private boolean activo;
+    private int activo;
     private List<Brigada> brigadas; // Relacion con Brigada
     
 
     public Cuartel() {
+    }
+
+    public Cuartel(String nombre, String domicilio, int coordenadax, int coordenaday, String telefono, String correoElectronico, int activo) {
+        this.nombre = nombre;
+        this.domicilio = domicilio;
+        this.coordenadax = coordenadax;
+        this.coordenaday = coordenaday;
+        this.telefono = telefono;
+        this.correoElectronico = correoElectronico;
+        this.activo = activo;
     }
 
     public Cuartel(String nombre, String domicilio, int coordenadax, int coordenaday, String telefono, String correoElectronico) {
@@ -47,11 +57,15 @@ public class Cuartel  {
         this.correoElectronico = correoElectronico;
     }
 
-    public boolean isActivo() {
+    public int isActivo() {
         return activo;
     }
 
-    public void setActivo(boolean activo) {
+    public int getActivo() {
+        return activo;
+    }
+
+    public void setActivo(int activo) {
         this.activo = activo;
     }
 

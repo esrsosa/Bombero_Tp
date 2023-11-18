@@ -23,8 +23,8 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
     private SiniestrosData sd = new SiniestrosData();
     private CuartelData cd = new CuartelData();
     private List<Siniestro> listaSiniestros = sd.listarSiniestroSinResolver();
-    private List <Cuartel> listaCuartel = cd.listaCuarteles();
-    
+    private List<Cuartel> listaCuartel = cd.listaCuarteles();
+
     DefaultComboBoxModel comboModelo = new DefaultComboBoxModel(listaSiniestros.toArray());
     DefaultTableModel modelo = new DefaultTableModel();
     DefaultTableModel modelo2 = new DefaultTableModel();
@@ -69,11 +69,14 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jCuartel = new javax.swing.JTable();
+        jtCuartel = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jSiniestro = new javax.swing.JTable();
+        jtSiniestro = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jbSeleccionar = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jtResultado = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -120,7 +123,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Cuartel");
 
-        jCuartel.setModel(new javax.swing.table.DefaultTableModel(
+        jtCuartel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -131,9 +134,9 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jCuartel);
+        jScrollPane3.setViewportView(jtCuartel);
 
-        jSiniestro.setModel(new javax.swing.table.DefaultTableModel(
+        jtSiniestro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -144,11 +147,20 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(jSiniestro);
+        jScrollPane4.setViewportView(jtSiniestro);
 
         jLabel9.setText("Cuartel");
 
         jLabel10.setText("Siniestro");
+
+        jbSeleccionar.setText("Seleccionar");
+        jbSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSeleccionarActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Seleccione un siniestro ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -198,20 +210,34 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(198, 198, 198)
                         .addComponent(jLabel5)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(11, 11, 11))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(210, 210, 210))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(11, 11, 11))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(210, 210, 210))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(168, 168, 168))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(99, 99, 99)
+                        .addComponent(jtResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel9)
-                .addGap(211, 211, 211))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(211, 211, 211))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jbSeleccionar)
+                        .addGap(192, 192, 192))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,9 +258,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
                             .addComponent(x1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
                             .addComponent(x2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
@@ -251,11 +275,20 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDistancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
+                    .addComponent(jDistancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbSeleccionar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -271,14 +304,46 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jbSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSeleccionarActionPerformed
+        // TODO add your handling code here:
+
+        try {
+            double distanciaMinima = Double.MAX_VALUE;
+            int fila2 = jtSiniestro.getRowCount();
+            Object valorCoordx = jtSiniestro.getValueAt(fila2, 1);
+            Object valorCoordy = jtSiniestro.getValueAt(fila2, 2);
+
+            int X1 = Integer.parseInt(valorCoordx.toString());
+            int Y1 = Integer.parseInt(valorCoordy.toString());
+
+
+            for(Cuartel cuartel:listaCuartel){
+                
+                int X2 = cuartel.getCoordenadax();
+                int Y2 = cuartel.getCoordenaday();
+                
+                double  distancia = Math.sqrt(Math.pow(X2 - X1, 2) + Math.pow(Y2 - Y1, 2));
+                
+            if(distancia < distanciaMinima)
+                distanciaMinima =  distancia;
+            }
+        
+            
+
+            jtResultado.setText("" + distanciaMinima);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Los datos tomados del sistema son incorrectos ");
+        }
+    }//GEN-LAST:event_jbSeleccionarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JTable jCuartel;
     private javax.swing.JTextField jDistancia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -291,9 +356,12 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jSiniestro;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JButton jbSeleccionar;
+    private javax.swing.JTable jtCuartel;
+    private javax.swing.JTextField jtResultado;
+    private javax.swing.JTable jtSiniestro;
     private javax.swing.JTextField x1;
     private javax.swing.JTextField x2;
     private javax.swing.JTextField y1;
@@ -306,41 +374,49 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
             int X2 = Integer.parseInt(x2.getText().trim());
             int Y2 = Integer.parseInt(y2.getText().trim());
 
-            double distancia = Math.sqrt(Math.pow(X2 - X1, 2) + Math.pow(Y2 - Y1, 2));
+            if (x1.getText() != null && y2.getText() != null && x2.getText() != null && y2.getText() != null) {
 
-            jDistancia.setText("" + distancia);
+                double distancia = Math.sqrt(Math.pow(X2 - X1, 2) + Math.pow(Y2 - Y1, 2));
+
+                jDistancia.setText("" + distancia);
+            } else {
+                JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
+            }
         } catch (NumberFormatException ex) {
 
-            JOptionPane.showMessageDialog(this, "Error: Ingresa números válidos en los campos." + ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Error: Ingresa números válidos en los campos.");
         }
     }
-  
-  public void llenarTablaSiniestro() {
+
+    public void llenarTablaSiniestro() {
         modelo.setRowCount(0);
-          
+
         for (Siniestro aux : listaSiniestros) {
-            
-            modelo.addRow(new Object[]{ aux.getDetalles(), aux.getCoordenadaX(), aux.getCoordenadaY()});
+
+            modelo.addRow(new Object[]{aux.getDetalles(), aux.getCoordenadaX(), aux.getCoordenadaY()});
         }
     }
-public void llenarTablaCuartel() {
+
+    public void llenarTablaCuartel() {
         modelo.setRowCount(0);
-          
+
         for (Cuartel aux : listaCuartel) {
-            
-            modelo2.addRow(new Object[]{ aux.getNombre(), aux.getCoordenadax(), aux.getCoordenaday()});
+
+            modelo2.addRow(new Object[]{aux.getNombre(), aux.getCoordenadax(), aux.getCoordenaday()});
         }
     }
-  public void armarTabla2(){
-      modelo2.addColumn("Cuartel");
-      modelo2.addColumn("CoordenadaX");
-      modelo2.addColumn("CoordenadaY");
-      jCuartel.setModel(modelo2);
-  }
-  public void armarTabla(){
-      modelo.addColumn("Tipo de Siniestro");
-      modelo.addColumn("CoordenadaX");
-      modelo.addColumn("CoordenadaY");
-      jSiniestro.setModel(modelo);
-  }
+
+    public void armarTabla2() {
+        modelo2.addColumn("Cuartel");
+        modelo2.addColumn("CoordenadaX");
+        modelo2.addColumn("CoordenadaY");
+        jtCuartel.setModel(modelo2);
+    }
+
+    public void armarTabla() {
+        modelo.addColumn("Tipo de Siniestro");
+        modelo.addColumn("CoordenadaX");
+        modelo.addColumn("CoordenadaY");
+        jtSiniestro.setModel(modelo);
+    }
 }
