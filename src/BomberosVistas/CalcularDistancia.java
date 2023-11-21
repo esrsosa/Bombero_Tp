@@ -309,26 +309,28 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
 
         try {
             double distanciaMinima = Double.MAX_VALUE;
-            int fila2 = jtSiniestro.getRowCount();
+//            int fila2 = jtSiniestro.getRowCount();
+//            Object valorCoordx = jtSiniestro.getValueAt(fila2, 1);
+//            Object valorCoordy = jtSiniestro.getValueAt(fila2, 2);
+            int fila2 = jtSiniestro.getRowCount() - 1; // Ajusta el índice de fila
+
             Object valorCoordx = jtSiniestro.getValueAt(fila2, 1);
             Object valorCoordy = jtSiniestro.getValueAt(fila2, 2);
 
             int X1 = Integer.parseInt(valorCoordx.toString());
             int Y1 = Integer.parseInt(valorCoordy.toString());
 
+            for (Cuartel cuartel : listaCuartel) {
 
-            for(Cuartel cuartel:listaCuartel){
-                
                 int X2 = cuartel.getCoordenadax();
                 int Y2 = cuartel.getCoordenaday();
-                
-                double  distancia = Math.sqrt(Math.pow(X2 - X1, 2) + Math.pow(Y2 - Y1, 2));
-                
-            if(distancia < distanciaMinima)
-                distanciaMinima =  distancia;
+
+                double distancia = Math.sqrt(Math.pow(X2 - X1, 2) + Math.pow(Y2 - Y1, 2));
+
+                if (distancia < distanciaMinima) {
+                    distanciaMinima = distancia;
+                }
             }
-        
-            
 
             jtResultado.setText("" + distanciaMinima);
         } catch (NumberFormatException ex) {

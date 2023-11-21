@@ -16,6 +16,7 @@ import BomberosEntidades.Especialidad;
 import BomberosEntidades.Siniestro;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -93,14 +94,15 @@ public class BomberoMAIN {
 //siniestro.setCodigoBrigada(1); // Ejemplo de código de brigada
 //
 //
-//        Siniestro s1 = new Siniestro(Especialidad.Incendios, LocalDate.now().minusDays(2), 33, 02, "xx", 2);
-//        SiniestrosData s = new SiniestrosData();
-//        s.agregarSiniestro(s1);
-//        List<Siniestro> siniestrosRecientes = s.listarSiniestrosRecientes();
-//        for (Siniestro siniestro : siniestrosRecientes) {
-//            System.out.println(siniestro);
-//        }
-//        
+      //  Siniestro s1 = new Siniestro(Especialidad.Incendios, LocalDate.now().minusDays(2), 33, 02, "xx", 2);
+        Siniestro s1 = new Siniestro(Especialidad.Incendios, LocalDateTime.now().minusDays(2), 33, 02, "xx");
+        SiniestrosData s = new SiniestrosData();
+        s.agregarSiniestro(s1);
+        List<Siniestro> siniestrosRecientes = s.listarSiniestrosRecientes();
+        for (Siniestro siniestro : siniestrosRecientes) {
+            System.out.println(siniestro);
+        }
+        
 ////
 
 //------------------------------------------------------------------------------
