@@ -38,6 +38,8 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
         armarTabla2();
         llenarTablaCuartel();
         llenarTablaSiniestro();
+        jDistancia.setEnabled(false);
+        jtResultado.setEnabled(false);
     }
 
     /**
@@ -77,6 +79,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
         jbSeleccionar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jtResultado = new javax.swing.JTextField();
+        JLimpiar = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -162,6 +165,13 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Seleccione un siniestro ");
 
+        JLimpiar.setText("Limpiar");
+        JLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JLimpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -174,7 +184,8 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
                                 .addGap(28, 28, 28)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
-                                    .addComponent(jLabel1)))
+                                    .addComponent(jLabel1)
+                                    .addComponent(JLimpiar)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(104, 104, 104)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -211,33 +222,30 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
                         .addGap(198, 198, 198)
                         .addComponent(jLabel5)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(11, 11, 11))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addGap(210, 210, 210))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(168, 168, 168))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addComponent(jtResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(210, 210, 210))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(211, 211, 211))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jbSeleccionar)
-                        .addGap(192, 192, 192))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(133, 133, 133)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jbSeleccionar))
+                                    .addComponent(jtResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(168, 168, 168)))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,17 +287,18 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
                     .addComponent(jDistancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbSeleccionar)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
-                            .addComponent(jButton3)))
+                            .addComponent(jButton3)
+                            .addComponent(JLimpiar)))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jtResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbSeleccionar)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -306,40 +315,56 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
 
     private void jbSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSeleccionarActionPerformed
         // TODO add your handling code here:
-
         try {
-            double distanciaMinima = Double.MAX_VALUE;
-//            int fila2 = jtSiniestro.getRowCount();
-//            Object valorCoordx = jtSiniestro.getValueAt(fila2, 1);
-//            Object valorCoordy = jtSiniestro.getValueAt(fila2, 2);
-            int fila2 = jtSiniestro.getRowCount() - 1; // Ajusta el índice de fila
-
-            Object valorCoordx = jtSiniestro.getValueAt(fila2, 1);
-            Object valorCoordy = jtSiniestro.getValueAt(fila2, 2);
-
-            int X1 = Integer.parseInt(valorCoordx.toString());
-            int Y1 = Integer.parseInt(valorCoordy.toString());
-
-            for (Cuartel cuartel : listaCuartel) {
-
-                int X2 = cuartel.getCoordenadax();
-                int Y2 = cuartel.getCoordenaday();
-
-                double distancia = Math.sqrt(Math.pow(X2 - X1, 2) + Math.pow(Y2 - Y1, 2));
-
-                if (distancia < distanciaMinima) {
-                    distanciaMinima = distancia;
+            int filaSeleccionada = jtSiniestro.getSelectedRow();
+            int filaSeleccionada2 = jtCuartel.getSelectedRow();
+            if (filaSeleccionada != -1 && filaSeleccionada2 != -1) {
+                Object valorCoordx = jtSiniestro.getValueAt(filaSeleccionada, 1);
+                Object valorCoordy = jtSiniestro.getValueAt(filaSeleccionada, 2);
+                Object nombre = jtCuartel.getValueAt(filaSeleccionada2, 0);
+                int X1 = Integer.parseInt(valorCoordx.toString());
+                int Y1 = Integer.parseInt(valorCoordy.toString());
+                double distanciaMinima = Double.MAX_VALUE;
+                for (Cuartel cuartel : listaCuartel) {
+                    if (nombre.equals(cuartel.getNombre())) {
+                        int X2 = cuartel.getCoordenadax();
+                        int Y2 = cuartel.getCoordenaday();
+                        double distancia = Math.sqrt(Math.pow(X2 - X1, 2) + Math.pow(Y2 - Y1, 2));
+                        if (distancia < distanciaMinima) {
+                            distanciaMinima = distancia;
+                        }
+                        jtResultado.setText(String.format("%.2f", distanciaMinima) +"Km");
+                    }
                 }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Fila seleccionada invalida");
             }
 
-            jtResultado.setText("" + distanciaMinima);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Los datos tomados del sistema son incorrectos ");
         }
     }//GEN-LAST:event_jbSeleccionarActionPerformed
 
+    private void JLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JLimpiarActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_JLimpiarActionPerformed
+    public void limpiar() {
+        jtSiniestro.clearSelection();
+        jtCuartel.clearSelection();
+        jtResultado.setText(null);
+        jDistancia.setText(null);
+        jTextPane1.setText(null);
+        x1.setText(null);
+        x2.setText(null);
+        y1.setText(null);
+        y2.setText(null);
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JLimpiar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JTextField jDistancia;
@@ -379,8 +404,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
             if (x1.getText() != null && y2.getText() != null && x2.getText() != null && y2.getText() != null) {
 
                 double distancia = Math.sqrt(Math.pow(X2 - X1, 2) + Math.pow(Y2 - Y1, 2));
-
-                jDistancia.setText("" + distancia);
+                jtResultado.setText(String.format("%.2f", distancia));
             } else {
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
             }
