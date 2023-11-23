@@ -178,9 +178,10 @@ public class SiniestrosData {
     }
 
     public boolean codigoSiniestroExiste(int codigo) {
-        String sql = "SELECT 1 FROM siniestro WHERE codigo = ?";
+        String sql = "SELECT * FROM siniestro WHERE codigo = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, codigo);
+            
             ResultSet rs = ps.executeQuery();
             return rs.next();
         } catch (SQLException ex) {

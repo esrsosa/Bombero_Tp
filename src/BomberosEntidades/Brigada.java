@@ -20,6 +20,7 @@ public class Brigada {
     private Especialidad especialidad;
     private Cuartel nro_cuartel; //Relacion con cuartel
     List<Bombero> bomberos = new ArrayList(4);//Relacion con bombero
+    private boolean libre = true;
 
     public Brigada() {
     }
@@ -44,6 +45,14 @@ public class Brigada {
 
     public void setCodBrigada(int codBrigada) {
         this.codBrigada = codBrigada;
+    }
+
+    public boolean isLibre() {
+        return libre;
+    }
+
+    public void setLibre(boolean libre) {
+        this.libre = libre;
     }
 
     public String getNombreBrigada() {

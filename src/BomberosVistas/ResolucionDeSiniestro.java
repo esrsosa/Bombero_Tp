@@ -5,7 +5,9 @@
  */
 package BomberosVistas;
 
+import BomberoAcceesoDatos.BrigadaData;
 import BomberoAcceesoDatos.SiniestrosData;
+import BomberosEntidades.Brigada;
 import BomberosEntidades.Siniestro;
 import static java.lang.System.in;
 import java.sql.Timestamp;
@@ -28,6 +30,8 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
     private Siniestro siniestroActual = null;
     private DefaultTableModel modelo = new DefaultTableModel();
     List<Siniestro> listarSiniestros;
+    private BrigadaData brigadaData = new BrigadaData();
+    private List<Brigada> listaBrigada = brigadaData.listarBrigadas();
 
     public ResolucionDeSiniestro() {
         initComponents();
@@ -269,7 +273,7 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
             siniestroActual.setCalificacion(puntuacion);
 
             siniestrodata.marcarComoResuelto(siniestroActual);
-
+            
             modelo.setRowCount(0);
 
             for (Siniestro siniestro : listarSiniestros) {

@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -82,6 +83,24 @@ public class BrigadaData {
         }
     }
 
+    public List<Brigada> listarBrigadas() {
+        List<Brigada> brigadas = new ArrayList<>();
+        String sql = "SELECT * FROM brigada";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                    Brigada brigada = new Brigada();
+                    brigada.setEspecialidad(Especialidad.valueOf(rs.getString("especialidad")));
+                    brigada.setNombreBrigada(rs.getString("nombre_br"));
+                    brigada.setCodBrigada(rs.getInt("codBrigada"));
+                    brigadas.add(brigada);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al listar brigadas: " + ex.getMessage());
+        }
+        return brigadas;
+    }
+    
     public List<Brigada> listarBrigadasLibres() {
         List<Brigada> brigadas = new ArrayList<>();
         String sql = "SELECT * FROM brigada WHERE libre = 1";
@@ -99,7 +118,6 @@ public class BrigadaData {
         }
         return brigadas;
     }
-    
     public boolean estaAsignada(int codBrigada) {
         String sql = "SELECT * FROM siniestro WHERE codBrigada = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -136,5 +154,42 @@ public class BrigadaData {
         }
         return brigada; 
     }
-    
+    public void asignarBrigadaSiniestro(int codBrigada) {
+        String sql = "UPDATE brigada SET libre = 0 WHERE codBrigada = ? ";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, codBrigada);
+            int exito = ps.executeUpdate();
+            System.out.println("Brigada Asignada");
+        } catch (SQLException ex) {
+            System.out.println("Error al acceder a la tabla brigada: " + ex.getMessage());
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+    }
+    public void liberarBrigada(int codBrigada) {
+        String sql = "UPDATE brigada SET libre = 1 WHERE codBrigada = ? ";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, codBrigada);
+            int exito = ps.executeUpdate();
+            System.out.println("Brigada libre");
+        } catch (SQLException ex) {
+            System.out.println("Error al acceder a la tabla brigada: " + ex.getMessage());
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+    }
 }
