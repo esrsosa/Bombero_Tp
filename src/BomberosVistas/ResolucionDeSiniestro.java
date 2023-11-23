@@ -57,8 +57,6 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
         jFecha = new com.toedter.calendar.JDateChooser();
         jGuardar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jTCodigo = new javax.swing.JTextField();
 
         jLabel1.setText("Resolucion del Simiestero");
 
@@ -96,14 +94,6 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel4.setText("Codigo: ");
-
-        jTCodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTCodigoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -132,13 +122,9 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPunto, 0, 46, Short.MAX_VALUE)
-                                    .addComponent(jTCodigo))))
+                                .addComponent(jPunto, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -156,25 +142,17 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3)
                             .addComponent(jPunto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jGuardar)
                     .addComponent(jButton2))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCodigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTCodigoActionPerformed
 
     private void jGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGuardarActionPerformed
         Resolucion();
@@ -192,10 +170,8 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JComboBox<String> jPunto;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTCodigo;
     private javax.swing.JTable jTable;
     // End of variables declaration//GEN-END:variables
 
@@ -254,37 +230,41 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
         siniestroActual = new Siniestro();
 
         try {
-            Integer codigo = Integer.parseInt(jTCodigo.getText());
-            java.util.Date fecha = jFecha.getDate();
-
-            if (fecha == null) {
-                JOptionPane.showMessageDialog(this, "Debe ingresar una fecha.");
-                return;
+            int fila = jTable.getSelectedRow();
+            if (fila != -1) {
+                Object codigo = jTable.getValueAt(fila, 0);
+                int codigo1 = Integer.parseInt(codigo.toString());
+                java.util.Date fecha = jFecha.getDate();
+                if (fecha == null) {
+                    JOptionPane.showMessageDialog(this, "Debe ingresar una fecha.");
+                    return;
+                }
+                LocalDate fechaResolucion = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                Integer puntuacion = Integer.parseInt(Objects.requireNonNull(jPunto.getSelectedItem()).toString());
+                LocalDateTime fechaResol = fechaResolucion.atTime(LocalTime.now());
+                siniestroActual.setCodigo(codigo1);
+                siniestroActual.setFechaResolucion(fechaResol);
+                siniestroActual.setCalificacion(puntuacion);
+                siniestrodata.marcarComoResuelto(siniestroActual);
+                for (Siniestro siniestro : listarSiniestros) {
+                    if (siniestro.getCodigo() == codigo1) {
+                        brigadaData.liberarBrigada(siniestro.getCodigoBrigada().getCodBrigada());
+                    }
+                }
+                modelo.setRowCount(0);
+                for (Siniestro siniestro : listarSiniestros) {
+                    modelo.addRow(new Object[]{
+                        siniestro.getCodigo(),
+                        siniestro.getFechaResolucion(),
+                        siniestro.getTipoSiniestro(),
+                        siniestro.getCodigoBrigada(),
+                        siniestro.getDetalles()
+                    });
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Fila seleccionada invalida");
             }
 
-            LocalDate fechaResolucion = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            Integer puntuacion = Integer.parseInt(Objects.requireNonNull(jPunto.getSelectedItem()).toString());
-            
-            LocalDateTime fechaResol = fechaResolucion.atTime(LocalTime.now());
-            
-            siniestroActual.setCodigo(codigo);
-            
-            siniestroActual.setFechaResolucion(fechaResol);
-            siniestroActual.setCalificacion(puntuacion);
-
-            siniestrodata.marcarComoResuelto(siniestroActual);
-            
-            modelo.setRowCount(0);
-
-            for (Siniestro siniestro : listarSiniestros) {
-                modelo.addRow(new Object[]{
-                    siniestro.getCodigo(),
-                    siniestro.getFechaResolucion(),
-                    siniestro.getTipoSiniestro(),
-                    siniestro.getCodigoBrigada(),
-                    siniestro.getDetalles()
-                });
-            }
         } catch (NumberFormatException ex) {
 
             JOptionPane.showMessageDialog(this, "Ingrese un código y una puntuación válidos.");
