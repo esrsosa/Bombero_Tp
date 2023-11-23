@@ -38,7 +38,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
     DefaultComboBoxModel comboModelo = new DefaultComboBoxModel(listaCuartel.toArray());
     DefaultTableModel modelo2 = new DefaultTableModel();
     private SiniestrosData sn = new SiniestrosData();
-    List<Siniestro> listarSiniestro =  sn.listarSiniestroSinResolver();
+    List<Siniestro> listarSiniestro = sn.listarSiniestros();
     List<BomberosEntidades.Brigada> brigadas = bData.listarBrigadasLibres();
 
     /**
@@ -49,7 +49,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
         armarTabla2();
         llenarTipo();
         ArmarTabla();
-        llenarSiniestro();
+        llenarTablaSiniestro();
         llenarCuartel();
         llenarTabla();
     }
@@ -286,18 +286,26 @@ public void llenarTipo() {
             jCtipo.addItem(tipo);
         }
     }
-public void llenarSiniestro(){
-    for (Siniestro aux : listarSiniestro) {
-            modelo2.addRow(new Object[]{aux.getCodigo(), aux.getFechaSiniestro(), aux.getTipoSiniestro(), aux.getCodigoBrigada(), aux.getDetalles()});
+
+    public void llenarTablaSiniestro() {
+        modelo2.setRowCount(0);
+        for (Siniestro aux : listarSiniestro) {
+            Brigada b1=aux.getCodigoBrigada();
+            System.out.println(b1);
+            modelo2.addRow(new Object[]{aux.getCodigo(), aux.getFechaSiniestro(), aux.getTipoSiniestro(), aux.getDetalles()});
         }
-}
-public void armarTabla2(){
-    modelo2.addColumn("Codigo");
-    modelo2.addColumn("Fecha");
-    modelo2.addColumn("Tipo");
-    modelo2.addColumn("CodBrigada");
-    modelo2.addColumn("Detalles");
-}
+    }
+
+    public void armarTabla2() {
+
+        modelo2.addColumn("Codigo");
+        modelo2.addColumn("Fecha");
+        modelo2.addColumn("Tipo");
+        modelo2.addColumn("CodBrigada");
+        modelo2.addColumn("Detalles");
+        jTableSiniestro.setModel(modelo2);
+    }
+
     public void llenarCuartel() {
         jcCuartel.setModel(comboModelo);
     }

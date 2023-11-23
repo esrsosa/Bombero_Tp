@@ -38,8 +38,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
         armarTabla2();
         llenarTablaCuartel();
         llenarTablaSiniestro();
-        jDistancia.setEnabled(false);
-        jtResultado.setEnabled(false);
+
     }
 
     /**
@@ -78,8 +77,10 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jbSeleccionar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        jtResultado = new javax.swing.JTextField();
         JLimpiar = new javax.swing.JButton();
+        jtResultado = new javax.swing.JLabel();
+        jCuartelCercano = new javax.swing.JButton();
+        jCercano = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -172,6 +173,17 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
             }
         });
 
+        jtResultado.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 14)); // NOI18N
+
+        jCuartelCercano.setText("Cuartel cercano");
+        jCuartelCercano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCuartelCercanoActionPerformed(evt);
+            }
+        });
+
+        jCercano.setText("           ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -223,36 +235,32 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
                         .addComponent(jLabel5)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(11, 11, 11))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(210, 210, 210))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(211, 211, 211))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbSeleccionar)
+                        .addGap(81, 81, 81)
+                        .addComponent(jCuartelCercano)
+                        .addGap(52, 52, 52))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(jbSeleccionar))
-                                    .addComponent(jtResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(168, 168, 168)))
-                .addContainerGap(13, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jtResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel11))
+                                .addGap(37, 37, 37)
+                                .addComponent(jCercano, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addContainerGap(25, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
@@ -282,23 +290,26 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jDistancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton3)
-                            .addComponent(JLimpiar)))
+                        .addComponent(jLabel11)
+                        .addGap(5, 5, 5)
+                        .addComponent(jCercano, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jtResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbSeleccionar)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(jDistancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1)
+                        .addComponent(jButton3)
+                        .addComponent(JLimpiar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbSeleccionar)
+                        .addComponent(jCuartelCercano)))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -333,7 +344,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
                         if (distancia < distanciaMinima) {
                             distanciaMinima = distancia;
                         }
-                        jtResultado.setText(String.format("%.2f", distanciaMinima) +"Km");
+                        jtResultado.setText(String.format("%.2f", distanciaMinima) + "Km");
                     }
                 }
 
@@ -350,9 +361,42 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         limpiar();
     }//GEN-LAST:event_JLimpiarActionPerformed
+
+    private void jCuartelCercanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCuartelCercanoActionPerformed
+        // TODO add your handling code here:
+        try {
+            int filaSeleccionada = jtSiniestro.getSelectedRow();
+            int filaSeleccionada2 = jtCuartel.getSelectedRow();
+            if (filaSeleccionada != -1) {
+                Object valorCoordx = jtSiniestro.getValueAt(filaSeleccionada, 1);
+                Object valorCoordy = jtSiniestro.getValueAt(filaSeleccionada, 2);
+                int X1 = Integer.parseInt(valorCoordx.toString());
+                int Y1 = Integer.parseInt(valorCoordy.toString());
+                double distanciaMinima = Double.MAX_VALUE;
+                String nombre1 = "";
+                for (Cuartel cuartel : listaCuartel) {
+                    int X2 = cuartel.getCoordenadax();
+                    int Y2 = cuartel.getCoordenaday();
+                    double distancia = Math.sqrt(Math.pow(X2 - X1, 2) + Math.pow(Y2 - Y1, 2));
+                    if (distancia < distanciaMinima) {
+                        distanciaMinima = distancia;
+                        nombre1 = cuartel.getNombre();
+                    }
+                }
+                jCercano.setText(nombre1 + " " + String.format("%.2f", distanciaMinima) + "Km");
+            } else {
+                JOptionPane.showMessageDialog(this, "Fila seleccionada invalida");
+            }
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Los datos tomados del sistema son incorrectos ");
+        }
+
+    }//GEN-LAST:event_jCuartelCercanoActionPerformed
     public void limpiar() {
         jtSiniestro.clearSelection();
         jtCuartel.clearSelection();
+        jCercano.setText(null);
         jtResultado.setText(null);
         jDistancia.setText(null);
         jTextPane1.setText(null);
@@ -367,6 +411,8 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
     private javax.swing.JButton JLimpiar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jCercano;
+    private javax.swing.JButton jCuartelCercano;
     private javax.swing.JTextField jDistancia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -387,7 +433,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JButton jbSeleccionar;
     private javax.swing.JTable jtCuartel;
-    private javax.swing.JTextField jtResultado;
+    private javax.swing.JLabel jtResultado;
     private javax.swing.JTable jtSiniestro;
     private javax.swing.JTextField x1;
     private javax.swing.JTextField x2;
