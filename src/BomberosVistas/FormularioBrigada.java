@@ -290,9 +290,11 @@ public void llenarTipo() {
     public void llenarTablaSiniestro() {
         modelo2.setRowCount(0);
         for (Siniestro aux : listarSiniestro) {
-            Brigada b1=aux.getCodigoBrigada();
-            System.out.println(b1);
-            modelo2.addRow(new Object[]{aux.getCodigo(), aux.getFechaSiniestro(), aux.getTipoSiniestro(), aux.getDetalles()});
+            String codigo="No asignada";
+            if (aux.getCodigoBrigada()!=null) {
+                codigo=""+aux.getCodigoBrigada().getCodBrigada()+"-"+aux.getCodigoBrigada().getNombreBrigada();
+            }
+            modelo2.addRow(new Object[]{aux.getCodigo(), aux.getFechaSiniestro(), aux.getTipoSiniestro(),codigo, aux.getDetalles()});
         }
     }
 
