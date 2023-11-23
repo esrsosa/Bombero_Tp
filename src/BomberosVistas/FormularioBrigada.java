@@ -38,7 +38,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
     DefaultComboBoxModel comboModelo = new DefaultComboBoxModel(listaCuartel.toArray());
     DefaultTableModel modelo2 = new DefaultTableModel();
     private SiniestrosData sn = new SiniestrosData();
-    List<Siniestro> listarSiniestro = sn.listarSiniestros();
+    List<Siniestro> listarSiniestro = sn.listarSiniestroSinBrigada();
     List<BomberosEntidades.Brigada> brigadas = bData.listarBrigadasLibres();
 
     /**

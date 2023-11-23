@@ -228,7 +228,6 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
 //            });
 //        }
         siniestroActual = new Siniestro();
-
         try {
             int fila = jTable.getSelectedRow();
             if (fila != -1) {
