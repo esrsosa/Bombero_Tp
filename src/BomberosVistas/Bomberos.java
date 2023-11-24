@@ -222,7 +222,7 @@ public class Bomberos extends javax.swing.JFrame {
         // TODO add your handling code here:
         Escritorio.removeAll();
         Escritorio.repaint();
-        Siniestros siniestro = new Siniestros();
+        CrearSiniestros siniestro = new CrearSiniestros();
         Escritorio.add(siniestro);
         siniestro.setVisible(true);
         Escritorio.moveToFront(siniestro);

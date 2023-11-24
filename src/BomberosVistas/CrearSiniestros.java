@@ -10,32 +10,35 @@ import BomberoAcceesoDatos.SiniestrosData;
 import BomberosEntidades.Brigada;
 import BomberosEntidades.Especialidad;
 import BomberosEntidades.Siniestro;
+import java.awt.HeadlessException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Emanuel Sosa
  */
-public class Siniestros extends javax.swing.JInternalFrame {
+public class CrearSiniestros extends javax.swing.JInternalFrame {
 
-      private SiniestrosData siniesrodata = new SiniestrosData();
+    private SiniestrosData siniesrodata = new SiniestrosData();
     private Siniestro SinniestroActual = null;
     private BrigadaData bData = new BrigadaData();
-        private List<Brigada> listaBrigadas = bData.listarBrigadasLibres();
-        
-      DefaultComboBoxModel comboModelo = new DefaultComboBoxModel(listaBrigadas.toArray());
+    private List<Brigada> listaBrigadas = bData.listarBrigadasLibres();
+
+    DefaultComboBoxModel comboModelo = new DefaultComboBoxModel(listaBrigadas.toArray());
+
     /**
      * Creates new form Siniestros
      */
-    public Siniestros() {
+    public CrearSiniestros() {
         initComponents();
-       llenarTipo();
+        llenarTipo();
 //       llenarComboBox();
-               
+
     }
 
     /**
@@ -98,6 +101,11 @@ public class Siniestros extends javax.swing.JInternalFrame {
         });
 
         jLimpiar.setText("Limpiar");
+        jLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jLimpiarActionPerformed(evt);
+            }
+        });
 
         jSalir.setText("Salir");
         jSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -180,33 +188,78 @@ public class Siniestros extends javax.swing.JInternalFrame {
 
     private void jGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGuardarActionPerformed
 
-           Especialidad tipo =Especialidad.valueOf(jCtipo.getSelectedItem().toString());
-//            java.util.Date sfecha = jFecha.getDate();
-          LocalDateTime sfecha = LocalDateTime.now();
-//             LocalDateTime fechaSi = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            int corX = Integer.parseInt(jCoordx.getText()); 
-            int corY = Integer.parseInt(jCoordy.getText()); 
-            String Detalles = jDetalle.getText();
-//            Brigada brigada =(Brigada) jBrigadaAsignada.getSelectedItem();//Funciona?? 
-            SinniestroActual = new Siniestro(tipo,sfecha,corX,corY,Detalles);
-           siniesrodata.agregarSiniestro(SinniestroActual);
+//           Especialidad tipo =Especialidad.valueOf(jCtipo.getSelectedItem().toString());
+////    //        java.util.Date sfecha = jFecha.getDate();
+//          LocalDateTime sfecha = LocalDateTime.now();
+////   //          LocalDateTime fechaSi = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//            int corX = Integer.parseInt(jCoordx.getText()); 
+//            int corY = Integer.parseInt(jCoordy.getText()); 
+//            String Detalles = jDetalle.getText();
+////  //          Brigada brigada =(Brigada) jBrigadaAsignada.getSelectedItem();//Funciona?? 
+//            SinniestroActual = new Siniestro(tipo,sfecha,corX,corY,Detalles);
+//           siniesrodata.agregarSiniestro(SinniestroActual);
+//---------------------------------------------------------------------------------------------------
+        int selectedIndex = jCtipo.getSelectedIndex();
+
+        if (selectedIndex == -1) {
+            JOptionPane.showMessageDialog(this, "Error Seleccione una especialidad.");
+        } else {
+            try {
+
+                Especialidad tipo = Especialidad.valueOf(jCtipo.getSelectedItem().toString());
+                LocalDateTime sfecha = LocalDateTime.now();
+
+                String coordxText = jCoordx.getText();
+                String coordyText = jCoordy.getText();
+                String detallesText = jDetalle.getText();
+
+                if (coordxText.isEmpty() || coordyText.isEmpty() || detallesText.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Error Hay campos vacios");
+                } else {
+
+                    int corX = Integer.parseInt(coordxText);
+                    int corY = Integer.parseInt(coordyText);
+
+                    SinniestroActual = new Siniestro(tipo, sfecha, corX, corY, detallesText);
+                    siniesrodata.agregarSiniestro(SinniestroActual);
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Error Ingrese cordenadas correctas");
+
+            } catch (HeadlessException e) {
+                JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage());
+            }
+        }
+
+
     }//GEN-LAST:event_jGuardarActionPerformed
 
     private void jCtipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCtipoActionPerformed
         // TODO add your handling code here:
-      // llenarTipo();
+        // llenarTipo();
     }//GEN-LAST:event_jCtipoActionPerformed
 
     private void jSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalirActionPerformed
-       dispose();
+        dispose();
     }//GEN-LAST:event_jSalirActionPerformed
 
-public void llenarTipo(){
-    for (Especialidad tipo :Especialidad.values()) {
-        jCtipo.addItem(tipo.getTipoEspecialidades());
-}
-    
-}
+    private void jLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLimpiarActionPerformed
+        Limpiar();
+    }//GEN-LAST:event_jLimpiarActionPerformed
+
+    public void llenarTipo() {
+        for (Especialidad tipo : Especialidad.values()) {
+            jCtipo.addItem(tipo.getTipoEspecialidades());
+        }
+
+    }
+
+    public void Limpiar() {
+        jCoordx.setText(null);
+        jCoordy.setText(null);
+        jDetalle.setText(null);
+        jCtipo.setSelectedIndex(-1);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JTextField jCoordx;
