@@ -205,27 +205,21 @@ public class CrearSiniestros extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Error Seleccione una especialidad.");
         } else {
             try {
-
                 Especialidad tipo = Especialidad.valueOf(jCtipo.getSelectedItem().toString());
                 LocalDateTime sfecha = LocalDateTime.now();
-
                 String coordxText = jCoordx.getText();
                 String coordyText = jCoordy.getText();
                 String detallesText = jDetalle.getText();
-
                 if (coordxText.isEmpty() || coordyText.isEmpty() || detallesText.isEmpty()) {
                     JOptionPane.showMessageDialog(this, "Error Hay campos vacios");
                 } else {
-
                     int corX = Integer.parseInt(coordxText);
                     int corY = Integer.parseInt(coordyText);
-
                     SinniestroActual = new Siniestro(tipo, sfecha, corX, corY, detallesText);
                     siniesrodata.agregarSiniestro(SinniestroActual);
                 }
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Error Ingrese cordenadas correctas");
-
             } catch (HeadlessException e) {
                 JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage());
             }
