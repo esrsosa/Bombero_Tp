@@ -67,7 +67,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         jDarDeBaja = new javax.swing.JButton();
         jlimpiar = new javax.swing.JButton();
         jBuscar = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jFiltrar = new javax.swing.JButton();
         jModificar = new javax.swing.JButton();
         jSangre = new javax.swing.JComboBox<>();
         jBrigadaAsignada = new javax.swing.JComboBox<>();
@@ -79,6 +79,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         jNuevo = new javax.swing.JButton();
         jDCalendar = new com.toedter.calendar.JDateChooser();
         jTSelecionar = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -144,10 +145,10 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton5.setText("Salir");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jFiltrar.setText("Filtrar");
+        jFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jFiltrarActionPerformed(evt);
             }
         });
 
@@ -192,6 +193,13 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton6.setText("Salir");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -219,29 +227,29 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jDni, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel3))
+                                    .addGap(28, 28, 28)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(JApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Jnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(71, 71, 71)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jDCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel2)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jDni, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(106, 106, 106))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel4)
-                                                .addComponent(jLabel3))
-                                            .addGap(28, 28, 28)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(JApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(Jnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGap(97, 97, 97)))
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(jDCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                             .addComponent(jLabel5)
@@ -255,20 +263,24 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                                             .addComponent(jLabel9)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(jBrigadaAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jDarDeBaja)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jButton5))))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(390, 390, 390)
-                                .addComponent(jLabel1)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jFiltrar))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jDarDeBaja)))))))
                 .addGap(21, 21, 21))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(390, 390, 390)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(366, 366, 366)
+                    .addComponent(jButton6)
+                    .addContainerGap(641, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,8 +292,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jlimpiar)
                         .addComponent(jModificar)
-                        .addComponent(jDarDeBaja)
-                        .addComponent(jButton5))
+                        .addComponent(jDarDeBaja))
                     .addComponent(jTSelecionar))
                 .addContainerGap(14, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -318,7 +329,8 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jBrigadaAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBrigadaAsignada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFiltrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -326,6 +338,11 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jNuevo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(521, Short.MAX_VALUE)
+                    .addComponent(jButton6)
+                    .addGap(4, 4, 4)))
         );
 
         pack();
@@ -467,10 +484,24 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         limpiar();
     }//GEN-LAST:event_jDarDeBajaActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void jFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFiltrarActionPerformed
+        modelo.setRowCount(0);
+        listarBomberos = bomberodata.listaBomberos();
+        boolean x = false;
+        for (Bombero aux : listarBomberos) {
+            for (Brigada tipo : brigadas) {
+                if (aux.getBrigada().getCodBrigada() == tipo.getCodBrigada()) {
+                    if (tipo.getNombreBrigada().equals(jBrigadaAsignada.getSelectedItem().toString())) {
+                        x = true;
+                        modelo.addRow(new Object[]{aux.getDni(), aux.getApellido(), aux.getNombre(), tipo.getNombreBrigada()});
+                    }
+                }
+            }
+        }
+        if (!x) {
+            JOptionPane.showMessageDialog(this, "No hay Bomberos en "+ jBrigadaAsignada.getSelectedItem());
+        }
+    }//GEN-LAST:event_jFiltrarActionPerformed
 
     private void jBrigadaAsignadaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jBrigadaAsignadaItemStateChanged
         brigadas();
@@ -511,6 +542,10 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Error al procesar la selección: " + ex.getMessage());
         }
     }//GEN-LAST:event_jTSelecionarActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
     public void brigadas() {
         List<Bombero> bomberos = bomberodata.listaBomberos();
         List<Brigada> brigadasLibres = bData.listarBrigadasLibres();
@@ -611,12 +646,13 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
     private javax.swing.JTextField Jnombre;
     private javax.swing.JComboBox<Brigada> jBrigadaAsignada;
     private javax.swing.JButton jBuscar;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JTextField jCelular;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private com.toedter.calendar.JDateChooser jDCalendar;
     private javax.swing.JButton jDarDeBaja;
     private javax.swing.JTextField jDni;
+    private javax.swing.JButton jFiltrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
