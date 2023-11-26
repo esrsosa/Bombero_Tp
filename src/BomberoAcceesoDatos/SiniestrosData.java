@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import sun.util.resources.LocaleData;
 
 /**
@@ -48,21 +49,23 @@ public class SiniestrosData {
             ps.setInt(3, siniestro.getCoordenadaX());
             ps.setInt(4, siniestro.getCoordenadaY());
             ps.setString(5, siniestro.getDetalles());
-            ps.setObject(6, siniestro.getCodigoBrigada());//No estoy seguro si funciona
+            ps.setObject(6, siniestro.getCodigoBrigada());
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 ResultSet generatedKeys = ps.getGeneratedKeys();
                 if (generatedKeys.next()) {
                     siniestro.setCodigo(generatedKeys.getInt(1));
-                    System.out.println("Siniestro agregado exitosamente con ID: " + siniestro.getCodigo());
+                    JOptionPane.showMessageDialog(null, "Siniestro agregado exitosamente con ID: " + siniestro.getCodigo());
                 } else {
                     System.out.println("Error al obtener el ID del siniestro.");
                 }
             } else {
-                System.out.println("Error al agregar el siniestro.");
+                JOptionPane.showMessageDialog(null, "Error al agregar el siniestro.");
             }
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla siniestro: " + ex.getMessage());
+
+            JOptionPane.showMessageDialog(null, "Error al agregar el siniestro." + ex.getMessage());
+
         } finally {
             try {
                 if (ps != null) {
@@ -81,7 +84,7 @@ public class SiniestrosData {
                 ps.setInt(2, s.getCodigo());
                 int exito = ps.executeUpdate();
                 if (exito > 0) {
-                    System.out.println("Brigada asignada al incidente en este cuartel.");
+                    JOptionPane.showMessageDialog(null, "Brigada asignada al incidente en este cuartel.");
                 } else {
                     System.out.println("No se pudo asignar la brigada al incidente.");
                 }
@@ -105,12 +108,12 @@ public class SiniestrosData {
             ps.setInt(3, siniestro.getCodigo());
             int exito = ps.executeUpdate();
             if (exito == 1) {
-                System.out.println("Siniestro marcado como resuelto exitosamente.");
+                JOptionPane.showMessageDialog(null, "Siniestro marcado como resuelto exitosamente.");
             } else {
-                System.out.println("Error al marcar el siniestro como resuelto.");
+                JOptionPane.showMessageDialog(null, "Error al marcar el siniestro como resuelto.");
             }
         } catch (SQLException ex) {
-            System.out.println("Error al acceder a la tabla siniestro: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla siniestro: " + ex.getMessage());
         } finally {
             try {
                 if (ps != null) {
@@ -161,7 +164,7 @@ public class SiniestrosData {
                 }
             }
         } catch (SQLException ex) {
-            System.out.println("Error al consultar siniestros recientes: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al consultar siniestros recientes: " + ex.getMessage());
         } finally {
             try {
                 if (rs != null) {
@@ -181,7 +184,7 @@ public class SiniestrosData {
         String sql = "SELECT * FROM siniestro WHERE codigo = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, codigo);
-            
+
             ResultSet rs = ps.executeQuery();
             return rs.next();
         } catch (SQLException ex) {
@@ -281,9 +284,10 @@ public class SiniestrosData {
 
         return todosLosSiniestros;
     }
- public List<Siniestro> listarSiniestroSinBrigada() {
+
+    public List<Siniestro> listarSiniestroSinBrigada() {
         List<Siniestro> todosLosSiniestros = new ArrayList<>();
-        String sql = "SELECT * FROM siniestro where codBrigada = null";
+        String sql = "SELECT * FROM siniestro where codBrigada is null";
         try (PreparedStatement ps = con.prepareStatement(sql);
                 ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
@@ -324,6 +328,7 @@ public class SiniestrosData {
 
         return todosLosSiniestros;
     }
+
     public List<Siniestro> listarSiniestros() {
         List<Siniestro> todosLosSiniestros = new ArrayList<>();
         String sql = "SELECT * FROM siniestro";
@@ -349,12 +354,12 @@ public class SiniestrosData {
                 Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro1, coordenadaX, coordenadaY, detalles, codigoBrigada);
                 todosLosSiniestros.add(siniestro);
             }
-            }catch (SQLException ex) {
+        } catch (SQLException ex) {
 
             System.out.println("Error al consultar todos los siniestros ordenados por fecha de resolución: " + ex.getMessage());
         }
 
-            return todosLosSiniestros;
-        }
-
+        return todosLosSiniestros;
     }
+
+}

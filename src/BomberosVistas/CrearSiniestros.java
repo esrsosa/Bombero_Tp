@@ -217,6 +217,7 @@ public class CrearSiniestros extends javax.swing.JInternalFrame {
                     int corY = Integer.parseInt(coordyText);
                     SinniestroActual = new Siniestro(tipo, sfecha, corX, corY, detallesText);
                     siniesrodata.agregarSiniestro(SinniestroActual);
+                    
                 }
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Error Ingrese cordenadas correctas");
