@@ -156,6 +156,7 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
 
     private void jGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGuardarActionPerformed
         Resolucion();
+        llenarTabla();
     }//GEN-LAST:event_jGuardarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -227,6 +228,7 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
 //                siniestro.getDetalles()
 //            });
 //        }
+////////////////////////////////////////////////////////////////////////////////////////////////
         siniestroActual = new Siniestro();
         try {
             int fila = jTable.getSelectedRow();
@@ -234,8 +236,19 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
                 Object codigo = jTable.getValueAt(fila, 0);
                 int codigo1 = Integer.parseInt(codigo.toString());
                 java.util.Date fecha = jFecha.getDate();
+                Object tipoSiniestro = jTable.getValueAt(fila, 2);
+                Object codigoBrigada = jTable.getValueAt(fila, 3);
+                Object detalles = jTable.getValueAt(fila, 4);
                 if (fecha == null) {
                     JOptionPane.showMessageDialog(this, "Debe ingresar una fecha.");
+                    return;
+                }
+//                    if (codigo == null || fecha == null || tipoSiniestro == null || codigoBrigada == null || detalles == null) {
+//            JOptionPane.showMessageDialog(this, "Hay campos vacíos en la fila seleccionada. Complete todos los campos antes de continuar.");
+//            return;
+//        }
+                if (codigoBrigada == null) {
+                    JOptionPane.showMessageDialog(this, "Asigne una brigada antes de continuar.");
                     return;
                 }
                 LocalDate fechaResolucion = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();

@@ -83,7 +83,7 @@ public class HistorialDeSiniestro extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Y");
 
-        jButton1.setText("Limpiar");
+        jButton1.setText("Actualizar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -136,7 +136,7 @@ public class HistorialDeSiniestro extends javax.swing.JInternalFrame {
                         .addComponent(jfecha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(jBuscar)))
-                .addGap(0, 231, Short.MAX_VALUE))
+                .addGap(0, 216, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,6 +171,7 @@ public class HistorialDeSiniestro extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // limpiar
         limpiarTabla();
+        llenarTabla();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed

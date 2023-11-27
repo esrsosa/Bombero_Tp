@@ -135,6 +135,11 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
         });
 
         jButton5.setText("Salir");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jCtipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,7 +263,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7)
                     .addComponent(jLabel9)
                     .addComponent(jcCuartelFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jFiltrar)
@@ -412,7 +417,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-
+    
         try {
             Cuartel cuartel;
             Brigada brigada;
@@ -421,7 +426,9 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
             cuartel = (Cuartel) jcCuartel.getSelectedItem();
             brigada = new Brigada(nombre, esp, cuartel);
             bData.agregarBrigada(brigada);
-            llenarTabla();
+            llenarTabla();  llenarTablaSiniestro();
+        llenarCuartel();
+        llenarTabla();
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "No debe haber campos vacios ");
         }
@@ -454,7 +461,9 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                 bData.asignarBrigadaSiniestro(bd.getCodBrigada());
                 siniestro.setCodigo(CodS);
                 sn.asignarBrigada(siniestro, bd);
-
+    llenarTablaSiniestro();
+        llenarCuartel();
+        llenarTabla();
             } else {
                 JOptionPane.showMessageDialog(this, "Fila seleccionada invalida");
             }
@@ -514,6 +523,11 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
     private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton5ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // Salir
+        dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
     private void limpiarCampos() {
         jtNombre.setText("");
         jCtipo.setSelectedIndex(0);
