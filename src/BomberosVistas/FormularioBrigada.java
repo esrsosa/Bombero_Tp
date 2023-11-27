@@ -26,6 +26,8 @@ import BomberosEntidades.Siniestro;
  */
 public class FormularioBrigada extends javax.swing.JInternalFrame {
 
+    private Brigada brigadaActual = null;
+ // private BrigadaData brigadadata = new BrigadaData();
     private BomberoData bomberodata = new BomberoData();
     private Bombero bomberoActual = null;
     private FormularioBrigada brigada;
@@ -129,6 +131,11 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTBrigada);
 
         jButton1.setText("Selecionar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Nuevo");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -440,9 +447,9 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
             brigada = new Brigada(nombre, esp, cuartel);
             bData.agregarBrigada(brigada);
             llenarTabla();
-            llenarTablaSiniestro();
-            llenarCuartel();
-            llenarTabla();
+         limpiarCampos();
+     
+            JOptionPane.showMessageDialog(this, "La brigada '" + brigada + "' a sido guardada exitosamente.");
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "No debe haber campos vacios ");
         }
@@ -478,13 +485,13 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                     bData.asignarBrigadaSiniestro(bd.getCodBrigada());
                     siniestro.setCodigo(CodS);
                     sn.asignarBrigada(siniestro, bd);
-                    llenarTablaSiniestro();
-                    llenarCuartel();
+
                     llenarTabla();
                 } else {
                     JOptionPane.showMessageDialog(this, "Fila seleccionada invalida");
                 }
             } else {
+               
                 limpiarCampos();
                 JOptionPane.showMessageDialog(this, "Seleccione la tabla de no asignados");
 
@@ -494,6 +501,11 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Los datos tomados del sistema son incorrectos ");
         }
         limpiarCampos();
+
+  
+
+
+
     }//GEN-LAST:event_jAsignarActionPerformed
 
     private void jEspecialidadFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEspecialidadFiltroActionPerformed
@@ -567,7 +579,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                     nombre = cuartel.getNombre();
                 }
             }
-                modelo.addRow(new Object[]{aux.getCodBrigada(), aux.getNombreBrigada(), aux.getEspecialidad(), nombre});   
+            modelo.addRow(new Object[]{aux.getCodBrigada(), aux.getNombreBrigada(), aux.getEspecialidad(), nombre});
         }
     }//GEN-LAST:event_jAsignadasBrigadaActionPerformed
 
@@ -591,6 +603,38 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
         }
         llenarTablaSiniestro();
     }//GEN-LAST:event_jNoAsignadaSiniestroActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int filaSeleccionada = jTBrigada.getSelectedRow();
+           if (filaSeleccionada != -1) {
+                Object IdBrigada = jTBrigada.getValueAt(filaSeleccionada, 0);
+                if (IdBrigada != null) {
+                    int numero = Integer.parseInt(IdBrigada.toString());
+                    brigadaActual = bData.buscarBrigadaPorId(numero);
+                    if (brigadaActual != null) {
+                        jtNombre.setText(brigadaActual.getNombreBrigada());
+                        jCtipo.setSelectedItem(brigadaActual.getEspecialidad());
+                        jcCuartel.setSelectedItem(brigadaActual.getNro_cuartel());
+                               
+//                        jDni.setText(bomberoActual.getDni());
+//                        Jnombre.setText(bomberoActual.getNombre());
+//                        JApellido.setText(bomberoActual.getApellido());
+//                        jCelular.setText(bomberoActual.getCelular());
+//                        jSangre.setSelectedItem(bomberoActual.getGrupSanguineo());
+//                        jBrigadaAsignada.setSelectedItem(bomberoActual.getBrigada());
+//                        jDCalendar.setDate(Date.from(bomberoActual.getFecha_nac().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Bombero no encontrado");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "El valor seleccionado es nulo");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "No se ha seleccionado ninguna fila");
+            }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
     private void limpiarCampos() {
         jAsignadaSiniestreo.setSelected(false);
         jAsignadasBrigada.setSelected(false);
