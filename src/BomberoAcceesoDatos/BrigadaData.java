@@ -22,14 +22,14 @@ import javax.swing.JOptionPane;
  * @author Emanuel Sosa
  */
 public class BrigadaData {
-    
+
     private CuartelData cd = new CuartelData();
     private Connection con = null;
-    
+
     public BrigadaData() {
         con = Conexion.getConexion();
     }
-    
+
     public void agregarBrigada(Brigada brigada) {
         String sql = "INSERT INTO brigada (nombre_br, especialidad,codCuartel,libre) VALUES (?, ?, ?,?)";
         PreparedStatement ps = null;
@@ -57,7 +57,7 @@ public class BrigadaData {
             }
         }
     }
-    
+
     public void asignarBrigadaAcuartel(int codBrigada, int codCuartel) {
         String sql = "UPDATE brigada SET codCuartel = ? WHERE codBrigada = ? ";
         PreparedStatement ps = null;
@@ -82,8 +82,28 @@ public class BrigadaData {
             }
         }
     }
-    
-    public List<Brigada> listarBrigadas() {
+
+    public List<Brigada> listarBrigadasAsignadas() {
+        List<Brigada> brigadas = new ArrayList<>();
+        String sql = "SELECT * FROM brigada WHERE libre = 0";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Brigada brigada = new Brigada();
+                brigada.setEspecialidad(Especialidad.valueOf(rs.getString("especialidad")));
+                brigada.setNombreBrigada(rs.getString("nombre_br"));
+                brigada.setCodBrigada(rs.getInt("codBrigada"));
+                Cuartel c = new Cuartel();
+                c.setCodCuartel(rs.getInt("codCuartel"));
+                brigada.setNro_cuartel(c);
+                brigadas.add(brigada);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al listar brigadas: " + ex.getMessage());
+        }
+        return brigadas;
+    }
+        public List<Brigada> listarBrigadas() {
         List<Brigada> brigadas = new ArrayList<>();
         String sql = "SELECT * FROM brigada";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -93,6 +113,9 @@ public class BrigadaData {
                 brigada.setEspecialidad(Especialidad.valueOf(rs.getString("especialidad")));
                 brigada.setNombreBrigada(rs.getString("nombre_br"));
                 brigada.setCodBrigada(rs.getInt("codBrigada"));
+                Cuartel c = new Cuartel();
+                c.setCodCuartel(rs.getInt("codCuartel"));
+                brigada.setNro_cuartel(c);
                 brigadas.add(brigada);
             }
         } catch (SQLException ex) {
@@ -100,7 +123,7 @@ public class BrigadaData {
         }
         return brigadas;
     }
-    
+
     public List<Brigada> listarBrigadasLibres() {
         List<Brigada> brigadas = new ArrayList<>();
         String sql = "SELECT * FROM brigada WHERE libre = 1";
@@ -121,7 +144,7 @@ public class BrigadaData {
         }
         return brigadas;
     }
-    
+
     public boolean estaAsignada(int codBrigada) {
         String sql = "SELECT * FROM siniestro WHERE codBrigada = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -133,7 +156,7 @@ public class BrigadaData {
             return false;
         }
     }
-    
+
     public Brigada buscarBrigadaPorId(int i) {
         Brigada brigada = null;
         Cuartel cuartel = null;
@@ -158,7 +181,7 @@ public class BrigadaData {
         }
         return brigada;
     }
-    
+
     public void asignarBrigadaSiniestro(int codBrigada) {
         String sql = "UPDATE brigada SET libre = 0 WHERE codBrigada = ? ";
         PreparedStatement ps = null;
@@ -178,7 +201,7 @@ public class BrigadaData {
             }
         }
     }
-    
+
     public void liberarBrigada(int codBrigada) {
         String sql = "UPDATE brigada SET libre = 1 WHERE codBrigada = ? ";
         PreparedStatement ps = null;

@@ -40,6 +40,8 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
     private SiniestrosData sn = new SiniestrosData();
     List<Siniestro> listarSiniestro = sn.listarSiniestroSinBrigada();
     List<BomberosEntidades.Brigada> brigadas = bData.listarBrigadasLibres();
+    List<Siniestro> listarSiniestroTodos = sn.listarSiniestros();
+    List<BomberosEntidades.Brigada> Todasbrigadas = bData.listarBrigadasAsignadas();
 
     /**
      * Creates new form Brigada
@@ -52,6 +54,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
         llenarTablaSiniestro();
         llenarCuartel();
         llenarTabla();
+        limpiarCampos();
     }
 
     private void ArmarTabla() {
@@ -88,7 +91,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
         jTSiniestro = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        jAsignar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jFiltrar = new javax.swing.JButton();
@@ -99,10 +102,10 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
         liompiarfasasdasd = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jModificar = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
+        jAsignadaSiniestreo = new javax.swing.JRadioButton();
+        jNoAsignadaSiniestro = new javax.swing.JRadioButton();
+        jAsignadasBrigada = new javax.swing.JRadioButton();
+        jNoasignadaBrigada = new javax.swing.JRadioButton();
 
         jLabel1.setText("Brigada");
 
@@ -170,10 +173,10 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButton2.setText("Asignar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jAsignar.setText("Asignar");
+        jAsignar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jAsignarActionPerformed(evt);
             }
         });
 
@@ -230,7 +233,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jcCuartelFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton2)
+                                .addComponent(jAsignar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jFiltrar))
                             .addComponent(jEspecialidadFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -265,7 +268,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                     .addComponent(jcCuartelFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(jAsignar)
                     .addComponent(jFiltrar)
                     .addComponent(liompiarfasasdasd))
                 .addGap(19, 19, 19))
@@ -283,23 +286,33 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
             }
         });
 
-        jRadioButton1.setText("Asignadas");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        jAsignadaSiniestreo.setText("Asignadas");
+        jAsignadaSiniestreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                jAsignadaSiniestreoActionPerformed(evt);
             }
         });
 
-        jRadioButton3.setText("No Asignadas");
-
-        jRadioButton5.setText("Asignadas");
-        jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
+        jNoAsignadaSiniestro.setText("No Asignadas");
+        jNoAsignadaSiniestro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton5ActionPerformed(evt);
+                jNoAsignadaSiniestroActionPerformed(evt);
             }
         });
 
-        jRadioButton6.setText("No Asignadas");
+        jAsignadasBrigada.setText("Asignadas");
+        jAsignadasBrigada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAsignadasBrigadaActionPerformed(evt);
+            }
+        });
+
+        jNoasignadaBrigada.setText("No Asignadas");
+        jNoasignadaBrigada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jNoasignadaBrigadaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -341,9 +354,9 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addGap(275, 275, 275)
-                                        .addComponent(jRadioButton1)
+                                        .addComponent(jAsignadaSiniestreo)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jRadioButton3)
+                                        .addComponent(jNoAsignadaSiniestro)
                                         .addGap(23, 23, 23))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
@@ -356,9 +369,9 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jRadioButton5)
+                                .addComponent(jAsignadasBrigada)
                                 .addGap(31, 31, 31)
-                                .addComponent(jRadioButton6)
+                                .addComponent(jNoasignadaBrigada)
                                 .addGap(31, 31, 31))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(56, 56, 56)
@@ -392,8 +405,8 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jRadioButton5)
-                                .addComponent(jRadioButton6)))
+                                .addComponent(jAsignadasBrigada)
+                                .addComponent(jNoasignadaBrigada)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -404,8 +417,8 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton3))
+                            .addComponent(jAsignadaSiniestreo)
+                            .addComponent(jNoAsignadaSiniestro))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -417,7 +430,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-    
+
         try {
             Cuartel cuartel;
             Brigada brigada;
@@ -426,13 +439,14 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
             cuartel = (Cuartel) jcCuartel.getSelectedItem();
             brigada = new Brigada(nombre, esp, cuartel);
             bData.agregarBrigada(brigada);
-            llenarTabla();  llenarTablaSiniestro();
-        llenarCuartel();
-        llenarTabla();
+            llenarTabla();
+            llenarTablaSiniestro();
+            llenarCuartel();
+            llenarTabla();
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "No debe haber campos vacios ");
         }
-        
+        limpiarCampos();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jCtipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCtipoActionPerformed
@@ -445,33 +459,42 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_liompiarfasasdasdActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAsignarActionPerformed
+
         // TODO add your handling code here:
         try {
-            int filaSeleccionada = jTSiniestro.getSelectedRow();
-            int filaSeleccionada2 = jTBrigada.getSelectedRow();
-            if (filaSeleccionada != -1) {
-                Object codSiniestro = jTSiniestro.getValueAt(filaSeleccionada, 0);
-                Object codBrigada = jTBrigada.getValueAt(filaSeleccionada2, 0);
-                int CodS = Integer.parseInt(codSiniestro.toString());
-                int codB = Integer.parseInt(codBrigada.toString());
-                Brigada bd = bData.buscarBrigadaPorId(codB);
-                Siniestro siniestro = new Siniestro();
+            if (!jAsignadaSiniestreo.isSelected() && !jAsignadasBrigada.isSelected()) {
 
-                bData.asignarBrigadaSiniestro(bd.getCodBrigada());
-                siniestro.setCodigo(CodS);
-                sn.asignarBrigada(siniestro, bd);
-    llenarTablaSiniestro();
-        llenarCuartel();
-        llenarTabla();
+                int filaSeleccionada = jTSiniestro.getSelectedRow();
+                int filaSeleccionada2 = jTBrigada.getSelectedRow();
+                if (filaSeleccionada != -1 && filaSeleccionada2 != -1) {
+                    Object codSiniestro = jTSiniestro.getValueAt(filaSeleccionada, 0);
+                    Object codBrigada = jTBrigada.getValueAt(filaSeleccionada2, 0);
+                    int CodS = Integer.parseInt(codSiniestro.toString());
+                    int codB = Integer.parseInt(codBrigada.toString());
+                    Brigada bd = bData.buscarBrigadaPorId(codB);
+                    Siniestro siniestro = new Siniestro();
+
+                    bData.asignarBrigadaSiniestro(bd.getCodBrigada());
+                    siniestro.setCodigo(CodS);
+                    sn.asignarBrigada(siniestro, bd);
+                    llenarTablaSiniestro();
+                    llenarCuartel();
+                    llenarTabla();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Fila seleccionada invalida");
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Fila seleccionada invalida");
+                limpiarCampos();
+                JOptionPane.showMessageDialog(this, "Seleccione la tabla de no asignados");
+
             }
 
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Los datos tomados del sistema son incorrectos ");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_jAsignarActionPerformed
 
     private void jEspecialidadFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEspecialidadFiltroActionPerformed
         // TODO add your handling code here:
@@ -503,8 +526,8 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                     nombre = cuartel.getNombre();
                 }
             }
-            if (aux.getEspecialidad().equals(jEspecialidadFiltro.getSelectedItem()) &&
-                    nombre.equalsIgnoreCase(jcCuartelFiltro.getSelectedItem().toString())   ) {
+            if (aux.getEspecialidad().equals(jEspecialidadFiltro.getSelectedItem())
+                    && nombre.equalsIgnoreCase(jcCuartelFiltro.getSelectedItem().toString())) {
                 modelo.addRow(new Object[]{aux.getCodBrigada(), aux.getNombreBrigada(), aux.getEspecialidad(), nombre});
             }
         }
@@ -516,27 +539,79 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jModificarActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void jAsignadaSiniestreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAsignadaSiniestreoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+        if (jAsignadaSiniestreo.isSelected() == true) {
+            jNoAsignadaSiniestro.setSelected(false);
+        }
+        modelo2.setRowCount(0);
+        for (Siniestro aux : listarSiniestroTodos) {
+            String codigo = "No asignada";
+            if (aux.getCodigoBrigada() != null) {
+                codigo = "" + aux.getCodigoBrigada().getCodBrigada() + "-" + aux.getCodigoBrigada().getNombreBrigada();
+                modelo2.addRow(new Object[]{aux.getCodigo(), aux.getFechaSiniestro(), aux.getTipoSiniestro(), codigo, aux.getDetalles()});
+            }
+        }
+    }//GEN-LAST:event_jAsignadaSiniestreoActionPerformed
 
-    private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
+    private void jAsignadasBrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAsignadasBrigadaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton5ActionPerformed
+        if (jAsignadasBrigada.isSelected() == true) {
+            jNoasignadaBrigada.setSelected(false);
+        }
+        modelo.setRowCount(0);
+        for (Brigada aux : Todasbrigadas) {
+            String nombre = "";
+            for (Cuartel cuartel : listaCuartel) {
+                if (cuartel.getCodCuartel() == aux.getNro_cuartel().getCodCuartel()) {
+                    nombre = cuartel.getNombre();
+                }
+            }
+                modelo.addRow(new Object[]{aux.getCodBrigada(), aux.getNombreBrigada(), aux.getEspecialidad(), nombre});   
+        }
+    }//GEN-LAST:event_jAsignadasBrigadaActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // Salir
         dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jNoasignadaBrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNoasignadaBrigadaActionPerformed
+        // TODO add your handling code here:
+        if (jNoasignadaBrigada.isSelected() == true) {
+            jAsignadasBrigada.setSelected(false);
+        }
+        llenarTabla();
+    }//GEN-LAST:event_jNoasignadaBrigadaActionPerformed
+
+    private void jNoAsignadaSiniestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNoAsignadaSiniestroActionPerformed
+        // TODO add your handling code here:
+        if (jNoAsignadaSiniestro.isSelected() == true) {
+            jAsignadaSiniestreo.setSelected(false);
+        }
+        llenarTablaSiniestro();
+    }//GEN-LAST:event_jNoAsignadaSiniestroActionPerformed
     private void limpiarCampos() {
+        jAsignadaSiniestreo.setSelected(false);
+        jAsignadasBrigada.setSelected(false);
+        jNoAsignadaSiniestro.setSelected(true);
+        jNoasignadaBrigada.setSelected(true);
         jtNombre.setText("");
         jCtipo.setSelectedIndex(0);
         jcCuartel.setSelectedIndex(0);
+        modelo.setRowCount(0);
+        modelo2.setRowCount(0);
+        llenarTabla();
+        llenarTablaSiniestro();
+        jTBrigada.clearSelection();
+        jTSiniestro.clearSelection();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton jAsignadaSiniestreo;
+    private javax.swing.JRadioButton jAsignadasBrigada;
+    private javax.swing.JButton jAsignar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<Especialidad> jCtipo;
@@ -553,11 +628,9 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JButton jModificar;
+    private javax.swing.JRadioButton jNoAsignadaSiniestro;
+    private javax.swing.JRadioButton jNoasignadaBrigada;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTBrigada;

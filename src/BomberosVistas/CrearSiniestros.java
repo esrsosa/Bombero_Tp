@@ -225,7 +225,7 @@ public class CrearSiniestros extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage());
             }
         }
-
+Limpiar();
 
     }//GEN-LAST:event_jGuardarActionPerformed
 
