@@ -121,7 +121,39 @@ public class BomberoData {
         }
         return bomberos;
     }
+    public List<Bombero> listaBomberosInactivos() {
+        ArrayList<Bombero> bomberos = new ArrayList<>();
+        String sql = "SELECT dni, nombre, apellido, grupSanguineo, fecha_nac, celular, codBrigada, estado FROM bombero";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
 
+            while (rs.next()) {
+                Bombero bombero = new Bombero();
+                bombero.setDni(rs.getString("dni"));
+                bombero.setNombre(rs.getString("nombre"));
+                bombero.setApellido(rs.getString("apellido"));
+                bombero.setGrupSanguineo(rs.getString("grupSanguineo"));
+                LocalDate fechaNac = rs.getDate("fecha_nac").toLocalDate();
+                bombero.setFecha_nac(fechaNac);
+                bombero.setCelular(rs.getString("celular"));
+                bombero.setEstado(rs.getBoolean("estado"));
+                int numBrigada = rs.getInt("codBrigada");
+                Brigada codBrigada = bd.buscarBrigadaPorId(numBrigada);
+//                Brigada codBrigada =(Brigada) rs.getObject("codBrigada"); //No estoy seguro si funciona
+                bombero.setBrigada(codBrigada);
+                if (!bombero.isEstado()) {
+                    bomberos.add(bombero);
+                }
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero " + ex.getMessage());
+            System.out.println(ex.getMessage());
+        }
+        return bomberos;
+    }
     public void agregarBombero(Bombero bombero) { //probado por arian :)
         String sql = "INSERT INTO bombero ( dni, nombre, apellido, celular, fecha_nac, grupSanguineo, codBrigada, estado) VALUES ( ?, ?, ?, ?, ?, ?,?,?)";
         PreparedStatement ps = null;
@@ -182,7 +214,30 @@ public class BomberoData {
             }
         }
     }
-
+  public void darDeAlta(String dni) {
+        String sql = "UPDATE bombero SET estado = true WHERE dni = ?";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, dni);
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Dado de alta realizada con éxito.");
+            } else {
+                JOptionPane.showMessageDialog(null, "El bombero no existe o no pudo ser dado de Alta.");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al acceder a la tabla Bombero: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Bombero: " + ex.getMessage());
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+    }
 //    public void eliminarBombero(Bombero bombero) {
 //        String sql = "DELETE FROM bombero WHERE id_bombero = ?";
 //        PreparedStatement ps = null;
