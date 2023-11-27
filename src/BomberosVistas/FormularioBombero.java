@@ -33,10 +33,10 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
     private Bombero bomberoActual = null;
     private BrigadaData bData = new BrigadaData();
     DefaultTableModel modelo = new DefaultTableModel();
-    private List<Brigada> listaBrigadas = bData.listarBrigadasLibres();
+    private List<Brigada> listaBrigadas = bData.listarBrigadas();
     DefaultComboBoxModel comboModelo = new DefaultComboBoxModel(listaBrigadas.toArray());
     List<Bombero> listarBomberos = bomberodata.listaBomberos();
-    List<Brigada> brigadas = bData.listarBrigadasLibres();
+    List<Brigada> brigadas = bData.listarBrigadas();
 
     public FormularioBombero() {
         initComponents();
@@ -205,27 +205,29 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(141, 141, 141)
+                        .addComponent(jNuevo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jlimpiar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jModificar)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(141, 141, 141)
-                                .addComponent(jNuevo))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(jlimpiar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jModificar)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(514, 514, 514)
-                                .addComponent(jTSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(120, 120, 120)
-                                .addComponent(jBuscar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(514, 514, 514)
+                        .addComponent(jTSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addComponent(jBuscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(21, 21, 21))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,8 +235,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel2)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jDni, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jDni, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel4)
@@ -242,8 +243,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                                     .addGap(28, 28, 28)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(JApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Jnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addComponent(Jnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
@@ -270,17 +270,11 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jTDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jDarDeBaja)))))))
-                .addGap(21, 21, 21))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(390, 390, 390)
-                .addComponent(jLabel1)
+                                        .addComponent(jDarDeBaja))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(390, 390, 390)
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(366, 366, 366)
-                    .addComponent(jButton6)
-                    .addContainerGap(641, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,7 +287,9 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                         .addComponent(jlimpiar)
                         .addComponent(jModificar)
                         .addComponent(jDarDeBaja))
-                    .addComponent(jTSelecionar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTSelecionar)
+                        .addComponent(jButton6)))
                 .addContainerGap(14, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,11 +334,6 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jNuevo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(521, Short.MAX_VALUE)
-                    .addComponent(jButton6)
-                    .addGap(4, 4, 4)))
         );
 
         pack();
@@ -458,7 +449,6 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 if (!brigadasLibre()) {
                     bomberoActual = new Bombero(dni, nombre, apellido, sangre, fechaNac, celular, true, asigBrigada);
                     bomberodata.actualizarDatos(bomberoActual);
-
                     limpiar();
                 } else {
                     JOptionPane.showMessageDialog(this, "Brigada completa, " + jBrigadaAsignada.getSelectedItem().toString());
@@ -499,7 +489,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
             }
         }
         if (!x) {
-            JOptionPane.showMessageDialog(this, "No hay Bomberos en "+ jBrigadaAsignada.getSelectedItem());
+            JOptionPane.showMessageDialog(this, "No hay Bomberos en " + jBrigadaAsignada.getSelectedItem());
         }
     }//GEN-LAST:event_jFiltrarActionPerformed
 
@@ -548,7 +538,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
     public void brigadas() {
         List<Bombero> bomberos = bomberodata.listaBomberos();
-        List<Brigada> brigadasLibres = bData.listarBrigadasLibres();
+        List<Brigada> brigadasLibres = bData.listarBrigadas();
         Map<Integer, Integer> bomberosPorBrigada = new HashMap<>();
         for (Bombero bombero : bomberos) {
             int codBrigada = bombero.getBrigada().getCodBrigada();
