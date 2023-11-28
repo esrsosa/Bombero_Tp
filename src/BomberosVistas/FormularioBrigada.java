@@ -533,7 +533,34 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jFiltrarActionPerformed
 
     private void jModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModificarActionPerformed
-        // TODO add your handling code here:
+
+        try {
+            String nombre = jtNombre.getText();
+            Especialidad esp = (Especialidad) jCtipo.getSelectedItem();
+            Cuartel cuartel = (Cuartel) jcCuartel.getSelectedItem();
+            int filaSeleccionada2 = jTBrigada.getSelectedRow();
+            if (filaSeleccionada2 != 1) {
+                Object codBrigada = jTBrigada.getValueAt(filaSeleccionada2, 0);
+                if (nombre.isEmpty() || esp == null || cuartel == null) {
+                    JOptionPane.showMessageDialog(this, "Todos los campos deben estar llenos.");
+                } else {
+                    int codB = Integer.parseInt(codBrigada.toString());
+                    Brigada brigada = new Brigada();
+                    brigada.setNombreBrigada(nombre);
+                    brigada.setCodBrigada(codB);
+                    brigada.setEspecialidad(esp);
+                    brigada.setNro_cuartel(cuartel);
+                    bData.modificarBrigada(brigada);
+                    llenarTabla();
+                    limpiarCampos();
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Seleccione la fila de brigada a modificar");
+
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al modificar la brigada: " + ex.getMessage());
+        }
     }//GEN-LAST:event_jModificarActionPerformed
 
     private void jAsignadaSiniestreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAsignadaSiniestreoActionPerformed
@@ -564,7 +591,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
             for (Siniestro siniestro1 : listarSiniestroTodos) {
                 if (siniestro1.getCodigoBrigada() != null) {
                     if (siniestro1.getCodigoBrigada().equals(aux)) {
-                        s =siniestro1.getCodigo() +"-" + siniestro1.getDetalles();
+                        s = siniestro1.getCodigo() + "-" + siniestro1.getDetalles();
                     }
                 }
             }
@@ -609,8 +636,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                 if (brigadaActual != null) {
                     jtNombre.setText(brigadaActual.getNombreBrigada());
                     jCtipo.setSelectedItem(brigadaActual.getEspecialidad());
-                    System.out.println(brigadaActual.getNro_cuartel());
-                    System.out.println(jcCuartel.getSelectedItem());
+                   
                     for (Cuartel cuartel : listaCuartel) {
                         if (cuartel.getCodCuartel() == brigadaActual.getNro_cuartel().getCodCuartel()) {
                             jcCuartel.setSelectedItem(cuartel);
@@ -741,7 +767,7 @@ public void llenarTipo() {
     }
 
     private void llenarTabla() {
-        System.out.println("hola");
+
         modelo.setRowCount(0);
         brigadas = bData.listarBrigadas();
         for (Brigada aux : brigadas) {
@@ -755,6 +781,5 @@ public void llenarTipo() {
             modelo.addRow(new Object[]{aux.getCodBrigada(), aux.getNombreBrigada(), aux.getEspecialidad(), nombre, siniestro});
         }
 
-        System.out.println("chau");
     }
 }
