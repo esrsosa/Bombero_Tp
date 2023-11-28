@@ -228,8 +228,8 @@ public class BrigadaData {
         ps.setString(1, brigada.getNombreBrigada());
         ps.setString(2, brigada.getEspecialidad().toString());
         ps.setInt(3, brigada.getNro_cuartel().getCodCuartel());
-        ps.setBoolean(4, false); // Ajusta esto según tus requisitos
-        ps.setInt(5, brigada.getCodBrigada()); // Asegúrate de tener un método getIdBrigada() en tu clase Brigada
+        ps.setBoolean(4, true); 
+        ps.setInt(5, brigada.getCodBrigada()); 
 
         int exito = ps.executeUpdate();
         
@@ -237,6 +237,8 @@ public class BrigadaData {
             System.out.println("Brigada modificada exitosamente.");
         } else {
             System.out.println("Error al modificar la brigada.");
+           
+            
         }
         }catch (SQLException ex) {
     ex.printStackTrace();
@@ -244,7 +246,7 @@ public class BrigadaData {
 
 
     }
-        // Imprime la traza completa de la excepción
+       
         
 }
 }

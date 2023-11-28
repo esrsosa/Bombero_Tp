@@ -567,22 +567,13 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
             Especialidad esp = (Especialidad) jCtipo.getSelectedItem();
             Cuartel cuartel = (Cuartel) jcCuartel.getSelectedItem();
 
-            // Verificar campos vacíos antes de modificar la brigada
             if (nombre.isEmpty() || esp == null || cuartel == null) {
                 JOptionPane.showMessageDialog(this, "Todos los campos deben estar llenos.");
             } else {
-                // Crear la brigada
                 Brigada brigada = new Brigada(nombre, esp, cuartel);
-
-                // Modificar la brigada a través de bData (asumiendo que bData está inicializado)
                 bData.modificarBrigada(brigada);
-
-                // Actualizar la tabla después de modificar la brigada
                 llenarTabla();
-
-                // Limpiar campos después de la operación
                 limpiarCampos();
-
                 JOptionPane.showMessageDialog(this, "La brigada '" + brigada.getNombreBrigada() + "' ha sido modificada exitosamente.");
             }
         } catch (Exception ex) {
