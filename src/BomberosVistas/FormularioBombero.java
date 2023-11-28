@@ -545,7 +545,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 Object valorCodigo = jMostrar.getValueAt(filaSeleccionada, 0);
                 if (valorCodigo != null) {
                     int numero = Integer.parseInt(valorCodigo.toString());
-                    bomberoActual = bomberodata.buscarBombero(numero);
+                    bomberoActual = bomberodata.buscarBomberoTodos(numero);
                     if (bomberoActual != null) {
                         jDni.setText(bomberoActual.getDni());
                         Jnombre.setText(bomberoActual.getNombre());

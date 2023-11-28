@@ -57,7 +57,33 @@ public class BomberoData {
         }
         return bombero;
     }
-
+  public Bombero buscarBomberoTodos(int dni) {
+        String sql = "SELECT dni, nombre, apellido, celular, fecha_nac, grupSanguineo, codBrigada FROM bombero WHERE dni = ?";
+        Bombero bombero = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, dni);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                bombero = new Bombero();
+                bombero.setDni(rs.getString("dni"));
+                bombero.setNombre(rs.getString("nombre"));
+                bombero.setApellido(rs.getString("apellido"));
+                bombero.setCelular(rs.getString("celular"));
+                bombero.setFecha_nac(rs.getDate("fecha_nac").toLocalDate());
+                bombero.setGrupSanguineo(rs.getString("grupSanguineo"));
+                int codBrigada = rs.getInt("codBrigada");
+                Brigada brigada = new Brigada();
+                brigada.setCodBrigada(codBrigada);
+                bombero.setBrigada(brigada);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla bombero");
+            return bombero;
+        }
+        return bombero;
+    }
     public void actualizarDatos(Bombero bombero) {
         String sql = "UPDATE bombero SET nombre = ?, apellido = ?, grupSanguineo = ?, fecha_nac = ?, celular = ?, codBrigada = ? WHERE dni = ?";
         PreparedStatement ps = null;
