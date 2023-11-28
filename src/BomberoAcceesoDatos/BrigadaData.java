@@ -221,4 +221,32 @@ public class BrigadaData {
             }
         }
     }
+  public void modificarBrigada(Brigada brigada) {
+    String sql = "UPDATE brigada SET nombre_br = ?, especialidad = ?, codCuartel = ?, libre = ? WHERE codBrigada = ?";
+    
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setString(1, brigada.getNombreBrigada());
+        ps.setString(2, brigada.getEspecialidad().toString());
+        ps.setInt(3, brigada.getNro_cuartel().getCodCuartel());
+        ps.setBoolean(4, true); 
+        ps.setInt(5, brigada.getCodBrigada()); 
+
+        int exito = ps.executeUpdate();
+        
+        if (exito == 1) {
+            System.out.println("Brigada modificada exitosamente.");
+        } else {
+            System.out.println("Error al modificar la brigada.");
+           
+            
+        }
+        }catch (SQLException ex) {
+    ex.printStackTrace();
+    System.out.println("Error al acceder a la tabla brigada: " + ex.getMessage());
+
+
+    }
+       
+        
+}
 }
