@@ -46,6 +46,8 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
 //        llenarTipo();
         llenarComboBox();
         brigadas();
+        JActivos.setSelected(true);
+        activos();
     }
 
     @SuppressWarnings("unchecked")
@@ -574,14 +576,17 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
 
     private void JActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JActivosActionPerformed
         // TODO add your handling code here:
+        activos();
+    }//GEN-LAST:event_JActivosActionPerformed
+
+    private void activos() {
         jDarDeBaja.setEnabled(true);
         jDarDeAlta.setEnabled(false);
         if (JActivos.isSelected() == true) {
             Jinactivos.setSelected(false);
         }
         llenarTabla();
-    }//GEN-LAST:event_JActivosActionPerformed
-
+    }
     private void JinactivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JinactivosActionPerformed
         // TODO add your handling code here:
         jDarDeAlta.setEnabled(true);
@@ -609,7 +614,13 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
             if (dni.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No debe haber campos vacíos");
             } else {
-                bomberodata.darDeAlta(dni);
+                
+                if (!brigadasLibre()) {
+                    bomberodata.darDeAlta(dni);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Brigada completa, " + jBrigadaAsignada.getSelectedItem().toString());
+                }
+
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar números válidos");
@@ -702,6 +713,8 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         jSangre.setSelectedIndex(-1);
         jDCalendar.setDate(null);
         jCelular.setText(null);
+        JActivos.setSelected(true);
+        activos();
         jTDisponibles.setText("");
     }
 
