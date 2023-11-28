@@ -541,9 +541,6 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
         if (jAsignadaSiniestreo.isSelected() == true) {
             jNoAsignadaSiniestro.setSelected(false);
         }
-        Todasbrigadas = bData.listarBrigadasAsignadas();
-        listarSiniestroTodos = sn.listarSiniestros();
-        
         modelo2.setRowCount(0);
         for (Siniestro aux : listarSiniestroTodos) {
             String codigo = "No asignada";
@@ -561,16 +558,13 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
             jNoasignadaBrigada.setSelected(false);
         }
         modelo.setRowCount(0);
-        Todasbrigadas = bData.listarBrigadasAsignadas();
-        listarSiniestroTodos = sn.listarSiniestros();
-        
         for (Brigada aux : Todasbrigadas) {
             String nombre = "";
             String s = "";
             for (Siniestro siniestro1 : listarSiniestroTodos) {
                 if (siniestro1.getCodigoBrigada() != null) {
                     if (siniestro1.getCodigoBrigada().equals(aux)) {
-                        s = siniestro1.getCodigo() + "-" + siniestro1.getDetalles();
+                        s =siniestro1.getCodigo() +"-" + siniestro1.getDetalles();
                     }
                 }
             }
@@ -579,7 +573,6 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                     nombre = cuartel.getNombre();
                 }
             }
-            System.out.println(Todasbrigadas);
             modelo.addRow(new Object[]{aux.getCodBrigada(), aux.getNombreBrigada(), aux.getEspecialidad(), nombre, s});
         }
     }//GEN-LAST:event_jAsignadasBrigadaActionPerformed

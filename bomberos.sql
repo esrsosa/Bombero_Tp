@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-11-2023 a las 19:14:56
+-- Tiempo de generación: 17-11-2023 a las 02:11:06
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `bomberos`
 --
+CREATE DATABASE IF NOT EXISTS `bomberos` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `bomberos`;
 
 -- --------------------------------------------------------
 
@@ -44,14 +46,7 @@ CREATE TABLE `bombero` (
 --
 
 INSERT INTO `bombero` (`id_bombero`, `dni`, `nombre`, `apellido`, `celular`, `fecha_nac`, `grupSanguineo`, `codBrigada`, `estado`) VALUES
-(33, '112233', 'Santiago', 'Alvarez', '23344542', '2023-11-03', 'B+', 40, 1),
-(34, '2323421', 'Valentina', 'Cortez', '232333', '1987-11-21', 'B-', 41, 1),
-(35, '443355', 'Mateo', 'Rodríguez', '2334562', '2023-11-22', 'B+', 42, 1),
-(36, '66454', 'Luciana', 'López', '234453', '2023-11-30', 'B+', 46, 1),
-(37, '44360403', 'Emanuel', 'Sosa', '2665032890', '2023-11-15', 'B-', 44, 1),
-(38, '5533344', 'Mateo', 'García', '22334455', '2023-11-13', 'B+', 40, 1),
-(39, '233323', 'Joaquín', 'Ramírez ', '23456776', '2023-11-03', 'A-', 40, 1),
-(40, '343434', 'Agustín', 'Silva', '2233322', '2023-11-24', 'B+', 40, 1);
+(2, '42526313', 'marcos', 'giraudi', 'A+', '2000-11-04', '12464', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -72,13 +67,8 @@ CREATE TABLE `brigada` (
 --
 
 INSERT INTO `brigada` (`codBrigada`, `nombre_br`, `especialidad`, `libre`, `codCuartel`) VALUES
-(40, 'Alpha |', 'OperativosPrevencion', 1, 11),
-(41, 'Alpha ||', 'Incendios', 0, 11),
-(42, 'Fénix', 'Derrumbes', 1, 14),
-(43, 'Centauro', 'Inundaciones', 1, 11),
-(44, 'Delta', 'Accidentes', 1, 13),
-(45, 'Cóndor', 'Derrumbes', 1, 12),
-(46, 'Titanes', 'Rescate', 1, 12);
+(1, 'omega', 'Accidentes', 1, 1),
+(5533, 'alpha', 'Rescate', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -102,10 +92,8 @@ CREATE TABLE `cuartel` (
 --
 
 INSERT INTO `cuartel` (`codCuartel`, `nombre_cuartel`, `direccion`, `coord_x`, `coord_y`, `telefono`, `correo`, `activo`) VALUES
-(11, 'Forntera SL', 'Av belgrano2343', 2323, 4422, '2665431223', 'FornteraSl@gmail.com', 1),
-(12, 'Cuartel Puntano', 'av ilia 233', 213, 4442, '2665863745', 'CuartelPuntano@gmail.com', 1),
-(13, 'Central Bomberos', 'av españa 232', 2323, 5532, '2665034567', 'CentralBomberos@e.com', 1),
-(14, 'Estación Rayo Bomber', 'Av allem 2332', 545, 342, '2333544326', 'EstacionRayoBombero@gmail.com', 1);
+(1, 'fortin', 'a la vuelta de la sanma', 123512, 433521, '2657 tumam', 'Fortin@gmail.com', 0),
+(7, 'Bomberos La Patria', 'avenida los santos 1356', 245892, 389532, '2657 888085', 'BomberosPatria@gmail.com', 1);
 
 -- --------------------------------------------------------
 
@@ -122,7 +110,7 @@ CREATE TABLE `siniestro` (
   `detalles` text NOT NULL,
   `fecha_resol` date NOT NULL,
   `puntuacion` int(11) NOT NULL,
-  `codBrigada` int(11) DEFAULT NULL
+  `codBrigada` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -130,10 +118,7 @@ CREATE TABLE `siniestro` (
 --
 
 INSERT INTO `siniestro` (`codigo`, `tipo`, `fecha_siniestro`, `coord_x`, `coord_y`, `detalles`, `fecha_resol`, `puntuacion`, `codBrigada`) VALUES
-(11, 'Incendios', '2023-11-28', 3343, 5654, 'Casa incendiada', '0000-00-00', 0, 41),
-(12, 'Derrumbes', '2023-11-28', 442, 222, 'Monumento de San martin caido ', '0000-00-00', 0, NULL),
-(13, 'Inundaciones', '2023-11-28', 55112, 44422, 'departamento por ilia 223 inundado', '0000-00-00', 0, NULL),
-(14, 'Accidentes', '2023-11-28', 3434, 123, 'Choque de vehiculos por av ilia 2323', '0000-00-00', 0, NULL);
+(5, 'Derrumbes', '2023-10-07', 87126387, 3749332, 'se callo una piedrita', '2023-11-16', 5, 5533);
 
 --
 -- Índices para tablas volcadas
@@ -144,6 +129,7 @@ INSERT INTO `siniestro` (`codigo`, `tipo`, `fecha_siniestro`, `coord_x`, `coord_
 --
 ALTER TABLE `bombero`
   ADD PRIMARY KEY (`id_bombero`),
+  ADD UNIQUE KEY `codBrigada_2` (`codBrigada`),
   ADD KEY `codBrigada` (`codBrigada`);
 
 --
@@ -151,7 +137,7 @@ ALTER TABLE `bombero`
 --
 ALTER TABLE `brigada`
   ADD PRIMARY KEY (`codBrigada`),
-  ADD KEY `codCuartel` (`codCuartel`);
+  ADD KEY `nro_cuartel` (`codCuartel`);
 
 --
 -- Indices de la tabla `cuartel`
@@ -174,25 +160,13 @@ ALTER TABLE `siniestro`
 -- AUTO_INCREMENT de la tabla `bombero`
 --
 ALTER TABLE `bombero`
-  MODIFY `id_bombero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
-
---
--- AUTO_INCREMENT de la tabla `brigada`
---
-ALTER TABLE `brigada`
-  MODIFY `codBrigada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id_bombero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `cuartel`
 --
 ALTER TABLE `cuartel`
-  MODIFY `codCuartel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT de la tabla `siniestro`
---
-ALTER TABLE `siniestro`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `codCuartel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas
@@ -203,12 +177,6 @@ ALTER TABLE `siniestro`
 --
 ALTER TABLE `bombero`
   ADD CONSTRAINT `bombero_ibfk_1` FOREIGN KEY (`codBrigada`) REFERENCES `brigada` (`codBrigada`);
-
---
--- Filtros para la tabla `brigada`
---
-ALTER TABLE `brigada`
-  ADD CONSTRAINT `brigada_ibfk_1` FOREIGN KEY (`codCuartel`) REFERENCES `cuartel` (`codCuartel`);
 
 --
 -- Filtros para la tabla `siniestro`
