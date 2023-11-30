@@ -210,7 +210,6 @@ public class SiniestrosData {
                 int coordenadaY = rs.getInt("coord_y");
                 String detalles = rs.getString("detalles");
                 int brigadaCod = rs.getInt("codBrigada");
-                System.out.println(brigadaCod);
                 Brigada codigoBrigada = bd.buscarBrigadaPorId(brigadaCod);
                 LocalDateTime fechaResolucion = null;
 //                 fechaResolucion = null;
@@ -256,7 +255,7 @@ public class SiniestrosData {
                 int coordenadaY = rs.getInt("coord_y");
                 String detalles = rs.getString("detalles");
                 int brigadaCod = rs.getInt("codBrigada");
-                System.out.println(brigadaCod);
+   
                 Brigada codigoBrigada = bd.buscarBrigadaPorId(brigadaCod);
                 LocalDateTime fechaResolucion = null;
                 if (rs.getDate("fecha_resol") != null) {
@@ -300,7 +299,7 @@ public class SiniestrosData {
                 int coordenadaY = rs.getInt("coord_y");
                 String detalles = rs.getString("detalles");
                 int brigadaCod = rs.getInt("codBrigada");
-                System.out.println(brigadaCod);
+  
                 Brigada codigoBrigada = bd.buscarBrigadaPorId(brigadaCod);
                 LocalDateTime fechaResolucion = null;
                 if (rs.getDate("fecha_resol") != null) {
@@ -344,7 +343,7 @@ public class SiniestrosData {
                 int coordenadaY = rs.getInt("coord_y");
                 String detalles = rs.getString("detalles");
                 int brigadaCod = rs.getInt("codBrigada");
-                System.out.println(brigadaCod);
+         
                 Brigada codigoBrigada = bd.buscarBrigadaPorId(brigadaCod);
                 LocalDateTime fechaResolucion = null;
                 if (rs.getDate("fecha_resol") != null) {

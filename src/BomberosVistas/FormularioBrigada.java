@@ -441,15 +441,19 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
             Cuartel cuartel;
             Brigada brigada;
             String nombre = jtNombre.getText();
-            Especialidad esp = (Especialidad) jCtipo.getSelectedItem();
-            cuartel = (Cuartel) jcCuartel.getSelectedItem();
-            brigada = new Brigada(nombre, esp, cuartel);
-            bData.agregarBrigada(brigada);
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Ingrese un nombre valido");
 
-            limpiarCampos();
+            } else {
+                Especialidad esp = (Especialidad) jCtipo.getSelectedItem();
+                cuartel = (Cuartel) jcCuartel.getSelectedItem();
+                brigada = new Brigada(nombre, esp, cuartel);
+                bData.agregarBrigada(brigada);
 
-            JOptionPane.showMessageDialog(this, "La brigada '" + brigada + "' a sido guardada exitosamente.");
+                limpiarCampos();
 
+                JOptionPane.showMessageDialog(this, "La brigada '" + brigada + "' a sido guardada exitosamente.");
+            }
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "No debe haber campos vacios ");
         }
@@ -642,7 +646,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                 if (brigadaActual != null) {
                     jtNombre.setText(brigadaActual.getNombreBrigada());
                     jCtipo.setSelectedItem(brigadaActual.getEspecialidad());
-                   
+
                     for (Cuartel cuartel : listaCuartel) {
                         if (cuartel.getCodCuartel() == brigadaActual.getNro_cuartel().getCodCuartel()) {
                             jcCuartel.setSelectedItem(cuartel);
@@ -656,6 +660,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
 //                        jBrigadaAsignada.setSelectedItem(bomberoActual.getBrigada());
 //                        jDCalendar.setDate(Date.from(bomberoActual.getFecha_nac().atStartOfDay(ZoneId.systemDefault()).toInstant()));
                 } else {
+
                     JOptionPane.showMessageDialog(this, "Bombero no encontrado");
                 }
             } else {
