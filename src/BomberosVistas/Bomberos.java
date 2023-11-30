@@ -6,6 +6,9 @@
 package BomberosVistas;
 
 import BomberosEntidades.Siniestro;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -41,7 +44,14 @@ public class Bomberos extends javax.swing.JFrame {
         jMenu9 = new javax.swing.JMenu();
         jMenu10 = new javax.swing.JMenu();
         jMenu13 = new javax.swing.JMenu();
-        Escritorio = new javax.swing.JDesktopPane();
+        ImageIcon icono = new ImageIcon(getClass().getResource("/imagen/miImagen.jpeg"));
+        Image miImage = icono.getImage();
+        Escritorio = new javax.swing.JDesktopPane(){
+            public void paintComponent (Graphics g){
+                g.drawImage(miImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        }
+        ;
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -97,7 +107,7 @@ public class Bomberos extends javax.swing.JFrame {
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 549, Short.MAX_VALUE)
+            .addGap(0, 561, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Bomberos");
@@ -189,10 +199,7 @@ public class Bomberos extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Escritorio)
-                .addContainerGap())
+            .addComponent(Escritorio)
         );
 
         pack();
