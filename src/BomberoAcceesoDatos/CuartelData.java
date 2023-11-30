@@ -30,10 +30,10 @@ public class CuartelData {
         con = Conexion.getConexion();
     }
 
-    public Cuartel buscarCuartel(int i){
+    public Cuartel buscarCuartel(int i) {
         String sql = "SELECT  codCuartel, nombre_cuartel, direccion, coord_x, coord_y, telefono, correo FROM cuartel WHERE codCuartel= ?";
         Cuartel cuartel = null;
-        try{
+        try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, i);
             ResultSet rs = ps.executeQuery();
@@ -47,16 +47,16 @@ public class CuartelData {
                 cuartel.setTelefono(rs.getString("telefono"));
                 cuartel.setCorreoElectronico(rs.getString("correo"));
 //                JOptionPane.showMessageDialog(null, "cuartel encontrado");
-            }else {
+            } else {
                 JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel");
                 ps.close();
             }
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             return cuartel;
         }
         return cuartel;
     }
-    
+
     public void agregarCuartel(Cuartel cuartel) {
         String sql = "INSERT INTO cuartel (nombre_cuartel, direccion, coord_x, coord_y, telefono, correo, activo) VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = null;
@@ -88,14 +88,38 @@ public class CuartelData {
         }
     }
 
-    public List<Cuartel> listaCuarteles (){
+    public void editarCuartel(Cuartel cuartel) {
+        String sql = "UPDATE cuartel set nombreCuartel = ?, direccion = ?, coord_x = ?, coord_y = ?, telefono = ?, correo = ? WHERE codCuartel = ?";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, cuartel.getNombre());
+            ps.setString(2, cuartel.getDomicilio());
+            ps.setInt(3, cuartel.getCoordenadax());
+            ps.setInt(4, cuartel.getCoordenaday());
+            ps.setString(5, cuartel.getTelefono());
+            ps.setString(6, cuartel.getCorreoElectronico());
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "error al acceder a la tabla cuartel");
+        }finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+    }
+
+    public List<Cuartel> listaCuarteles() {
         List<Cuartel> cuarteles = new ArrayList<>();
         String sql = "SELECT  codCuartel, nombre_cuartel, direccion, coord_x, coord_y, telefono, correo, activo FROM cuartel WHERE 1";
-        try{
+        try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                
+            while (rs.next()) {
+
                 Cuartel cuartel = new Cuartel();
                 cuartel.setCodCuartel(rs.getInt("codCuartel"));
                 cuartel.setNombre(rs.getString("nombre_cuartel"));
@@ -108,13 +132,14 @@ public class CuartelData {
                 cuarteles.add(cuartel);
             }
             ps.close();
-            
-        }catch (SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel "+ ex.getMessage());
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel " + ex.getMessage());
         }
         return cuarteles;
-        
+
     }
+
     public boolean codCuartelExiste(int codCuartel) {
         String sql = "SELECT 1 FROM cuartel WHERE codCuartel = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -126,32 +151,33 @@ public class CuartelData {
             return false;
         }
     }
-    
-    public void darBajaCuartel(int id){
+
+    public void darBajaCuartel(int id) {
         String sql = "UPDATE cuartel SET activo = false WHERE codCuartel = ?";
-        try{
+        try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             int exito = ps.executeUpdate();
-            if (exito==1) {
+            if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Cuartel fue dado de baja");
             }
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error a conectar con la tabla cuartel ");
         }
     }
-    public void darAltaCuartel(int id){
+
+    public void darAltaCuartel(int id) {
         String sql = "UPDATE cuartel SET activo = true WHERE codCuartel = ?";
-        try{
+        try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             int exito = ps.executeUpdate();
-            if (exito==1) {
+            if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Cuartel fue dado de alta");
             }
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error a conectar con la tabla cuartel ");
         }
     }
