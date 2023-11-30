@@ -383,20 +383,22 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
             String nombre = Jnombre.getText();
             String apellido = JApellido.getText();
             java.util.Date sfecha = jDCalendar.getDate();
-            String celular = jCelular.getText();
+          //  String celular = jCelular.getText();
+            int celular = Integer.parseInt(jCelular.getText());
 
-            if (jDni.getText().isEmpty() || nombre.isEmpty() || apellido.isEmpty() || sfecha == null || celular.isEmpty()
+            if (jDni.getText().isEmpty() || nombre.isEmpty() || apellido.isEmpty() || sfecha == null || jCelular.getText().isEmpty()
                     || jSangre.getSelectedItem().toString().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No debe haber campos vacíos");
             } else {
                 Brigada asigBrigada = new Brigada();
                 String dni1 = String.valueOf(dni);
+                String celular1 = String.valueOf(celular);
                 String sangre = jSangre.getSelectedItem().toString();
                 LocalDate fechaNac = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 asigBrigada = (Brigada) jBrigadaAsignada.getSelectedItem();
                 if (bomberoActual == null) {
                     if (!brigadasLibre()) {
-                        bomberoActual = new Bombero(dni1, nombre, apellido, celular, fechaNac, sangre, true, asigBrigada);
+                        bomberoActual = new Bombero(dni1, nombre, apellido, celular1, fechaNac, sangre, true, asigBrigada);
                         bomberodata.agregarBombero(bomberoActual);
                         limpiar();
                     } else {
@@ -470,21 +472,24 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
 
     private void jModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModificarActionPerformed
         try {
-            String dni = jDni.getText();
+            int dni = Integer.parseInt(jDni.getText());
             String nombre = Jnombre.getText();
             String apellido = JApellido.getText();
             java.util.Date sfecha = jDCalendar.getDate();
-            String celular = jCelular.getText();
+            int celular = Integer.parseInt(jCelular.getText());
             Brigada asigBrigada = new Brigada();
             asigBrigada.setCodBrigada(Ndebrigada());
-            if (jDni.getText().isEmpty() || nombre.isEmpty() || apellido.isEmpty() || sfecha == null || celular.isEmpty()
+            if (jDni.getText().isEmpty() || nombre.isEmpty() || apellido.isEmpty() || sfecha == null || jCelular.getText().isEmpty()
                     || jSangre.getSelectedItem().toString().isEmpty()) {//hay que verificar si entro una brigada en asigBrigada
                 JOptionPane.showMessageDialog(this, "No debe haber campos vacíos");
             } else {
+                
                 String sangre = jSangre.getSelectedItem().toString();
                 LocalDate fechaNac = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 if (!brigadasLibre()) {
-                    bomberoActual = new Bombero(dni, nombre, apellido, sangre, fechaNac, celular, true, asigBrigada);
+                     String dni1 = String.valueOf(dni);
+                String celular1 = String.valueOf(celular);
+                    bomberoActual = new Bombero(dni1, nombre, apellido, sangre, fechaNac, celular1, true, asigBrigada);
                     bomberodata.actualizarDatos(bomberoActual);
                     limpiar();
                 } else {

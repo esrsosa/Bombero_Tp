@@ -110,6 +110,12 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Cuartel: ");
 
+        jtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtNombreActionPerformed(evt);
+            }
+        });
+
         jTBrigada.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -660,6 +666,10 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtNombreActionPerformed
     private void limpiarTabla() {
         int filas = modelo.getRowCount();
         for (int i = filas - 1; i >= 0; i--) {
