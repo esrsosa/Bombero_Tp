@@ -383,7 +383,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
             String nombre = Jnombre.getText();
             String apellido = JApellido.getText();
             java.util.Date sfecha = jDCalendar.getDate();
-          //  String celular = jCelular.getText();
+            //  String celular = jCelular.getText();
             int celular = Integer.parseInt(jCelular.getText());
 
             if (jDni.getText().isEmpty() || nombre.isEmpty() || apellido.isEmpty() || sfecha == null || jCelular.getText().isEmpty()
@@ -398,11 +398,38 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                 asigBrigada = (Brigada) jBrigadaAsignada.getSelectedItem();
                 if (bomberoActual == null) {
                     if (!brigadasLibre()) {
-                        bomberoActual = new Bombero(dni1, nombre, apellido, celular1, fechaNac, sangre, true, asigBrigada);
-                        bomberodata.agregarBombero(bomberoActual);
-                        limpiar();
+                        if (bomberodata.buscarBombero(dni) == null) {
+                            bomberoActual = new Bombero(dni1, nombre, apellido, celular1, fechaNac, sangre, true, asigBrigada);
+                            bomberodata.agregarBombero(bomberoActual);
+                            limpiar();
+                        } else {
+                            JOptionPane.showMessageDialog(this, "El Bombero con Dni: " + dni + " ya existe");
+                        }
                     } else {
                         JOptionPane.showMessageDialog(this, "Brigada completa, " + jBrigadaAsignada.getSelectedItem().toString());
+                        List<Bombero> bomberos = bomberodata.listaBomberos();
+                        Map<Integer, Integer> bomberosPorBrigada = new HashMap<>();
+                        for (Bombero bombero : bomberos) {
+                            int codBrigada = bombero.getBrigada().getCodBrigada();
+                            bomberosPorBrigada.put(codBrigada, bomberosPorBrigada.getOrDefault(codBrigada, 0) + 1);
+                        }
+                        Boolean x = false;
+                        for (Brigada brigada : brigadas) {
+                            String nombre1 = brigada.getNombreBrigada();
+                            int codBrigada = brigada.getCodBrigada();
+                            int bomberosAsignados = bomberosPorBrigada.getOrDefault(codBrigada, 0);
+                            int bomberosDisponibles = Math.max(0, 5 - bomberosAsignados);
+                            if (bomberosDisponibles >= 1) {
+                                x = true;
+                                jBrigadaAsignada.setSelectedItem(brigada);
+                                JOptionPane.showMessageDialog(this, "Brigada Recomendada, " + nombre1 + " con " + bomberosDisponibles + " bomberos disponibles. "
+                                        + "Especialidad en "+brigada.getEspecialidad());
+                                break;
+                            }
+                        }
+                        if (!x) {
+                            JOptionPane.showMessageDialog(this, "Sin Brigadas disponibles, libere alguna brigada");
+                        }
                     }
                 }
             }
@@ -483,12 +510,12 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
                     || jSangre.getSelectedItem().toString().isEmpty()) {//hay que verificar si entro una brigada en asigBrigada
                 JOptionPane.showMessageDialog(this, "No debe haber campos vacíos");
             } else {
-                
+
                 String sangre = jSangre.getSelectedItem().toString();
                 LocalDate fechaNac = sfecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 if (!brigadasLibre()) {
-                     String dni1 = String.valueOf(dni);
-                String celular1 = String.valueOf(celular);
+                    String dni1 = String.valueOf(dni);
+                    String celular1 = String.valueOf(celular);
                     bomberoActual = new Bombero(dni1, nombre, apellido, sangre, fechaNac, celular1, true, asigBrigada);
                     bomberodata.actualizarDatos(bomberoActual);
                     limpiar();
@@ -619,7 +646,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
             if (dni.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No debe haber campos vacíos");
             } else {
-                
+
                 if (!brigadasLibre()) {
                     bomberodata.darDeAlta(dni);
                 } else {
@@ -664,7 +691,6 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
 
     private boolean brigadasLibre() {
         List<Bombero> bomberos = bomberodata.listaBomberos();
-        List<Brigada> brigadasLibres = bData.listarBrigadas();
         Map<Integer, Integer> bomberosPorBrigada = new HashMap<>();
         for (Bombero bombero : bomberos) {
             int codBrigada = bombero.getBrigada().getCodBrigada();
