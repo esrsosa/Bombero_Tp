@@ -23,6 +23,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
     DefaultTableModel modelo = new DefaultTableModel();
     List<Cuartel> listaCuarteles = new ArrayList<>();
     private String Activo;
+
     /**
      * Creates new form Cwwwuartel
      */
@@ -279,7 +280,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
 //Probado por arian  ;)
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
-        
+
         try {
             String nombre = jtNombre.getText();
             String direccion = jtDireccion.getText();
@@ -322,31 +323,42 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
         Limpiar();
         cuartelActual = new Cuartel();
         int id2 = jTable.getSelectedRow();
-        Object valorCodigo = jTable.getValueAt(id2, 0);
-        int numero = Integer.parseInt(valorCodigo.toString());
-        System.out.println(valorCodigo);
-        System.out.println(numero);
-        cuartelActual = cuartelData.buscarCuartel(numero);
-        if (cuartelActual != null) {
-            jtNombre.setText(cuartelActual.getNombre());
-            jtDireccion.setText(cuartelActual.getDomicilio());
-            jtCoordenadaX.setText(cuartelActual.getCoordenadax() + "");
-            jtCoordenadaY.setText(cuartelActual.getCoordenaday() + "");
-            jtTelefono.setText(cuartelActual.getTelefono());
-            jtCorreo.setText(cuartelActual.getCorreoElectronico());
+        if (id2 != -1) {
+            Object valorCodigo = jTable.getValueAt(id2, 0);
+            int numero = Integer.parseInt(valorCodigo.toString());
+            System.out.println(valorCodigo);
+            System.out.println(numero);
+            cuartelActual = cuartelData.buscarCuartel(numero);
+            if (cuartelActual != null) {
+                jtNombre.setText(cuartelActual.getNombre());
+                jtDireccion.setText(cuartelActual.getDomicilio());
+                jtCoordenadaX.setText(cuartelActual.getCoordenadax() + "");
+                jtCoordenadaY.setText(cuartelActual.getCoordenaday() + "");
+                jtTelefono.setText(cuartelActual.getTelefono());
+                jtCorreo.setText(cuartelActual.getCorreoElectronico());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Fila seleccionada invalida");
+
         }
+
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbDarBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDarBajaActionPerformed
         // TODO add your handling code here:
         try {
             int id2 = jTable.getSelectedRow();
-            Object valorCodigo = jTable.getValueAt(id2, 0);
-            int numero = Integer.parseInt(valorCodigo.toString());
-            int confirmar = JOptionPane.showConfirmDialog(this, "Estas seguro que desea dar de baja al cuartel?");
-            if (confirmar == 0) {
-                cuartelData.darBajaCuartel(numero);
+            if (id2 != -1) {
+                Object valorCodigo = jTable.getValueAt(id2, 0);
+                int numero = Integer.parseInt(valorCodigo.toString());
+                int confirmar = JOptionPane.showConfirmDialog(this, "Estas seguro que desea dar de baja al cuartel?");
+                if (confirmar == 0) {
+                    cuartelData.darBajaCuartel(numero);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Fila seleccionada invalida");
             }
+
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar un id válido");
         }
@@ -355,14 +367,19 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
 
     private void jbDarAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDarAltaActionPerformed
         // TODO add your handling code here:
-         try {
+        try {
             int id2 = jTable.getSelectedRow();
-            Object valorCodigo = jTable.getValueAt(id2, 0);
-            int numero = Integer.parseInt(valorCodigo.toString());
-            int confirmar = JOptionPane.showConfirmDialog(this, "Estas seguro que desea dar de alta al cuartel?");
-            if (confirmar == 0) {
-                cuartelData.darAltaCuartel(numero);
+            if (id2 != -1) {
+                Object valorCodigo = jTable.getValueAt(id2, 0);
+                int numero = Integer.parseInt(valorCodigo.toString());
+                int confirmar = JOptionPane.showConfirmDialog(this, "Estas seguro que desea dar de alta al cuartel?");
+                if (confirmar == 0) {
+                    cuartelData.darAltaCuartel(numero);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Fila seleccionada invalida");
             }
+
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar un id válido");
         }
@@ -426,11 +443,11 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
     public void llenarTabla() {
         modelo.setRowCount(0);
         listaCuarteles = cuartelData.listaCuarteles();
-        
+
         for (Cuartel aux : listaCuarteles) {
-            if(aux.getActivo()==1){
+            if (aux.getActivo() == 1) {
                 Activo = "Activo";
-            }else{
+            } else {
                 Activo = "Inactivo";
             }
             modelo.addRow(new Object[]{aux.getCodCuartel(), aux.getNombre(), aux.getDomicilio(), aux.getTelefono(), Activo});
