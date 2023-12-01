@@ -48,6 +48,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         brigadas();
         JActivos.setSelected(true);
         activos();
+        
     }
 
     @SuppressWarnings("unchecked")

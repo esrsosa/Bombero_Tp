@@ -6,9 +6,11 @@
 package BomberosVistas;
 
 import BomberosEntidades.Siniestro;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JInternalFrame;
 
 /**
  *
@@ -22,6 +24,17 @@ public class Bomberos extends javax.swing.JFrame {
     public Bomberos() {
         initComponents();
         setLocationRelativeTo(null);
+        setResizable(false);
+
+    }
+
+    private void centrarVentanaInterna(JInternalFrame ventanaInterna) {
+        Dimension desktopSize = Escritorio.getSize();
+        Dimension jInternalFrameSize = ventanaInterna.getSize();
+        int width = (desktopSize.width - jInternalFrameSize.width) / 2;
+        int height = (desktopSize.height - jInternalFrameSize.height) / 2;
+        ventanaInterna.setLocation(width, height);
+
     }
 
     /**
@@ -103,11 +116,11 @@ public class Bomberos extends javax.swing.JFrame {
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 923, Short.MAX_VALUE)
+            .addGap(0, 1074, Short.MAX_VALUE)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 561, Short.MAX_VALUE)
+            .addGap(0, 812, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Bomberos");
@@ -213,6 +226,7 @@ public class Bomberos extends javax.swing.JFrame {
         Escritorio.add(vistaCuartel);
         vistaCuartel.setVisible(true);
         Escritorio.moveToFront(vistaCuartel);
+        centrarVentanaInterna(vistaCuartel);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -223,6 +237,7 @@ public class Bomberos extends javax.swing.JFrame {
         Escritorio.add(vistaBombero);
         vistaBombero.setVisible(true);
         Escritorio.moveToFront(vistaBombero);
+        centrarVentanaInterna(vistaBombero);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -233,6 +248,7 @@ public class Bomberos extends javax.swing.JFrame {
         Escritorio.add(siniestro);
         siniestro.setVisible(true);
         Escritorio.moveToFront(siniestro);
+        centrarVentanaInterna(siniestro);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
@@ -242,36 +258,38 @@ public class Bomberos extends javax.swing.JFrame {
         Escritorio.add(historial);
         historial.setVisible(true);
         Escritorio.moveToFront(historial);
-
+        centrarVentanaInterna(historial);
 
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-          Escritorio.removeAll();
+        Escritorio.removeAll();
         Escritorio.repaint();
-         ResolucionDeSiniestro Resolucion = new ResolucionDeSiniestro();
+        ResolucionDeSiniestro Resolucion = new ResolucionDeSiniestro();
         Escritorio.add(Resolucion);
         Resolucion.setVisible(true);
         Escritorio.moveToFront(Resolucion);
-        
+        centrarVentanaInterna(Resolucion);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-          Escritorio.removeAll();
+        Escritorio.removeAll();
         Escritorio.repaint();
         CalcularDistancia calcular = new CalcularDistancia();
-          Escritorio.add(calcular);
+        Escritorio.add(calcular);
         calcular.setVisible(true);
         Escritorio.moveToFront(calcular);
+        centrarVentanaInterna(calcular);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-         Escritorio.removeAll();
+        Escritorio.removeAll();
         Escritorio.repaint();
         FormularioBrigada bri = new FormularioBrigada();
         Escritorio.add(bri);
         bri.setVisible(true);
         Escritorio.moveToFront(bri);
+        centrarVentanaInterna(bri);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**
