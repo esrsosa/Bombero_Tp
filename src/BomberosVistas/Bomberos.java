@@ -120,7 +120,7 @@ public class Bomberos extends javax.swing.JFrame {
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 812, Short.MAX_VALUE)
+            .addGap(0, 854, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Bomberos");

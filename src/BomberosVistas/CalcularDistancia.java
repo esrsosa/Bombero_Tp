@@ -97,6 +97,8 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
 
         jScrollPane2.setViewportView(jTextPane1);
 
+        setForeground(java.awt.Color.white);
+
         jButton1.setText("Calcular");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
