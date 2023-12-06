@@ -31,7 +31,7 @@ public class CuartelData {
     }
 
     public Cuartel buscarCuartel(int i) {
-        String sql = "SELECT  codCuartel, nombre_cuartel, direccion, coord_x, coord_y, telefono, correo FROM cuartel WHERE codCuartel= ?";
+        String sql = "SELECT  codCuartel, nombre_cuartel, direccion, coord_x, coord_y, telefono, correo, activo FROM cuartel WHERE codCuartel= ?";
         Cuartel cuartel = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -46,6 +46,7 @@ public class CuartelData {
                 cuartel.setCoordenaday(rs.getInt("coord_y"));
                 cuartel.setTelefono(rs.getString("telefono"));
                 cuartel.setCorreoElectronico(rs.getString("correo"));
+                cuartel.setActivo(rs.getInt("activo"));
 //                JOptionPane.showMessageDialog(null, "cuartel encontrado");
             } else {
                 JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel");
@@ -89,26 +90,27 @@ public class CuartelData {
     }
 
     public void editarCuartel(Cuartel cuartel) {
-        String sql = "UPDATE cuartel set nombreCuartel = ?, direccion = ?, coord_x = ?, coord_y = ?, telefono = ?, correo = ? WHERE codCuartel = ?";
-        PreparedStatement ps = null;
-        try {
-            ps = con.prepareStatement(sql);
+        String sql = "UPDATE cuartel SET nombre_cuartel = ?, direccion = ?, coord_x = ?, coord_y = ?, telefono = ?, correo = ? WHERE codCuartel = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, cuartel.getNombre());
             ps.setString(2, cuartel.getDomicilio());
             ps.setInt(3, cuartel.getCoordenadax());
             ps.setInt(4, cuartel.getCoordenaday());
             ps.setString(5, cuartel.getTelefono());
             ps.setString(6, cuartel.getCorreoElectronico());
+            ps.setInt(7, cuartel.getCodCuartel());
+            int filasActualizadas = ps.executeUpdate();
+
+            if (filasActualizadas > 0) {
+                JOptionPane.showMessageDialog(null, "Cuartel actualizado exitosamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar el cuartel");
+            }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "error al acceder a la tabla cuartel");
-        }finally {
-            try {
-                if (ps != null) {
-                    ps.close();
-                }
-            } catch (SQLException ex) {
-            }
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel: " + ex.getMessage());
         }
     }
 
