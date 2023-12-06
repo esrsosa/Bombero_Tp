@@ -441,10 +441,11 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
             Cuartel cuartel;
             Brigada brigada;
             String nombre = jtNombre.getText();
+
             if (nombre.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Ingrese un nombre valido");
 
-            } else {
+            } else if (bData.buscarBrigadaPorNombre(nombre) == null) {
                 Especialidad esp = (Especialidad) jCtipo.getSelectedItem();
                 cuartel = (Cuartel) jcCuartel.getSelectedItem();
                 brigada = new Brigada(nombre, esp, cuartel);
@@ -453,6 +454,8 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                 limpiarCampos();
 
                 JOptionPane.showMessageDialog(this, "La brigada '" + brigada + "' a sido guardada exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(this, "La brigada con este nombre: " + nombre + " ya existe");
             }
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "No debe haber campos vacios ");

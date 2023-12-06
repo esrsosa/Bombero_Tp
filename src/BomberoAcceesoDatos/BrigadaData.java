@@ -244,4 +244,30 @@ public class BrigadaData {
         // Imprime la traza completa de la excepción
 
     }
+
+    public Brigada buscarBrigadaPorNombre(String nombre) {
+        Brigada brigada = null;
+        Cuartel cuartel = null;
+        String sql = "SELECT * FROM brigada WHERE nombre_br = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, nombre);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                brigada = new Brigada();
+                cuartel = new Cuartel();
+                brigada.setCodBrigada(rs.getInt("codBrigada"));
+                brigada.setEspecialidad(Especialidad.valueOf(rs.getString("especialidad")));
+                brigada.setNombreBrigada(rs.getString("nombre_br"));
+                int entero = rs.getInt("codCuartel");
+                cuartel = cd.buscarCuartel(entero);
+                brigada.setNro_cuartel(cuartel);
+            }
+        } catch (SQLException ex) {
+
+            System.out.println("Error al buscar brigada por nombre: " + ex.getMessage());
+        }
+        return brigada;
+    }
+
 }
