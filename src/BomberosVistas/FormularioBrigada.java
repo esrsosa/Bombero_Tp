@@ -458,7 +458,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "La brigada con este nombre: " + nombre + " ya existe");
             }
         } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(this, "No debe haber campos vacios ");
+            JOptionPane.showMessageDialog(this, "No debe haber campos vacios " +ex);
         }
 
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -492,7 +492,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
                     bData.asignarBrigadaSiniestro(bd.getCodBrigada());
                     siniestro.setCodigo(CodS);
                     sn.asignarBrigada(siniestro, bd);
-                    limpiarTabla();
+                    limpiarCampos();
                 } else {
                     JOptionPane.showMessageDialog(this, "Fila seleccionada invalida");
                 }
@@ -518,7 +518,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
         modelo2.setRowCount(0);
-
+           
         for (Siniestro aux : listarSiniestro) {
             if (aux.getTipoSiniestro().equals(jEspecialidadFiltro.getSelectedItem())) {
                 String codigo = "No asignada";
@@ -582,6 +582,9 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
             jNoAsignadaSiniestro.setSelected(false);
         }
         modelo2.setRowCount(0);
+        
+   
+        listarSiniestroTodos = sn.listarSiniestros();
         for (Siniestro aux : listarSiniestroTodos) {
             String codigo = "No asignada";
             if (aux.getCodigoBrigada() != null) {
@@ -615,6 +618,7 @@ public class FormularioBrigada extends javax.swing.JInternalFrame {
             }
             modelo.addRow(new Object[]{aux.getCodBrigada(), aux.getNombreBrigada(), aux.getEspecialidad(), nombre, s});
         }
+         listarSiniestro = sn.listarSiniestroSinBrigada();
     }//GEN-LAST:event_jAsignadasBrigadaActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
