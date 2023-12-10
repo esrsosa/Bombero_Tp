@@ -10,13 +10,17 @@ import BomberoAcceesoDatos.SiniestrosData;
 import BomberosEntidades.Brigada;
 import BomberosEntidades.Especialidad;
 import BomberosEntidades.Siniestro;
+import java.awt.Graphics;
 import java.awt.HeadlessException;
+import java.awt.Image;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -28,13 +32,15 @@ public class CrearSiniestros extends javax.swing.JInternalFrame {
     private Siniestro SinniestroActual = null;
     private BrigadaData bData = new BrigadaData();
     private List<Brigada> listaBrigadas = bData.listarBrigadasLibres();
-
+    FondoPanel fondo = new FondoPanel();
     DefaultComboBoxModel comboModelo = new DefaultComboBoxModel(listaBrigadas.toArray());
 
     /**
      * Creates new form Siniestros
      */
     public CrearSiniestros() {
+        ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+        this.setContentPane(fondo);
         initComponents();
         llenarTipo();
 //       llenarComboBox();
@@ -73,8 +79,16 @@ public class CrearSiniestros extends javax.swing.JInternalFrame {
         jLimpiar = new javax.swing.JButton();
         jSalir = new javax.swing.JButton();
 
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Siniestros");
 
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Yu Gothic Light", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Tipo: ");
 
         jCtipo.addActionListener(new java.awt.event.ActionListener() {
@@ -83,14 +97,23 @@ public class CrearSiniestros extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Yu Gothic Light", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Coord X");
 
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("Yu Gothic Light", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Coord Y");
 
         jDetalle.setColumns(20);
         jDetalle.setRows(5);
         jScrollPane1.setViewportView(jDetalle);
 
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("Yu Gothic Light", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Detalles:");
 
         jGuardar.setText("Guardar");
@@ -118,23 +141,14 @@ public class CrearSiniestros extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(153, 153, 153))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCtipo, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
+                        .addGap(61, 61, 61)
                         .addComponent(jGuardar)
-                        .addGap(52, 52, 52)
+                        .addGap(66, 66, 66)
                         .addComponent(jLimpiar)
-                        .addGap(88, 88, 88)
+                        .addGap(73, 73, 73)
                         .addComponent(jSalir))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(135, 135, 135)
@@ -148,11 +162,21 @@ public class CrearSiniestros extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jCoordy))))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel7)
-                        .addGap(16, 16, 16)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(98, Short.MAX_VALUE))
+                        .addGap(189, 189, 189)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jLabel7))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(54, 54, 54)
+                                .addComponent(jLabel2)))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                            .addComponent(jCtipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +195,7 @@ public class CrearSiniestros extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jCoordy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -217,7 +241,7 @@ public class CrearSiniestros extends javax.swing.JInternalFrame {
                     int corY = Integer.parseInt(coordyText);
                     SinniestroActual = new Siniestro(tipo, sfecha, corX, corY, detallesText);
                     siniesrodata.agregarSiniestro(SinniestroActual);
-                    
+
                 }
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Error Ingrese cordenadas correctas");
@@ -225,7 +249,7 @@ public class CrearSiniestros extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage());
             }
         }
-Limpiar();
+        Limpiar();
 
     }//GEN-LAST:event_jGuardarActionPerformed
 
@@ -282,4 +306,16 @@ Limpiar();
 //public void llenarComboBox(){
 //        jBrigadaAsignada.setModel(comboModelo);
 //    }
+    public class FondoPanel extends JPanel {
+
+        private Image imagen;
+
+        public void paint(Graphics g) {
+            imagen = new ImageIcon(getClass().getResource("/imagen/degrade.jpg")).getImage();
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+        }
+
+    }
 }

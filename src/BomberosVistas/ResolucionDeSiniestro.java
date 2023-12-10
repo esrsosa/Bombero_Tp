@@ -9,6 +9,8 @@ import BomberoAcceesoDatos.BrigadaData;
 import BomberoAcceesoDatos.SiniestrosData;
 import BomberosEntidades.Brigada;
 import BomberosEntidades.Siniestro;
+import java.awt.Graphics;
+import java.awt.Image;
 import static java.lang.System.in;
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -20,7 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -32,8 +36,11 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
     List<Siniestro> listarSiniestros;
     private BrigadaData brigadaData = new BrigadaData();
     private List<Brigada> listaBrigada = brigadaData.listarBrigadas();
-
+    FondoPanel fondo = new FondoPanel();
+    
     public ResolucionDeSiniestro() {
+        ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+        this.setContentPane(fondo);
         initComponents();
         armarCabecera();
         llenarTabla();
@@ -48,7 +55,7 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -57,8 +64,9 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
         jFecha = new com.toedter.calendar.JDateChooser();
         jGuardar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
-        jLabel1.setText("Resolucion del Simiestero");
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -80,6 +88,7 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
 
         jPunto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
 
+        jGuardar.setFont(new java.awt.Font("Yu Gothic Light", 0, 14)); // NOI18N
         jGuardar.setText("Guardar");
         jGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,6 +96,7 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Yu Gothic Light", 0, 14)); // NOI18N
         jButton2.setText("Salir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,21 +104,15 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Resolucion De Siniestro");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(259, 259, 259))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jGuardar)
-                        .addGap(58, 58, 58)
-                        .addComponent(jButton2)
-                        .addGap(234, 234, 234))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -127,13 +131,22 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
                                 .addComponent(jPunto, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jGuardar)
+                .addGap(58, 58, 58)
+                .addComponent(jButton2)
+                .addGap(234, 234, 234))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(191, 191, 191)
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -148,7 +161,7 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jGuardar)
                     .addComponent(jButton2))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -168,9 +181,10 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private com.toedter.calendar.JDateChooser jFecha;
     private javax.swing.JButton jGuardar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JComboBox<String> jPunto;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable;
@@ -283,6 +297,19 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
         } catch (NullPointerException ex) {
 
             JOptionPane.showMessageDialog(this, "Asegúrese de ingresar todos los datos requeridos.");
+        }
+
+    }
+
+    public class FondoPanel extends JPanel {
+
+        private Image imagen;
+
+        public void paint(Graphics g) {
+            imagen = new ImageIcon(getClass().getResource("/imagen/degrade.jpg")).getImage();
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
         }
 
     }
