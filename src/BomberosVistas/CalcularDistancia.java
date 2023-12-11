@@ -96,7 +96,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel10.setFont(new java.awt.Font("Yu Gothic Light", 0, 18)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Yu Gothic Light", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Siniestro");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, -1, -1));
@@ -116,7 +116,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
 
         jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 98, -1, 101));
 
-        jLabel9.setFont(new java.awt.Font("Yu Gothic Light", 0, 18)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Yu Gothic Light", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Cuartel");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, -1, -1));
@@ -129,7 +129,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 421, -1, -1));
 
-        jLabel11.setFont(new java.awt.Font("Yu Gothic Light", 0, 18)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Yu Gothic Light", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Seleccione un siniestro ");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, -1, -1));
@@ -146,7 +146,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
                 jCuartelCercanoActionPerformed(evt);
             }
         });
-        jPanel1.add(jCuartelCercano, new org.netbeans.lib.awtextra.AbsoluteConstraints(338, 421, -1, -1));
+        jPanel1.add(jCuartelCercano, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 420, -1, -1));
 
         jbSeleccionar.setText("Seleccionar");
         jbSeleccionar.addActionListener(new java.awt.event.ActionListener() {
@@ -154,7 +154,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
                 jbSeleccionarActionPerformed(evt);
             }
         });
-        jPanel1.add(jbSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 421, -1, -1));
+        jPanel1.add(jbSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 420, -1, -1));
 
         jtSiniestro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -171,11 +171,16 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
 
         jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 239, -1, 94));
 
-        jtResultado.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 14)); // NOI18N
-        jPanel1.add(jtResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 152, 28));
+        jtResultado.setBackground(new java.awt.Color(204, 204, 204));
+        jtResultado.setFont(new java.awt.Font("Eras Demi ITC", 1, 14)); // NOI18N
+        jtResultado.setForeground(new java.awt.Color(204, 204, 204));
+        jPanel1.add(jtResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 380, 180, 28));
 
+        jCercano.setBackground(new java.awt.Color(204, 204, 204));
+        jCercano.setFont(new java.awt.Font("Eras Demi ITC", 1, 14)); // NOI18N
+        jCercano.setForeground(new java.awt.Color(204, 204, 204));
         jCercano.setText("           ");
-        jPanel1.add(jCercano, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, 106, 28));
+        jPanel1.add(jCercano, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, 180, 28));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -218,7 +223,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
                         if (distancia < distanciaMinima) {
                             distanciaMinima = distancia;
                         }
-                        jtResultado.setText(String.format("%.2f", distanciaMinima) + "Km");
+                        jtResultado.setText(nombre+" "+String.format("%.2f", distanciaMinima) + "Km");
                     }
                 }
 
