@@ -123,7 +123,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jMostrar);
 
-        jDarDeBaja.setText("Dar de baja");
+        jDarDeBaja.setText("Dar de baja ↓ ");
         jDarDeBaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jDarDeBajaActionPerformed(evt);
@@ -183,7 +183,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
             }
         });
 
-        jDarDeAlta.setText("Dar de Alta");
+        jDarDeAlta.setText("Dar de Alta ↑ ");
         jDarDeAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jDarDeAltaActionPerformed(evt);
