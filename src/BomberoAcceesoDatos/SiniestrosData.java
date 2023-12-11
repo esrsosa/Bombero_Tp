@@ -99,7 +99,7 @@ public class SiniestrosData {
     public void marcarComoResuelto(Siniestro siniestro) {
         String sql = "UPDATE siniestro SET fecha_resol = ?, puntuacion = ? WHERE codigo = ?";
         PreparedStatement ps = null;
-        LocalDateTime fechaResolucion = LocalDateTime.now();
+        LocalDateTime fechaResolucion = siniestro.getFechaResolucion();
         Timestamp timestamp = Timestamp.valueOf(fechaResolucion);
         try {
             ps = con.prepareStatement(sql);
@@ -124,17 +124,15 @@ public class SiniestrosData {
         }
     }
 
-    public List<Siniestro> listarSiniestrosRecientes() {//Devuelve los siniestros de la ultima semana
+    public List<Siniestro> listarSiniestrosRecientes( LocalDateTime fecha1, LocalDateTime fecha2) {//Devuelve los siniestros de la ultima semana
         List<Siniestro> siniestrosRecientes = new ArrayList<>();
-        LocalDate semana = LocalDate.now().minusDays(7);//16-7=9  9/11/23-16/11/23
-        LocalDate hoy = LocalDate.now();
         String sql = "SELECT * FROM siniestro WHERE fecha_siniestro BETWEEN ? AND ?";
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
             ps = con.prepareStatement(sql);
-            ps.setDate(1, Date.valueOf(semana));
-            ps.setDate(2, Date.valueOf(hoy));
+            ps.setDate(1, Date.valueOf(fecha1.toLocalDate()));
+            ps.setDate(2, Date.valueOf(fecha2.toLocalDate()));
             rs = ps.executeQuery();
             while (rs.next()) {
                 int codigo = rs.getInt("codigo");
@@ -142,7 +140,6 @@ public class SiniestrosData {
                 Especialidad tipoSiniestro = Especialidad.valueOf(auxiliar);
                 Timestamp fechaSiniestro = rs.getTimestamp("fecha_siniestro");
                 LocalDateTime fechaSiniestro1 = fechaSiniestro.toLocalDateTime();
-//                LocalDate fechaSiniestro = rs.getDate("fecha_siniestro").toLocalDate();
                 int coordenadaX = rs.getInt("coord_x");
                 int coordenadaY = rs.getInt("coord_y");
                 String detalles = rs.getString("detalles");
@@ -158,11 +155,11 @@ public class SiniestrosData {
                     LocalDateTime fechaResolucion = fechaResol.toLocalDateTime();
                     Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro1, coordenadaX, coordenadaY, detalles, fechaResolucion, puntuacion, codigoBrigada);
                     siniestrosRecientes.add(siniestro);
-                } else {
-                    Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro1, coordenadaX, coordenadaY, detalles, codigoBrigada);
-                    siniestrosRecientes.add(siniestro);
-                }
-            }
+//                } else {
+//                    Siniestro siniestro = new Siniestro(codigo, tipoSiniestro, fechaSiniestro1, coordenadaX, coordenadaY, detalles, codigoBrigada);
+//                    siniestrosRecientes.add(siniestro);
+//                }
+                }}
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al consultar siniestros recientes: " + ex.getMessage());
         } finally {

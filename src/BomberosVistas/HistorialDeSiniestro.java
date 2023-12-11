@@ -28,8 +28,9 @@ public class HistorialDeSiniestro extends javax.swing.JInternalFrame {
 
     private SiniestrosData siniestrodata = new SiniestrosData();
     private Siniestro siniestroActual = null;
+    List<Siniestro> listarSiniestros = null;
+
     DefaultTableModel modelo = new DefaultTableModel();
-    List<Siniestro> listarSiniestros = siniestrodata.listarSiniestrosRecientes();
     FondoPanel fondo = new FondoPanel();
 
     public HistorialDeSiniestro() {
@@ -195,125 +196,38 @@ public class HistorialDeSiniestro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
-
-//        siniestroActual = new Siniestro();
-//        java.util.Date sfecha = jfecha1.getDate();
-//        // Suponiendo que listarSiniestrosRecientes() devuelve una List<Siniestro>
-//        List<Siniestro> siniestrosRecientes = siniestrodata.listarSiniestrosRecientes();
-//
-//        if (siniestrosRecientes.isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "No se encontraron siniestros recientes.");
-//        } else {
-//            // Limpiar la tabla antes de agregar nuevas filas
-//            modelo.setRowCount(0);
-//
-//            // Suponiendo que quieres mostrar detalles del primer siniestro reciente
-//            Siniestro siniestroActual = siniestrosRecientes.get(0);
-//
-//            modelo.addRow(new Object[]{
-//                siniestroActual.getCodigo(),
-//                siniestroActual.getTipoSiniestro(),
-//                siniestroActual.getCoordenadaX(),
-//                siniestroActual.getCoordenadaY(),
-//                siniestroActual.getCodigoBrigada(),
-//                siniestroActual.getDetalles(),
-//                siniestroActual.getFechaSiniestro(),
-//                siniestroActual.getFechaResolucion()
-//            });
-//        }
-//---------------------------------------------------------------------------------------------------
-/// Obtener las fechas ingresadas del componente gráfico (supongamos que son JDateChooser)
-//        try {
-//            java.util.Date fechaInicio = jfecha1.getDate();
-//            java.util.Date fechaFin = jfecha2.getDate();
-//
-//           
-//            if (fechaInicio == null || fechaFin == null) {
-//                JOptionPane.showMessageDialog(this, "Debe ingresar ambas fechas.");
-//                return;
-//            }
-//
-//            LocalDate fechaInicioFiltro = fechaInicio.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//            LocalDate fechaFinFiltro = fechaFin.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//
-//            List<Siniestro> siniestrosRecientes = siniestrodata.listarSiniestrosRecientes();
-//
-//            List<Siniestro> siniestrosFiltrados = siniestrosRecientes.stream()
-//                    .filter(siniestro
-//                            -> siniestro.getFechaSiniestro().isAfter(fechaInicioFiltro)
-//                    && siniestro.getFechaSiniestro().isBefore(fechaFinFiltro))
-//                    .collect(Collectors.toList());
-//
-//            modelo.setRowCount(0);
-//
-//            if (siniestrosFiltrados.isEmpty()) {
-//              
-//                JOptionPane.showMessageDialog(this, "No se encontraron siniestros recientes entre las fechas ingresadas: "
-//                        + fechaInicioFiltro + " y " + fechaFinFiltro);
-//            } else {
-//                for (Siniestro siniestroActual : siniestrosFiltrados) {
-//                    modelo.addRow(new Object[]{
-//                        siniestroActual.getCodigo(),
-//                        siniestroActual.getTipoSiniestro(),
-//                        siniestroActual.getCoordenadaX(),
-//                        siniestroActual.getCoordenadaY(),
-//                        siniestroActual.getCodigoBrigada(),
-//                        siniestroActual.getDetalles(),
-//                        siniestroActual.getFechaSiniestro(),
-//                        siniestroActual.getFechaResolucion()
-//                    });
-//                }
-//            }
-//
-//        } catch (NumberFormatException ex) {
-//            JOptionPane.showMessageDialog(this, "Error en el formato de las fechas.");
-//        }
-//---------------------------------------------------------------------------------------------------
         try {
-
             java.util.Date fechaInicio = jfecha1.getDate();
-            Instant instant = fechaInicio.toInstant();
-
             java.util.Date fechaFin = jfecha2.getDate();
-            Instant instant2 = fechaFin.toInstant();
-
             if (fechaInicio == null || fechaFin == null) {
                 JOptionPane.showMessageDialog(this, "Debe ingresar ambas fechas.");
                 return;
             }
+            Instant instant2 = fechaFin.toInstant();
+            Instant instant = fechaInicio.toInstant();
             LocalDateTime FechaInicioFiltro = instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
             LocalDateTime FechaFinFiltro = instant2.atZone(ZoneId.systemDefault()).toLocalDateTime();
-//            LocalDate fechaInicioFiltro = fechaInicio.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//            LocalDate fechaFinFiltro = fechaFin.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-            List<Siniestro> siniestrosRecientes = siniestrodata.listarSiniestrosRecientes();
-
-            List<Siniestro> siniestrosFiltrados = siniestrosRecientes.stream()
-                    .filter(siniestro
-                            -> siniestro.getFechaSiniestro().isAfter(FechaInicioFiltro)
-                    && siniestro.getFechaSiniestro().isBefore(FechaFinFiltro))
-                    .collect(Collectors.toList());
-
+            System.out.println(FechaInicioFiltro + "      " + FechaFinFiltro);
+            List<Siniestro> siniestrosRecientes = siniestrodata.listarSiniestrosRecientes(FechaInicioFiltro, FechaFinFiltro);
             modelo.setRowCount(0);
+            for (Siniestro siniestroActual : siniestrosRecientes) {
+                LocalDateTime fechaSiniestro = siniestroActual.getFechaSiniestro();
+                LocalDate fechaSiniestroSoloFecha = fechaSiniestro.toLocalDate();
 
-            if (siniestrosFiltrados.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No se encontraron siniestros recientes entre las fechas ingresadas.");
-            } else {
+                LocalDateTime fechaResolucion = siniestroActual.getFechaResolucion();
+                LocalDate fechaResolucionSoloFecha = fechaResolucion.toLocalDate();
 
-                for (Siniestro siniestroActual : siniestrosFiltrados) {
-                    modelo.addRow(new Object[]{
-                        siniestroActual.getCodigo(),
-                        siniestroActual.getTipoSiniestro(),
-                        siniestroActual.getCoordenadaX(),
-                        siniestroActual.getCoordenadaY(),
-                        siniestroActual.getCodigoBrigada(),
-                        siniestroActual.getDetalles(),
-                        siniestroActual.getFechaSiniestro(),
-                        siniestroActual.getFechaResolucion(),
-                        siniestroActual.getCalificacion()
+                modelo.addRow(new Object[]{
+                    siniestroActual.getTipoSiniestro(),
+                    siniestroActual.getCoordenadaX(),
+                    siniestroActual.getCoordenadaY(),
+                    siniestroActual.getCodigoBrigada(),
+                    siniestroActual.getDetalles(),
+                    fechaSiniestroSoloFecha,
+                    fechaResolucionSoloFecha,
+                    siniestroActual.getCalificacion()
+                });
 
-                    });
-                }
             }
 
         } catch (NumberFormatException ex) {
@@ -345,7 +259,16 @@ public class HistorialDeSiniestro extends javax.swing.JInternalFrame {
         modelo.setRowCount(0);
         listarSiniestros = siniestrodata.listarTodosLosSiniestrosOrdenadosPorFechaResolucion();
         for (Siniestro aux : listarSiniestros) {
-            modelo.addRow(new Object[]{aux.getCodigo(), aux.getTipoSiniestro(), aux.getCoordenadaX(), aux.getCoordenadaY(), aux.getCodigoBrigada(), aux.getDetalles(), aux.getFechaSiniestro(), aux.getFechaResolucion(), aux.getCalificacion()});
+            LocalDateTime fechaSiniestro = aux.getFechaSiniestro();
+            LocalDate fechaSiniestroSoloFecha = fechaSiniestro.toLocalDate();
+
+            LocalDateTime fechaResolucion = aux.getFechaResolucion();
+            LocalDate fechaResolucionSoloFecha = null;
+            if (fechaResolucion != null) {
+                fechaResolucionSoloFecha = fechaResolucion.toLocalDate();
+            }
+
+            modelo.addRow(new Object[]{aux.getTipoSiniestro(), aux.getCoordenadaX(), aux.getCoordenadaY(), aux.getCodigoBrigada(), aux.getDetalles(), fechaSiniestroSoloFecha, fechaResolucionSoloFecha, aux.getCalificacion()});
         }
     }
 
@@ -357,7 +280,6 @@ public class HistorialDeSiniestro extends javax.swing.JInternalFrame {
     }
 
     private void ArmarTabla() {
-        modelo.addColumn("ID");
         modelo.addColumn("Tipo");
         modelo.addColumn("CorX");
         modelo.addColumn("CorY");
@@ -366,9 +288,6 @@ public class HistorialDeSiniestro extends javax.swing.JInternalFrame {
         modelo.addColumn("F.Inicio");
         modelo.addColumn("F.Resolucion");
         modelo.addColumn("puntuacion");
-        modelo.addColumn("Activos");
-        modelo.addColumn("Hora");
-
         jHistorial.setModel(modelo);
         // this.setLocationRelativeTo(null);
         this.setResizable(false);

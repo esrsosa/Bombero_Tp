@@ -37,7 +37,7 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
     private BrigadaData brigadaData = new BrigadaData();
     private List<Brigada> listaBrigada = brigadaData.listarBrigadas();
     FondoPanel fondo = new FondoPanel();
-    
+
     public ResolucionDeSiniestro() {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.setContentPane(fondo);
@@ -208,41 +208,13 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
         modelo.setRowCount(0);
         listarSiniestros = siniestrodata.listarSiniestroSinResolver();
         for (Siniestro aux : listarSiniestros) {
-            modelo.addRow(new Object[]{aux.getCodigo(), aux.getFechaSiniestro(), aux.getTipoSiniestro(), aux.getCodigoBrigada(), aux.getDetalles()});
+            if (aux.getCodigoBrigada() != null) {
+                modelo.addRow(new Object[]{aux.getCodigo(), aux.getFechaSiniestro(), aux.getTipoSiniestro(), aux.getCodigoBrigada(), aux.getDetalles()});
+            }
         }
     }
 
     private void Resolucion() {
-//      siniestroActual = new Siniestro();
-//        Integer codigo = Integer.parseInt(jTCodigo.getText());
-//        java.util.Date fecha = jFecha.getDate();
-//        LocalDate fechaResolucion = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//        Integer puntuacion = Integer.parseInt(jPunto.getItemAt(siniestroActual.getCalificacion()));
-//        
-//        siniestroActual.setCodigo(codigo);
-//        siniestroActual.setFechaResolucion( fechaResolucion);
-//        siniestroActual.setCalificacion(puntuacion);
-//        
-//        if (fecha == null) {
-//            JOptionPane.showMessageDialog(this, "Debe ingresar una fecha.");
-//            return;
-//        }
-//
-//
-//
-//       siniestrodata.marcarComoResuelto(siniestroActual);
-//        modelo.setRowCount(0);
-//
-//        for (Siniestro siniestro : listarSiniestros) {
-//            modelo.addRow(new Object[]{
-//                siniestro.getCodigo(),
-//                siniestro.getFechaResolucion(),
-//                siniestro.getTipoSiniestro(),
-//                siniestro.getCodigoBrigada(),
-//                siniestro.getDetalles()
-//            });
-//        }
-////////////////////////////////////////////////////////////////////////////////////////////////
         siniestroActual = new Siniestro();
         try {
             int fila = jTable.getSelectedRow();
@@ -250,6 +222,7 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
                 Object codigo = jTable.getValueAt(fila, 0);
                 int codigo1 = Integer.parseInt(codigo.toString());
                 java.util.Date fecha = jFecha.getDate();
+                Instant instant = fecha.toInstant();
                 Object tipoSiniestro = jTable.getValueAt(fila, 2);
                 Object codigoBrigada = jTable.getValueAt(fila, 3);
                 Object detalles = jTable.getValueAt(fila, 4);
@@ -265,11 +238,11 @@ public class ResolucionDeSiniestro extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Asigne una brigada antes de continuar.");
                     return;
                 }
-                LocalDate fechaResolucion = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDateTime fechaResolucion = instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
                 Integer puntuacion = Integer.parseInt(Objects.requireNonNull(jPunto.getSelectedItem()).toString());
-                LocalDateTime fechaResol = fechaResolucion.atTime(LocalTime.now());
+                System.out.println(fechaResolucion);
                 siniestroActual.setCodigo(codigo1);
-                siniestroActual.setFechaResolucion(fechaResol);
+                siniestroActual.setFechaResolucion(fechaResolucion);
                 siniestroActual.setCalificacion(puntuacion);
                 siniestrodata.marcarComoResuelto(siniestroActual);
                 for (Siniestro siniestro : listarSiniestros) {
