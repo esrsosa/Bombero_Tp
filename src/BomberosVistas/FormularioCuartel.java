@@ -38,7 +38,7 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
      */
     public FormularioCuartel() {
         this.setContentPane(fondo);
-        ((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
+        ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 //        jTable.setOpaque(false);
 //        ((DefaultTableCellRenderer) jTable.getDefaultRenderer(Object.class)).setOpaque(false);
         initComponents();
@@ -355,22 +355,26 @@ public class FormularioCuartel extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             int id2 = jTable.getSelectedRow();
-            String nombre = jtNombre.getText();
-            String direccion = jtDireccion.getText();
-            String correo = jtCorreo.getText();
-            String telefono = jtTelefono.getText();
-            if (nombre.isEmpty() || direccion.isEmpty() || correo.isEmpty() || telefono.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No puede haber campos vacíos");
-                return;
+            if (id2 != -1) {
+
+                Object valorCoordx = jTable.getValueAt(id2, 0);
+                String nombre = jtNombre.getText();
+                String direccion = jtDireccion.getText();
+                String correo = jtCorreo.getText();
+                String telefono = jtTelefono.getText();
+                if (nombre.isEmpty() || direccion.isEmpty() || correo.isEmpty() || telefono.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "No puede haber campos vacíos");
+                    return;
+                }
+
+                int coordenadax = Integer.parseInt(jtCoordenadaX.getText());
+                int coordenaday = Integer.parseInt(jtCoordenadaY.getText());
+                cuartelActual = new Cuartel(Integer.parseInt(valorCoordx.toString()), nombre, direccion, coordenadax, coordenaday, telefono, correo);
+                cuartelData.editarCuartel(cuartelActual);
+                llenarTabla();
+            } else {
+                JOptionPane.showMessageDialog(this, "Fila seleccionada invalida");
             }
-
-            int coordenadax = Integer.parseInt(jtCoordenadaX.getText());
-            int coordenaday = Integer.parseInt(jtCoordenadaY.getText());
-
-            cuartelActual = new Cuartel(id2, nombre, direccion, coordenadax, coordenaday, telefono, correo);
-            cuartelData.editarCuartel(cuartelActual);
-
-            llenarTabla();
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar numeros validos ");
         }
