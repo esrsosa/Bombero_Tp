@@ -73,8 +73,10 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
         jbSeleccionar = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jtSiniestro = new javax.swing.JTable();
-        jtResultado = new javax.swing.JLabel();
+        jtResultado2 = new javax.swing.JLabel();
         jCercano = new javax.swing.JLabel();
+        jCercano2 = new javax.swing.JLabel();
+        jtResultado = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -127,7 +129,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 421, -1, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Yu Gothic Light", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -146,7 +148,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
                 jCuartelCercanoActionPerformed(evt);
             }
         });
-        jPanel1.add(jCuartelCercano, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 420, -1, -1));
+        jPanel1.add(jCuartelCercano, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 450, -1, -1));
 
         jbSeleccionar.setText("Seleccionar");
         jbSeleccionar.addActionListener(new java.awt.event.ActionListener() {
@@ -154,7 +156,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
                 jbSeleccionarActionPerformed(evt);
             }
         });
-        jPanel1.add(jbSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 420, -1, -1));
+        jPanel1.add(jbSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, -1, -1));
 
         jtSiniestro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -171,16 +173,29 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
 
         jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 239, -1, 94));
 
-        jtResultado.setBackground(new java.awt.Color(204, 204, 204));
-        jtResultado.setFont(new java.awt.Font("Eras Demi ITC", 1, 14)); // NOI18N
-        jtResultado.setForeground(new java.awt.Color(204, 204, 204));
-        jPanel1.add(jtResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 380, 180, 28));
+        jtResultado2.setBackground(new java.awt.Color(255, 255, 255));
+        jtResultado2.setFont(new java.awt.Font("Eras Demi ITC", 1, 14)); // NOI18N
+        jtResultado2.setForeground(new java.awt.Color(255, 255, 255));
+        jtResultado2.setText(".");
+        jPanel1.add(jtResultado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 220, 28));
 
         jCercano.setBackground(new java.awt.Color(204, 204, 204));
         jCercano.setFont(new java.awt.Font("Eras Demi ITC", 1, 14)); // NOI18N
-        jCercano.setForeground(new java.awt.Color(204, 204, 204));
-        jCercano.setText("           ");
-        jPanel1.add(jCercano, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, 180, 28));
+        jCercano.setForeground(new java.awt.Color(51, 255, 255));
+        jCercano.setText(".");
+        jPanel1.add(jCercano, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, 200, 28));
+
+        jCercano2.setBackground(new java.awt.Color(204, 204, 204));
+        jCercano2.setFont(new java.awt.Font("Eras Demi ITC", 1, 14)); // NOI18N
+        jCercano2.setForeground(new java.awt.Color(255, 255, 255));
+        jCercano2.setText(".");
+        jPanel1.add(jCercano2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 410, 200, 30));
+
+        jtResultado.setBackground(new java.awt.Color(204, 204, 204));
+        jtResultado.setFont(new java.awt.Font("Eras Demi ITC", 1, 14)); // NOI18N
+        jtResultado.setForeground(new java.awt.Color(51, 255, 255));
+        jtResultado.setText(".");
+        jPanel1.add(jtResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 220, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -223,7 +238,8 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
                         if (distancia < distanciaMinima) {
                             distanciaMinima = distancia;
                         }
-                        jtResultado.setText(nombre+" "+String.format("%.2f", distanciaMinima) + "Km");
+                        jtResultado.setText(nombre+"");
+                        jtResultado2.setText(String.format("%.2f", distanciaMinima) + "Km");
                     }
                 }
 
@@ -257,7 +273,8 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
                         nombre1 = cuartel.getNombre();
                     }
                 }
-                jCercano.setText(nombre1 + " " + String.format("%.2f", distanciaMinima) + "Km");
+                jCercano.setText(nombre1 + "");
+                jCercano2.setText( String.format("%.2f", distanciaMinima) + "Km");
             } else {
                 JOptionPane.showMessageDialog(this, "Fila seleccionada invalida");
             }
@@ -284,6 +301,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jCercano;
+    private javax.swing.JLabel jCercano2;
     private javax.swing.JButton jCuartelCercano;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -299,6 +317,7 @@ public class CalcularDistancia extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbSeleccionar;
     private javax.swing.JTable jtCuartel;
     private javax.swing.JLabel jtResultado;
+    private javax.swing.JLabel jtResultado2;
     private javax.swing.JTable jtSiniestro;
     // End of variables declaration//GEN-END:variables
 //  private void calcularDistancia() {

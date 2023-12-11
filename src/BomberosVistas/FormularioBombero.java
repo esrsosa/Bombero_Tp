@@ -218,7 +218,7 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         jPanel1.add(jBrigadaAsignada, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 120, -1));
 
         jLabel7.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel7.setFont(new java.awt.Font("Yu Gothic Light", 0, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Yu Gothic Light", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Quedan Disponibles");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 339, -1, -1));
@@ -242,10 +242,10 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
 
         jDetallesEspecialidad.setBackground(new java.awt.Color(0, 0, 0));
-        jDetallesEspecialidad.setFont(new java.awt.Font("Yu Gothic Light", 0, 14)); // NOI18N
+        jDetallesEspecialidad.setFont(new java.awt.Font("Yu Gothic Light", 1, 14)); // NOI18N
         jDetallesEspecialidad.setForeground(new java.awt.Color(255, 255, 255));
         jDetallesEspecialidad.setText("predeterminado");
-        jPanel1.add(jDetallesEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 309, 209, -1));
+        jPanel1.add(jDetallesEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 309, 270, -1));
 
         jPanel1.add(jSangre, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 131, 110, -1));
 
@@ -284,10 +284,10 @@ public class FormularioBombero extends javax.swing.JInternalFrame {
         jPanel1.add(jDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(157, 6, 120, -1));
 
         jDetallesCuartel.setBackground(new java.awt.Color(0, 0, 0));
-        jDetallesCuartel.setFont(new java.awt.Font("Yu Gothic Light", 0, 14)); // NOI18N
+        jDetallesCuartel.setFont(new java.awt.Font("Yu Gothic Light", 1, 14)); // NOI18N
         jDetallesCuartel.setForeground(new java.awt.Color(255, 255, 255));
         jDetallesCuartel.setText("predeterminado");
-        jPanel1.add(jDetallesCuartel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 151, -1));
+        jPanel1.add(jDetallesCuartel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 270, -1));
 
         jBuscar.setText("Buscar");
         jBuscar.addActionListener(new java.awt.event.ActionListener() {
